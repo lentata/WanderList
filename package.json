@@ -1,0 +1,42 @@
+{
+  "name": "wanderlist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabriellei814/WanderList.git"
+  },
+  "author": "lentata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabriellei814/WanderList/issues"
+  },
+  "homepage": "https://github.com/gabriellei814/WanderList#readme",
+  "dependencies": {
+    "babel-preset-stage-1": "^6.1.18",
+    "axios": "^0.13.1",
+    "express": "^4.14.0",
+    "lodash": "^4.14.1",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.6.0",
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "chai": "^3.5.0",
+    "enzyme": "^2.4.1",
+    "mocha": "^2.5.3",
+    "jquery": "^2.2.1",
+    "jsdom": "^8.1.0",
+    "webpack": "^1.12.9"
+  }
+}
