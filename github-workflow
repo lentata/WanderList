@@ -1,0 +1,28 @@
+At the beginning:
+- fork repo to your github
+- from your github repo, clone repo to local machine
+- in local repo, git remote add upstream https://github.com/lentata/testRepo.git
+
+Process to update code base:
+1) create a new branch if you don’t have one
+    - git checkout -b branchName
+2) on your branch, commit your code to your branch
+    - git status/add/commit
+3) git checkout master
+    - this checks out your local master
+    - do this before rebasing from upstream master (the production code)
+4) git pull —rebase upstream master
+    - has your local master rebase from master production code (the upstream)
+5) git checkout branchName
+    - checkout the branch you just committed code to
+6) git rebase master
+    - has your branch rebase from local repo master (code should be same as prod repo, but you’re working from your local repo)
+    - solve merge conflicts if they exist and save files
+    - after saving files, git add the files (do NOT commit)
+    - git rebase —continue
+        - this allows the rebase process to continue for your checked out branch
+        - test the code in the browser/console (e.g. nodemon index.js)
+7) git push origin branchName
+    - push your code to your branch
+8) on github in your forked repo, make pull request from your branch
+9) notify scrum master to review and accept pull request
