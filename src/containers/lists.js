@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//actions 
-//import { bindActionCreators } from 'redux';
-
-
+import { selectList } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 class tenList extends Component {
   renderList(){
     return this.props.lists.map((list) =>{
       return (
         <li
-          key={list.title}>
+          key={list.title}
+          onClick={() => this.props.selectList(list)}>
           {list.title}
         </li>
       );
     });
   }
-
-
 
   render() {
     return (
@@ -35,7 +32,10 @@ function mapStateToProps(state){
   return {
     lists: state.lists
   };
-
 }
 
-export default connect(mapStateToProps)(tenList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ selectList }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(tenList);
