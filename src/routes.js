@@ -1,5 +1,12 @@
 import React from 'react';
+import { Route, IndexRoute } from 'react-router';
+import App from './components/app';
+//import ListsIndex from './components/listsindex';
+export default (
+  <Route path='/' component={App}>
+ 
+  </Route>
 
-export default function() {
-  return <div>hot reload in routes.js</div>;
-}
+  );
+
+   //<IndexRoute component={ListsIndex} />
