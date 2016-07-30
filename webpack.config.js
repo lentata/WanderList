@@ -3,10 +3,12 @@ var path = require('path');
 
 module.exports = {
   entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './src/index.js'
   ],
   output: {
     path: path.join(__dirname, 'public'),
+    publicPath: '/assets',
     filename: 'bundle.js'
   },
   module: {
@@ -20,5 +22,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
