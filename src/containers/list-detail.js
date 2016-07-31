@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 class ListDetail extends Component {
   render() {
-    if(!this.prop.list) {
+    if(!this.props.list) {
       return <div>Select a list!</div>;
     }
 
-    return {
+    return (
       <div>
         <h2>Lists:</h2>
         <div>Headline: {this.props.list.title}</div>
@@ -16,7 +16,7 @@ class ListDetail extends Component {
         <div>First: {this.props.list[1]}</div>
         <div>Second: {this.props.list[2]}</div>
       </div>
-    }
+    );
   }
 }
 
@@ -27,3 +27,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(ListDetail);
+
+//        <div>First: {this.props.list[1]}</div>
+//        <div>Second: {this.props.list[2]}</div>
