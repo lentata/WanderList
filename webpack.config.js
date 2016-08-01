@@ -1,31 +1,38 @@
 var webpack = require('webpack');
-var path = require('path');
+var WebpackDevServer = require('webpack-dev-server');
+var env = process.env.WEBPACK_ENV;
 
-module.exports = {
+var config = {
+  devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './src/index.js'
   ],
   output: {
-    path: path.join(__dirname, 'public'),
-    publicPath: '/assets',
-    filename: 'bundle.js'
+    path: __dirname + 'public',
+    filename: 'bundle.js',
+    publicPath: __dirname + '/assets'
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['react', 'es2015', 'stage-1']
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel'
       }
-    }]
+    ]
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
-};
+  plugins: []
+}
+
+
+if (env === 'dev') {
+  config.entry.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server");
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  new WebpackDevServer(webpack(config), {
+    contentBase: './public',
+    hot: true
+  }).listen(8080);
+}
+
+module.exports = config;
+
