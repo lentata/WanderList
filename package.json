@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "dev": "WEBPACK_ENV=dev webpack --inline --hot",
-    "build": "webpack --watch --config webpack.prod.config.js",
+    "build": "npm run clean && webpack",
+    "clean": "rm public/bundle.js public/bundle.js.map",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lentata",

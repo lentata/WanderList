@@ -5,7 +5,7 @@ var env = process.env.WEBPACK_ENV;
 var config = {
   devtool: 'source-map',
   entry: [
-    './src/index.js'
+    './client/index.js'
   ],
   output: {
     path: __dirname + '/public',
