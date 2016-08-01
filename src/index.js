@@ -17,6 +17,6 @@ ReactDOM.render(
 
 
 //Hard Reload if statement
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
