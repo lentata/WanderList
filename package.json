@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "WEBPACK_ENV=dev webpack --inline --hot",
-    "build": "WEBPACK_ENV=build webpack",
+    "start": "nodemon server.js",
+    "dev": "WEBPACK_ENV=dev webpack --inline --hot",
+    "build": "webpack --watch --config webpack.prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lentata",

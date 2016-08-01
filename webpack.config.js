@@ -8,9 +8,9 @@ var config = {
     './src/index.js'
   ],
   output: {
-    path: __dirname + 'public',
+    path: __dirname + '/public',
     filename: 'bundle.js',
-    publicPath: __dirname + '/assets'
+    publicPath: __dirname + 'assets'
   },
   module: {
     loaders: [
