@@ -19,7 +19,7 @@ Process to update code base:
     - has your branch rebase from local repo master (code should be same as prod repo, but you’re working from your local repo)
     - solve merge conflicts if they exist and save files
     - after saving files, git add the files (do NOT commit)
-    - git rebase —continue
+    - git rebase —-continue
         - this allows the rebase process to continue for your checked out branch
         - test the code in the browser/console (e.g. nodemon index.js)
 7) git push origin branchName

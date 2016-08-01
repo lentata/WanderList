@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import Router from './routes';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import {Router, browserHistory} from 'react-router';
 import routes from './routes';
 import { Provider } from 'react-redux';
@@ -18,6 +18,9 @@ if(module.hot) {
     store.replaceReducer(nextRootReducer);
   });
 }
+
+//for redux dev tools
+const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 ReactDOM.render(
   <Provider store={store}>
