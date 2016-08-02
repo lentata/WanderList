@@ -5,14 +5,12 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
 
-
 let y = 0;
 
 class ListDetail extends Component {
   static contextTypes = {
-    router: PropTypes.object
+    router: PropTypes.object.isRequired
   }
-
 
   componentWillMount() {
     this.props.fetchList(this.props.params.id);
@@ -55,7 +53,7 @@ class ListDetail extends Component {
           onClick={ this.onDeleteClick.bind(this) }>
           Delete List
         </button>
-        
+
         <div>
           <span className="fa fa-angle-up"></span>
           <h6>{+list.upvote - +list.downvote}</h6>
@@ -67,14 +65,12 @@ class ListDetail extends Component {
         <h5>{ list.author } </h5>
         <h6>Categories: { list.categories }</h6>
 
-        <ol>  
+        <ol>
           {this.renderList()}
         </ol>
       </div>
 
     );
-
-  
 
   }
 }

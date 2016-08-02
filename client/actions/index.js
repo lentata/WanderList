@@ -24,7 +24,7 @@ export function fetchList(id) {
 }
 
 export function createList(props) {
-  const request = axios.post(`/api/lists/${props}`);
+  const request = axios.post(`/api/lists`,props);
   console.log('REQUEST:', request);
   return {
     type: CREATE_LIST,
