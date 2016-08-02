@@ -13,6 +13,6 @@ export default (
 // import ListDetail from './containers/list-detail';
     <Route path='login' component={Login} />
   </Route>
-  );
+);
 
     // <Route path="lists/:id" component = {ShowList} />

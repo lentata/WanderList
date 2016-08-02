@@ -1,20 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { fetchList, deleteList } from '../actions/index';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 
 class ListDetail extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  componentWillMount() {
+    this.props.fetchList(this.props.params.id);
+  }
+
+  onDeleteClick() {
+  this.props.deleteList(this.props.params.id)
+    .then( () => {
+      this.context.router.push('/');
+    });
+  }
+
   render() {
-    if(!this.props.list) {
-      return <div>Select a list!</div>;
+    const list = this.props.list;
+
+    if(!list) {
+      return <div>Loading...</div>;
     }
 
     return (
       <div>
-        <h2>Lists:</h2>
-        <div>Headline: {this.props.list.title}</div>
-        <div>Author: {this.props.list.author}</div>
-        <div>Votes: {this.props.list.votes}</div>
-        <div>First: {this.props.list[1]}</div>
-        <div>Second: {this.props.list[2]}</div>
+        <Link to="/">Back to All Lists</Link>
+        <button
+          className="btn btn-danger pull-xs-right"
+          onClick={ this.onDeleteClick.bind(this) }>
+          Delete List
+        </button>
+        <h3>{ list.title }</h3>
+        <h6>Categories: { list.categories }</h6>
+        <p>{ list.content }</p>
       </div>
     );
   }
@@ -22,11 +45,12 @@ class ListDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    list: state.activeList
+    list: state.lists.list
   };
 }
 
-export default connect(mapStateToProps)(ListDetail);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchList, deleteList }, dispatch);
+}
 
-//        <div>First: {this.props.list[1]}</div>
-//        <div>Second: {this.props.list[2]}</div>
+export default connect(mapStateToProps, mapDispatchToProps)(ListDetail);
