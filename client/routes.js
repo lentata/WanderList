@@ -11,10 +11,6 @@ export default (
     <IndexRoute component={ ListsIndex } />
     <Route path="/lists/:id" component={ ListDetail }></Route>
 // import ListDetail from './containers/list-detail';
-
-export default (
-  <Route path='/' component={App}>
-    <IndexRoute component={ListsIndex} />
     <Route path='login' component={Login} />
   </Route>
   );
