@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectList } from '../actions/index';
+import { fetchLists } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 
-class tenList extends Component {
-  renderList(){
+class Lists extends Component {
+  componentWillMount() {
+    this.props.fetchLists();
+  }
+
+
+  renderLists(){
     return this.props.lists.map((list) =>{
       return (
-        <li
-          key={list.title}
-          onClick={() => this.props.selectList(list)}>
-          {list.title}
+        <li className="list-group-item" key={ list.id }>
+          <Link to={ "posts/" + list.id }>
+            <span className="pull-xs-right">{ list.categories }</span>
+            <strong>{ list.title }</strong>
+          </Link>
         </li>
       );
     });
@@ -18,24 +25,30 @@ class tenList extends Component {
 
   render() {
     return (
-      <ul>
-        <li>HottoDogguazzzzz!</li>
-        {this.renderList()}
-      </ul>
+      <div>
+        <div className="text-xs-right">
+          <Link to="/lists/new" className="btn btn-primary">
+            Add a list
+          </Link>
+        </div>
+        <h3>Lists</h3>
+        <ul className="list-group">
+          { this.renderLists() }
+        </ul>
+      </div>
     );
   }
 
 }
 
-
 function mapStateToProps(state){
   return {
-    lists: state.lists
+    lists: state.lists.all
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectList }, dispatch);
+  return bindActionCreators({ fetchLists }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(tenList);
+export default connect(mapStateToProps, mapDispatchToProps)(Lists);
