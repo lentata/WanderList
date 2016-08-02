@@ -4,9 +4,13 @@ var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 var db = require('./server/config');
+var bodyParser = require('body-parser');
 
 var app = express();
 var compiler = webpack(config);
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
