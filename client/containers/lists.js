@@ -19,6 +19,9 @@ class Lists extends Component {
             <span className="pull-xs-right">{ list.categories }</span>
             <strong>{ list.title }</strong>
           </Link>
+            <div className="pull-xs-right">{ list.author }</div>
+            <span>Upvote: { list.upvote} &nbsp; </span>
+            <span>Downvote: { list.downvote }</span>
         </li>
       );
     });
