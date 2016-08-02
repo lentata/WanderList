@@ -13,8 +13,18 @@ class ListDetail extends Component {
     router: PropTypes.object
   }
 
+
   componentWillMount() {
     this.props.fetchList(this.props.params.id);
+  }
+
+  renderList(){
+    console.log("RENDERLIST", this.props.list);
+    return this.props.list.content.map((x)=> {
+      return (
+          <li key={this.props.list.content.indexOf(x)}>{x}</li>
+        );
+    });
   }
 
   onDeleteClick() {
@@ -42,9 +52,10 @@ class ListDetail extends Component {
         <h3>{ list.title }</h3>
         <h4>{ list.author } </h4>
         <h6>Categories: { list.categories }</h6>
-       
-
-
+        <img src={list.img} alt={list.img} />
+        <ol>  
+          {this.renderList()}
+        </ol>
       </div>
 
     );
