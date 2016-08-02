@@ -19,7 +19,7 @@ class tenList extends Component {
   render() {
     return (
       <ul>
-        <li>HottoDoggu!</li>
+        <li>HottoDogguazzzzz!</li>
         {this.renderList()}
       </ul>
     );
