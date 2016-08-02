@@ -8,7 +8,7 @@ module.exports = function(app) {
     res.sendFile('index.html');
   });
 
-  app.get('/api/posts', function(req, res) {
+  app.get('/api/lists', function(req, res) {
     res.send(dummy);
   });
 

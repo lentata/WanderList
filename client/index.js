@@ -16,16 +16,16 @@ import lists from './data/lists';
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 //initial dummy data for lists and comments
-const defaultState = {
-  lists,
-  comments
-};
+// const defaultState = {
+//   lists,
+//   comments
+// };
 
 //for redux dev tools
 const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 //tried to put defaultState (our data) and enhancers here
-const store = createStoreWithMiddleware(reducers, defaultState, enhancers);
+const store = createStoreWithMiddleware(reducers, enhancers);
 
 //browserHistory keeps track of app's pages you've been on
 const history = syncHistoryWithStore(browserHistory, store);
