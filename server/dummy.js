@@ -7,7 +7,7 @@ module.exports = {
       downvote: '1',
       id: '1',
       img: 'http://i.ytimg.com/vi/yAIGLAgEa84/0.jpg',
-      content: [
+      content:
         {
           a: "this is the fattest of all time",
           b: "second fattest",
@@ -19,8 +19,7 @@ module.exports = {
           h: "I actually did",
           i: "keep it short",
           j: "SHORTEST!!!!!!"
-        }
-      ],
+        },
       comments: [
         {
           user: '2',

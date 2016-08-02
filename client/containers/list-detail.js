@@ -43,7 +43,7 @@ class ListDetail extends Component {
         <h4>{ list.author } </h4>
         <h6>Categories: { list.categories }</h6>
        
-        <p>{ list.content }</p>
+
 
       </div>
 
