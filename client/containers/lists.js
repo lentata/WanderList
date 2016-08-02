@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { selectList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-class tenList extends Component {
+class Lists extends Component {
   renderList(){
     return this.props.lists.map((list) =>{
       return (
@@ -19,7 +19,7 @@ class tenList extends Component {
   render() {
     return (
       <ul>
-        <li>HottoDogguazzzzz!</li>
+        <li>LISTS BELOWWWWW!</li>
         {this.renderList()}
       </ul>
     );
@@ -38,4 +38,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectList }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(tenList);
+export default connect(mapStateToProps, mapDispatchToProps)(Lists);

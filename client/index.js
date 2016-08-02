@@ -18,7 +18,7 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 //initial dummy data for lists and comments
 const defaultState = {
   lists,
-  // comments
+  comments
 };
 
 //for redux dev tools
