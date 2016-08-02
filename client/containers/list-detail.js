@@ -6,6 +6,8 @@ import { Link } from 'react-router';
 
 
 
+
+
 class ListDetail extends Component {
   static contextTypes = {
     router: PropTypes.object
