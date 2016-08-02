@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_LISTS = 'FETCH_LISTS';
+export const FETCH_LIST = 'FETCH_LIST';
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
