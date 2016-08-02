@@ -6,6 +6,20 @@ module.exports = {
       upvote: '1',
       downvote: '1',
       id: '1',
+      img: 'http://i.ytimg.com/vi/yAIGLAgEa84/0.jpg',
+      content: [
+          "this is the fattest of all time",
+          "second fattest",
+          "should we keep going?",
+          "I think so",
+          "why would someone have such a fat cat?",
+          "probs because they are funny",
+          "I ain't going there",
+          "I actually did",
+          "keep it short",
+          "SHORTEST!!!!!!"
+        ],
+        
       comments: [
         {
           user: '2',
