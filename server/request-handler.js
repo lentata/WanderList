@@ -26,4 +26,14 @@ module.exports = function(app) {
       }
     });
   });
+
+  app.get('/lists/:id', function(req, res) {
+    var id = req.params.id;
+    for(var i = 0; i < dummy.lists.length; i++) {
+      if(dummy.lists[i].id === id) {
+        res.send(dummy.lists[i]);
+      }
+    }
+    res.sendStatus(404);
+  });
 }
