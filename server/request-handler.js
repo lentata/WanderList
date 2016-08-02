@@ -27,8 +27,9 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/lists/:id', function(req, res) {
+  app.get('/api/lists/:id', function(req, res) {
     var id = req.params.id;
+    console.log('id', id);
     for(var i = 0; i < dummy.lists.length; i++) {
       if(dummy.lists[i].id === id) {
         res.send(dummy.lists[i]);
