@@ -4,6 +4,7 @@ import { fetchLists } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
+
 class Lists extends Component {
   componentWillMount() {
     this.props.fetchLists();
@@ -29,6 +30,9 @@ class Lists extends Component {
         <div className="text-xs-right">
           <Link to="/lists/new" className="btn btn-primary">
             Add a list
+          </Link>
+          <Link to='/login'>
+            Log In
           </Link>
         </div>
         <h3>Lists</h3>

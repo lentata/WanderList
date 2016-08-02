@@ -3,12 +3,19 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 import ListsIndex from './containers/lists';
 import ListDetail from './containers/list-detail';
+import Login from './containers/login';
 //need to import new list when that's created
 
 export default (
   <Route path='/' component={App}>
     <IndexRoute component={ ListsIndex } />
     <Route path="/lists/:id" component={ ListDetail }></Route>
+// import ListDetail from './containers/list-detail';
+
+export default (
+  <Route path='/' component={App}>
+    <IndexRoute component={ListsIndex} />
+    <Route path='login' component={Login} />
   </Route>
   );
 
