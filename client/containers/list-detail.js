@@ -4,6 +4,8 @@ import { fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
+
+
 class ListDetail extends Component {
   static contextTypes = {
     router: PropTypes.object
@@ -39,7 +41,11 @@ class ListDetail extends Component {
         <h6>Categories: { list.categories }</h6>
         <p>{ list.content }</p>
       </div>
+
     );
+
+  
+
   }
 }
 
