@@ -15,7 +15,7 @@ class Lists extends Component {
     return this.props.lists.map((list) =>{
       return (
         <li className="list-group-item" key={ list.id }>
-          <Link to={ "posts/" + list.id }>
+          <Link to={ "lists/" + list.id }>
             <span className="pull-xs-right">{ list.categories }</span>
             <strong>{ list.title }</strong>
           </Link>
