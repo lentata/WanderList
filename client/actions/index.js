@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const FETCH_LISTS = 'FETCH_LISTS';
 export const FETCH_LIST = 'FETCH_LIST';
+export const CREATE_LIST = "CREATE_POST";
 export const DELETE_LIST = 'DELETE_LIST';
 
 export function fetchLists() {
@@ -22,6 +23,15 @@ export function fetchList(id) {
   };
 }
 
+export function createList(props) {
+  const request = axios.post(`/api/lists/${props}`);
+  console.log('REQUEST:', request);
+  return {
+    type: CREATE_LIST,
+    payload: request
+  };
+}
+
 export function deleteList(id) {
   const request = axios.delete(`/api/lists/${id}`);
   console.log('REQUEST:', request);
@@ -30,10 +40,3 @@ export function deleteList(id) {
     payload: request
   };
 }
-
-// export function selectList(list) {
-//   return {
-//     type: 'LIST_SELECTED',
-//     payload: list
-//   };
-// }
