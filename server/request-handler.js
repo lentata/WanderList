@@ -2,6 +2,7 @@ var dummy = require('./dummy');
 var path = require('path');
 var Users = require('./collections/users');
 var User = require('./models/user');
+var jsonfile = require('jsonfile');
 
 module.exports = function(app) {
   app.get('/', function(req, res) {
@@ -9,7 +10,11 @@ module.exports = function(app) {
   });
 
   app.get('/api/lists', function(req, res) {
-    res.send(dummy);
+    var file = './public/dummy.JSON';    
+    jsonfile.readFile(file, function(err, obj){
+      if(err) throw err;
+      res.send(obj);
+    });
   });
 
   app.get('/api/auth', function(req, res) {
@@ -28,13 +33,28 @@ module.exports = function(app) {
   });
 
   app.get('/api/lists/:id', function(req, res) {
+    var file = './public/dummy.JSON';    
     var id = req.params.id;
-    console.log('id', id);
-    for(var i = 0; i < dummy.lists.length; i++) {
-      if(dummy.lists[i].id === id) {
-        res.send(dummy.lists[i]);
+    jsonfile.readFile(file, function(err, obj){
+      if(err) throw err;
+      for(var i = 0; i < obj.lists.length; i++) {
+        if(obj.lists[i].id === id) {
+          res.send(obj.lists[i]);
+        }
       }
-    }
-    res.sendStatus(404);
+      //res.sendStatus(404);
+
+    });
+  });
+
+  app.post('/api/lists/', function(req, res){
+    var file = './public/dummy.JSON';    
+    jsonfile.readFile(file, function(err, obj){
+      if(err) throw err;
+      obj.lists.push(req.body);
+      jsonfile.writeFile(file, obj, function(err){
+        if(err) throw err;
+      });
+    });
   });
 }
