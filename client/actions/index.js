@@ -24,7 +24,7 @@ export function fetchList(id) {
 }
 
 export function createList(props) {
-  const request = axios.post(`/api/lists/${props}`);
+  const request = axios.post(`/api/lists`,props);
   console.log('REQUEST:', request);
   return {
     type: CREATE_LIST,
@@ -40,3 +40,17 @@ export function deleteList(id) {
     payload: request
   };
 }
+
+// export function upvote() {
+//   return {
+//     type: UPVOTE,
+//     payload: request
+//   };
+// }
+//
+// export function downvote() {
+//   return {
+//     type: DOWNVOTE,
+//     payload: request
+//   };
+// }
