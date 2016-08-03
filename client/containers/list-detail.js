@@ -41,6 +41,9 @@ class ListDetail extends Component {
 
   render() {
     const list = this.props.list;
+    // console.log("this is list: ", list)
+    // console.log("this is downvote: ", list.downvote)
+    // let netVotes = (list.upvote || 0) - (list.downvote || 0);
 
     if(!list) {
       return <div>Loading...</div>;
@@ -57,11 +60,10 @@ class ListDetail extends Component {
 
         <div>
           <span className="fa fa-angle-up"></span>
-          <h6>{+list.upvote - +list.downvote}</h6>
+          <h6>{ list.upvote - list.downvote }</h6>
           <span className="fa fa-angle-down"></span>
           <h1>{ list.title }</h1>
         </div>
-
 
         <h5>{ list.author } </h5>
         <h6>Categories: { list.categories }</h6>
@@ -72,7 +74,6 @@ class ListDetail extends Component {
       </div>
 
     );
-
   }
 }
 

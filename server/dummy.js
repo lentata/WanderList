@@ -3,8 +3,8 @@ module.exports = {
     {
       title: 'title1',
       author: 'author1',
-      upvote: '1',
-      downvote: '1',
+      upvote: 1,
+      downvote: 1,
       id: '1',
       content: [
           {headline: "this is the fattest of all time",
@@ -48,12 +48,12 @@ module.exports = {
            desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis blanditiis quis, inventore doloribus doloremque quam, necessitatibus repellendus omnis voluptas excepturi nobis asperiores quasi, beatae architecto odio hic soluta voluptatibus consequatur?'
           }
         ],
-        
+
       comments: [
         {
           user: '2',
-          upvote: '2',
-          downvote: '2',
+          upvote: 2,
+          downvote: 2,
           text: 'user2 comment'
         }
       ]
@@ -61,8 +61,8 @@ module.exports = {
     {
       title: 'title2',
       author: 'author2',
-      upvote: '3',
-      downvote: '2',
+      upvote: 3,
+      downvote: 2,
       id: '2',
       content: [
           {headline: "List2 same picture",
@@ -109,8 +109,8 @@ module.exports = {
       comments: [
         {
           user: 'comment_user',
-          upvote: '0',
-          downvote: '1',
+          upvote: 0,
+          downvote: 1,
           text: 'comment_user comment'
         }
       ]

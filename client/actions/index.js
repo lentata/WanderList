@@ -40,3 +40,17 @@ export function deleteList(id) {
     payload: request
   };
 }
+
+// export function upvote() {
+//   return {
+//     type: UPVOTE,
+//     payload: request
+//   };
+// }
+//
+// export function downvote() {
+//   return {
+//     type: DOWNVOTE,
+//     payload: request
+//   };
+// }

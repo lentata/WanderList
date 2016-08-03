@@ -10,13 +10,11 @@ class Lists extends Component {
     this.props.fetchLists();
   }
 
-
   renderLists(){
     return this.props.lists.map((list) =>{
       return (
         <li className="list-group-item" key={ list.id }>
           <div className="row">
-
 
             <div className="col-md-1">
               <div className="fa fa-angle-up"></div>
@@ -33,8 +31,8 @@ class Lists extends Component {
                 <strong>{ list.title }</strong>
               </Link>
               <div>{ list.author }</div>
-            </div>  
-          </div>  
+            </div>
+          </div>
         </li>
       );
     });
@@ -45,7 +43,7 @@ class Lists extends Component {
       <div>
         <div className="row">
           <div className="col-md-8">
-          
+
           </div>
           <div className="col-md-2">
           <Link to="/lists/new" className="btn btn-primary">
@@ -55,7 +53,7 @@ class Lists extends Component {
           <div className="col-md-2">
             <Link to='/login'>
             Log In
-          </Link>
+            </Link>
           </div>
 
         </div>
