@@ -24,5 +24,5 @@ app.use(express.static(path.join(__dirname + '/public')));
 require('./server/request-handler')(app);
 
 app.listen(port, function() {
-  console.log('server up at port 3000!!!! OMGEEEEEZ!!!');
+  console.log('server up at port 3000!');
 });

@@ -1,4 +1,3 @@
-var dummy = require('./dummy');
 var path = require('path');
 var Users = require('./collections/users');
 var User = require('./models/user');
@@ -18,7 +17,6 @@ module.exports = function(app) {
   });
 
   app.get('/api/auth', function(req, res) {
-    // console.log(req.query)
     var info = req.query;
     User.where({
       username: info.username,
@@ -42,8 +40,6 @@ module.exports = function(app) {
           res.send(obj.lists[i]);
         }
       }
-      //res.sendStatus(404);
-
     });
   });
 

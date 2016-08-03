@@ -16,7 +16,6 @@ export default (
     <Route path="/lists/:id" component={ ListDetail } />
     <Route path='login' component={ Login } />
   </Route>
-
 );
 
 // <Route path='/' component= { Votes } />

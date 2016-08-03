@@ -47,12 +47,11 @@ class Lists extends Component {
       <div>
         <div className="row">
           <div className="col-md-8">
-
           </div>
           <div className="col-md-2">
-          <Link to="/lists/new" className="btn btn-primary">
-            Add a list
-          </Link>
+            <Link to="/lists/new" className="btn btn-primary">
+              Add a list
+            </Link>
           </div>
           <div className="col-md-2">
             <Link to='/login'>

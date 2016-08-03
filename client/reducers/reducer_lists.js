@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 };
 
 export default function(state = INITIAL_STATE, action) {
-  console.log('ACTION:', action);
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
   }
