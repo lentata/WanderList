@@ -4,45 +4,36 @@ import { fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 
-
-
 class ListDetail extends Component {
-  // static contextTypes = {
-  //   router: PropTypes.object.isRequired
-  // }
 
   componentWillMount() {
     this.props.fetchList(this.props.params.id);
   }
 
-  renderList(){
+  renderList() {
     console.log("RENDERLIST", this.props.list);
-    return this.props.list.content.map((x,i)=> {
+    return this.props.list.content.map((x, i) => {
       return (
-          <div key={i}>
-            <li>
-              <h2>{x.headline}</h2>
-              <img src={x.img} alt={x.headline} />
-              <p>{x.desc}</p>
-            </li>
-          </div>
-        );
+        <div key={i}>
+          <li>
+            <h2>{x.headline}</h2>
+            <img src={x.img} alt={x.headline} />
+            <p>{x.desc}</p>
+          </li>
+        </div>
+      );
     });
   }
 
   onDeleteClick() {
-  this.props.deleteList(this.props.params.id)
-    .then( () => {
-      // this.context.router.push('/');
-      browserHistory.push('/')
-    });
+    this.props.deleteList(this.props.params.id)
+      .then(() => {
+        browserHistory.push('/');
+      });
   }
 
   render() {
     const list = this.props.list;
-    // console.log("this is list: ", list)
-    // console.log("this is downvote: ", list.downvote)
-    // let netVotes = (list.upvote || 0) - (list.downvote || 0);
 
     if(!list) {
       return <div>Loading...</div>;
@@ -57,6 +48,7 @@ class ListDetail extends Component {
           Delete List
         </button>
 
+        {/*pull upvote downvote out*/}
         <div>
           <span className="fa fa-angle-up"></span>
           <h6>{ list.upvote - list.downvote }</h6>
@@ -71,7 +63,6 @@ class ListDetail extends Component {
           {this.renderList()}
         </ol>
       </div>
-
     );
   }
 }
