@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 
 
-let y = 0;
 
 class ListDetail extends Component {
   // static contextTypes = {
@@ -18,10 +17,10 @@ class ListDetail extends Component {
 
   renderList(){
     console.log("RENDERLIST", this.props.list);
-    return this.props.list.content.map((x)=> {
+    return this.props.list.content.map((x,i)=> {
       return (
-          <div>
-            <li key={++y}>
+          <div key={i}>
+            <li>
               <h2>{x.headline}</h2>
               <img src={x.img} alt={x.headline} />
               <p>{x.desc}</p>
