@@ -49,12 +49,12 @@ module.exports = {
            desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis blanditiis quis, inventore doloribus doloremque quam, necessitatibus repellendus omnis voluptas excepturi nobis asperiores quasi, beatae architecto odio hic soluta voluptatibus consequatur?'
           }
         ],
-        
+
       comments: [
         {
           user: '2',
-          upvote: '2',
-          downvote: '2',
+          upvote: 2,
+          downvote: 2,
           text: 'user2 comment'
         }
       ]
@@ -111,8 +111,8 @@ module.exports = {
       comments: [
         {
           user: 'comment_user',
-          upvote: '0',
-          downvote: '1',
+          upvote: 0,
+          downvote: 1,
           text: 'comment_user comment'
         }
       ]

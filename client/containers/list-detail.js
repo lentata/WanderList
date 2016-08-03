@@ -2,17 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
-
+import { Link, browserHistory } from 'react-router';
 
 
 let y = 0;
 
 class ListDetail extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
+  // static contextTypes = {
+  //   router: PropTypes.object.isRequired
+  // }
 
   componentWillMount() {
     this.props.fetchList(this.props.params.id);
@@ -36,12 +34,16 @@ class ListDetail extends Component {
   onDeleteClick() {
   this.props.deleteList(this.props.params.id)
     .then( () => {
-      this.context.router.push('/');
+      // this.context.router.push('/');
+      browserHistory.push('/')
     });
   }
 
   render() {
     const list = this.props.list;
+    // console.log("this is list: ", list)
+    // console.log("this is downvote: ", list.downvote)
+    // let netVotes = (list.upvote || 0) - (list.downvote || 0);
 
     if(!list) {
       return <div>Loading...</div>;
@@ -55,27 +57,23 @@ class ListDetail extends Component {
           onClick={ this.onDeleteClick.bind(this) }>
           Delete List
         </button>
-        
+
         <div>
           <span className="fa fa-angle-up"></span>
-          <h6>{+list.upvote - +list.downvote}</h6>
+          <h6>{ list.upvote - list.downvote }</h6>
           <span className="fa fa-angle-down"></span>
           <h1>{ list.title }</h1>
         </div>
 
-
         <h5>{ list.author } </h5>
         <h6>Categories: { list.categories }</h6>
 
-        <ol>  
+        <ol>
           {this.renderList()}
         </ol>
       </div>
 
     );
-
-  
-
   }
 }
 
