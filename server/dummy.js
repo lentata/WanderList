@@ -66,7 +66,7 @@ module.exports = {
       id: '2',
       content: [
           {headline: "List2 same picture",
-           img: 'http://i.ytimg.com/vi/yAIGLAgEa84/0.jpg',
+           img: 'https://featuredcreature.com/wp-content/uploads/2012/10/beauty_exotica22.jpg',
            desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis officiis in, est accusantium magnam. Praesentium sequi at sed libero facere, quae? Necessitatibus debitis, quae labore voluptate dicta illo assumenda consequuntur.'
           },
           {headline: "still list 2",

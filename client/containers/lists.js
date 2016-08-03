@@ -15,13 +15,26 @@ class Lists extends Component {
     return this.props.lists.map((list) =>{
       return (
         <li className="list-group-item" key={ list.id }>
-          <Link to={ "lists/" + list.id }>
-            <span className="pull-xs-right">{ list.categories }</span>
-            <strong>{ list.title }</strong>
-          </Link>
-            <div className="pull-xs-right">{ list.author }</div>
-            <span>Upvote: { list.upvote} &nbsp; </span>
-            <span>Downvote: { list.downvote }</span>
+          <div className="row">
+
+
+            <div className="col-md-1">
+              <div className="fa fa-angle-up"></div>
+              <div className="text-justify">{ list.upvote - list.downvote}</div>
+              <div className="fa fa-angle-down"></div>
+            </div>
+
+            <div className="col-md-3">
+              <img className="img-thumbnail" src={list.content[0].img} />
+            </div>
+
+            <div className="col-md-3">
+              <Link to={ "lists/" + list.id }>
+                <strong>{ list.title }</strong>
+              </Link>
+              <div>{ list.author }</div>
+            </div>  
+          </div>  
         </li>
       );
     });
@@ -30,18 +43,32 @@ class Lists extends Component {
   render() {
     return (
       <div>
-        <div className="text-xs-right">
+        <div className="row">
+          <div className="col-md-8">
+          
+          </div>
+          <div className="col-md-2">
           <Link to="/lists/new" className="btn btn-primary">
             Add a list
           </Link>
-          <Link to='/login'>
+          </div>
+          <div className="col-md-2">
+            <Link to='/login'>
             Log In
           </Link>
+          </div>
+
         </div>
-        <h3>Lists</h3>
-        <ul className="list-group">
-          { this.renderLists() }
-        </ul>
+
+        <div className="row">
+          <div className="col-md-10">
+            <h3>Lists</h3>
+            <ul className="list-group">
+              { this.renderLists() }
+            </ul>
+          </div>
+        </div>
+
       </div>
     );
   }
