@@ -4,6 +4,7 @@ import {reduxForm} from 'redux-form';
 
 export default class Login extends Component {
   render() {
+    // const {fields: {username, password}, handleSubmit} = this.props;
     return (
       <form>
         <h2>Login</h2>
@@ -21,4 +22,8 @@ export default class Login extends Component {
   }
 }
 
+// export default reduxForm({
+//   form: 'loginForm',
+//   fields: [username, password]
+// })
  // onSubmit={handleSubmit(this.onSubmit.bind(this))}>

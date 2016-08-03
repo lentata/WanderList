@@ -7,6 +7,7 @@ export const DELETE_LIST = 'DELETE_LIST';
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
+
   return {
     type: FETCH_LISTS,
     payload: request
@@ -15,6 +16,7 @@ export function fetchLists() {
 
 export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
+
   return {
     type: FETCH_LIST,
     payload: request
@@ -23,6 +25,7 @@ export function fetchList(id) {
 
 export function createList(props) {
   const request = axios.post(`/api/lists`,props);
+
   return {
     type: CREATE_LIST,
     payload: request
