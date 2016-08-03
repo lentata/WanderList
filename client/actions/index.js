@@ -5,9 +5,9 @@ export const FETCH_LIST = 'FETCH_LIST';
 export const CREATE_LIST = "CREATE_POST";
 export const DELETE_LIST = 'DELETE_LIST';
 
+
 export function fetchLists() {
-  const request = axios.get('/api/lists');
-  console.log('REQUEST:', request);
+const request = axios.get('/api/lists');
   return {
     type: FETCH_LISTS,
     payload: request
