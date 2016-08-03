@@ -19,20 +19,24 @@ class Lists extends Component {
 
 
             <div className="col-md-1">
-              <div className="fa fa-angle-up"></div>
-              <div className="text-justify">{ list.upvote - list.downvote}</div>
-              <div className="fa fa-angle-down"></div>
+              <div className="fa fa-chevron-up"></div>
+              <div>{list.upvote - list.downvote}</div>
+              <div className="fa fa-chevron-down"></div>
             </div>
 
-            <div className="col-md-3">
+            <div className="col-md-2">
               <img className="img-thumbnail" src={list.content[0].img} />
             </div>
 
-            <div className="col-md-3">
+            <div className="col-md-5">
               <Link to={ "lists/" + list.id }>
                 <strong>{ list.title }</strong>
               </Link>
-              <div>{ list.author }</div>
+              <div className="small"><em>{ list.author } &nbsp;</em>
+              <span className="fa fa-commenting"> Comments: {list.comments.length} </span>
+
+              </div>
+              <div className="small fa fa-caret-square-o-right"><em>Categories: { list.categories }</em></div>
             </div>  
           </div>  
         </li>

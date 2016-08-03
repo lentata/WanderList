@@ -1,10 +1,11 @@
 module.exports = {
   lists: [
     {
-      title: 'title1',
-      author: 'author1',
+      title: 'this is the fattest cat of all time',
+      author: 'Dr. Jonathan Katz',
       upvote: '1',
       downvote: '1',
+      categories: ['cats ', 'fatcat ', 'timewaste '],
       id: '1',
       content: [
           {headline: "this is the fattest of all time",
@@ -59,10 +60,11 @@ module.exports = {
       ]
     },
     {
-      title: 'title2',
-      author: 'author2',
+      title: 'List2 same picture',
+      author: 'Frank Grimes',
       upvote: '3',
       downvote: '2',
+      categories: ['cats ', 'hairless ', 'pig tattooes'],
       id: '2',
       content: [
           {headline: "List2 same picture",
