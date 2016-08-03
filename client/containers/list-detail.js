@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 
 
-
+let y = 0;
 
 class ListDetail extends Component {
   static contextTypes = {
@@ -22,7 +22,13 @@ class ListDetail extends Component {
     console.log("RENDERLIST", this.props.list);
     return this.props.list.content.map((x)=> {
       return (
-          <li key={this.props.list.content.indexOf(x)}>{x}</li>
+          <div>
+            <li key={++y}>
+              <h2>{x.headline}</h2>
+              <img src={x.img} alt={x.headline} />
+              <p>{x.desc}</p>
+            </li>
+          </div>
         );
     });
   }
@@ -49,10 +55,18 @@ class ListDetail extends Component {
           onClick={ this.onDeleteClick.bind(this) }>
           Delete List
         </button>
-        <h3>{ list.title }</h3>
-        <h4>{ list.author } </h4>
+        
+        <div>
+          <span className="fa fa-angle-up"></span>
+          <h6>{+list.upvote - +list.downvote}</h6>
+          <span className="fa fa-angle-down"></span>
+          <h1>{ list.title }</h1>
+        </div>
+
+
+        <h5>{ list.author } </h5>
         <h6>Categories: { list.categories }</h6>
-        <img src={list.img} alt={list.img} />
+
         <ol>  
           {this.renderList()}
         </ol>
