@@ -22,6 +22,7 @@ class Login extends Component {
 
   render() {
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;
+
     return (
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -43,9 +44,16 @@ class Login extends Component {
           Don't have an account? Sign up here -->
         </Link>
       </div>
+
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <h2>Login</h2>
+        <div> 
+          <label>Username</label>
+
     );
   }
 }
+
 
 function mapStateToProps(state) {
   return {
