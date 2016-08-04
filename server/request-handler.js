@@ -30,6 +30,13 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/auth', function(req, res) {
+    var info = req.body;
+    new User({username: info.username, password: info.password}).save().then(function() {
+      res.sendStatus(201);
+    });
+  });
+
   app.get('/api/lists/:id', function(req, res) {
     var file = './public/dummy.JSON';    
     var id = req.params.id;

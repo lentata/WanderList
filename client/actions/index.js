@@ -5,6 +5,7 @@ export const FETCH_LIST = 'FETCH_LIST';
 export const CREATE_LIST = 'CREATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const AUTH_IN = 'AUTH_IN';
+export const SIGN_UP = 'SIGN_UP';
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
@@ -24,7 +25,7 @@ export function fetchList(id) {
 }
 
 export function createList(props) {
-  const request = axios.post(`/api/lists`,props);
+  const request = axios.post(`/api/lists`, props);
 
   return {
     type: CREATE_LIST,
@@ -45,6 +46,15 @@ export function userAuth(props) {
 
   return {
     type: AUTH_IN,
+    payload: request
+  };
+}
+
+export function userCreate(props) {
+  const request = axios.post('/api/auth', props);
+
+  return {
+    type: SIGN_UP,
     payload: request
   };
 }
