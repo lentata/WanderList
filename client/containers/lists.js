@@ -46,7 +46,7 @@ class Lists extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-6">
           </div>
           <div className="col-md-2">
             <Link to="/lists/new" className="btn btn-primary">
@@ -55,7 +55,12 @@ class Lists extends Component {
           </div>
           <div className="col-md-2">
             <Link to='/login'>
-            Log In
+              Log In
+            </Link>
+          </div>
+          <div className="col-md-2">
+            <Link to='/signup'>
+              Sign Up
             </Link>
           </div>
 

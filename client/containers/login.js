@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import {userAuth} from '../actions/index';
-//import {Link} from 'react-router';
+import {Link} from 'react-router';
 
 
 class Login extends Component {
@@ -21,22 +21,28 @@ class Login extends Component {
   }
 
   render() {
-    const {auth} = this.props;
-    console.log("PROPS",auth);
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <h2>Login</h2>
-        <div> 
-          <label>Username</label>
-          <input type="text" {...username}/>
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" {...password}/>
-        </div>
-        <button type="submit">submit</button>
-      </form>
+      <div>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <h2>Login</h2>
+          <div> 
+            <label>Username</label>
+            <input type="text" {...username}/>
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="password" {...password}/>
+          </div>
+          <button type="submit" className="btn btn-primary">Log In</button>
+          <Link to="/" className="btn btn-error">
+            Cancel
+          </Link>
+        </form>
+        <Link to="/signup" className="btn btn-error">
+          Don't have an account? Sign up here -->
+        </Link>
+      </div>
     );
   }
 }

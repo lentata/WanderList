@@ -7,6 +7,7 @@ import ListsIndex from './containers/lists';
 import NewList from './containers/new_list';
 import ListDetail from './containers/list-detail';
 import Login from './containers/login';
+import Signup from './containers/signup';
 // import Votes from './components/VoteCounter';
 
 export default (
@@ -15,6 +16,7 @@ export default (
     <Route path="lists/new" component={ NewList } />
     <Route path="/lists/:id" component={ ListDetail } />
     <Route path='login' component={ Login } />
+    <Route path='signup' component={ Signup } />
   </Route>
 );
 
