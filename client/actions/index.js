@@ -8,6 +8,7 @@ export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
 
 
+
 export function fetchLists() {
   const request = axios.get('/api/lists');
   return {
@@ -53,6 +54,7 @@ export function userAuth(props) {
 
 
 
+
 export function userCreate(props) {
   const request = axios.post('/api/auth', props);
 
@@ -61,5 +63,6 @@ export function userCreate(props) {
     payload: request
   };
 }
+
 
 
