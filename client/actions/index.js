@@ -5,7 +5,10 @@ export const FETCH_LIST = 'FETCH_LIST';
 export const CREATE_LIST = 'CREATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const AUTH_IN = 'AUTH_IN';
+<<<<<<< 224547b7a83218e45500aea043a126a14ee58591
 export const SIGN_UP = 'SIGN_UP';
+=======
+>>>>>>> rebase
 
 
 export function fetchLists() {
@@ -41,15 +44,23 @@ export function deleteList(id) {
     payload: request
   };
 }
+<<<<<<< 224547b7a83218e45500aea043a126a14ee58591
 
 
 export function userAuth(props) {
   const request = axios.get(`/api/auth?username=${props.username}&password=${props.password}`);
+=======
+
+export function userAuth(props) {
+  const request = axios.get(`/api/auth?username=${props.username}&password=${props.password}`);
+
+>>>>>>> rebase
   return {
     type: AUTH_IN,
     payload: request
   };
 }
+<<<<<<< 224547b7a83218e45500aea043a126a14ee58591
 
 
 export function userCreate(props) {
@@ -61,3 +72,6 @@ export function userCreate(props) {
   };
 }
 
+=======
+
+>>>>>>> rebase
