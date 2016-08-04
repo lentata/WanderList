@@ -112,6 +112,7 @@ class ListsNew extends Component {
   }
 }
 
+//merge
 //Client side validation
 function validate(values) {
   const errors = {};
