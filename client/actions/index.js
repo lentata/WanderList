@@ -58,17 +58,19 @@ export function userCreate(props) {
   return {
     type: SIGN_UP,
     payload: request
-
-export function upvote(upvote) {
-  return {
-    type: UPVOTE,
-    upvote
   };
 }
 
-export function downvote(downvote) {
+export function upvote(index) {
+  return {
+    type: UPVOTE,
+    index
+  };
+}
+
+export function downvote(index) {
   return {
     type: DOWNVOTE,
-    downvote
+    index
   };
 }

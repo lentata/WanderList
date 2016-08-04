@@ -2,7 +2,9 @@ import { FETCH_LISTS, FETCH_LIST } from '../actions/index';
 
 const INITIAL_STATE = {
   all: [],
-  list: null
+  list: null,
+  upvote: 0,
+  downvote: 0
 };
 
 export default function(state = INITIAL_STATE, action) {

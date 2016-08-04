@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   votes: Votes,
   form: formReducer,
   routing: routerReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
 });
 
 export default rootReducer;
