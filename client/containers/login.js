@@ -1,20 +1,29 @@
 import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
+import {auth} from '../actions/index';
 
 
-export default class Login extends Component {
+class Login extends Component {
+  onSubmit(props) {
+    console.log("PROPS",props);
+    this.props.auth(props)
+      .then(() => {
+        this.context.router.push('/');
+      });
+  }
+
   render() {
-    // const {fields: {username, password}, handleSubmit} = this.props;
+    const {fields: {username, password}, handleSubmit} = this.props;
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h2>Login</h2>
         <div> 
           <label>Username</label>
-          <input type="text" />
+          <input type="text" {...username}/>
         </div>
         <div>
           <label>Password</label>
-          <input type="password" />
+          <input type="password" {...password}/>
         </div>
         <button type="submit">submit</button>
       </form>
@@ -22,8 +31,7 @@ export default class Login extends Component {
   }
 }
 
-// export default reduxForm({
-//   form: 'loginForm',
-//   fields: [username, password]
-// })
- // onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+export default reduxForm({
+  form: 'loginForm',
+  fields: [username, password]
+}, null, {auth})(Login);
