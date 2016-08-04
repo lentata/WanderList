@@ -6,6 +6,8 @@ export const CREATE_LIST = 'CREATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
+export const UPVOTE = 'UPVOTE';
+export const DOWNVOTE = 'DOWNVOTE';
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
@@ -56,5 +58,17 @@ export function userCreate(props) {
   return {
     type: SIGN_UP,
     payload: request
+
+export function upvote(upvote) {
+  return {
+    type: UPVOTE,
+    upvote
+  };
+}
+
+export function downvote(downvote) {
+  return {
+    type: DOWNVOTE,
+    downvote
   };
 }

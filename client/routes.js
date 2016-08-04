@@ -19,5 +19,3 @@ export default (
     <Route path='signup' component={ Signup } />
   </Route>
 );
-
-// <Route path='/' component= { Votes } />

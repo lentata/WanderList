@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLists } from '../actions/index';
+import { fetchLists, upvote, downvote } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
@@ -17,9 +17,9 @@ class Lists extends Component {
           <div className="row">
 
             <div className="col-md-1">
-              <div className="fa fa-chevron-up"></div>
+              <button className="fa fa-chevron-up" onClick={this.props.upvote}></button>
               <div>{list.upvote - list.downvote}</div>
-              <div className="fa fa-chevron-down"></div>
+              <button className="fa fa-chevron-down" onClick={this.props.downvote}></button>
             </div>
 
             <div className="col-md-2">
@@ -35,8 +35,8 @@ class Lists extends Component {
 
               </div>
               <div className="small fa fa-caret-square-o-right"><em>Categories: { list.categories }</em></div>
-            </div>  
-          </div>  
+            </div>
+          </div>
         </li>
       );
     });
@@ -74,7 +74,6 @@ class Lists extends Component {
             </ul>
           </div>
         </div>
-
       </div>
     );
   }
@@ -88,7 +87,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchLists }, dispatch);
+  return bindActionCreators({ fetchLists, upvote, downvote }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lists);
