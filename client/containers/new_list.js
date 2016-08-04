@@ -31,8 +31,6 @@ class ListsNew extends Component {
       ]
     };
 
-    id++;
-
     console.log('LIST TEST', list);
 
     this.props.createList(list)
