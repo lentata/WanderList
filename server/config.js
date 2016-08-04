@@ -8,7 +8,8 @@ var db = require('knex')({
     database: 'testdb',
     charset: 'utf8',
     filename: path.join(__dirname, '../db/testdb.sqlite')
-  }
+  },
+  useNullAsDefault: true
 });
 
 db.schema.hasTable('users').then(function(exists) {
