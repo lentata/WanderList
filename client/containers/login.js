@@ -1,19 +1,29 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-import {auth} from '../actions/index';
+import {userAuth} from '../actions/index';
+//import {Link} from 'react-router';
 
 
 class Login extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   onSubmit(props) {
-    console.log("PROPS",props);
-    this.props.auth(props)
+    this.props.userAuth(props)
       .then(() => {
-        this.context.router.push('/');
+        if (this.props.authStatus) {
+          this.context.router.push('/');
+        } else {
+          this.props.resetForm();
+        }
       });
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit} = this.props;
+    const {auth} = this.props;
+    console.log("PROPS",auth);
+    const {fields: {username, password}, handleSubmit, resetForm} = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h2>Login</h2>
@@ -31,7 +41,12 @@ class Login extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    authStatus: state.auth.authState
+  }
+}
 export default reduxForm({
   form: 'loginForm',
-  fields: [username, password]
-}, null, {auth})(Login);
+  fields: ['username', 'password']
+}, mapStateToProps, {userAuth})(Login);
