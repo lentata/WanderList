@@ -1,19 +1,39 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
+import {userAuth} from '../actions/index';
+//import {Link} from 'react-router';
 
 
-export default class Login extends Component {
+class Login extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  onSubmit(props) {
+    this.props.userAuth(props)
+      .then(() => {
+        if (this.props.authStatus) {
+          this.context.router.push('/');
+        } else {
+          this.props.resetForm();
+        }
+      });
+  }
+
   render() {
+    const {auth} = this.props;
+    console.log("PROPS",auth);
+    const {fields: {username, password}, handleSubmit, resetForm} = this.props;
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h2>Login</h2>
         <div> 
           <label>Username</label>
-          <input type="text" />
+          <input type="text" {...username}/>
         </div>
         <div>
           <label>Password</label>
-          <input type="password" />
+          <input type="password" {...password}/>
         </div>
         <button type="submit">submit</button>
       </form>
@@ -21,4 +41,12 @@ export default class Login extends Component {
   }
 }
 
- // onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+function mapStateToProps(state) {
+  return {
+    authStatus: state.auth.authState
+  }
+}
+export default reduxForm({
+  form: 'loginForm',
+  fields: ['username', 'password']
+}, mapStateToProps, {userAuth})(Login);

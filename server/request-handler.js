@@ -53,4 +53,17 @@ module.exports = function(app) {
       });
     });
   });
+
+  app.post('/api/lists', function(req, res) {
+    var dest = __dirname + "/dummy.js";
+    console.log("DUMMYDATA", dummy.lists);
+    dummy = JSON.parse(dummy).lists.push(req.body);
+    fs.writeFile(dest, "module.export = " + JSON.stringify(dummy), function(err) {
+      if (err) {
+        throw err;
+      }
+      res.sendStatus(201);
+      res.end();
+    });
+  });
 }

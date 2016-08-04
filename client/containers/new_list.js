@@ -54,7 +54,6 @@ class ListsNew extends Component {
   render() {
     const { asyncValidating, fields: { title, categories,
       headline1, image1, description1 }, handleSubmit, submitting } = this.props;
-
     return (
       <form onSubmit={ handleSubmit(this.onSubmit.bind(this))}>
         <h3>Create a New List</h3>
