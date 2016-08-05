@@ -11,7 +11,6 @@ class ListGrid extends Component {
   }
 
   render() {
-    console.log('this.props: ', this.props);
     return (
       <div>
         <div className="row">

@@ -6,10 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import {Router, browserHistory, withRouter} from 'react-router';
 import routes from './routes';
 import reducers from './reducers';
-import promise from 'redux-promise'
-
-// import comments from './data/comments';
-// import lists from './data/lists';
+import promise from 'redux-promise';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 

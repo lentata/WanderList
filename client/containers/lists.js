@@ -8,13 +8,13 @@ import { Link } from 'react-router';
 class Lists extends Component {
 
   renderLists(){
-    const { list, i, upvoteCount, downvoteCount } = this.props;
+    const { list, i, upvote, downvote } = this.props;
       return (
         <div className="row">
           <div className="col-md-1">
-            <button className="fa fa-chevron-up" onClick={this.props.upvote.bind(null, i)}></button>
-            <div>{upvote - downvote}</div>
-            <button className="fa fa-chevron-down" onClick={this.props.downvote.bind(null, i)}></button>
+            <button className="fa fa-chevron-up" onClick={upvote.bind(null, i)}></button>
+            <div>{list.upvote - list.downvote}</div>
+            <button className="fa fa-chevron-down" onClick={downvote.bind(null, i)}></button>
           </div>
 
           <div className="col-md-2">
@@ -46,11 +46,8 @@ class Lists extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return {
-    upvoteCount: state.votes.upvote,
-    downvoteCount: state.votes.downvote
-  };
+function mapStateToProps(state) {
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
