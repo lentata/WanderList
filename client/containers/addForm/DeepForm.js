@@ -72,6 +72,7 @@ class DeepForm extends Component {
               addValue('deep', 'children')
             }
           }}><i/> Show me 10!</button>
+
         </div>
 
         {children.map((child, index) => <div key={index}>
