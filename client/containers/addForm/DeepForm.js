@@ -1,8 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import { reduxForm, addArrayValue } from 'redux-form'
+import React, { Component, PropTypes } from 'react';
+import { reduxForm, addArrayValue } from 'redux-form';
 import { Link } from 'react-router';
-import PureInput from './PureInput'
-import validate from './validateDeepForm'
+import { createList } from '../../actions/index'; //import our action creator
+import PureInput from './PureInput';
+import PureTextarea from './PureTextarea';
+import validate from './validateDeepForm';
 
 
 export const fields = [
@@ -14,8 +16,18 @@ export const fields = [
 ]
 
 class DeepForm extends Component {
+  onSubmit(props) {
+    console.log('PROPS TEST', props);
+
+    this.props.createList(props)
+      .then(() => {
+        browserHistory.push('/');
+      });
+  }
+
   render() {
     const {
+      asyncValidating,
       addValue,
       fields: { ListHeader, categories, children },
       handleSubmit,
@@ -24,13 +36,21 @@ class DeepForm extends Component {
     } = this.props
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
         <div className="form-group">
             <legend>Create a new list!</legend>
-          <div>
-            <label className="control-label">Title for your list</label>
-            <PureInput className="form-control" type="text" placeholder="List Title" field={ListHeader} title={ListHeader.error}/>
+
+          <div className={`form-group ${ListHeader.touched && ListHeader.invalid ? 'has-error' : ''}`}>
+            <label className="control-label">Title for your list*</label>
+            <PureInput type="text" className="form-control" placeholder="List Title" field={ListHeader}/>
+            <div className="help-block">
+              {ListHeader.touched ? ListHeader.error : ''}
+            </div>
+            <div className="help-block">
+              {asyncValidating === 'ListHeader' ? 'validating..': ''}
+            </div>
           </div>
+
           <div>
             <label className="control-label">Categories for your list</label>
             <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error}/>
@@ -58,17 +78,17 @@ class DeepForm extends Component {
           <div className="form-group">
             <label className="control-label">List item #{index + 1}</label>
             <div>
-              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.title}/>
+              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.title} />
             </div>
 
-            <label className="control-label">Image for list item #{index + 1}</label>
+            <label className="control-label">Image url for list item #{index + 1}</label>
             <div>
-              <PureInput className="form-control" type="text" placeholder="img URL" field={child.image}/>
+              <PureInput className="form-control" type="text" placeholder="img URL" field={child.image} />
             </div>
 
             <label className="control-label">Details for list item #{index + 1}</label>
             <div>
-              <textarea className="form-control" type="text" placeholder="Describe your list item" field={child.content}/>
+              <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.content} />
             </div>
 
             <div>
@@ -123,5 +143,14 @@ export default reduxForm({
   fields,
   validate
 }, undefined, {
-  addValue: addArrayValue // mapDispatchToProps (will bind action creator to dispatch)
+  addValue: addArrayValue, createList // mapDispatchToProps (will bind action creator to dispatch)
 })(DeepForm)
+
+//OLD VERSION
+// export default reduxForm({
+//   form: 'deep',
+//   fields,
+//   validate
+// }, undefined, {
+//   addValue: addArrayValue // mapDispatchToProps (will bind action creator to dispatch)
+// })(DeepForm)

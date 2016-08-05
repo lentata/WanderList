@@ -52,8 +52,9 @@ class ListsNew extends Component {
   render() {
     const { asyncValidating, fields: { title, categories,
       headline1, image1, description1 }, handleSubmit, submitting } = this.props;
+
     return (
-      <form onSubmit={ handleSubmit(this.onSubmit.bind(this))}>
+      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
         <h3>Create a New List</h3>
 
         <div className={`form-group ${title.touched && title.invalid ? 'has-error' : ''}`}>
@@ -63,7 +64,7 @@ class ListsNew extends Component {
             {title.touched ? title.error : ''}
           </div>
           <div className="help-block">
-            {asyncValidating === 'title'? 'validating..': ''}
+            {asyncValidating === 'title' ? 'validating..': ''}
           </div>
         </div>
 
