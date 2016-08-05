@@ -49,6 +49,6 @@
     "jsdom": "^8.1.0",
     "mocha": "^2.5.3",
     "react-addons-test-utils": "^15.3.0",
-    "sinon": "^1.17.5",
+    "sinon": "^1.17.5"
   }
 }
