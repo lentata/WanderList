@@ -4,7 +4,7 @@ var User = require('./models/user');
 var jsonfile = require('jsonfile');
 
 module.exports = function(app) {
-  let id = 7;
+  var id = 7;
 
   app.get('/', function(req, res) {
     res.sendFile('index.html');
