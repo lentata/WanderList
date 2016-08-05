@@ -53,7 +53,7 @@ class DeepForm extends Component {
 
           <div>
             <label className="control-label">Categories for your list</label>
-            <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error}/>
+            <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error} />
           </div>
         </div>
 
@@ -119,7 +119,7 @@ class DeepForm extends Component {
           }}><i/> Add Item
           </button>
 
-          <legend>List done, time to submit!</legend>
+          <legend className="list-legend">List done, time to submit!</legend>
           <button className="btn btn-success" type="submit" disabled={submitting || invalid}>
             {submitting ? <i/> : <i/>} Submit
           </button>
@@ -145,12 +145,3 @@ export default reduxForm({
 }, undefined, {
   addValue: addArrayValue, createList // mapDispatchToProps (will bind action creator to dispatch)
 })(DeepForm)
-
-//OLD VERSION
-// export default reduxForm({
-//   form: 'deep',
-//   fields,
-//   validate
-// }, undefined, {
-//   addValue: addArrayValue // mapDispatchToProps (will bind action creator to dispatch)
-// })(DeepForm)

@@ -9,16 +9,18 @@ const requireFields = (...names) => data =>
 // const validateChild = requireFields('title', 'image', 'content')
 const validateDeepForm = data => {
   const errors = {}
-  // if (!data.ListHeader) {
-  //   errors.ListHeader = 'Required'
-  // }
+
   if (!data.ListHeader || data.ListHeader.trim() === '') {
     errors.ListHeader = 'Enter a Header for Your List';
   }
+  //DON'T DELETE COMMENTS BELOW FOR NOW
+  // if (!data.ListHeader) {
+  //   errors.ListHeader = 'Required'
+  // }
 
-  if (!data.categories) {
-    errors.categories = 'Required'
-  }
+  // if (!data.categories) {
+  //   errors.categories = 'Required'
+  // }
 
   // errors.children = data.children.map(validateChild)
 
