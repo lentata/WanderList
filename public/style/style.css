@@ -1,3 +1,7 @@
+.container {
+  margin-top: 75px;
+}
+
 .img-responsive2 {
   max-height: 15%;
   max-width: 15%
@@ -8,3 +12,14 @@
 .form-control {
   margin-bottom: 4px;
 }
+
+.navbar {
+  background-color: #e6e6e6;
+}
+
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+

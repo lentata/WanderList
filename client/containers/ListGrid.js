@@ -13,27 +13,25 @@ class ListGrid extends Component {
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-md-6">
-          </div>
-          <div className="col-md-2">
-            <Link to="/lists/new" className="btn btn-primary">
+        <nav className="navbar navbar-fixed-top">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <a className="navbar-brand">
+                <img height="100%" src="./logo.png" alt="WanderList-logo" />
+              </a>
+            </div>
+            <Link to='/signup' className="btn btn-default navbar-btn navbar-right col-md-1">
+              Sign Up
+            </Link>
+            <Link to='/login' className="btn btn-default navbar-btn navbar-right col-md-1">
+              Log In
+            </Link>
+            <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
               Add a list
             </Link>
           </div>
-          <div className="col-md-2">
-            <Link to='/login'>
-              Log In
-            </Link>
-          </div>
-          <div className="col-md-2">
-            <Link to='/signup'>
-              Sign Up
-            </Link>
-          </div>
-
-        </div>
-        <ul className="lists-list">
+        </nav>
+        <ul className="list-group">
           {this.props.lists.map((list, i) => <List {...this.props} key={i} i={i} list={list} />)}
         </ul>
       </div>
