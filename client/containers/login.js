@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-import { auth } from '../actions/index';
 import { userAuth } from '../actions/index';
 import {Link} from 'react-router';
 
@@ -59,11 +58,6 @@ export default reduxForm({
   form: 'loginForm',
   fields: ['username', 'password']
 }, mapStateToProps, {userAuth})(Login);
-
-export default reduxForm({
-  form: "AuthLogin",
-  fields: ['username', 'password']
-}, null, {auth})(Login);
 
 
 
