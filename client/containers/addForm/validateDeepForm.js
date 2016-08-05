@@ -6,15 +6,18 @@ const requireFields = (...names) => data =>
     return errors
   }, {})
 
-const validateChild = requireFields('ListHeader', 'age')
+const validateChild = requireFields('ListHeader', 'categories', 'title', 'content')
 const validateDeepForm = data => {
   const errors = {}
   if (!data.ListHeader) {
     errors.ListHeader = 'Required'
   }
-
+  if (!data.categories) {
+    errors.categories = 'Required'
+  }
 
   errors.children = data.children.map(validateChild)
+
   return errors
 }
 
