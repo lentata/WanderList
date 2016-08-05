@@ -5,12 +5,6 @@ import ListsReducer from './reducer_lists';
 import ActiveList from './reducer_active_list';
 import AuthReducer from './reducer_auth';
 
-
-
-
-
-
-
 const rootReducer = combineReducers({
   lists: ListsReducer,
   activeList: ActiveList,

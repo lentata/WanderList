@@ -6,8 +6,8 @@ export const CREATE_LIST = 'CREATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
-
-
+export const UPVOTE = 'UPVOTE';
+export const DOWNVOTE = 'DOWNVOTE';
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
@@ -51,10 +51,6 @@ export function userAuth(props) {
   };
 }
 
-
-
-
-
 export function userCreate(props) {
   const request = axios.post('/api/auth', props);
 
@@ -64,5 +60,16 @@ export function userCreate(props) {
   };
 }
 
+export function upvote(index) {
+  return {
+    type: UPVOTE,
+    index
+  };
+}
 
-
+export function downvote(index) {
+  return {
+    type: DOWNVOTE,
+    index
+  };
+}
