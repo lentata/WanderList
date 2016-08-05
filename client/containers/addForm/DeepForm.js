@@ -7,15 +7,17 @@ import validate from './validateDeepForm'
 
 export const fields = [
   'ListHeader',
-  'children[].name',
-  'children[].age',
+  'categories',
+  'children[].title',
+  'children[].image',
+  'children[].content'
 ]
 
 class DeepForm extends Component {
   render() {
     const {
       addValue,
-      fields: { ListHeader, children },
+      fields: { ListHeader, categories, children },
       handleSubmit,
       invalid,
       submitting
@@ -25,19 +27,26 @@ class DeepForm extends Component {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
             <legend>Create a new list!</legend>
-          <label className="control-label">Title for your list</label>
           <div>
+            <label className="control-label">Title for your list</label>
             <PureInput className="form-control" type="text" placeholder="List Title" field={ListHeader} title={ListHeader.error}/>
+          </div>
+          <div>
+            <label className="control-label">Categories for your list</label>
+            <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error}/>
           </div>
         </div>
 
-        {!children.length && <div>Add some items to your list!</div>}
+        {!children.length && <div><label>Add some items to your list!</label></div>}
 
         <div className="form-group">
+          {/*
           <button className="btn btn-primary btn-sm" type="button" onClick={() => {
             children.addField()    // pushes empty child field onto the end of the array
           }}><i/> Add Item
           </button>
+          */}
+
           <button className="btn btn-primary btn-sm" type="button" onClick={() => {
             for (let childIndex = 0; childIndex < 10; childIndex++) {
               addValue('deep', 'children')
@@ -49,17 +58,17 @@ class DeepForm extends Component {
           <div className="form-group">
             <label className="control-label">List item #{index + 1}</label>
             <div>
-              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.name}/>
+              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.title}/>
             </div>
 
             <label className="control-label">Image for list item #{index + 1}</label>
             <div>
-              <PureInput className="form-control" type="text" placeholder="img URL" field={child.age}/>
+              <PureInput className="form-control" type="text" placeholder="img URL" field={child.image}/>
             </div>
 
             <label className="control-label">Details for list item #{index + 1}</label>
             <div>
-              <textarea className="form-control" type="text" placeholder="Describe your list item" field={child.age}/>
+              <textarea className="form-control" type="text" placeholder="Describe your list item" field={child.content}/>
             </div>
 
             <div>
@@ -85,6 +94,11 @@ class DeepForm extends Component {
         </div>)}
 
         <div>
+          <button className="btn btn-primary btn-sm" type="button" onClick={() => {
+            children.addField()    // pushes empty child field onto the end of the array
+          }}><i/> Add Item
+          </button>
+
           <legend>List done, time to submit!</legend>
           <button className="btn btn-success" type="submit" disabled={submitting || invalid}>
             {submitting ? <i/> : <i/>} Submit
