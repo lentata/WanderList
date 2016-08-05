@@ -7,6 +7,8 @@ export const DELETE_LIST = 'DELETE_LIST';
 export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
 
+
+
 export function fetchLists() {
   const request = axios.get('/api/lists');
   return {
@@ -43,12 +45,15 @@ export function deleteList(id) {
 
 export function userAuth(props) {
   const request = axios.get(`/api/auth?username=${props.username}&password=${props.password}`);
-
   return {
     type: AUTH_IN,
     payload: request
   };
 }
+
+
+
+
 
 export function userCreate(props) {
   const request = axios.post('/api/auth', props);
@@ -58,3 +63,6 @@ export function userCreate(props) {
     payload: request
   };
 }
+
+
+

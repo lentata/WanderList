@@ -41,27 +41,41 @@ class ListDetail extends Component {
 
     return (
       <div>
-        <Link to="/">Back to All Lists</Link>
-        <button
-          className="btn btn-danger pull-xs-right"
-          onClick={ this.onDeleteClick.bind(this) }>
-          Delete List
-        </button>
+        <div className="row">
+          <div className="col-md-8"></div>
+          <div className="col-md-4">
+            <Link to="/">Back to All Lists</Link>
+            <button
+              className="btn btn-danger"
+              onClick={ this.onDeleteClick.bind(this) }>
+              Delete List
+            </button>
+          </div>
 
-        {/*pull upvote downvote out*/}
-        <div>
-          <span className="fa fa-angle-up"></span>
-          <h6>{ list.upvote - list.downvote }</h6>
-          <span className="fa fa-angle-down"></span>
-          <h1>{ list.title }</h1>
         </div>
+        <div className="row">
+          
 
-        <h5>{ list.author } </h5>
-        <h6>Categories: { list.categories }</h6>
+          <div className="col-mid-3">
+            <div className="pull-left m-l-5">
+            <div className="fa fa-angle-up"></div>
+            <h6>{ list.upvote - list.downvote }</h6>
+            <div className="fa fa-angle-down"></div>
+            </div>
+          </div>
 
-        <ol>
-          {this.renderList()}
-        </ol>
+            <div className="col-mid-9">
+              <div className="h1">{ list.title }</div>
+              <h5>{ list.author } </h5>
+              <h6>Categories: { list.categories }</h6>
+              <ol>
+                {this.renderList()}
+             </ol>
+            </div>  
+
+        </div>
+      
+
       </div>
     );
   }
