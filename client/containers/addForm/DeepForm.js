@@ -74,11 +74,11 @@ class DeepForm extends Component {
             <div>
           
               <div>
-                <button type="button" disabled={index === 0} onClick={() => {
+                <button className="fa fa-chevron-up" type="button" disabled={index === 0} onClick={() => {
                   children.swapFields(index, index - 1)  // swap field with it's predecessor
                 }}><i/>
                 </button>
-                <button type="button" disabled={index === children.length - 1} onClick={() => {
+                <button className="fa fa-chevron-down" type="button" disabled={index === children.length - 1} onClick={() => {
                   children.swapFields(index, index + 1)  // swap field with it's successor
                 }}><i/>
                 </button>
