@@ -44,12 +44,9 @@
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
     "mocha": "^2.5.3",
-<<<<<<< e580244eecda7701e337e188f846d6ad468a3098
     "react-addons-test-utils": "^15.3.0",
     "react-dom": "^15.3.0",
     "sinon": "^1.17.5",
-=======
->>>>>>> rebase merge
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",

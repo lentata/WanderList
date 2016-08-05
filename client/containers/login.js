@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-import {userAuth} from '../actions/index';
+import { auth } from '../actions/index';
+import { userAuth } from '../actions/index';
 import {Link} from 'react-router';
 
 
