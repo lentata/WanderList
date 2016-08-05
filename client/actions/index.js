@@ -61,15 +61,29 @@ export function userCreate(props) {
 }
 
 export function upvote(index) {
+  const votes = {
+    index: index,
+    vote: true
+  };
+  const request = axios.post('/api/votes', votes);
+
   return {
     type: UPVOTE,
-    index
+    index: index,
+    payload: request
   };
 }
 
 export function downvote(index) {
+  const votes = {
+    index: index,
+    vote: false
+  };
+  const request = axios.post('/api/votes', votes);
+
   return {
     type: DOWNVOTE,
-    index
+    index: index,
+    payload: request
   };
 }

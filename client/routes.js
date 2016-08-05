@@ -15,5 +15,6 @@ export default (
     <Route path="/lists/:id" component={ ListDetail } />
     <Route path='login' component={ Login } />
     <Route path='signup' component={ Signup } />
+    <Route path='votes' component={ ListGrid } />
   </Route>
 );
