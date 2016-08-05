@@ -5,12 +5,6 @@ import PureInput from './PureInput'
 import validate from './validateDeepForm'
 export const fields = [
   'name',
-  'shipping.street',
-  'shipping.city',
-  'shipping.phones[]',
-  'billing.street',
-  'billing.city',
-  'billing.phones[]',
   'children[].name',
   'children[].age',
   'children[].awards[]'
@@ -20,7 +14,7 @@ class DeepForm extends Component {
   render() {
     const {
       addValue,
-      fields: { name, shipping, billing, children },
+      fields: { name, children },
       handleSubmit,
       resetForm,
       invalid,
@@ -29,13 +23,13 @@ class DeepForm extends Component {
     return (<form onSubmit={handleSubmit}>
         <div>
           <button type="button" onClick={() => {
-            for (let childIndex = 0; childIndex < 30; childIndex++) {
+            for (let childIndex = 0; childIndex < 10; childIndex++) {
               addValue('deep', 'children')
-              for (let awardIndex = 0; awardIndex < 10; awardIndex++) {
+              for (let awardIndex = 0; awardIndex < 3; awardIndex++) {
                 addValue('deep', `children[${childIndex}].awards`)
               }
             }
-          }}><i/> Make Form Enormous!</button>
+          }}><i/> Show me 10!</button>
         </div>
         <div>
           <label>Name</label>
@@ -43,7 +37,7 @@ class DeepForm extends Component {
             <PureInput type="text" placeholder="Name" field={name} title={name.error}/>
           </div>
         </div>
-        <div>
+       {/* <div>
           <fieldset>
             <legend>Shipping</legend>
             <Address {...shipping}/>
@@ -52,36 +46,33 @@ class DeepForm extends Component {
             <legend>Billing</legend>
             <Address {...billing}/>
           </fieldset>
-        </div>
+        </div> */}
         <div>
           <button type="button" onClick={() => {
             children.addField()    // pushes empty child field onto the end of the array
-          }}><i/> Add Child
+          }}><i/> Add Item
           </button>
-          <button type="button" onClick={() => {
+         {/* <button type="button" onClick={() => {
             children.addField({     // pushes child field with initial values onto the end of the array
               name: 'Bobby Tables',
               age: 13,
               awards: [ 'Input Sanitation', 'Best XKCD Meme' ]
             })
           }}><i/> Add Bobby
-          </button>
+          </button> */}
         </div>
-        {!children.length && <div>No Children</div>}
+        {!children.length && <div>No Items</div>}
         {children.map((child, index) => <div key={index}>
           <div>
-            <label>Child #{index + 1}</label>
+            <label>#{index + 1}</label>
             <div>
-              <PureInput type="text" placeholder="Child Name" field={child.name}/>
+              <PureInput type="text" placeholder="Item" field={child.name}/>
             </div>
             <div>
-              <PureInput type="text" placeholder="Child Age" field={child.age}/>
+              <PureInput type="text" placeholder="img URL" field={child.age}/>
             </div>
             <div>
-              <button type="button" onClick={() => {
-                child.awards.addField()  // pushes empty award field onto the end of the array
-              }}><i/> Add Award
-              </button>
+          
               <div>
                 <button type="button" disabled={index === 0} onClick={() => {
                   children.swapFields(index, index - 1)  // swap field with it's predecessor

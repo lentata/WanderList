@@ -5,15 +5,15 @@ const requireFields = (...names) => data =>
     }
     return errors
   }, {})
-const validateAddress = requireFields('street', 'city')
+
 const validateChild = requireFields('name', 'age')
 const validateDeepForm = data => {
   const errors = {}
   if (!data.name) {
     errors.name = 'Required'
   }
-  errors.shipping = validateAddress(data.shipping)
-  errors.billing = validateAddress(data.billing)
+
+
   errors.children = data.children.map(validateChild)
   return errors
 }
