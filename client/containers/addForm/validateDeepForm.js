@@ -6,17 +6,21 @@ const requireFields = (...names) => data =>
     return errors
   }, {})
 
-const validateChild = requireFields('ListHeader', 'categories', 'title', 'content')
+// const validateChild = requireFields('title', 'image', 'content')
 const validateDeepForm = data => {
   const errors = {}
-  if (!data.ListHeader) {
-    errors.ListHeader = 'Required'
+  // if (!data.ListHeader) {
+  //   errors.ListHeader = 'Required'
+  // }
+  if (!data.ListHeader || data.ListHeader.trim() === '') {
+    errors.ListHeader = 'Enter a Header for Your List';
   }
+
   if (!data.categories) {
     errors.categories = 'Required'
   }
 
-  errors.children = data.children.map(validateChild)
+  // errors.children = data.children.map(validateChild)
 
   return errors
 }
