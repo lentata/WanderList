@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 import ListGrid from './containers/ListGrid';
-import NewList from './containers/new_list';
 import NewList from './containers/addForm/DeepForm'
 import ListDetail from './containers/list-detail';
 import Login from './containers/login';
