@@ -6,11 +6,11 @@ const requireFields = (...names) => data =>
     return errors
   }, {})
 
-const validateChild = requireFields('name', 'age')
+const validateChild = requireFields('ListHeader', 'age')
 const validateDeepForm = data => {
   const errors = {}
-  if (!data.name) {
-    errors.name = 'Required'
+  if (!data.ListHeader) {
+    errors.ListHeader = 'Required'
   }
 
 

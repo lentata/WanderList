@@ -2,3 +2,9 @@
   max-height: 15%;
   max-width: 15%
 }
+.btn {
+  margin: 5px 5px;
+}
+.form-control {
+  margin-bottom: 4px;
+}
