@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-import {userAuth} from '../actions/index';
+import { userAuth } from '../actions/index';
 import {Link} from 'react-router';
 
 
@@ -22,6 +22,7 @@ class Login extends Component {
 
   render() {
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;
+
     return (
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -46,6 +47,7 @@ class Login extends Component {
     );
   }
 }
+
 
 function mapStateToProps(state) {
   return {

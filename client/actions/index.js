@@ -45,7 +45,6 @@ export function deleteList(id) {
 
 export function userAuth(props) {
   const request = axios.get(`/api/auth?username=${props.username}&password=${props.password}`);
-
   return {
     type: AUTH_IN,
     payload: request

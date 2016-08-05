@@ -4,6 +4,8 @@ var User = require('./models/user');
 var jsonfile = require('jsonfile');
 
 module.exports = function(app) {
+  let id = 7;
+
   app.get('/', function(req, res) {
     res.sendFile('index.html');
   });
@@ -54,6 +56,7 @@ module.exports = function(app) {
     var file = './public/dummy.JSON';    
     jsonfile.readFile(file, function(err, obj){
       if(err) throw err;
+      req.body.id = id++;
       obj.lists.push(req.body);
       jsonfile.writeFile(file, obj, function(err){
         if(err) throw err;
