@@ -10,22 +10,26 @@ class Lists extends Component {
   renderLists() {
     const { list, i, upvote, downvote } = this.props;
     return (
-      <div className="list-group-item" key={ list.id }>
+      <div className="media" key={ list.id }>
         <div className="row">
 
           <div className="col-md-1">
-            <button className="fa fa-chevron-up" onClick={upvote.bind(null, i)}></button>
-            <div>{list.upvote - list.downvote}</div>
-            <button className="fa fa-chevron-down" onClick={downvote.bind(null, i)}></button>
+            <div className="text-center">
+              <button className="text-center fa fa-chevron-up" onClick={upvote.bind(null, i)}></button>
+            </div>
+            <div className="text-center">{list.upvote - list.downvote}</div>
+            <div className="text-center">
+              <button className="text-center fa fa-chevron-down" onClick={downvote.bind(null, i)}></button>
+            </div>
           </div>
 
-          <div className="col-md-2">
+          <div className="col-md-1">
             <img className="img-thumbnail" src={list.content[0].img} />
           </div>
 
-          <div className="col-md-5">
-            <Link to={ "lists/" + list.id }>
-              <strong>{ list.title }</strong>
+          <div className="media-body">
+            <Link to={ "lists/" + list.id } className="media-heading">
+              { list.title }
             </Link>
             <div className="small"><em>{ list.author } &nbsp;</em>
             <span className="fa fa-commenting"> Comments: {list.comments.length} </span>
@@ -40,7 +44,7 @@ class Lists extends Component {
   render() {
     return (
       <div>
-        <li>
+        <li className="list-group-item">
           { this.renderLists() }
         </li>
       </div>
