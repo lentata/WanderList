@@ -10,8 +10,6 @@ class Lists extends Component {
   renderLists(){
     const { list, i, upvote, downvote } = this.props;
       return (
-<<<<<<< HEAD
-=======
         <li className="list-group-item" key={ list.id }>
           <div className="row">
 
@@ -45,7 +43,6 @@ class Lists extends Component {
     console.log(this.props)
     return (
       <div>
->>>>>>> master
         <div className="row">
           <div className="col-md-1">
             <button className="fa fa-chevron-up" onClick={upvote.bind(null, i)}></button>
