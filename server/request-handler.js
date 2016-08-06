@@ -64,15 +64,46 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/votes/', function(req, res){
+  app.get('/api/votes', function(req, res){
     var file = './public/dummy.JSON';
+    console.log('this is req.body: ', req.query);
     jsonfile.readFile(file, function(err, obj){
-      var selectedList = obj.lists[req.body.index];
+      var selectedList = obj.lists[req.query.index];
       if(err) throw err;
-      if(req.body.vote) {
-        selectedList.upvote = +selectedList.upvote + 1;
+      if(req.query.votes === "true") {
+        console.log('upflag: ', selectedList.upflag)
+        console.log('downflag: ', selectedList.downflag)
+        if(!selectedList.upflag && !selectedList.downflag) {
+          selectedList.upvote = +selectedList.upvote + 1;
+          selectedList.upflag = true;
+          res.send({up: 1, down: 0});
+          console.log('upvote: ', selectedList.upvote);
+          console.log('downvote: ', selectedList.downvote);
+        }
+        else if(!selectedList.upflag && selectedList.downflag) {
+          selectedList.upvote = +selectedList.upvote + 1;
+          selectedList.downvote = +selectedList.downvote - 1;
+          selectedList.upflag = true;
+          selectedList.downflag = false;
+          res.send({up: 1, down: -1});
+        }
       } else {
-        selectedList.downvote = +selectedList.downvote + 1;
+        console.log("we are in votes false")
+        if(!selectedList.upflag && !selectedList.downflag) {
+          selectedList.downvote = +selectedList.downvote + 1;
+          selectedList.downflag = true;
+          res.send({up: 0, down: 1});
+        }
+        else if(selectedList.upflag && !selectedList.downflag) {
+          console.log("downvote");
+          selectedList.downvote = +selectedList.downvote + 1;
+          selectedList.upvote = +selectedList.upvote - 1;
+          selectedList.upflag = false;
+          selectedList.downflag = true;
+          res.send({up: -1, down: 1});
+          console.log('upvote: ', selectedList.upvote);
+          console.log('downvote: ', selectedList.downvote);
+        }
       }
       jsonfile.writeFile(file, obj, function(err) {
         if(err) throw err;
