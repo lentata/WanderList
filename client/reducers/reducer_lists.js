@@ -14,15 +14,18 @@ export default function(state = INITIAL_STATE, action) {
       ...state, all: action.payload.data.lists
     };
   } else if(action.type === UPVOTE) {
-    const up = action.payload.data.up;
-    const down = action.payload.data.down;
+
+    const { up, down, upvoteColor, downvoteColor, voteCountColor } = action.payload.data;
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
+    targetList.upvoteColor = { color: upvoteColor };
+    targetList.downvoteColor = { color: downvoteColor };
+    targetList.voteCountColor = { color: voteCountColor };
     return {
       ...state,
       all:[
         ...state.all.slice(0, action.index),
-        Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+        Object.assign({}, targetList, targetList.upvote, targetList.downvote, targetList.upvoteColor, targetList.downvoteColor, targetList.voteCountColor),
         ...state.all.slice(action.index + 1)
       ]
     };
