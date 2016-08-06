@@ -8,6 +8,8 @@ export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
@@ -81,4 +83,24 @@ export function downvote(index) {
     index: index,
     payload: request
   };
+}
+
+//FOR COMMENTS
+export function addComment(postId, author, comment) {
+  console.log("dispatching add comment!");
+  return {
+    type: ADD_COMMENT,
+    postId,
+    author,
+    comment
+  }
+}
+
+//remove comment
+export function removeComment(postId, i) {
+  return {
+    type: REMOVE_COMMENT,
+    i,
+    postId
+  }
 }

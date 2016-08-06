@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
+import Comments from './comments';
 
 class ListDetail extends Component {
 
@@ -34,6 +35,8 @@ class ListDetail extends Component {
 
   render() {
     const list = this.props.list;
+    // const postComments = list.comments[postId] || [];
+    // console.log("post comments 1", postComments);
 
     if(!list) {
       return <div>Loading...</div>;
@@ -44,7 +47,9 @@ class ListDetail extends Component {
         <div className="row">
           <div className="col-md-8"></div>
           <div className="col-md-4">
+
             <Link to="/">Back to All Lists</Link>
+
             <button
               className="btn btn-danger"
               onClick={ this.onDeleteClick.bind(this) }>
@@ -54,7 +59,6 @@ class ListDetail extends Component {
 
         </div>
         <div className="row">
-          
 
           <div className="col-mid-3">
             <div className="pull-left m-l-5">
@@ -64,17 +68,18 @@ class ListDetail extends Component {
             </div>
           </div>
 
-            <div className="col-mid-9">
-              <div className="h1">{ list.title }</div>
-              <h5>{ list.author } </h5>
-              <h6>Categories: { list.categories }</h6>
-              <ol>
-                {this.renderList()}
-             </ol>
-            </div>  
+          <div className="col-mid-9">
+            <div className="h1">{ list.title }</div>
+            <h5>{ list.author } </h5>
+            <h6>Categories: { list.categories }</h6>
+            <ol>
+              {this.renderList()}
+           </ol>
+          </div>
+
+          <Comments {...this.props}/>
 
         </div>
-      
 
       </div>
     );
