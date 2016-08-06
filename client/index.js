@@ -45,7 +45,6 @@ if(module.hot) {
     store.replaceReducer(nextRootReducer);
   });
 }
-// debugger;
 //Render our app!
 ReactDOM.render(
   <Provider store={store}>
