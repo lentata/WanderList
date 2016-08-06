@@ -38,6 +38,8 @@ class ListDetail extends Component {
     // const postComments = list.comments[postId] || [];
     // console.log("post comments 1", postComments);
 
+    console.log('fetch listtt', this.props.fetchList);
+
     if(!list) {
       return <div>Loading...</div>;
     }

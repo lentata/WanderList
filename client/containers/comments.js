@@ -22,11 +22,13 @@ class Comments extends Component {
     const postId = this.props.list.id;
     const author = this.refs.author.value;
     const comment = this.refs.comment.value;
+    console.log("ADD COMMENT PROP", this.props.addComment);
     this.props.addComment(postId, author, comment);
     this.refs.commentForm.reset();
   }
   //ref attributes on form allow us to use them in handle submit function
   render() {
+    console.log("COMMENTS", this.props.comments, this.props.addComment);
     return (
       <div className="comments">
         <legend className="list-legend">Comments</legend>
