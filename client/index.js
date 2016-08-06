@@ -7,16 +7,6 @@ import {Router, browserHistory, withRouter} from 'react-router';
 import routes from './routes';
 import reducers from './reducers';
 
-// const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
-
-//for redux dev tools
-// const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
-
-//tried to put defaultState (our data) and enhancers here
-// const store = createStoreWithMiddleware(reducers, enhancers);
-
-//browserHistory keeps track of app's pages you've been on
-
 function isPromise(val) {
   return val && typeof val.then === 'function';
 }
@@ -44,6 +34,7 @@ if(module.hot) {
     store.replaceReducer(nextRootReducer);
   });
 }
+
 //Render our app!
 ReactDOM.render(
   <Provider store={store}>

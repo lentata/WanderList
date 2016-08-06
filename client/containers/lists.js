@@ -8,14 +8,16 @@ import { Link } from 'react-router';
 class Lists extends Component {
 
   renderLists() {
-    const { list, i, upvote, downvote } = this.props;
+    const { list, i, upvote, downvote, upvoteColor, downvoteColor, voteCountColor } = this.props;
     return (
       <div className="media" key={ list.id }>
         <div className="row">
 
           <div className="col-md-1">
             <div className="text-center">
-              <button className="text-center fa fa-chevron-up" onClick={upvote.bind(null, i)}></button>
+              <button className="text-center fa fa-chevron-up" onClick={upvote.bind(null, i)}
+                style={}
+                ></button>
             </div>
             <div className="text-center">{list.upvote - list.downvote}</div>
             <div className="text-center">
