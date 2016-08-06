@@ -88,16 +88,25 @@ export function downvote(index) {
 //FOR COMMENTS
 export function addComment(postId, author, comment) {
   console.log("dispatching add comment!");
+  console.log(postId, author, comment);
+  const data = {
+    id: postId,
+    user: author,
+    text: comment
+  }
+  const request = axios.post(`/api/comments`, data);
   return {
     type: ADD_COMMENT,
     postId,
     author,
-    comment
+    comment,
+    payload: request
   }
 }
 
 //remove comment
 export function removeComment(postId, i) {
+  console.log("removing a comment!");
   return {
     type: REMOVE_COMMENT,
     i,
