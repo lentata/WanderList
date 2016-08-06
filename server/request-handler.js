@@ -64,6 +64,31 @@ module.exports = function(app) {
     });
   });
 
+  //for comments!
+  app.post('/api/comments/', function(req, res){
+    var file = './public/dummy.JSON';
+    jsonfile.readFile(file, function(err, obj){
+      if(err) throw err;
+
+      var data = {
+        user: req.body.user,
+        text: req.body.text
+      }
+
+      obj.lists.forEach( list => {
+        if(req.body.id === list.id) {
+          list.comments.push(data)
+        }
+      })
+
+      jsonfile.writeFile(file, obj, function(err){
+        if(err) throw err;
+      });
+    });
+  });
+
+
+
   app.post('/api/votes', function(req, res){
     var file = './public/dummy.JSON';
     var resObj = {};
