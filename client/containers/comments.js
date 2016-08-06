@@ -48,7 +48,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addComment, removeComment, fetchList }, dispatch);
+  return bindActionCreators({ addComment, removeComment }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);
