@@ -64,12 +64,13 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/api/votes', function(req, res){
+  app.post('/api/votes', function(req, res){
     var file = './public/dummy.JSON';
+    var resObj = {};
     jsonfile.readFile(file, function(err, obj){
-      var selectedList = obj.lists[req.query.index];
+      var selectedList = obj.lists[req.body.index];
       if(err) throw err;
-      if(req.query.votes === "true") {
+      if(req.body.votes) {
         if(!selectedList.upflag && !selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote + 1;
           selectedList.upflag = true;
@@ -81,8 +82,11 @@ module.exports = function(app) {
           selectedList.upflag = true;
           selectedList.downflag = false;
           resObj = {up: 1, down: -1};
-        } else {
-          resObj = {up: 0, down: 0};
+        }
+        else if(selectedList.upflag && !selectedList.downflag) {
+          selectedList.upvote = +selectedList.upvote - 1;
+          selectedList.upflag = false;
+          resObj = {up: -1, down: 0};
         }
       } else {
         if(!selectedList.upflag && !selectedList.downflag) {
@@ -96,8 +100,11 @@ module.exports = function(app) {
           selectedList.upflag = false;
           selectedList.downflag = true;
           resObj = {up: -1, down: 1};
-        } else {
-          resObj = {up: 0, down: 0};
+        }
+        else if(!selectedList.upflag && selectedList.downflag) {
+          selectedList.downvote = +selectedList.downvote - 1;
+          selectedList.downflag = false;
+          resObj = {up: 0, down: -1};
         }
       }
       jsonfile.writeFile(file, obj, function(err) {
