@@ -69,21 +69,18 @@ module.exports = function(app) {
     var file = './public/dummy.JSON';
     jsonfile.readFile(file, function(err, obj){
       if(err) throw err;
-      // console.log('BODY', req.body);
-      // console.log('BODY ID', req.body.id);
-      // console.log('LISTS', obj.lists);
 
       var data = {
         user: req.body.user,
         text: req.body.text
       }
-      //need to insert where the list.id = req.body.id
+
       obj.lists.forEach( list => {
         if(req.body.id === list.id) {
           list.comments.push(data)
         }
       })
-      
+
       jsonfile.writeFile(file, obj, function(err){
         if(err) throw err;
       });

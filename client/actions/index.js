@@ -85,10 +85,7 @@ export function downvote(index) {
   };
 }
 
-//FOR COMMENTS
 export function addComment(postId, author, comment) {
-  console.log("dispatching add comment!");
-  console.log(postId, author, comment);
   const data = {
     id: postId,
     user: author,
@@ -104,7 +101,7 @@ export function addComment(postId, author, comment) {
   }
 }
 
-//remove comment
+//remove comment, need to get this to work
 export function removeComment(postId, i) {
   console.log("removing a comment!");
   return {
