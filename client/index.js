@@ -23,19 +23,18 @@ function isPromise(val) {
 
 const store = createStore(reducers, {},
   compose(applyMiddleware(function promiseMiddleware({ dispatch }) {
-  return next => action => {
-    return isPromise(action.payload)
-      ? action.payload.then(
-          result => dispatch({ ...action, payload: result }),
-          error => {
-            dispatch({ ...action, payload: error, error: true });
-            return Promise.reject(error);
-          }
-        )
-      : next(action);
-  };
-}),
-          window.devToolsExtension ? window.devToolsExtension() : f => f));
+    return next => action => {
+      return isPromise(action.payload)
+        ? action.payload.then(
+            result => dispatch({ ...action, payload: result }),
+            error => {
+              dispatch({ ...action, payload: error, error: true });
+              return Promise.reject(error);
+            }
+          )
+        : next(action);
+    };
+  }), window.devToolsExtension ? window.devToolsExtension() : f => f));
 
 const history = syncHistoryWithStore(browserHistory, store);
 
