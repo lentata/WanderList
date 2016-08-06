@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addComment, removeComment } from '../actions/index';
+import { addComment, removeComment, fetchList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class Comments extends Component {
@@ -19,11 +19,13 @@ class Comments extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const { postId } = this.props.params;
+    // const { postId } = this.props.params;
+    console.log("ARE PROPS HERE BROOOO?!?!", this.props);
+    // const postId = this.props.params.id;
+    const postId = this.props.list.id;
     const author = this.refs.author.value;
     const comment = this.refs.comment.value;
     //test logs
-    console.log(postId, author, comment);
     console.log(this.refs);
     //use addComment action creator here
     this.props.addComment(postId, author, comment);
@@ -38,9 +40,10 @@ class Comments extends Component {
 
     return (
       <div className="comments">
+        <legend className="list-legend">Comments</legend>
         {/*{this.props.postComments.map(this.renderComment)}*/}
         {this.props.list.comments.map(this.renderComment)}
-        <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit}>
+        <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
           <input type="text" ref="author" placeholder="author" />
           <input type="text" ref="comment" placeholder="comment" />
           <input type="submit" hidden />
@@ -57,7 +60,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addComment, removeComment }, dispatch);
+  return bindActionCreators({ addComment, removeComment, fetchList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);
