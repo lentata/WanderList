@@ -19,7 +19,6 @@ export function fetchLists() {
 
 export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
-
   return {
     type: FETCH_LIST,
     payload: request
@@ -28,7 +27,6 @@ export function fetchList(id) {
 
 export function createList(props) {
   const request = axios.post(`/api/lists`, props);
-
   return {
     type: CREATE_LIST,
     payload: request
@@ -53,7 +51,6 @@ export function userAuth(props) {
 
 export function userCreate(props) {
   const request = axios.post('/api/auth', props);
-
   return {
     type: SIGN_UP,
     payload: request
@@ -62,7 +59,6 @@ export function userCreate(props) {
 
 export function upvote(index) {
   const request = axios.get(`/api/votes?votes=true&index=${index}`);
-
   return {
     type: UPVOTE,
     index: index,
@@ -72,7 +68,6 @@ export function upvote(index) {
 
 export function downvote(index) {
   const request = axios.get(`/api/votes?votes=false&index=${index}`);
-
   return {
     type: DOWNVOTE,
     index: index,
