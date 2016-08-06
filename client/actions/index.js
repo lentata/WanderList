@@ -92,7 +92,7 @@ export function addComment(postId, author, comment) {
     text: comment
   }
   const request = axios.post(`/api/comments`, data);
-  console.log('in the addComment')
+  console.log(request);
   return {
     type: ADD_COMMENT,
     payload: request

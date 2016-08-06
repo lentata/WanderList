@@ -1,49 +1,50 @@
-import { ADD_COMMENT, REMOVE_COMMENT } from '../actions/index';
+// import { ADD_COMMENT, REMOVE_COMMENT } from '../actions/index';
 
-function postComments(state = [], action) {
-  console.log("HEY WE GOT CALLED postCOMMENTS");
-  // console.log("STATE:", state, "ACTION:", action);
-  if(action.type === ADD_COMMENT) {
-    //return the new state with the new comment. state is an object, each prop is an id, value per prop is array of objs with text (val is comment text) and user (inputed user) as props. state is basically an object holding all comments here
-    console.log(action);
-    return state;
-  } else if(action.type === REMOVE_COMMENT) {
-    console.log("removing a comment");
-    //return new state without the deleted user comment
-    return [
-      //from the start to the one we want to delete
-      ...state.slice(0, action.i),
-      //after the deleted one to the end
-      ...state.slice(action.i + 1)
-    ]
-  } else {
-    return state;
-  }
-}
+// function postComments(state = [], action) {
+//   console.log("HEY WE GOT CALLED postCOMMENTS");
+//   // console.log("STATE:", state, "ACTION:", action);
+//   if(action.type === ADD_COMMENT) {
+//     //return the new state with the new comment. state is an object, each prop is an id, value per prop is array of objs with text (val is comment text) and user (inputed user) as props. state is basically an object holding all comments here
+//     console.log(action);
+//     return state;
+//   } else if(action.type === REMOVE_COMMENT) {
+//     console.log("removing a comment");
+//     //return new state without the deleted user comment
+//     return [
+//       //from the start to the one we want to delete
+//       ...state.slice(0, action.i),
+//       //after the deleted one to the end
+//       ...state.slice(action.i + 1)
+//     ]
+//   } else {
+//     return state;
+//   }
+// }
 
-function comments(state = [], action) {
-  console.log("HEY WE GOT CALLED COMMENTS");
-  console.log('postId', action.postId);
-  switch(action.type) {
-    case ADD_COMMENT:
-      return state;
-    default: 
-      return state;
-  }
-  // if(typeof action.postId !== 'undefined') {
-  //   //...state are values from state
-  //   //overwrite this post with a new one
-  //   return {
-  //     ...state,
-  //     [action.postId]: postComments(state[action.postId], action)
-  //   }
-  // } else {
-  //   return state;
-  // }
-}
+// function comments(state = [], action) {
+//   console.log("HEY WE GOT CALLED COMMENTS");
+//   console.log('postId', action);
+//   switch(action.type) {
+//     case ADD_COMMENT:
+//       return [...state, action.payload.config.data]
+//       //return state;
+//     default: 
+//       return state;
+//   }
+//   // if(typeof action.postId !== 'undefined') {
+//   //   //...state are values from state
+//   //   //overwrite this post with a new one
+//   //   return {
+//   //     ...state,
+//   //     [action.postId]: postComments(state[action.postId], action)
+//   //   }
+//   // } else {
+//   //   return state;
+//   // }
+// }
 
-export default comments;
+// export default comments;
 
-//see ...state above for removing comment
-//e.g. want to remove 3 from [1,2,3,4]
-//replace array with [1,2,4]
+// //see ...state above for removing comment
+// //e.g. want to remove 3 from [1,2,3,4]
+// //replace array with [1,2,4]

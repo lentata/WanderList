@@ -1,4 +1,4 @@
-import { FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE } from '../actions/index';
+import { FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, ADD_COMMENT, REMOVE_COMMENT } from '../actions/index';
 
 const INITIAL_STATE = {
   all: [],
@@ -39,6 +39,18 @@ export default function(state = INITIAL_STATE, action) {
         ...state.all.slice(action.index + 1)
       ]
     };
+  } else if(action.type === ADD_COMMENT){
+    return {
+      ...state,
+        list:{
+          ...state.list,
+          comments: [
+            ...state.list.comments,
+            JSON.parse(action.payload.config.data)
+          ]
+        }
+    }
+
   } else {
     return state;
   }

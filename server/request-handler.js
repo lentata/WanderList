@@ -83,6 +83,7 @@ module.exports = function(app) {
 
       jsonfile.writeFile(file, obj, function(err){
         if(err) throw err;
+        res.send(200);
       });
     });
   });

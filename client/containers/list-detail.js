@@ -79,7 +79,7 @@ class ListDetail extends Component {
            </ol>
           </div>
 
-          <Comments {...this.props}/>
+          <Comments list={this.props.list}/>
 
         </div>
 
