@@ -11,7 +11,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/lists', function(req, res) {
-    var file = './public/dummy.JSON';    
+    var file = './public/dummy.JSON';
     jsonfile.readFile(file, function(err, obj){
       if(err) throw err;
       res.send(obj);
@@ -40,7 +40,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/lists/:id', function(req, res) {
-    var file = './public/dummy.JSON';    
+    var file = './public/dummy.JSON';
     var id = req.params.id;
     jsonfile.readFile(file, function(err, obj){
       if(err) throw err;
@@ -53,7 +53,7 @@ module.exports = function(app) {
   });
 
   app.post('/api/lists/', function(req, res){
-    var file = './public/dummy.JSON';    
+    var file = './public/dummy.JSON';
     jsonfile.readFile(file, function(err, obj){
       if(err) throw err;
       req.body.id = id++;
@@ -64,16 +64,49 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/lists', function(req, res) {
-    var dest = __dirname + "/dummy.js";
-    console.log("DUMMYDATA", dummy.lists);
-    dummy = JSON.parse(dummy).lists.push(req.body);
-    fs.writeFile(dest, "module.export = " + JSON.stringify(dummy), function(err) {
-      if (err) {
-        throw err;
+  app.get('/api/votes', function(req, res){
+    var file = './public/dummy.JSON';
+    jsonfile.readFile(file, function(err, obj){
+      var selectedList = obj.lists[req.query.index];
+      if(err) throw err;
+      if(req.query.votes === "true") {
+        if(!selectedList.upflag && !selectedList.downflag) {
+          selectedList.upvote = +selectedList.upvote + 1;
+          selectedList.upflag = true;
+          res.send({up: 1, down: 0});
+        }
+        else if(!selectedList.upflag && selectedList.downflag) {
+          selectedList.upvote = +selectedList.upvote + 1;
+          selectedList.downvote = +selectedList.downvote - 1;
+          selectedList.upflag = true;
+          selectedList.downflag = false;
+          res.send({up: 1, down: -1});
+        }
+        else if(selectedList.upflag && !selectedList.downflag) {
+          selectedList.upvote = +selectedList.upvote - 1;
+          selectedList.upflag = false;
+          res.send({up: -1, down: 0});
+        }
+      } else {
+        if(!selectedList.upflag && !selectedList.downflag) {
+          selectedList.downvote = +selectedList.downvote + 1;
+          selectedList.downflag = true;
+          res.send({up: 0, down: 1});
+        }
+        else if(selectedList.upflag && !selectedList.downflag) {
+          selectedList.downvote = +selectedList.downvote + 1;
+          selectedList.upvote = +selectedList.upvote - 1;
+          selectedList.upflag = false;
+          selectedList.downflag = true;
+          res.send({up: -1, down: 1});
+        }
+        else if(!selectedList.upflag && selectedList.downflag) {
+          selectedList.downvote = +selectedList.downvote - 1;
+          selectedList.downflag = false;
+          res.send({up: 0, down: -1});
+        }
       }
-      res.sendStatus(201);
-      res.end();
+      jsonfile.writeFileSync(file, obj);
     });
   });
 }
