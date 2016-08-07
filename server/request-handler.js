@@ -100,37 +100,55 @@ module.exports = function(app) {
         if(!selectedList.upflag && !selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote + 1;
           selectedList.upflag = true;
-          resObj = {up: 1, down: 0};
+          resObj = {
+            up: 1,
+            down: 0,
+          };
         }
         else if(!selectedList.upflag && selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote + 1;
           selectedList.downvote = +selectedList.downvote - 1;
           selectedList.upflag = true;
           selectedList.downflag = false;
-          resObj = {up: 1, down: -1};
+          resObj = {
+            up: 1,
+            down: -1,
+          };
         }
         else if(selectedList.upflag && !selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote - 1;
           selectedList.upflag = false;
-          resObj = {up: -1, down: 0};
+          resObj = {
+            up: -1,
+            down: 0,
+          };
         }
       } else {
         if(!selectedList.upflag && !selectedList.downflag) {
           selectedList.downvote = +selectedList.downvote + 1;
           selectedList.downflag = true;
-          resObj = {up: 0, down: 1};
+          resObj = {
+            up: 0,
+            down: 1,
+          };
         }
         else if(selectedList.upflag && !selectedList.downflag) {
           selectedList.downvote = +selectedList.downvote + 1;
           selectedList.upvote = +selectedList.upvote - 1;
           selectedList.upflag = false;
           selectedList.downflag = true;
-          resObj = {up: -1, down: 1};
+          resObj = {
+            up: -1,
+            down: 1,
+          };
         }
         else if(!selectedList.upflag && selectedList.downflag) {
           selectedList.downvote = +selectedList.downvote - 1;
           selectedList.downflag = false;
-          resObj = {up: 0, down: -1};
+          resObj = {
+            up: 0,
+            down: -1,
+          };
         }
       }
       jsonfile.writeFile(file, obj, function(err) {

@@ -7,21 +7,85 @@ import { Link } from 'react-router';
 
 class Lists extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      style: {
+        color: "red"
+      }
+    }
+    this.upvote = this.upvote.bind(this);
+    this.downvote = this.downvote.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.list.upflag && !nextProps.list.downflag) {
+      this.setState({
+        style: {
+          color: "green"
+        }
+      });
+      console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
+    }
+    if(nextProps.list.upflag && !nextProps.list.downflag) {
+      this.setState({
+        style: {
+          color: "blue"
+        }
+      });
+      //console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
+    }
+  }
+
+  upvote(i, e) {
+    this.props.upvote(i);
+  }
+
+  downvote(i, e) {
+    this.setState({
+      style: {
+        color: "red"
+      }
+    });
+    this.props.downvote(i);
+  }
+
+  componentWillMount() {
+    if(this.props.list.upflag) {
+      this.setState({
+        style: {
+          color: "green"
+        }
+      });
+    } else if(this.props.list.downflag){
+      this.setState({
+        style: {
+          color: "red"
+        }
+      });
+    } else {
+      this.setState({
+        style: {
+          color: "blue"
+        }
+      });
+    }
+  }
+
   renderLists() {
-    const { list, i, upvote, downvote, upvoteColor, downvoteColor, voteCountColor } = this.props;
+    const { list, i, upvoteColor, downvoteColor, voteCountColor } = this.props;
+    var { style } = this.state;
     return (
       <div className="media" key={ list.id }>
         <div className="row">
 
           <div className="col-md-1">
             <div className="text-center">
-              <button className="text-center fa fa-chevron-up" onClick={upvote.bind(null, i)}
-                style={}
-                ></button>
+              <button className="text-center fa fa-chevron-up" onClick={this.upvote.bind(this, i)}></button>
             </div>
-            <div className="text-center">{list.upvote - list.downvote}</div>
+            <div style={style}>{list.upvote - list.downvote}</div>
             <div className="text-center">
-              <button className="text-center fa fa-chevron-down" onClick={downvote.bind(null, i)}></button>
+              <button className="text-center fa fa-chevron-down" onClick={this.downvote.bind(this, i)}></button>
             </div>
           </div>
 
