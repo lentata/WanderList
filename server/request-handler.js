@@ -83,6 +83,7 @@ module.exports = function(app) {
 
       jsonfile.writeFile(file, obj, function(err){
         if(err) throw err;
+        res.send(200);
       });
     });
   });
@@ -138,4 +139,8 @@ module.exports = function(app) {
       });
     });
   });
+app.use(function(req, res) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  });
 }
+

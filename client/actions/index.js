@@ -92,11 +92,9 @@ export function addComment(postId, author, comment) {
     text: comment
   }
   const request = axios.post(`/api/comments`, data);
+  console.log(request);
   return {
     type: ADD_COMMENT,
-    postId,
-    author,
-    comment,
     payload: request
   }
 }
