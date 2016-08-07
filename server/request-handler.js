@@ -103,6 +103,8 @@ module.exports = function(app) {
           resObj = {
             up: 1,
             down: 0,
+            upflag: true,
+            downflag: false
           };
         }
         else if(!selectedList.upflag && selectedList.downflag) {
@@ -113,6 +115,8 @@ module.exports = function(app) {
           resObj = {
             up: 1,
             down: -1,
+            upflag: true,
+            downflag: false
           };
         }
         else if(selectedList.upflag && !selectedList.downflag) {
@@ -121,6 +125,8 @@ module.exports = function(app) {
           resObj = {
             up: -1,
             down: 0,
+            upflag: false,
+            downflag: false
           };
         }
       } else {
@@ -130,6 +136,8 @@ module.exports = function(app) {
           resObj = {
             up: 0,
             down: 1,
+            upflag: false,
+            downflag: true
           };
         }
         else if(selectedList.upflag && !selectedList.downflag) {
@@ -140,6 +148,8 @@ module.exports = function(app) {
           resObj = {
             up: -1,
             down: 1,
+            upflag: false,
+            downflag: true
           };
         }
         else if(!selectedList.upflag && selectedList.downflag) {
@@ -148,6 +158,8 @@ module.exports = function(app) {
           resObj = {
             up: 0,
             down: -1,
+            upflag: false,
+            downflag: false
           };
         }
       }

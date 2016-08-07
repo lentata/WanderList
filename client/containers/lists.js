@@ -11,42 +11,63 @@ class Lists extends Component {
     super(props);
     this.state = {
       style: {
-        color: "red"
+        color: "grey"
       }
     }
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(!nextProps.list.upflag && !nextProps.list.downflag) {
-      this.setState({
-        style: {
-          color: "green"
-        }
-      });
-      console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
-    }
-    if(nextProps.list.upflag && !nextProps.list.downflag) {
+  // componentWillReceiveProps(nextProps) {
+  //   if(!nextProps.list.upflag && !nextProps.list.downflag) {
+  //     this.setState({
+  //       style: {
+  //         color: "green"
+  //       }
+  //     });
+  //     // console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
+  //   }
+  //   if(nextProps.list.upflag && !nextProps.list.downflag) {
+  //     this.setState({
+  //       style: {
+  //         color: "blue"
+  //       }
+  //     });
+  //     //console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
+  //   }
+  // }
+
+  upvote(i, e) {
+    if(!this.props.list.upflag) {
       this.setState({
         style: {
           color: "blue"
         }
       });
-      //console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
+    } else {
+      this.setState({
+        style: {
+          color: "grey"
+        }
+      });
     }
-  }
-
-  upvote(i, e) {
     this.props.upvote(i);
   }
 
   downvote(i, e) {
-    this.setState({
-      style: {
-        color: "red"
-      }
-    });
+    if(!this.props.list.downflag) {
+      this.setState({
+        style: {
+          color: "red"
+        }
+      });
+    } else {
+      this.setState({
+        style: {
+          color: "grey"
+        }
+      });
+    }
     this.props.downvote(i);
   }
 
@@ -73,7 +94,7 @@ class Lists extends Component {
   }
 
   renderLists() {
-    const { list, i, upvoteColor, downvoteColor, voteCountColor } = this.props;
+    const { list, i } = this.props;
     var { style } = this.state;
     return (
       <div className="media" key={ list.id }>
