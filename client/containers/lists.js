@@ -10,7 +10,13 @@ class Lists extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: {
+      upStyle: {
+        color: "grey"
+      },
+      downStyle: {
+        color: "grey"
+      },
+      numStyle: {
         color: "grey"
       }
     }
@@ -18,35 +24,28 @@ class Lists extends Component {
     this.downvote = this.downvote.bind(this);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if(!nextProps.list.upflag && !nextProps.list.downflag) {
-  //     this.setState({
-  //       style: {
-  //         color: "green"
-  //       }
-  //     });
-  //     // console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
-  //   }
-  //   if(nextProps.list.upflag && !nextProps.list.downflag) {
-  //     this.setState({
-  //       style: {
-  //         color: "blue"
-  //       }
-  //     });
-  //     //console.log('upflag, downflag', this.props.list.upflag, this.props.list.downflag);
-  //   }
-  // }
-
   upvote(i, e) {
     if(!this.props.list.upflag) {
       this.setState({
-        style: {
+        upStyle: {
+          color: "blue"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
           color: "blue"
         }
       });
     } else {
       this.setState({
-        style: {
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
           color: "grey"
         }
       });
@@ -57,13 +56,25 @@ class Lists extends Component {
   downvote(i, e) {
     if(!this.props.list.downflag) {
       this.setState({
-        style: {
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "red"
+        },
+        numStyle: {
           color: "red"
         }
       });
     } else {
       this.setState({
-        style: {
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
           color: "grey"
         }
       });
@@ -74,20 +85,38 @@ class Lists extends Component {
   componentWillMount() {
     if(this.props.list.upflag) {
       this.setState({
-        style: {
-          color: "green"
+        upStyle: {
+          color: "blue"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "blue"
         }
       });
     } else if(this.props.list.downflag){
       this.setState({
-        style: {
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "red"
+        },
+        numStyle: {
           color: "red"
         }
       });
     } else {
       this.setState({
-        style: {
-          color: "blue"
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "grey"
         }
       });
     }
@@ -95,18 +124,18 @@ class Lists extends Component {
 
   renderLists() {
     const { list, i } = this.props;
-    var { style } = this.state;
+    const { upStyle, downStyle, numStyle } = this.state;
     return (
       <div className="media" key={ list.id }>
         <div className="row">
 
           <div className="col-md-1">
             <div className="text-center">
-              <button className="text-center fa fa-chevron-up" onClick={this.upvote.bind(this, i)}></button>
+              <i className="button text-center fa fa-chevron-up" style={upStyle} onClick={this.upvote.bind(this, i)}></i>
             </div>
-            <div style={style}>{list.upvote - list.downvote}</div>
+            <div className="text-center" style={numStyle}>{list.upvote - list.downvote}</div>
             <div className="text-center">
-              <button className="text-center fa fa-chevron-down" onClick={this.downvote.bind(this, i)}></button>
+              <i className="button text-center fa fa-chevron-down" style={downStyle} onClick={this.downvote.bind(this, i)}></i>
             </div>
           </div>
 
