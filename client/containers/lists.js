@@ -7,19 +7,135 @@ import { Link } from 'react-router';
 
 class Lists extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      upStyle: {
+        color: "grey"
+      },
+      downStyle: {
+        color: "grey"
+      },
+      numStyle: {
+        color: "grey"
+      }
+    }
+    this.upvote = this.upvote.bind(this);
+    this.downvote = this.downvote.bind(this);
+  }
+
+  upvote(i, e) {
+    if(!this.props.list.upflag) {
+      this.setState({
+        upStyle: {
+          color: "blue"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "blue"
+        }
+      });
+    } else {
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "grey"
+        }
+      });
+    }
+    this.props.upvote(i);
+  }
+
+  downvote(i, e) {
+    if(!this.props.list.downflag) {
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "red"
+        },
+        numStyle: {
+          color: "red"
+        }
+      });
+    } else {
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "grey"
+        }
+      });
+    }
+    this.props.downvote(i);
+  }
+
+  componentWillMount() {
+    if(this.props.list.upflag) {
+      this.setState({
+        upStyle: {
+          color: "blue"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "blue"
+        }
+      });
+    } else if(this.props.list.downflag){
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "red"
+        },
+        numStyle: {
+          color: "red"
+        }
+      });
+    } else {
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "grey"
+        }
+      });
+    }
+  }
+
   renderLists() {
-    const { list, i, upvote, downvote } = this.props;
+    const { list, i } = this.props;
+    const { upStyle, downStyle, numStyle } = this.state;
     return (
       <div className="media" key={ list.id }>
         <div className="row">
 
           <div className="col-md-1">
             <div className="text-center">
-              <button className="text-center fa fa-chevron-up" onClick={upvote.bind(null, i)}></button>
+              <i className="button text-center fa fa-chevron-up" style={upStyle} onClick={this.upvote.bind(this, i)}></i>
             </div>
-            <div className="text-center">{list.upvote - list.downvote}</div>
+            <div className="text-center" style={numStyle}>{list.upvote - list.downvote}</div>
             <div className="text-center">
-              <button className="text-center fa fa-chevron-down" onClick={downvote.bind(null, i)}></button>
+              <i className="button text-center fa fa-chevron-down" style={downStyle} onClick={this.downvote.bind(this, i)}></i>
             </div>
           </div>
 

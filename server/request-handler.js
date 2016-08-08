@@ -100,37 +100,67 @@ module.exports = function(app) {
         if(!selectedList.upflag && !selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote + 1;
           selectedList.upflag = true;
-          resObj = {up: 1, down: 0};
+          resObj = {
+            up: 1,
+            down: 0,
+            upflag: true,
+            downflag: false
+          };
         }
         else if(!selectedList.upflag && selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote + 1;
           selectedList.downvote = +selectedList.downvote - 1;
           selectedList.upflag = true;
           selectedList.downflag = false;
-          resObj = {up: 1, down: -1};
+          resObj = {
+            up: 1,
+            down: -1,
+            upflag: true,
+            downflag: false
+          };
         }
         else if(selectedList.upflag && !selectedList.downflag) {
           selectedList.upvote = +selectedList.upvote - 1;
           selectedList.upflag = false;
-          resObj = {up: -1, down: 0};
+          resObj = {
+            up: -1,
+            down: 0,
+            upflag: false,
+            downflag: false
+          };
         }
       } else {
         if(!selectedList.upflag && !selectedList.downflag) {
           selectedList.downvote = +selectedList.downvote + 1;
           selectedList.downflag = true;
-          resObj = {up: 0, down: 1};
+          resObj = {
+            up: 0,
+            down: 1,
+            upflag: false,
+            downflag: true
+          };
         }
         else if(selectedList.upflag && !selectedList.downflag) {
           selectedList.downvote = +selectedList.downvote + 1;
           selectedList.upvote = +selectedList.upvote - 1;
           selectedList.upflag = false;
           selectedList.downflag = true;
-          resObj = {up: -1, down: 1};
+          resObj = {
+            up: -1,
+            down: 1,
+            upflag: false,
+            downflag: true
+          };
         }
         else if(!selectedList.upflag && selectedList.downflag) {
           selectedList.downvote = +selectedList.downvote - 1;
           selectedList.downflag = false;
-          resObj = {up: 0, down: -1};
+          resObj = {
+            up: 0,
+            down: -1,
+            upflag: false,
+            downflag: false
+          };
         }
       }
       jsonfile.writeFile(file, obj, function(err) {

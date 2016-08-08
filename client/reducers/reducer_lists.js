@@ -14,28 +14,31 @@ export default function(state = INITIAL_STATE, action) {
       ...state, all: action.payload.data.lists
     };
   } else if(action.type === UPVOTE) {
-    const up = action.payload.data.up;
-    const down = action.payload.data.down;
+    const { up, down, upflag, downflag } = action.payload.data;
+    console.log('action.payload: ', action.payload);
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
+    targetList.upflag = upflag;
+    targetList.downflag = downflag;
     return {
       ...state,
       all:[
         ...state.all.slice(0, action.index),
-        Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+        Object.assign({}, targetList, targetList.upvote, targetList.downvote, targetList.upflag, targetList.downflag),
         ...state.all.slice(action.index + 1)
       ]
     };
   } else if(action.type === DOWNVOTE) {
-    const up = action.payload.data.up;
-    const down = action.payload.data.down;
+    const { up, down, upflag, downflag } = action.payload.data;
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
+    targetList.upflag = upflag;
+    targetList.downflag = downflag;
     return {
       ...state,
       all:[
         ...state.all.slice(0, action.index),
-        Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+        Object.assign({}, targetList, targetList.upvote, targetList.downvote, targetList.upflag, targetList.downflag),
         ...state.all.slice(action.index + 1)
       ]
     };

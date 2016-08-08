@@ -9,6 +9,7 @@
 
 .btn {
   margin-right: 5px 5px;
+  border-radius: 0px;
 }
 
 .form-control {
@@ -55,4 +56,8 @@
     border-bottom: 1px solid lightgrey;
     outline: none;
     resize: vertical;
+}
+
+.button:hover {
+  cursor: pointer;
 }
