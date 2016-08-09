@@ -122,6 +122,46 @@ class Lists extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.list.upflag) {
+      this.setState({
+        upStyle: {
+          color: "blue"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "blue"
+        }
+      });
+    } else if(nextProps.list.downflag){
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "red"
+        },
+        numStyle: {
+          color: "red"
+        }
+      });
+    } else {
+      this.setState({
+        upStyle: {
+          color: "grey"
+        },
+        downStyle: {
+          color: "grey"
+        },
+        numStyle: {
+          color: "grey"
+        }
+      });
+    }
+  }
+
   renderLists() {
     const { list, i } = this.props;
     const { upStyle, downStyle, numStyle } = this.state;

@@ -1,5 +1,6 @@
 /node_modules
 npm-debug.log
+/public/dummy.JSON
 /public/bundle.js
 /public/bundle.js.map
-/public/dummy.JSON
+.gitignore
