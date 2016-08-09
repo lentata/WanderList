@@ -20,20 +20,24 @@ class ListGrid extends Component {
                 <img height="100%" src="./logo.png" alt="WanderList-logo" />
               </a>
             </div>
-            <Link to='/signup' className="btn btn-default navbar-btn navbar-right col-md-1">
-              Sign Up
-            </Link>
-            <Link to='/login' className="btn btn-default navbar-btn navbar-right col-md-1">
-              Log In
-            </Link>
-            <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
-              Add a list
-            </Link>
-            <form className="navbar-form navbar-right" role="search">
-              <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
-              </div>
-            </form>
+
+            <div className="btn-toolbar">
+              <Link to='/signup' className="btn btn-default navbar-btn navbar-right col-md-1">
+                Sign Up
+              </Link>
+              <Link to='/login' className="btn btn-default navbar-btn navbar-right col-md-1">
+                Log In
+              </Link>
+              <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
+                Add a list
+              </Link>
+              <form className="navbar-form navbar-right" role="search">
+                <div className="form-group">
+                  <input type="text" className="form-control" placeholder="Search" />
+                </div>
+              </form>
+            </div>
+
           </div>
         </nav>
         <ul className="list-group">

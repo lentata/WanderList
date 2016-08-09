@@ -8,7 +8,7 @@
 }
 
 .btn {
-  margin-right: 5px 5px;
+  margin-right: 5px;
   border-radius: 0px;
 }
 
@@ -60,4 +60,9 @@
 
 .button:hover {
   cursor: pointer;
+}
+
+.media-heading {
+  font-size: 1.75rem;
+  text-decoration: none !important
 }
