@@ -2,6 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  externals: {
+  'cheerio': 'window',
+  'react/lib/ExecutionEnvironment': true,
+  'react/lib/ReactContext': true,
+  },
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
@@ -25,5 +30,5 @@ module.exports = {
       }
     ]
   }
- 
+
 };

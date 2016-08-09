@@ -8,8 +8,8 @@
     "dev": "WEBPACK_ENV=dev webpack --inline --hot",
     "build": "npm run clean && webpack",
     "clean": "rm public/bundle.js public/bundle.js.map",
-    "test": "mocha --compilers js:babel-register --require ./test/test_helper.js --recursive",
-    "test:watch": "npm test -- --watch"
+    "test": "mocha -w test/test_helper.js test/*.spec.js",
+    "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
   },
   "author": "lentata",
   "license": "ISC",
