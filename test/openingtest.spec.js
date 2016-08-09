@@ -24,6 +24,3 @@ import App from '../client/components/app';
       expect(wrapper.props()).to.not.be.undefined;
     });
   });
-
-  
-
