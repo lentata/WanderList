@@ -8,6 +8,11 @@ import { Link } from 'react-router';
 class ListGrid extends Component {
   componentWillMount() {
     this.props.fetchLists();
+    this.state = {term: ""};
+  }
+
+  onInputChange(term) {
+    this.setState({term: term});
   }
 
   render() {
@@ -33,7 +38,7 @@ class ListGrid extends Component {
               </Link>
               <form className="navbar-form navbar-right" role="search">
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Search" />
+                  <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
                 </div>
               </form>
             </div>
@@ -41,7 +46,7 @@ class ListGrid extends Component {
           </div>
         </nav>
         <ul className="list-group">
-          {this.props.lists.map((list, i) => <List {...this.props} key={i} i={i} list={list} />)}
+          {this.props.lists.filter(list => list.title.match(new RegExp(this.state.term, "gi"))).map((list, i) => <List {...this.props} key={i} i={i} list={list} />)}
         </ul>
       </div>
     )
@@ -50,7 +55,7 @@ class ListGrid extends Component {
 
 function mapStateToProps(state) {
   return {
-    lists: state.lists.all
+    lists: state.lists.all 
   };
 }
 
