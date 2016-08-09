@@ -30800,6 +30800,47 @@
 	      }
 	    }
 	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.list.upflag) {
+	        this.setState({
+	          upStyle: {
+	            color: "blue"
+	          },
+	          downStyle: {
+	            color: "grey"
+	          },
+	          numStyle: {
+	            color: "blue"
+	          }
+	        });
+	      } else if (nextProps.list.downflag) {
+	        this.setState({
+	          upStyle: {
+	            color: "grey"
+	          },
+	          downStyle: {
+	            color: "red"
+	          },
+	          numStyle: {
+	            color: "red"
+	          }
+	        });
+	      } else {
+	        this.setState({
+	          upStyle: {
+	            color: "grey"
+	          },
+	          downStyle: {
+	            color: "grey"
+	          },
+	          numStyle: {
+	            color: "grey"
+	          }
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'renderLists',
 	    value: function renderLists() {
 	      var _props = this.props;
