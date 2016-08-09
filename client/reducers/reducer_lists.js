@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 };
 
 export default function(state = INITIAL_STATE, action) {
-  let targetList = state.all[action.index];
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
   } else if(action.type === FETCH_LISTS) {
@@ -15,7 +14,13 @@ export default function(state = INITIAL_STATE, action) {
     };
   } else if(action.type === UPVOTE) {
     const { up, down, upflag, downflag } = action.payload.data;
-    console.log('action.payload: ', action.payload);
+    let index = 0;
+    state.all.forEach((list, i) => {
+      if (list.id === action.id) {
+        index = i;
+      }
+    });
+    let targetList = state.all[index];
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
     targetList.upflag = upflag;
@@ -23,13 +28,20 @@ export default function(state = INITIAL_STATE, action) {
     return {
       ...state,
       all:[
-        ...state.all.slice(0, action.index),
+        ...state.all.slice(0, index),
         Object.assign({}, targetList, targetList.upvote, targetList.downvote, targetList.upflag, targetList.downflag),
-        ...state.all.slice(action.index + 1)
+        ...state.all.slice(index + 1)
       ]
     };
   } else if(action.type === DOWNVOTE) {
     const { up, down, upflag, downflag } = action.payload.data;
+    let index = 0;
+    state.all.forEach((list, i) => {
+      if (list.id === action.id) {
+        index = i;
+      }
+    });
+    let targetList = state.all[index];
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
     targetList.upflag = upflag;
@@ -37,9 +49,9 @@ export default function(state = INITIAL_STATE, action) {
     return {
       ...state,
       all:[
-        ...state.all.slice(0, action.index),
+        ...state.all.slice(0, index),
         Object.assign({}, targetList, targetList.upvote, targetList.downvote, targetList.upflag, targetList.downflag),
-        ...state.all.slice(action.index + 1)
+        ...state.all.slice(index + 1)
       ]
     };
   } else if(action.type === ADD_COMMENT){

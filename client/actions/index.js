@@ -67,7 +67,7 @@ export function upvote(index, id) {
   const request = axios.post(`/api/votes`, data);
   return {
     type: UPVOTE,
-    index: index,
+    id: id,
     payload: request
   };
 }
@@ -80,7 +80,7 @@ export function downvote(index, id) {
   const request = axios.post(`/api/votes`, data);
   return {
     type: DOWNVOTE,
-    index: index,
+    id: id,
     payload: request
   };
 }
