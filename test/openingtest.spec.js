@@ -26,4 +26,4 @@ import App from '../client/components/app';
   });
 
   
->>>>>>> [Test: feature] Implemented tests that respond with enzyme and jasmine
+
