@@ -129,13 +129,13 @@ class Lists extends Component {
       <div className="media" key={ list.id }>
         <div className="row">
 
-          <div className="col-md-1">
-            <div className="text-center">
-              <i className="button text-center fa fa-chevron-up" style={upStyle} onClick={this.upvote.bind(this, i)}></i>
+          <div className="col-md-1 text-center">
+            <div>
+              <i className="button fa fa-chevron-up" style={upStyle} onClick={this.upvote.bind(this, i)}></i>
             </div>
-            <div className="text-center" style={numStyle}>{list.upvote - list.downvote}</div>
-            <div className="text-center">
-              <i className="button text-center fa fa-chevron-down" style={downStyle} onClick={this.downvote.bind(this, i)}></i>
+            <div style={numStyle}>{list.upvote - list.downvote}</div>
+            <div>
+              <i className="button fa fa-chevron-down" style={downStyle} onClick={this.downvote.bind(this, i)}></i>
             </div>
           </div>
 
@@ -159,7 +159,7 @@ class Lists extends Component {
 
   render() {
     return (
-      <div>        
+      <div>
         <li className="list-group-item">
           { this.renderLists() }
         </li>

@@ -12,14 +12,13 @@ class ListDetail extends Component {
   }
 
   renderList() {
-    console.log("RENDERLIST", this.props.list);
     return this.props.list.content.map((x, i) => {
       return (
         <div key={i}>
           <li>
             <h2>{x.headline}</h2>
             <img src={x.img} alt={x.headline} />
-            <p>{x.desc}</p>
+            <p className="h6">{x.desc}</p>
           </li>
         </div>
       );
@@ -35,54 +34,52 @@ class ListDetail extends Component {
 
   render() {
     const list = this.props.list;
-    // const postComments = list.comments[postId] || [];
-    // console.log("post comments 1", postComments);
-
-    console.log('fetch listtt', this.props.fetchList);
 
     if(!list) {
-      return <div>Loading...</div>;
+      return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
     }
 
     return (
       <div>
-        <div className="row">
-          <div className="col-md-8"></div>
-          <div className="col-md-4">
+        <nav className="navbar navbar-fixed-top">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <Link to="/"  className="navbar-brand">
+                <img height="100%" src="../logo.png" alt="WanderList-logo" />
+              </Link>
+            </div>
 
-            <Link to="/">Back to All Lists</Link>
+            <div className="btn-toolbar">
+              <Link to="/" className="btn btn-default navbar-btn navbar-right col-md-1">
+                Back to Main
+              </Link>
 
-            <button
-              className="btn btn-danger"
-              onClick={ this.onDeleteClick.bind(this) }>
-              Delete List
-            </button>
-          </div>
-
-        </div>
-        <div className="row">
-
-          <div className="col-mid-3">
-            <div className="pull-left m-l-5">
-            <div className="fa fa-angle-up"></div>
-            <h6>{ list.upvote - list.downvote }</h6>
-            <div className="fa fa-angle-down"></div>
+              <button
+                className="btn btn-danger navbar-btn navbar-right col-md-1"
+                onClick={ this.onDeleteClick.bind(this) }>
+                Delete List
+              </button>
             </div>
           </div>
+        </nav>
 
-          <div className="col-mid-9">
-            <div className="h1">{ list.title }</div>
-            <h5>{ list.author } </h5>
-            <h6>Categories: { list.categories }</h6>
-            <ol>
-              {this.renderList()}
-           </ol>
-          </div>
-
-          <Comments list={this.props.list}/>
-
+        <div className="container-fluid pull-left">
+          <div className="button fa fa-chevron-up"></div>
+          <div>{ list.upvote - list.downvote }</div>
+          <div className="button fa fa-chevron-down"></div>
         </div>
 
+        <div className="container-fluid">
+          <div className="h1">{ list.title }</div>
+          <h5>{ list.author } </h5>
+          <h6>Categories: { list.categories }</h6>
+        </div>
+
+        <ol className="h2">
+          {this.renderList()}
+        </ol>
+
+        <Comments list={this.props.list}/>
       </div>
     );
   }

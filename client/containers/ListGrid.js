@@ -21,9 +21,9 @@ class ListGrid extends Component {
         <nav className="navbar navbar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand">
+              <Link to="/"  className="navbar-brand">
                 <img height="100%" src="./logo.png" alt="WanderList-logo" />
-              </a>
+              </Link>
             </div>
 
             <div className="btn-toolbar">
@@ -55,7 +55,7 @@ class ListGrid extends Component {
 
 function mapStateToProps(state) {
   return {
-    lists: state.lists.all 
+    lists: state.lists.all
   };
 }
 
