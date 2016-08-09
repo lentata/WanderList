@@ -24,7 +24,7 @@ class Lists extends Component {
     this.downvote = this.downvote.bind(this);
   }
 
-  upvote(i, id, e) {
+  upvote(i, e) {
     if(!this.props.list.upflag) {
       this.setState({
         upStyle: {
@@ -50,10 +50,10 @@ class Lists extends Component {
         }
       });
     }
-    this.props.upvote(i, id);
+    this.props.upvote(i, this.props.list.id);
   }
 
-  downvote(i, id, e) {
+  downvote(i, e) {
     if(!this.props.list.downflag) {
       this.setState({
         upStyle: {
@@ -79,7 +79,7 @@ class Lists extends Component {
         }
       });
     }
-    this.props.downvote(i, id);
+    this.props.downvote(i, this.props.list.id);
   }
 
   componentWillMount() {
@@ -131,11 +131,11 @@ class Lists extends Component {
 
           <div className="col-md-1">
             <div className="text-center">
-              <i className="button text-center fa fa-chevron-up" style={upStyle} onClick={this.upvote.bind(this, i, list.id)}></i>
+              <i className="button text-center fa fa-chevron-up" style={upStyle} onClick={this.upvote.bind(this, i)}></i>
             </div>
             <div className="text-center" style={numStyle}>{list.upvote - list.downvote}</div>
             <div className="text-center">
-              <i className="button text-center fa fa-chevron-down" style={downStyle} onClick={this.downvote.bind(this, i, list.id)}></i>
+              <i className="button text-center fa fa-chevron-down" style={downStyle} onClick={this.downvote.bind(this, i)}></i>
             </div>
           </div>
 

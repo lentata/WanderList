@@ -94,7 +94,9 @@ module.exports = function(app) {
     var file = './public/dummy.JSON';
     var resObj = {};
     jsonfile.readFile(file, function(err, obj){
-      var selectedList = obj.lists[req.body.id - 1];
+      var selectedList = obj.lists.filter(function(list) {
+        return list.id === req.body.id;
+      })[0];
       if(err) throw err;
       if(req.body.votes) {
         if(!selectedList.upflag && !selectedList.downflag) {
