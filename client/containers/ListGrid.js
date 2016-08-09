@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import List from './lists';
 import { Link } from 'react-router';
 
-class ListGrid extends Component {
+export class ListGrid extends Component {
   componentWillMount() {
     this.props.fetchLists();
   }
