@@ -59,10 +59,10 @@ export function userCreate(props) {
   };
 }
 
-export function upvote(index) {
+export function upvote(index, id) {
   const data = {
     votes: true,
-    index: index
+    id: id
   };
   const request = axios.post(`/api/votes`, data);
   return {
@@ -72,10 +72,10 @@ export function upvote(index) {
   };
 }
 
-export function downvote(index) {
+export function downvote(index, id) {
   const data = {
     votes: false,
-    index: index
+    id: id
   };
   const request = axios.post(`/api/votes`, data);
   return {

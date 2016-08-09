@@ -29,6 +29,11 @@ class ListGrid extends Component {
             <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
               Add a list
             </Link>
+            <form className="navbar-form navbar-right" role="search">
+              <div className="form-group">
+                <input type="text" className="form-control" placeholder="Search" />
+              </div>
+            </form>
           </div>
         </nav>
         <ul className="list-group">
