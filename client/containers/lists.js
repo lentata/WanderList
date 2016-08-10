@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { upvote, downvote } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import Votes from './vote';
 
 
 class Lists extends Component {
@@ -163,8 +164,7 @@ class Lists extends Component {
   }
 
   renderLists() {
-    const { list, i } = this.props;
-    const { upStyle, downStyle, numStyle } = this.state;
+    const { list, i, upvote, downvote } = this.props;
     return (
       <div className="media" key={ list.id }>
         <div className="row">
@@ -208,12 +208,8 @@ class Lists extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ upvote, downvote }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Lists);
+export default connect(null, mapDispatchToProps)(Lists);
