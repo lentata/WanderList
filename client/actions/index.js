@@ -59,7 +59,7 @@ export function userCreate(props) {
   };
 }
 
-export function upvote(index, id) {
+export function upvote(id) {
   const data = {
     votes: true,
     id: id
@@ -72,7 +72,7 @@ export function upvote(index, id) {
   };
 }
 
-export function downvote(index, id) {
+export function downvote(id) {
   const data = {
     votes: false,
     id: id

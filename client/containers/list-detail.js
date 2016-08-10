@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
 
-class ListDetail extends Component {
+export class ListDetail extends Component {
 
   componentWillMount() {
     this.props.fetchList(this.props.params.id);
