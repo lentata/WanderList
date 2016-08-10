@@ -15,7 +15,7 @@ export const fields = [
   'children[].content'
 ]
 
-class DeepForm extends Component {
+export class DeepForm extends Component {
   onSubmit(props) {
     console.log('PROPS TEST', props);
 

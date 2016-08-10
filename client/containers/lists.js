@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import Votes from './vote';
 
 
-class Lists extends Component {
+export class Lists extends Component {
 
   renderLists() {
     const { list, i, upvote, downvote } = this.props;

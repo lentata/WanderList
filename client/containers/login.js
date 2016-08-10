@@ -4,7 +4,7 @@ import { userAuth } from '../actions/index';
 import {Link} from 'react-router';
 
 
-class Login extends Component {
+export class Login extends Component {
   static contextTypes = {
     router: PropTypes.object
   };

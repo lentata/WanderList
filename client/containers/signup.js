@@ -3,8 +3,7 @@ import {reduxForm} from 'redux-form';
 import {userCreate} from '../actions/index';
 import {Link} from 'react-router';
 
-
-class Signup extends Component {
+export class Signup extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
@@ -21,7 +20,7 @@ class Signup extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h2>Signup</h2>
-        <div> 
+        <div>
           <label>Username</label>
           <input type="text" placeholder="Enter Username" {...username}/>
         </div>

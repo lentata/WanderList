@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addComment, removeComment } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-class Comments extends Component {
+export class Comments extends Component {
   renderComment(comment, i) {
     // console.log("comment:", comment);
     return (
