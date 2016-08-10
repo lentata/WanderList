@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import { createList } from '../actions/index';
 import { Link, browserHistory} from 'react-router';
 
-class ListsNew extends Component {
+export class ListsNew extends Component {
 
   onSubmit(props) {
     console.log('PROPS TEST', props);
