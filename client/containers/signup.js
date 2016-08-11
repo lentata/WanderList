@@ -9,10 +9,11 @@ export class Signup extends Component {
   };
 
   onSubmit(props) {
-    this.props.userCreate(props)
-      .then(() => {
-        this.context.router.push('/');
-      });
+    firebase.auth().createUserWithEmailAndPassword(props.username, props.password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
   }
 
   render() {
