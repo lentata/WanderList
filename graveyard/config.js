@@ -1,3 +1,5 @@
+//NEED TO DELETE !!!
+
 var path = require('path');
 var db = require('knex')({
   client: 'sqlite3',

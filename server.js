@@ -3,7 +3,8 @@ var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
-var db = require('./server/config');
+// var db = require('./server/config');
+
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -26,3 +27,7 @@ require('./server/request-handler')(app);
 app.listen(port, function() {
   console.log('server up at port 3000!');
 });
+
+
+
+// mongoimport -h ds017195.mlab.com:17195 -d lentata -c lists -u lentata -p lentata --file /Users/stephenshelton/Desktop/thesis-project/WanderList/public/dummy1.JSON
