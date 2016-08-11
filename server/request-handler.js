@@ -1,20 +1,28 @@
+var db = require('./mongo_config');
+var List = require('./models/mongo_list');
+var User = require('./models/mongo_user');
+
 var path = require('path');
-var Users = require('./collections/users');
-var User = require('./models/user');
+// var Users = require('./collections/users');
+// var User = require('./models/user');
 var jsonfile = require('jsonfile');
 
 module.exports = function(app) {
-  var id = 7;
+  var id = 7; //get rid of this???
 
+  //go to homepage
   app.get('/', function(req, res) {
     res.sendFile('index.html');
   });
 
+  //get all lists, ADAPTED FOR MONGO
   app.get('/api/lists', function(req, res) {
-    var file = './public/dummy.JSON';
-    jsonfile.readFile(file, function(err, obj){
+    List.find({}, function(err, docs) {
       if(err) throw err;
-      res.send(obj);
+
+      console.log(docs);
+
+      res.send(docs);
     });
   });
 
@@ -38,20 +46,28 @@ module.exports = function(app) {
       res.sendStatus(201);
     });
   });
-
+  //get individual list
   app.get('/api/lists/:id', function(req, res) {
-    var file = './public/dummy.JSON';
     var id = req.params.id;
-    jsonfile.readFile(file, function(err, obj){
-      if(err) throw err;
-      for(var i = 0; i < obj.lists.length; i++) {
-        if(obj.lists[i].id === id) {
-          res.send(obj.lists[i]);
-        }
-      }
-    });
-  });
 
+    List.findOne({id}, function(err, obj) {
+      console.log('individual ID:', obj)
+      if(err) throw err;
+      res.send(obj);
+    })
+
+    // var file = './public/dummy.JSON';
+    // var id = req.params.id;
+    // jsonfile.readFile(file, function(err, obj){
+    //   if(err) throw err;
+    //   for(var i = 0; i < obj.lists.length; i++) {
+    //     if(obj.lists[i].id === id) {
+    //       res.send(obj.lists[i]);
+    //     }
+    //   }
+    // });
+  });
+  //post a list
   app.post('/api/lists/', function(req, res){
     var file = './public/dummy.JSON';
     jsonfile.readFile(file, function(err, obj){
@@ -64,7 +80,7 @@ module.exports = function(app) {
     });
   });
 
-  //for comments!
+  //post a comment
   app.post('/api/comments/', function(req, res){
     var file = './public/dummy.JSON';
     jsonfile.readFile(file, function(err, obj){
@@ -88,8 +104,7 @@ module.exports = function(app) {
     });
   });
 
-
-
+  //post a vote for a list
   app.post('/api/votes', function(req, res){
     var file = './public/dummy.JSON';
     var resObj = {};
@@ -171,8 +186,8 @@ module.exports = function(app) {
       });
     });
   });
-app.use(function(req, res) {
+
+  app.use(function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 }
-
