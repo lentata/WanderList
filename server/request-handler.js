@@ -46,22 +46,11 @@ module.exports = function(app) {
   //get individual list
   app.get('/api/lists/:id', function(req, res) {
     var id = req.params.id;
-    List.findOne({'_id': id}, function(err, obj) {
-      console.log('individual ID:', obj);
+
+    List.findOne({_id: id}, function(err, obj) {
       if(err) throw err;
       res.send(obj);
-    })
-
-    // var file = './public/dummy.JSON';
-    // var id = req.params.id;
-    // jsonfile.readFile(file, function(err, obj){
-    //   if(err) throw err;
-    //   for(var i = 0; i < obj.lists.length; i++) {
-    //     if(obj.lists[i].id === id) {
-    //       res.send(obj.lists[i]);
-    //     }
-    //   }
-    // });
+    });
   });
   //post a list
   app.post('/api/lists/', function(req, res){
@@ -74,25 +63,15 @@ module.exports = function(app) {
 
   //post a comment
   app.post('/api/comments/', function(req, res){
-    var file = './public/dummy.JSON';
-    jsonfile.readFile(file, function(err, obj){
+    List.findById(req.body._id, function(err, doc) {
       if(err) throw err;
 
-      var data = {
-        user: req.body.user,
-        text: req.body.text
-      }
+      doc.comments.push({"user": req.body.user, "text": req.body.text});
 
-      obj.lists.forEach( list => {
-        if(req.body.id === list.id) {
-          list.comments.push(data)
-        }
-      })
-
-      jsonfile.writeFile(file, obj, function(err){
+      doc.save(function(err) {
         if(err) throw err;
-        res.send(200);
-      });
+        res.send(doc);
+      })
     });
   });
 

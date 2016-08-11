@@ -7,7 +7,7 @@ import Comments from './comments';
 import NavBar from '../components/nav';
 
 export class ListDetail extends Component {
-  
+
   componentWillMount() {
     console.log("THISISIT", this.props.params.id);
     this.props.fetchList(this.props.params.id);
@@ -29,7 +29,8 @@ export class ListDetail extends Component {
   }
 
   onDeleteClick() {
-    this.props.deleteList(this.props.params.id)
+    this.props.deleteList(this.props.list._id)
+    // this.props.deleteList(this.props.params.id)
       .then(() => {
         browserHistory.push('/');
       });
@@ -44,7 +45,7 @@ export class ListDetail extends Component {
     }
     return (
       <div>
-        <NavBar 
+        <NavBar
           list={list}
           />
              <div className="btn-toolbar">
@@ -58,7 +59,7 @@ export class ListDetail extends Component {
                 Delete List
               </button>
             </div>
-    {/* 
+    {/*
               <button
                 className="btn btn-danger navbar-btn navbar-right col-md-1"
                 onClick={ this.onDeleteClick.bind(this) }>
@@ -66,7 +67,7 @@ export class ListDetail extends Component {
               </button>
       */}
 
-      
+
       {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="container-fluid pull-left">
           <div className="button fa fa-chevron-up"></div>

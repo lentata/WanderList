@@ -21,6 +21,7 @@ export function fetchLists() {
 
 export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
+  // console.log('REQUEST FROM ACTION:', request);
   return {
     type: FETCH_LIST,
     payload: request
@@ -87,12 +88,11 @@ export function downvote(id) {
 
 export function addComment(postId, author, comment) {
   const data = {
-    id: postId,
+    _id: postId,
     user: author,
     text: comment
   }
   const request = axios.post(`/api/comments`, data);
-  console.log(request);
   return {
     type: ADD_COMMENT,
     payload: request

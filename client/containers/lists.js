@@ -10,14 +10,13 @@ export class Lists extends Component {
   renderLists() {
     const { list, i, upvote, downvote } = this.props;
     return (
-      <div className="media" key={ list.id }>
+      <div className="media" key={ list._id }>
         <div className="row">
-          
-          <Votes 
+          <Votes
             list={list}
             upvoteAction={upvote}
             downvoteAction={downvote} />
-          <ListComponent 
+          <ListComponent
             list={list} />
         </div>
       </div>
