@@ -8,7 +8,6 @@ import ListComponent from '../components/listcomponent';
 
 export class Lists extends Component {
   renderLists() {
-
     const { list, i, upvote, downvote } = this.props;
     return (
       <div className="media" key={ list.id }>
@@ -18,14 +17,12 @@ export class Lists extends Component {
             list={list}
             upvoteAction={upvote}
             downvoteAction={downvote} />
-
           <ListComponent 
             list={list} />
         </div>
       </div>
     );
   }
-
   render() {
     return (
       <div>

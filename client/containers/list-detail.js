@@ -36,31 +36,18 @@ export class ListDetail extends Component {
   }
 
   render() {
-    const { list, deleteList } = this.props;
+    const { list } = this.props;
     console.log("PROPS HERE", this.props);
-
-
 
     if(!list) {
       return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
     }
-
     return (
       <div>
         <NavBar 
           list={list}
-          deletingClick={deleteList}
           />
-    {/* 
-        <nav className="navbar navbar-fixed-top">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <Link to="/"  className="navbar-brand">
-                <img height="100%" src="../logo.png" alt="WanderList-logo" />
-              </Link>
-            </div>
-
-            <div className="btn-toolbar">
+             <div className="btn-toolbar">
               <Link to="/" className="btn btn-default navbar-btn navbar-right col-md-1">
                 Back to Main
               </Link>
@@ -71,10 +58,12 @@ export class ListDetail extends Component {
                 Delete List
               </button>
             </div>
-          </div>
-
-
-        </nav>
+    {/* 
+              <button
+                className="btn btn-danger navbar-btn navbar-right col-md-1"
+                onClick={ this.onDeleteClick.bind(this) }>
+                Delete List
+              </button>
       */}
 
       

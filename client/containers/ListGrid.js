@@ -4,6 +4,7 @@ import { fetchLists } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import List from './lists';
 import { Link } from 'react-router';
+import NavBar from '../components/nav';
 
 export class ListGrid extends Component {
   componentWillMount() {
@@ -17,34 +18,23 @@ export class ListGrid extends Component {
 
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-fixed-top">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <Link to="/"  className="navbar-brand">
-                <img height="100%" src="./logo.png" alt="WanderList-logo" />
-              </Link>
-            </div>
+      <div>  
+        <NavBar />
 
-            <div className="btn-toolbar">
-              <Link to='/signup' className="btn btn-default navbar-btn navbar-right col-md-1">
-                Sign Up
-              </Link>
-              <Link to='/login' className="btn btn-default navbar-btn navbar-right col-md-1">
-                Log In
-              </Link>
-              <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
+
+
+        <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
                 Add a list
-              </Link>
-              <form className="navbar-form navbar-right" role="search">
-                <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
-                </div>
-              </form>
-            </div>
-
+        </Link> 
+        <div className="row">
+          <div className="col-md-5">
+            <form role="search">
+              <div className="form-group">
+                <input type="text" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
+              </div>
+            </form>
           </div>
-        </nav>
+        </div>
         <ul className="list-group">
           {this.props.lists.filter(list => list.title.match(new RegExp(this.state.term, "gi"))).map((list, i) => <List {...this.props} key={i} i={i} list={list} />)}
         </ul>
