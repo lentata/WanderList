@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 
 
 export default class navBar extends Component {
-    constructor(props){
-      super(props);
-      this.deleteClick = this.deleteClick.bind(this);
-}
+  constructor(props){
+    super(props);
+    this.deleteClick = this.deleteClick.bind(this);
+  }
   deleteClick(){
     this.props.deletingClick(this.props.list.id);
   }
