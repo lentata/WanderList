@@ -7,8 +7,8 @@ import Votes from './vote';
 
 
 export class Lists extends Component {
-
   renderLists() {
+
     const { list, i, upvote, downvote } = this.props;
     return (
       <div className="media" key={ list.id }>
@@ -24,7 +24,7 @@ export class Lists extends Component {
           </div>
 
           <div className="media-body">
-            <Link to={ "lists/" + list.id } className="media-heading">
+            <Link to={ "lists/" + list._id } className="media-heading">
               { list.title }
             </Link>
             <div className="small"><em>{ list.author } &nbsp;</em>

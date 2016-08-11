@@ -6,8 +6,9 @@ import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
 
 export class ListDetail extends Component {
-
+  
   componentWillMount() {
+    console.log("THISISIT", this.props.params.id);
     this.props.fetchList(this.props.params.id);
   }
 
@@ -35,8 +36,8 @@ export class ListDetail extends Component {
   render() {
 
     const list = this.props.list;
+    console.log("INSIDE", this.props.list);
 
-    console.log("LIST:", list);
 
     if(!list) {
       return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
