@@ -10,7 +10,7 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, list: action.payload.data };
   } else if(action.type === FETCH_LISTS) {
     return {
-      ...state, all: action.payload.data.lists
+      ...state, all: action.payload.data
     };
   } else if(action.type === UPVOTE) {
     const { up, down, upflag, downflag } = action.payload.data;

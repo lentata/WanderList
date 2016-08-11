@@ -1,15 +1,15 @@
-var db = require('./mongo_config');
+var db = require('../mongo_config');
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
   userID: String,
   username: String,
   password: String,
-  email: String
-  upvotedLists: [listSchema],
-  downvotedLists: [listSchema]
+  email: String,
+  upvotedLists: [mongoose.Schema.Types.ObjectId],
+  downvotedLists: [mongoose.Schema.Types.ObjectId]
 });
 
-var User = mongoose.model('User', listSchema);
+var User = mongoose.model('User', userSchema);
 
 module.exports = User;

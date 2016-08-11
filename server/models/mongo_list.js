@@ -1,9 +1,23 @@
-var db = require('./mongo_config');
+var db = require('../mongo_config');
 var mongoose = require('mongoose');
+
+/*** CONTENT SCHEMA ***/
+var contentSchema = new mongoose.Schema({
+  headline: String,
+  imageUrl: String,
+  description: String
+});
+
+/*** COMMENT SCHEMA ***/
+var commentSchema = new mongoose.Schema({
+  user: String,
+  text: String,
+  posted: Date
+});
 
 /*** LIST SCHEMA ***/
 var listSchema = new mongoose.Schema({
-  createdAt: String,
+  createdAt: Date,
   title: String,
   author: String,
   upvote: Number,
@@ -16,24 +30,3 @@ var listSchema = new mongoose.Schema({
 var List = mongoose.model('List', listSchema);
 
 module.exports = List;
-
-/*** CONTENT SCHEMA ***/
-var contentSchema = new mongoose.Schema({
-  headline: String,
-  imageUrl: String,
-  description: String
-});
-
-var Content = mongoose.model('Content', contentSchema);
-
-model.exports = Content;
-
-/*** COMMENT SCHEMA ***/
-var commentSchema = new mongoose.Schema({
-  user: String,
-  text: String
-});
-
-var Comment = mongoose.model('Comment', commentSchema);
-
-model.exports = Comment;

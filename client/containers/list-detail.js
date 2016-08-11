@@ -12,13 +12,13 @@ export class ListDetail extends Component {
   }
 
   renderList() {
-    return this.props.list.content.map((x, i) => {
+    return this.props.list.content.map((item, i) => {
       return (
         <div key={i}>
           <li>
-            <h2>{x.headline}</h2>
-            <img src={x.img} alt={x.headline} />
-            <p className="h6">{x.desc}</p>
+            <h2>{item.headline}</h2>
+            <img src={item.img} alt={item.headline} />
+            <p className="h6">{item.desc}</p>
           </li>
         </div>
       );
@@ -33,7 +33,10 @@ export class ListDetail extends Component {
   }
 
   render() {
+
     const list = this.props.list;
+
+    console.log("LIST:", list);
 
     if(!list) {
       return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
