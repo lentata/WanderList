@@ -4,12 +4,14 @@ import { fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
+import NavBar from '../components/nav';
 
 export class ListDetail extends Component {
   
   componentWillMount() {
     console.log("THISISIT", this.props.params.id);
     this.props.fetchList(this.props.params.id);
+    this.deleteClick = this.onDeleteClick.bind(this)
   }
 
   renderList() {
@@ -34,9 +36,9 @@ export class ListDetail extends Component {
   }
 
   render() {
+    const { list, deleteList } = this.props;
+    console.log("PROPS HERE", this.props);
 
-    const list = this.props.list;
-    console.log("INSIDE", this.props.list);
 
 
     if(!list) {
@@ -45,6 +47,11 @@ export class ListDetail extends Component {
 
     return (
       <div>
+        <NavBar 
+          list={list}
+          deletingClick={deleteList}
+          />
+    {/* 
         <nav className="navbar navbar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -65,8 +72,13 @@ export class ListDetail extends Component {
               </button>
             </div>
           </div>
-        </nav>
 
+
+        </nav>
+      */}
+
+      
+      {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="container-fluid pull-left">
           <div className="button fa fa-chevron-up"></div>
           <div>{ list.upvote - list.downvote }</div>

@@ -4,7 +4,7 @@ import { upvote, downvote } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import Votes from './vote';
-
+import ListComponent from '../components/listcomponent';
 
 export class Lists extends Component {
   renderLists() {
@@ -19,19 +19,8 @@ export class Lists extends Component {
             upvoteAction={upvote}
             downvoteAction={downvote} />
 
-          <div className="col-md-1">
-            <img className="img-thumbnail" src={list.content[0].img} />
-          </div>
-
-          <div className="media-body">
-            <Link to={ "lists/" + list._id } className="media-heading">
-              { list.title }
-            </Link>
-            <div className="small"><em>{ list.author } &nbsp;</em>
-            <span className="fa fa-commenting"> Comments: {list.comments.length} </span>
-            </div>
-            <div className="small fa fa-caret-square-o-right"><em>Categories: { list.categories }</em></div>
-          </div>
+          <ListComponent 
+            list={list} />
         </div>
       </div>
     );

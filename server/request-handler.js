@@ -69,7 +69,7 @@ module.exports = function(app) {
     var posted = req.body;
     List.create(posted, function(err, post){
       if (err) throw err;
-      res.status.(status).json(post);
+      res.status(status).json(post);
     });
 
 
