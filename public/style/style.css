@@ -12,6 +12,10 @@
   border-radius: 0px;
 }
 
+.btn-social {
+  width: 18%
+}
+
 .form-control {
   margin-bottom: 4px;
 }
