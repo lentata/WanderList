@@ -46,7 +46,6 @@ module.exports = function(app) {
   //get individual list
   app.get('/api/lists/:id', function(req, res) {
     var id = req.params.id;
-    console.log("REKT", req.params.id);
     List.findOne({'_id': id}, function(err, obj) {
       console.log('individual ID:', obj);
       if(err) throw err;
@@ -69,10 +68,8 @@ module.exports = function(app) {
     var posted = req.body;
     List.create(posted, function(err, post){
       if (err) throw err;
-      res.status.(status).json(post);
+      res.status(status).json(post);
     });
-
-
   });
 
   //post a comment
