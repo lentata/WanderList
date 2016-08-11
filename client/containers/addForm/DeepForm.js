@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm, addArrayValue } from 'redux-form';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { createList } from '../../actions/index'; //import our action creator
 import PureInput from './PureInput';
 import PureTextarea from './PureTextarea';
@@ -8,7 +8,7 @@ import validate from './validateDeepForm';
 
 
 export const fields = [
-  'ListHeader',
+  'title',
   'categories',
   'children[].title',
   'children[].image',
@@ -29,7 +29,7 @@ export class DeepForm extends Component {
     const {
       asyncValidating,
       addValue,
-      fields: { ListHeader, categories, children },
+      fields: { title, categories, children },
       handleSubmit,
       invalid,
       submitting
@@ -40,14 +40,14 @@ export class DeepForm extends Component {
         <div className="form-group">
             <legend>Create a new list!</legend>
 
-          <div className={`form-group ${ListHeader.touched && ListHeader.invalid ? 'has-error' : ''}`}>
+          <div className={`form-group ${title.touched && title.invalid ? 'has-error' : ''}`}>
             <label className="control-label">Title for your list*</label>
-            <PureInput type="text" className="form-control" placeholder="List Title" field={ListHeader}/>
+            <PureInput type="text" className="form-control" placeholder="List Title" field={title}/>
             <div className="help-block">
-              {ListHeader.touched ? ListHeader.error : ''}
+              {title.touched ? title.error : ''}
             </div>
             <div className="help-block">
-              {asyncValidating === 'ListHeader' ? 'validating..': ''}
+              {asyncValidating === 'title' ? 'validating..': ''}
             </div>
           </div>
 

@@ -10,8 +10,8 @@ const requireFields = (...names) => data =>
 const validateDeepForm = data => {
   const errors = {}
 
-  if (!data.ListHeader || data.ListHeader.trim() === '') {
-    errors.ListHeader = 'Enter a Header for Your List';
+  if (!data.title || data.title.trim() === '') {
+    errors.title = 'Enter a Header for Your List';
   }
   //DON'T DELETE COMMENTS BELOW FOR NOW
   // if (!data.ListHeader) {

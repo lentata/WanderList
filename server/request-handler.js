@@ -19,9 +19,6 @@ module.exports = function(app) {
   app.get('/api/lists', function(req, res) {
     List.find({}, function(err, docs) {
       if(err) throw err;
-
-      console.log(docs);
-
       res.send(docs);
     });
   });
@@ -69,15 +66,13 @@ module.exports = function(app) {
   });
   //post a list
   app.post('/api/lists/', function(req, res){
-    var file = './public/dummy.JSON';
-    jsonfile.readFile(file, function(err, obj){
-      if(err) throw err;
-      req.body.id = id++;
-      obj.lists.push(req.body);
-      jsonfile.writeFile(file, obj, function(err){
-        if(err) throw err;
-      });
+    var posted = req.body;
+    List.create(posted, function(err, post){
+      if (err) throw err;
+      res.status.(status).json(post);
     });
+
+
   });
 
   //post a comment
