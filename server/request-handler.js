@@ -67,7 +67,6 @@ module.exports = function(app) {
 
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
-    console.log("REKKKKKKK", req.params.id);
     List.findByIdAndRemove({_id: req.params.id}, function(err){
       if(err) throw err;
     });
@@ -79,9 +78,7 @@ module.exports = function(app) {
     req.body.upvote = 0;
     req.body.downvote = 0;
     req.body.comments = [];
-    console.log('req.body', req.body);
     var posted = req.body;
-    console.log("POSTED", posted);
 
     new List(posted).save(function(err){
       if (err) throw err;
@@ -91,7 +88,6 @@ module.exports = function(app) {
 
   //post a comment
   app.post('/api/comments/', function(req, res){
-    console.log("TYPE OF ID:", typeof req.body._id);
     List.findById(req.body._id).exec()
     .then(function(doc) {
       doc.comments.push({"user": req.body.user, "text": req.body.text});
