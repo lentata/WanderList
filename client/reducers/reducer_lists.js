@@ -58,6 +58,7 @@ export default function(state = INITIAL_STATE, action) {
       ]
     };
   } else if(action.type === ADD_COMMENT){
+    console.log('new comment added read by reducer!', action.payload);
     return {
       ...state,
         list:{
@@ -69,6 +70,11 @@ export default function(state = INITIAL_STATE, action) {
         }
     }
 
+  } else if(action.type === REMOVE_COMMENT) {
+    return ...state,
+      list: {
+        ...state.list,
+      }
   } else {
     return state;
   }

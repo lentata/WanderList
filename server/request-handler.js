@@ -112,6 +112,13 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/comments/:id', function(req, res) {
+    console.log("ID?!", req.params);
+    console.log("req body:", req.body);
+    
+    List.update
+  });
+
   //post a vote for a list
   app.post('/api/votes', function(req, res){
     //params 

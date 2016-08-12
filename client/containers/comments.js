@@ -15,7 +15,11 @@ export class Comments extends Component {
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
+
           {<button className="remove-comment" onClick={this.props.deleteComment}>&times;</button>}
+
+          {/*<button className="remove-comment" onClick={this.props.removeComment.bind(null, this.props.list.id, i)}>&times;</button>*/}
+
         </p>
       </div>
     )
