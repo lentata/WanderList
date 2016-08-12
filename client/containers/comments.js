@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 export class Comments extends Component {
   constructor(props){
     super(props);
+    {/* this.props.deleteComment = this.props.deleteComment.bind(this);*/}
   }
 
   renderComment(comment, i) {
@@ -16,11 +17,7 @@ export class Comments extends Component {
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-
           <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
-
-          {/*<button className="remove-comment" onClick={this.props.removeComment.bind(null, this.props.list._id, i)}>&times;</button>*/}
-
         </p>
       </div>
     )
