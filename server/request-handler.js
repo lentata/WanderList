@@ -7,6 +7,10 @@ var path = require('path');
 // var User = require('./models/user');
 var jsonfile = require('jsonfile');
 
+// var Q = require('q');
+var mongoose = require('mongoose');
+mongoose.Promise = require('q').Promise;
+
 module.exports = function(app) {
   var id = 7; //get rid of this???
 
@@ -63,15 +67,17 @@ module.exports = function(app) {
 
   //post a comment
   app.post('/api/comments/', function(req, res){
-    List.findById(req.body._id, function(err, doc) {
-      if(err) throw err;
-
+    List.findById(req.body._id).exec()
+    .then(function(doc) {
       doc.comments.push({"user": req.body.user, "text": req.body.text});
 
-      doc.save(function(err) {
-        if(err) throw err;
-        res.send(doc);
-      })
+      return doc.save(); //returns a promise
+    })
+    .then(function(doc) {
+      res.send(doc);
+    })
+    .catch(function(err) {
+      throw err;
     });
   });
 
