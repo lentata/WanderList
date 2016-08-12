@@ -1,5 +1,9 @@
 .container {
-  margin-top: 75px;
+  margin-top: 10%
+}
+
+.navContainer {
+  background-color: #ecf0f1;
 }
 
 .img-responsive2 {
@@ -8,48 +12,70 @@
 }
 
 .btn {
-  margin-right: 5px;
-  border-radius: 0px;
+  margin-right: 10px;
+  border-radius: 0px
 }
 
 .btn-social {
   width: 18%
 }
 
+.mainBtns {
+  margin-right: 9.75%;
+  margin-top: 0.75%;
+}
+
+.navBtns {
+  margin-left: 4%;
+  margin-top: 0.2%;
+}
+
+.navSearch {
+  margin-top: 2%;
+}
+
 .form-control {
-  margin-bottom: 4px;
+  margin-bottom: 4px
 }
 
 .list-legend {
-  margin-top: 20px;
+  margin-top: 20px
+}
+
+.list-group {
+  border-radius: 0px
 }
 
 .navbar {
-  background-color: #e6e6e6;
+  background-color: #e6e6e6
 }
 
 .navbar-brand {
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0 !important
+}
+
+.nav-tabs {
+  background-color: #e6e6e6;
 }
 
 .comment {
   border-bottom: 1px solid lightgrey;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0
 }
 
 .comment p {
   font-size: 1.2rem;
-  margin: 0;
+  margin: 0
 }
 
 .comment strong {
   color: darkblue;
-  margin-right: 5px;
+  margin-right: 5px
 }
 
 .comment:hover .remove-comment {
-  opacity: 1;
+  opacity: 1
 }
 
 .comment-form input, textarea {
@@ -59,11 +85,11 @@
     padding: 1rem 0;
     border-bottom: 1px solid lightgrey;
     outline: none;
-    resize: vertical;
+    resize: vertical
 }
 
 .button:hover {
-  cursor: pointer;
+  cursor: pointer
 }
 
 .media-heading {
