@@ -58,10 +58,15 @@ module.exports = function(app) {
   });
   //post a list
   app.post('/api/lists/', function(req, res){
+    req.body.upvote = 0;
+    req.body.downvote = 0;
+    req.body.comments = [];
+    console.log('req.body', req.body);
     var posted = req.body;
-    List.create(posted, function(err, post){
+    console.log("POSTED", posted);
+
+    new List(posted).save(function(err){
       if (err) throw err;
-      res.status(status).json(post);
     });
   });
 

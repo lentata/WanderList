@@ -10,7 +10,7 @@ export default class ListComponent extends Component {
     return(
         <div>
           <div className="col-md-1">
-            <img className="img-thumbnail" src={list.content[0].img } />
+            <img className="img-thumbnail" src={list.content[0].image } />
           </div>
 
           <div className="media-body">

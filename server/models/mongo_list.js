@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 /*** CONTENT SCHEMA ***/
 var contentSchema = new mongoose.Schema({
   headline: String,
-  imageUrl: String,
+  image: String,
   description: String
 });
 

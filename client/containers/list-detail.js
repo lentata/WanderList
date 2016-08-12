@@ -20,7 +20,7 @@ export class ListDetail extends Component {
         <div key={i}>
           <li>
             <h2>{item.headline}</h2>
-            <img src={item.img} alt={item.headline} />
+            <img src={item.image} alt={item.headline} />
             <p className="h6">{item.desc}</p>
           </li>
         </div>
