@@ -58,7 +58,7 @@ export class ListGrid extends Component {
 
         </nav>
         <ul className="list-group">
-          {this.props.lists.filter(list => list.title.match(new RegExp(this.state.term, "gi"))).map((list, i) => <List {...this.props} key={i} i={i} list={list} />)}
+          {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} key={i} i={i} list={list} />)}
         </ul>
       </div>
     )
