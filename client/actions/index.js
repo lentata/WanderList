@@ -37,7 +37,10 @@ export function createList(props) {
 }
 
 export function deleteList(id) {
+  //const request = axios.delete(`/api/lists/${id}`);
   const request = axios.delete(`/api/lists/${id}`);
+
+
   return {
     type: DELETE_LIST,
     payload: request
@@ -100,11 +103,11 @@ export function addComment(postId, author, comment) {
 }
 
 //remove comment, need to get this to work
-export function removeComment(postId, i) {
+export function removeComment(postId) {
   console.log("removing a comment!");
   return {
     type: REMOVE_COMMENT,
-    i,
+    
     postId
   }
 }

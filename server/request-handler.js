@@ -56,6 +56,23 @@ module.exports = function(app) {
       res.send(obj);
     });
   });
+
+
+
+
+  // Delete list
+  app.delete('/api/lists/:id', function(req, res){
+    console.log("REKKKKKKK", req.params.id);
+    List.findByIdAndRemove({_id: req.params.id}, function(err){
+      if(err) throw err;
+    });
+
+  });
+
+
+
+
+
   //post a list
   app.post('/api/lists/', function(req, res){
     req.body.upvote = 0;

@@ -4,6 +4,10 @@ import { addComment, removeComment } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 export class Comments extends Component {
+  constructor(props){
+    super(props);
+    this.props.deleteComment = this.props.deleteComment.bind(this);
+  }
   renderComment(comment, i) {
     // console.log("comment:", comment);
     return (
@@ -11,10 +15,14 @@ export class Comments extends Component {
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-          {/*<button className="remove-comment" onClick={this.props.removeComment.bind(null, this.props.list.id, i)}>&times;</button>*/}
+          {<button className="remove-comment" onClick={this.props.deleteComment}>&times;</button>}
         </p>
       </div>
     )
+  }
+  deleteComment(){
+    this.props.removeComment(postId);
+
   }
 
   handleSubmit(evt) {
