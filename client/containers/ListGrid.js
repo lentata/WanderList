@@ -20,17 +20,17 @@ export class ListGrid extends Component {
     return (
       <div>
         <nav className="navbar navbar-fixed-top">
-          <div className="container-fluid">
+          <div className="container-fluid navContainer">
             <div className="navbar-header">
               <Link to="/"  className="navbar-brand">
                 <img height="100%" src="./logo.png" alt="WanderList-logo" />
               </Link>
             </div>
-          </div>
 
           <div>
             <ul className="nav navbar-nav navBtns">
-              <li className="active"><a href="#">Public<span className="sr-only">(current)</span></a></li>
+              <li className="active"><a href="#">Main<span className="sr-only">(current)</span></a></li>
+              <li><a href="#">Favorites</a></li>
               <li><a href="#">My Lists</a></li>
               <li><a href="#">My Drafts</a></li>
             </ul>
@@ -53,6 +53,8 @@ export class ListGrid extends Component {
               </Link>
             </div>
           </div>
+        </div>
+
 
         </nav>
         <ul className="list-group">

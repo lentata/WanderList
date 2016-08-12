@@ -2,8 +2,8 @@
   margin-top: 10%
 }
 
-.container-fluid {
-  background-color: white
+.navContainer {
+  background-color: #ecf0f1;
 }
 
 .img-responsive2 {
@@ -26,7 +26,7 @@
 }
 
 .navBtns {
-  margin-left: 9.75%;
+  margin-left: 4%;
   margin-top: 0.2%;
 }
 
