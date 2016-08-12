@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addComment, removeComment } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import Linkify from 'react-linkify';
 
 export class Comments extends Component {
   constructor(props){
@@ -18,7 +19,7 @@ export class Comments extends Component {
       <div className="comment" key={i}>
         <p>
           <strong>{comment.user}</strong>
-          {comment.text}
+          <Linkify>{comment.text}</Linkify>
           <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
         </p>
       </div>
