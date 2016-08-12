@@ -7,6 +7,11 @@ import Votes from './vote';
 import ListComponent from '../components/listcomponent';
 
 export class Lists extends Component {
+
+  componentWillMount() {
+    
+  }
+
   renderLists() {
     const { list, i, upvote, downvote } = this.props;
     return (

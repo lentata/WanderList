@@ -63,28 +63,30 @@ export function userCreate(props) {
   };
 }
 
-export function upvote(id) {
+export function upvote(lid, uid) {
   const data = {
+    lid: lid,
     votes: true,
-    id: id
+    uid: uid
   };
   const request = axios.post(`/api/votes`, data);
   return {
     type: UPVOTE,
-    id: id,
+    id: lid,
     payload: request
   };
 }
 
-export function downvote(id) {
+export function downvote(lid, uid) {
   const data = {
+    lid: lid,
     votes: false,
-    id: id
+    uid: uid
   };
   const request = axios.post(`/api/votes`, data);
   return {
     type: DOWNVOTE,
-    id: id,
+    id: lid,
     payload: request
   };
 }
