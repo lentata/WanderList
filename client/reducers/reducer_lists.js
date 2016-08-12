@@ -10,6 +10,7 @@ export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
   } else if(action.type === CREATE_LIST) {
+    console.log('createdList', action.payload.data);
     return { ...state, createdList: action.payload.data};
 
   } else if(action.type === FETCH_LISTS) {

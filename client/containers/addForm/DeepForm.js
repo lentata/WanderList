@@ -29,10 +29,10 @@ export class DeepForm extends Component {
     console.log('PROPS TEST', props);
 
     this.props.createList(props)
-      .then(() => {
-        console.log("BEFORE REDIRECT!!!!!")
-        browserHistory.push('/');
-      });
+     
+    console.log("BEFORE REDIRECT!!!!!");
+    browserHistory.push('/');
+     
   }
 
   render() {
