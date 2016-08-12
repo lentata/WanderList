@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+export const USER_INFO = 'USER_INFO';
 export const FETCH_LISTS = 'FETCH_LISTS';
 export const FETCH_LIST = 'FETCH_LIST';
 export const CREATE_LIST = 'CREATE_LIST';
@@ -10,6 +11,14 @@ export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+export function fetchUserInfo() {
+  const request = axios.get(`/api/user`);
+  return {
+    type: USER_INFO,
+    payload: request
+  };
+}
 
 export function fetchLists() {
   const request = axios.get('/api/lists');
@@ -63,28 +72,30 @@ export function userCreate(props) {
   };
 }
 
-export function upvote(id) {
+export function upvote(lid, uid) {
   const data = {
+    lid: lid,
     votes: true,
-    id: id
+    uid: uid
   };
   const request = axios.post(`/api/votes`, data);
   return {
     type: UPVOTE,
-    id: id,
+    id: lid,
     payload: request
   };
 }
 
-export function downvote(id) {
+export function downvote(lid, uid) {
   const data = {
+    lid: lid,
     votes: false,
-    id: id
+    uid: uid
   };
   const request = axios.post(`/api/votes`, data);
   return {
     type: DOWNVOTE,
-    id: id,
+    id: lid,
     payload: request
   };
 }

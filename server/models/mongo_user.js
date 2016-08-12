@@ -2,7 +2,6 @@ var db = require('../mongo_config');
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-  userID: String,
   username: String,
   password: String,
   email: String,
