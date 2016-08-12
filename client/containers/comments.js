@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 export class Comments extends Component {
   constructor(props){
     super(props);
+    {/* this.props.deleteComment = this.props.deleteComment.bind(this);*/}
   }
 
   renderComment(comment, i) {
@@ -16,11 +17,7 @@ export class Comments extends Component {
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-
           <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
-
-          {/*<button className="remove-comment" onClick={this.props.removeComment.bind(null, this.props.list._id, i)}>&times;</button>*/}
-
         </p>
       </div>
     )
@@ -29,12 +26,16 @@ export class Comments extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
 
-    const postId = this.props.list._id;
-    const author = this.refs.author.value;
-    const comment = this.refs.comment.value;
+    const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 
-    this.props.addComment(postId, author, comment);
-    this.refs.commentForm.reset();
+    if(author) {
+      const postId = this.props.list._id;
+      const comment = this.refs.comment.value;
+      this.props.addComment(postId, author, comment);
+      this.refs.commentForm.reset();
+    } else {
+      alert("You must log in to post a comment!")
+    }
   }
   //ref attributes on form allow us to use them in handle submit function
   render() {
@@ -45,7 +46,6 @@ export class Comments extends Component {
         <legend className="list-legend">Comments</legend>
         {this.props.list.comments.map(this.renderComment, this)}
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="author" placeholder="author" />
           <input type="text" ref="comment" placeholder="comment" />
           <input type="submit" hidden />
         </form>
