@@ -6,23 +6,24 @@ import { bindActionCreators } from 'redux';
 export class Comments extends Component {
   constructor(props){
     super(props);
-    this.props.deleteComment = this.props.deleteComment.bind(this);
   }
+
   renderComment(comment, i) {
-    // console.log("comment:", comment);
+    console.log("COMMENT PROPS", this.props)
+
     return (
       <div className="comment" key={i}>
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-          {<button className="remove-comment" onClick={this.props.deleteComment}>&times;</button>}
+
+          <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
+
+          {/*<button className="remove-comment" onClick={this.props.removeComment.bind(null, this.props.list._id, i)}>&times;</button>*/}
+
         </p>
       </div>
     )
-  }
-  deleteComment(){
-    this.props.removeComment(postId);
-
   }
 
   handleSubmit(evt) {
@@ -37,10 +38,12 @@ export class Comments extends Component {
   }
   //ref attributes on form allow us to use them in handle submit function
   render() {
+    console.log(this.props);
+
     return (
       <div className="comments">
         <legend className="list-legend">Comments</legend>
-        {this.props.list.comments.map(this.renderComment)}
+        {this.props.list.comments.map(this.renderComment, this)}
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
           <input type="text" ref="author" placeholder="author" />
           <input type="text" ref="comment" placeholder="comment" />

@@ -65,30 +65,20 @@ module.exports = function(app) {
     });
   });
 
-
-
-
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
-    console.log("REKKKKKKK", req.params.id);
     List.findByIdAndRemove({_id: req.params.id}, function(err){
       if(err) throw err;
     });
 
   });
 
-
-
-
-
   //post a list
   app.post('/api/lists/', function(req, res){
     req.body.upvote = 0;
     req.body.downvote = 0;
     req.body.comments = [];
-    console.log('req.body', req.body);
     var posted = req.body;
-    console.log("POSTED", posted);
 
     new List(posted).save(function(err){
       if (err) throw err;
@@ -112,9 +102,27 @@ module.exports = function(app) {
     });
   });
 
+  //remove a comment
+  app.post('/api/comments/:listId', function(req, res) {
+    // console.log("ID?!", typeof req.params.listId);
+    // console.log("req body:", req.body);
+    List.findById(req.params.listId).exec()
+    .then(function(doc) {
+      doc.comments.splice(req.body.commentIndex, 1);
+      return doc.save(); //returns a promise
+    })
+    .then(function(doc) {
+      res.send(doc);
+    })
+    .catch(function(err) {
+      throw err;
+    });
+
+  });
+
   //post a vote for a list
   app.post('/api/votes', function(req, res){
-    //params 
+    //params
     //@req.body.lid string
     //@req.body.votes boolean
     //@req.body.uid string
