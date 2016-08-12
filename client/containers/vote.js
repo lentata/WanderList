@@ -22,15 +22,23 @@ export default class Votes extends Component {
   }
 
   upvoteFunc() {
-    this.state.downflag ? this.setState({num: this.state.num + 2}) : this.state.upflag ? this.setState({num: this.state.num - 1}) : this.setState({num: this.state.num + 1});
-    this.state.upflag ? this.setState({upflag: false, downflag: false}) : this.setState({upflag: true, downflag: false});
-    this.props.upvoteAction(this.props.list._id.toString(), "57acacb4b086aca01bc783ea");
+    if(firebase.auth().currentUser) {
+      this.state.downflag ? this.setState({num: this.state.num + 1}) : this.state.upflag ? this.setState({num: this.state.num - 1}) : this.setState({num: this.state.num + 1});
+      this.state.upflag ? this.setState({upflag: false, downflag: false}) : this.setState({upflag: true, downflag: false});
+      this.props.upvoteAction(this.props.list._id.toString(), "57acacb4b086aca01bc783ea");
+    } else {
+      alert("You must be signed in to upvote lists!");
+    }
   }
 
   downvoteFunc() {
-    this.state.upflag ? this.setState({num: this.state.num - 2}) : this.state.downflag ? this.setState({num: this.state.num + 1}) : this.setState({num: this.state.num - 1});
-    this.state.downflag ? this.setState({upflag: false, downflag: false}) : this.setState({upflag: false, downflag: true});
-    this.props.downvoteAction(this.props.list._id.toString(), "57acacb4b086aca01bc783ea");
+    if(firebase.auth().currentUser) {
+      this.state.upflag ? this.setState({num: this.state.num - 2}) : this.state.downflag ? this.setState({num: this.state.num + 1}) : this.setState({num: this.state.num - 1});
+      this.state.downflag ? this.setState({upflag: false, downflag: false}) : this.setState({upflag: false, downflag: true});
+      this.props.downvoteAction(this.props.list._id.toString(), "57acacb4b086aca01bc783ea");
+    } else {
+      alert("You must be signed in to downvote lists!");
+    }
   }
 
   render() {
