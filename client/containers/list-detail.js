@@ -45,28 +45,16 @@ export class ListDetail extends Component {
     }
     return (
       <div>
-        <NavBar
-          list={list}
-          />
-             <div className="btn-toolbar">
-              <Link to="/" className="btn btn-default navbar-btn navbar-right col-md-1">
-                Back to Main
-              </Link>
+        <NavBar list={list}/>
+          <div className="btn-toolbar">
+            <Link to="/" className="btn btn-default navbar-btn navbar-right col-md-1">
+              Back to Main
+            </Link>
 
-              <button
-                className="btn btn-danger navbar-btn navbar-right col-md-1"
-                onClick={ this.onDeleteClick.bind(this) }>
-                Delete List
-              </button>
-            </div>
-    {/*
-              <button
-                className="btn btn-danger navbar-btn navbar-right col-md-1"
-                onClick={ this.onDeleteClick.bind(this) }>
-                Delete List
-              </button>
-      */}
-
+            <button className="btn btn-danger navbar-btn navbar-right col-md-1" onClick={ this.onDeleteClick.bind(this) }>
+              Delete List
+            </button>
+          </div>
 
       {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="container-fluid pull-left">
