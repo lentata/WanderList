@@ -1,9 +1,10 @@
-import { FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, ADD_COMMENT, REMOVE_COMMENT, CREATE_LIST } from '../actions/index';
+import { USER_INFO,FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, ADD_COMMENT, REMOVE_COMMENT, CREATE_LIST } from '../actions/index';
 
 const INITIAL_STATE = {
   all: [],
   list: null,
-  createdList: null
+  createdList: null,
+  info: null
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -12,7 +13,8 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === CREATE_LIST) {
     console.log('createdList', action.payload.data);
     return { ...state, createdList: action.payload.data};
-
+  } else if(action.type === USER_INFO) {
+    return { ...state, info: action.payload.data };
   } else if(action.type === FETCH_LISTS) {
     return {
       ...state, all: action.payload.data

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+export const USER_INFO = 'USER_INFO';
 export const FETCH_LISTS = 'FETCH_LISTS';
 export const FETCH_LIST = 'FETCH_LIST';
 export const CREATE_LIST = 'CREATE_LIST';
@@ -10,6 +11,14 @@ export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+export function fetchUserInfo() {
+  const request = axios.get(`/api/user`);
+  return {
+    type: USER_INFO,
+    payload: request
+  };
+}
 
 export function fetchLists() {
   const request = axios.get('/api/lists');

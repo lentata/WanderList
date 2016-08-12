@@ -8,11 +8,16 @@ export default class Votes extends Component {
     // Bind upvoting functions
     this.upvoteFunc = this.upvoteFunc.bind(this);
     this.downvoteFunc = this.downvoteFunc.bind(this);
-
+    const upflag = props.info.upvotedLists.map(function(objId) {
+      return objId.toString();
+    }).includes(props.list._id) || false;
+    const downflag = props.info.downvotedLists.map(function(objId) {
+      return objId.toString();
+    }).includes(props.list._id) || false;
     this.state = {
-      upflag: false,
-      downflag: false,
-      num: 18
+      upflag: upflag,
+      downflag: downflag,
+      num: props.list.upvote - props.list.downvote
     };
   }
 
@@ -29,7 +34,7 @@ export default class Votes extends Component {
   }
 
   render() {
-    const { list } = this.props; 
+    const { list, info } = this.props;
     return (
       <div className="col-md-1">
         <div className="text-center">

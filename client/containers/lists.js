@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { upvote, downvote } from '../actions/index';
+import { upvote, downvote, fetchUserInfo } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import Votes from './vote';
@@ -8,17 +8,14 @@ import ListComponent from '../components/listcomponent';
 
 export class Lists extends Component {
 
-  componentWillMount() {
-    
-  }
-
   renderLists() {
-    const { list, i, upvote, downvote } = this.props;
+    const { list, i, upvote, downvote, info } = this.props;
     return (
       <div className="media" key={ list._id }>
         <div className="row">
           <Votes
             list={list}
+            info={info}
             upvoteAction={upvote}
             downvoteAction={downvote} />
           <ListComponent
@@ -38,8 +35,14 @@ export class Lists extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ upvote, downvote }, dispatch);
+function mapStateToProps(state) {
+  return {
+    userInfo: state.lists.info
+  }
 }
 
-export default connect(null, mapDispatchToProps)(Lists);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ upvote, downvote, fetchUserInfo }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Lists);

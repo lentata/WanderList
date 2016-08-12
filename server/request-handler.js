@@ -28,6 +28,13 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/api/user', function(req, res) {
+    User.findOne({'_id': '57acacb4b086aca01bc783ea'}, function(err, user) {
+      if(err) throw err;
+      res.send(user);
+    });
+  });
+
   app.get('/api/auth', function(req, res) {
     var info = req.query;
     User.where({
