@@ -103,11 +103,11 @@ export function addComment(postId, author, comment) {
 }
 
 //remove comment, need to get this to work
-export function removeComment(postId, i) {
+export function removeComment(postId) {
   console.log("removing a comment!");
   return {
     type: REMOVE_COMMENT,
-    i,
+    
     postId
   }
 }
