@@ -9,18 +9,18 @@ export default class Votes extends Component {
     this.upvoteFunc = this.upvoteFunc.bind(this);
     this.downvoteFunc = this.downvoteFunc.bind(this);
   }
-  
+
   upvoteFunc() {
-    this.props.upvoteAction(this.props.list.id);
+    this.props.upvoteAction(this.props.list._id);
   }
 
   downvoteFunc() {
-    this.props.downvoteAction(this.props.list.id);
+    this.props.downvoteAction(this.props.list._id);
   }
 
   render() {
     // const { upStyle, downStyle, numStyle } = this.state;
-    const { list } = this.props; 
+    const { list } = this.props;
     return (
       <div className="col-md-1">
         <div className="text-center">

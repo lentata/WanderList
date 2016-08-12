@@ -19,16 +19,16 @@ export class Comments extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const postId = this.props.list.id;
+
+    const postId = this.props.list._id;
     const author = this.refs.author.value;
     const comment = this.refs.comment.value;
-    console.log("ADD COMMENT PROP", this.props.addComment);
+
     this.props.addComment(postId, author, comment);
     this.refs.commentForm.reset();
   }
   //ref attributes on form allow us to use them in handle submit function
   render() {
-    console.log("COMMENTS", this.props.comments, this.props.addComment);
     return (
       <div className="comments">
         <legend className="list-legend">Comments</legend>
@@ -43,14 +43,8 @@ export class Comments extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    comments: state.comments
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addComment, removeComment }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(null, mapDispatchToProps)(Comments);
