@@ -11,7 +11,7 @@ export class ListDetail extends Component {
   componentWillMount() {
     console.log("THISISIT", this.props.params.id);
     this.props.fetchList(this.props.params.id);
-    this.deleteClick = this.onDeleteClick.bind(this)
+    this.onDeleteClick = this.onDeleteClick.bind(this)
   }
 
   renderList() {
@@ -29,11 +29,10 @@ export class ListDetail extends Component {
   }
 
   onDeleteClick() {
-    this.props.deleteList(this.props.list._id)
-    // this.props.deleteList(this.props.params.id)
-      .then(() => {
-        browserHistory.push('/');
-      });
+    console.log("ERRRR, delete", this.props);
+    this.props.deleteList(this.props.list._id);
+    // this.props.deleteList(this.props.params.id)  
+    browserHistory.push('/');
   }
 
   render() {
@@ -55,7 +54,7 @@ export class ListDetail extends Component {
 
               <button
                 className="btn btn-danger navbar-btn navbar-right col-md-1"
-                onClick={ this.onDeleteClick.bind(this) }>
+                onClick={ this.onDeleteClick }>
                 Delete List
               </button>
             </div>

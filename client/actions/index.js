@@ -37,7 +37,10 @@ export function createList(props) {
 }
 
 export function deleteList(id) {
+  //const request = axios.delete(`/api/lists/${id}`);
   const request = axios.delete(`/api/lists/${id}`);
+
+
   return {
     type: DELETE_LIST,
     payload: request
