@@ -21,6 +21,7 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
+      alert(firebase.auth().currentUser);
       console.log('result in username signin: ', userDataStorage)
     }).catch(function(error) {
       alert(error.message)
@@ -41,7 +42,7 @@ export class Login extends Component {
 
   socialLogin(props) {
     firebase.auth().signInWithPopup(provider).then(function(result) {
-      alert("Logged in")
+      // alert("Logged in")
       var token = result.credential.accessToken;
       var user = firebase.auth().currentUser;
       var userData = user.providerData[0]
@@ -51,6 +52,7 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
+      console.log('firebase.auth().currentUser: ', firebase.auth().currentUser);
       console.log('result: ', userDataStorage)
     }).catch(function(error) {
       alert(error.message)
