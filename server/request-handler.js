@@ -65,9 +65,6 @@ module.exports = function(app) {
     });
   });
 
-
-
-
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
     console.log("REKKKKKKK", req.params.id);
@@ -76,10 +73,6 @@ module.exports = function(app) {
     });
 
   });
-
-
-
-
 
   //post a list
   app.post('/api/lists/', function(req, res){
@@ -98,6 +91,7 @@ module.exports = function(app) {
 
   //post a comment
   app.post('/api/comments/', function(req, res){
+    console.log("TYPE OF ID:", typeof req.body._id);
     List.findById(req.body._id).exec()
     .then(function(doc) {
       doc.comments.push({"user": req.body.user, "text": req.body.text});
@@ -112,16 +106,27 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/comments/:id', function(req, res) {
-    console.log("ID?!", req.params);
-    console.log("req body:", req.body);
-    
-    List.update
+  //remove a comment
+  app.post('/api/comments/:listId', function(req, res) {
+    // console.log("ID?!", typeof req.params.listId);
+    // console.log("req body:", req.body);
+    List.findById(req.params.listId).exec()
+    .then(function(doc) {
+      doc.comments.splice(req.body.commentIndex, 1);
+      return doc.save(); //returns a promise
+    })
+    .then(function(doc) {
+      res.send(doc);
+    })
+    .catch(function(err) {
+      throw err;
+    });
+
   });
 
   //post a vote for a list
   app.post('/api/votes', function(req, res){
-    //params 
+    //params
     //@req.body.lid string
     //@req.body.votes boolean
     //@req.body.uid string

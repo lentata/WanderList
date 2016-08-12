@@ -115,13 +115,17 @@ export function addComment(postId, author, comment) {
 
 //remove comment, need to get this to work
 export function removeComment(listId, commentIndex) {
-  const request = axios.post(`/api/comments/${id}`)
+  const data = {
+    commentIndex
+  }
+  const request = axios.post(`/api/comments/${listId}`, data)
 
   console.log("removing a comment!");
 
   return {
     type: REMOVE_COMMENT,
-    postId
+    listId,
+    commentIndex,
     payload: request
   }
 }

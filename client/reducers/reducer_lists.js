@@ -57,23 +57,34 @@ export default function(state = INITIAL_STATE, action) {
         ...state.all.slice(index + 1)
       ]
     };
-  } else if(action.type === ADD_COMMENT){
+  } else if(action.type === ADD_COMMENT) {
     console.log('new comment added read by reducer!', action.payload);
+    // console.log('PAYLOAD:', action.payload);
+    console.log('PAYLOAD CONFIG:', action.payload.config);
     return {
       ...state,
         list:{
           ...state.list,
           comments: [
             ...state.list.comments,
+            // action.payload.data
             JSON.parse(action.payload.config.data)
           ]
         }
     }
 
   } else if(action.type === REMOVE_COMMENT) {
-    return ...state,
-      list: {
-        ...state.list,
+    console.log("REMOVE PAYLOAD", action.payload.data.comments);
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          comments: [
+            ...state.list.comments.slice(0, action.commentIndex),
+            //after the deleted one to the end
+            ...state.list.comments.slice(action.commentIndex + 1)
+          ]
+        }
       }
   } else {
     return state;
