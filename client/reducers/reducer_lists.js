@@ -1,13 +1,17 @@
-import { FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, ADD_COMMENT, REMOVE_COMMENT } from '../actions/index';
+import { FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, ADD_COMMENT, REMOVE_COMMENT, CREATE_LIST } from '../actions/index';
 
 const INITIAL_STATE = {
   all: [],
-  list: null
+  list: null,
+  createdList: null
 };
 
 export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
+  } else if(action.type === CREATE_LIST) {
+    return { ...state, createdList: action.payload.data};
+
   } else if(action.type === FETCH_LISTS) {
     return {
       ...state, all: action.payload.data

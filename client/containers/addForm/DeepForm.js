@@ -7,20 +7,30 @@ import PureTextarea from './PureTextarea';
 import validate from './validateDeepForm';
 
 
+
 export const fields = [
   'title',
   'categories',
-  'children[].title',
-  'children[].image',
-  'children[].content'
+  'content[].headline',
+  'content[].image',
+  'content[].description'
 ]
 
 export class DeepForm extends Component {
+  
+  constructor(props){
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  
+
   onSubmit(props) {
     console.log('PROPS TEST', props);
 
     this.props.createList(props)
       .then(() => {
+        console.log("BEFORE REDIRECT!!!!!")
         browserHistory.push('/');
       });
   }
@@ -29,14 +39,14 @@ export class DeepForm extends Component {
     const {
       asyncValidating,
       addValue,
-      fields: { title, categories, children },
+      fields: { title, categories, content },
       handleSubmit,
       invalid,
       submitting
     } = this.props
 
     return (
-      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+      <form onSubmit={ handleSubmit(this.onSubmit) }>
         <div className="form-group">
             <legend>Create a new list!</legend>
 
@@ -57,29 +67,29 @@ export class DeepForm extends Component {
           </div>
         </div>
 
-        {!children.length && <div><label>Add some items to your list!</label></div>}
+        {!content.length && <div><label>Add some items to your list!</label></div>}
 
         <div className="form-group">
           {/*
           <button className="btn btn-primary btn-sm" type="button" onClick={() => {
-            children.addField()    // pushes empty child field onto the end of the array
+            content.addField()    // pushes empty child field onto the end of the array
           }}><i/> Add Item
           </button>
           */}
 
           <button className="btn btn-primary btn-sm" type="button" onClick={() => {
             for (let childIndex = 0; childIndex < 10; childIndex++) {
-              addValue('deep', 'children')
+              addValue('deep', 'content')
             }
           }}><i/> Show me 10!</button>
 
         </div>
 
-        {children.map((child, index) => <div key={index}>
+        {content.map((child, index) => <div key={index}>
           <div className="form-group">
             <label className="control-label">List item #{index + 1}</label>
             <div>
-              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.title} />
+              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.headline} />
             </div>
 
             <label className="control-label">Image url for list item #{index + 1}</label>
@@ -89,24 +99,24 @@ export class DeepForm extends Component {
 
             <label className="control-label">Details for list item #{index + 1}</label>
             <div>
-              <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.content} />
+              <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description} />
             </div>
 
             <div>
               <div>
                 <button className="fa fa-chevron-up btn-link" type="button" disabled={index === 0} onClick={() => {
-                  children.swapFields(index, index - 1)  // swap field with it's predecessor
+                  content.swapFields(index, index - 1)  // swap field with it's predecessor
                 }}><i/>
                 </button>
 
-                <button className="fa fa-chevron-down btn-link" type="button" disabled={index === children.length - 1} onClick={() => {
-                  children.swapFields(index, index + 1)  // swap field with it's successor
+                <button className="fa fa-chevron-down btn-link" type="button" disabled={index === content.length - 1} onClick={() => {
+                  content.swapFields(index, index + 1)  // swap field with it's successor
                 }}><i/>
                 </button>
               </div>
 
               <button className="btn btn-danger btn-sm" type="button" onClick={() => {
-                children.removeField(index)  // remove from index
+                content.removeField(index)  // remove from index
               }}><i/> Remove
               </button>
             </div>
@@ -116,7 +126,7 @@ export class DeepForm extends Component {
 
         <div>
           <button className="btn btn-primary btn-sm" type="button" onClick={() => {
-            children.addField()    // pushes empty child field onto the end of the array
+            content.addField()    // pushes empty child field onto the end of the array
           }}><i/> Add Item
           </button>
 

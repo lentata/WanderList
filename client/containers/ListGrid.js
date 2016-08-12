@@ -20,9 +20,6 @@ export class ListGrid extends Component {
     return (
       <div>  
         <NavBar />
-
-
-
         <Link to="/lists/new" className="btn btn-primary navbar-btn navbar-right col-md-1">
                 Add a list
         </Link> 
