@@ -28,34 +28,33 @@ export class ListGrid extends Component {
               </Link>
             </div>
 
-          <div>
-            <ul className="nav navbar-nav navBtns">
-              <li className="active"><a href="#">Main<span className="sr-only">(current)</span></a></li>
-              <li><a href="#">Favorites</a></li>
-              <li><a href="#">My Lists</a></li>
-              <li><a href="#">My Drafts</a></li>
-            </ul>
+            <div>
+              <ul className="nav navbar-nav navBtns">
+                <li className="active"><a href="#">Main<span className="sr-only">(current)</span></a></li>
+                <li><a href="#">Favorites</a></li>
+                <li><a href="#">My Lists</a></li>
+                <li><a href="#">My Drafts</a></li>
+              </ul>
 
-            <form className="navbar-form navbar-left">
-              <div className="form-group navSearch">
-                <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
+              <form className="navbar-form navbar-left">
+                <div className="form-group navSearch">
+                  <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
+                </div>
+              </form>
+
+              <div className="nav navbar-nav navbar-right mainBtns">
+                <Link to="/lists/new" className="btn btn-primary navbar-nav">
+                  Add a list
+                </Link>
+                <Link to='/login' className="btn btn-default">
+                  Log In  <span className="caret"></span>
+                </Link>
+                <Link to='/signup' className="btn btn-default">
+                  Sign Up
+                </Link>
               </div>
-            </form>
-
-            <div className="nav navbar-nav navbar-right mainBtns">
-              <Link to="/lists/new" className="btn btn-primary navbar-nav">
-                Add a list
-              </Link>
-              <Link to='/login' className="btn btn-default">
-                Log In  <span className="caret"></span>
-              </Link>
-              <Link to='/signup' className="btn btn-default">
-                Sign Up
-              </Link>
             </div>
           </div>
-        </div>
-
 
         </nav>
         <ul className="list-group">
