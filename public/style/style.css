@@ -52,11 +52,22 @@
 
 .navbar-brand {
   padding: 0 !important;
-  margin: 0 !important
+  margin: 0 !important;
 }
 
 .nav-tabs {
   background-color: #e6e6e6;
+}
+
+.remove-comment {
+  background: none;
+  border: 0;
+  line-height: 1;
+  opacity: 0;
+}
+
+.remove-comment:hover {
+  color: red;
 }
 
 .comment {

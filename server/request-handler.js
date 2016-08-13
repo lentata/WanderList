@@ -1,6 +1,7 @@
 var db = require('./mongo_config');
 var List = require('./models/mongo_list');
 var User = require('./models/mongo_user');
+var mongoose = require('mongoose');
 
 var path = require('path');
 // var Users = require('./collections/users');
@@ -24,6 +25,13 @@ module.exports = function(app) {
     List.find({}, function(err, docs) {
       if(err) throw err;
       res.send(docs);
+    });
+  });
+
+  app.get('/api/user', function(req, res) {
+    User.findOne({'_id': '57acacb4b086aca01bc783ea'}, function(err, user) {
+      if(err) throw err;
+      res.send(user);
     });
   });
 
@@ -57,33 +65,24 @@ module.exports = function(app) {
     });
   });
 
-
-
-
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
-    console.log("REKKKKKKK", req.params.id);
     List.findByIdAndRemove({_id: req.params.id}, function(err){
       if(err) throw err;
     });
 
   });
 
-
-
-
-
   //post a list
   app.post('/api/lists/', function(req, res){
     req.body.upvote = 0;
     req.body.downvote = 0;
     req.body.comments = [];
-    console.log('req.body', req.body);
     var posted = req.body;
-    console.log("POSTED", posted);
 
     new List(posted).save(function(err){
       if (err) throw err;
+      res.status(status).json(post);
     });
   });
 
@@ -103,84 +102,130 @@ module.exports = function(app) {
     });
   });
 
+  //remove a comment
+  app.post('/api/comments/:listId', function(req, res) {
+    // console.log("ID?!", typeof req.params.listId);
+    // console.log("req body:", req.body);
+    List.findById(req.params.listId).exec()
+    .then(function(doc) {
+      doc.comments.splice(req.body.commentIndex, 1);
+      return doc.save(); //returns a promise
+    })
+    .then(function(doc) {
+      res.send(doc);
+    })
+    .catch(function(err) {
+      throw err;
+    });
+
+  });
+
   //post a vote for a list
   app.post('/api/votes', function(req, res){
-    var file = './public/dummy.JSON';
-    var resObj = {};
-    jsonfile.readFile(file, function(err, obj){
-      var selectedList = obj.lists.filter(function(list) {
-        return list.id === req.body.id;
-      })[0];
+    //params
+    //@req.body.lid string
+    //@req.body.votes boolean
+    //@req.body.uid string
+    var lid = req.body.lid;
+    var vflag = req.body.votes;
+    var uid = req.body.uid;
+
+    var mapUpLists = {};
+    var mapDownLists = {};
+    User.findOne({'_id': uid}, function(err, info) {
       if(err) throw err;
-      if(req.body.votes) {
-        if(!selectedList.upflag && !selectedList.downflag) {
-          selectedList.upvote = +selectedList.upvote + 1;
-          selectedList.upflag = true;
-          resObj = {
-            up: 1,
-            down: 0,
-            upflag: true,
-            downflag: false
-          };
-        }
-        else if(!selectedList.upflag && selectedList.downflag) {
-          selectedList.upvote = +selectedList.upvote + 1;
-          selectedList.downvote = +selectedList.downvote - 1;
-          selectedList.upflag = true;
-          selectedList.downflag = false;
-          resObj = {
-            up: 1,
-            down: -1,
-            upflag: true,
-            downflag: false
-          };
-        }
-        else if(selectedList.upflag && !selectedList.downflag) {
-          selectedList.upvote = +selectedList.upvote - 1;
-          selectedList.upflag = false;
-          resObj = {
-            up: -1,
-            down: 0,
-            upflag: false,
-            downflag: false
-          };
-        }
-      } else {
-        if(!selectedList.upflag && !selectedList.downflag) {
-          selectedList.downvote = +selectedList.downvote + 1;
-          selectedList.downflag = true;
-          resObj = {
-            up: 0,
-            down: 1,
-            upflag: false,
-            downflag: true
-          };
-        }
-        else if(selectedList.upflag && !selectedList.downflag) {
-          selectedList.downvote = +selectedList.downvote + 1;
-          selectedList.upvote = +selectedList.upvote - 1;
-          selectedList.upflag = false;
-          selectedList.downflag = true;
-          resObj = {
-            up: -1,
-            down: 1,
-            upflag: false,
-            downflag: true
-          };
-        }
-        else if(!selectedList.upflag && selectedList.downflag) {
-          selectedList.downvote = +selectedList.downvote - 1;
-          selectedList.downflag = false;
-          resObj = {
-            up: 0,
-            down: -1,
-            upflag: false,
-            downflag: false
-          };
-        }
-      }
-      jsonfile.writeFile(file, obj, function(err) {
+      var upflag = info.upvotedLists.map(function(objId) {
+        return objId.toString();
+      }).includes(lid) || false;
+      var downflag = info.downvotedLists.map(function(objId) {
+        return objId.toString();
+      }).includes(lid) || false;
+      var addUpFlag = false;
+      var addDownFlag = false;
+      var delUpFlag = false;
+      var delDownFlag = false;
+      List.findOne({'_id': lid}, function(err, list) {
         if(err) throw err;
+        if(vflag) {
+          if(!upflag && !downflag) {
+            list.upvote = +list.upvote + 1;
+            resObj = {
+              up: 1,
+              down: 0
+            };
+            addUpFlag = true;
+          }
+          else if(!upflag && downflag) {
+            list.upvote = +list.upvote + 1;
+            list.downvote = +list.downvote - 1;
+            resObj = {
+              up: 1,
+              down: -1
+            };
+            addUpFlag = true;
+            delDownFlag = true;
+          }
+          else if(upflag && !downflag) {
+            list.upvote = +list.upvote - 1;
+            resObj = {
+              up: -1,
+              down: 0
+            };
+            delUpFlag = true;
+          }
+        } else {
+          if(!upflag && !downflag) {
+            list.downvote = +list.downvote + 1;
+            resObj = {
+              up: 0,
+              down: 1
+            };
+            addDownFlag = true;
+          }
+          else if(upflag && !downflag) {
+            list.downvote = +list.downvote + 1;
+            list.upvote = +list.upvote - 1;
+            resObj = {
+              up: -1,
+              down: 1
+            };
+            addDownFlag = true;
+            delUpFlag = true;
+          }
+          else if(!upflag && downflag) {
+            list.downvote = +list.downvote - 1;
+            resObj = {
+              up: 0,
+              down: -1
+            };
+            delDownFlag = true;
+          }
+        }
+        list.save(function(err) {
+          if(err) throw err;
+          if(addUpFlag) {
+            info.upvotedLists.push(lid);
+            info.save(function(err) {
+              if(err) throw err;
+            });
+          }
+          if(addDownFlag) {
+            info.downvotedLists.push(lid);
+            info.save(function(err) {
+              if(err) throw err;
+            });
+          }
+          if(delUpFlag) {
+            User.update({'_id': uid}, { $pullAll: {'upvotedLists': [lid]}}, function(err) {
+              if(err) throw err;
+            });
+          }
+          if(delDownFlag) {
+            User.update({'_id': uid}, { $pullAll: {'downvotedLists': [lid]}}, function(err) {
+              if(err) throw err;
+            });
+          }
+        });
         res.send(resObj);
       });
     });
