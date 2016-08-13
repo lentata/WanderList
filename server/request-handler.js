@@ -82,7 +82,7 @@ module.exports = function(app) {
 
     new List(posted).save(function(err){
       if (err) throw err;
-      res.status(status).json(post);
+      res.status(201).json(posted);
     });
   });
 
