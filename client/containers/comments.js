@@ -7,9 +7,6 @@ import Linkify from 'react-linkify';
 export class Comments extends Component {
   constructor(props){
     super(props);
-
-   // this.props.deleteComment = this.props.deleteComment.bind(this);
-
   }
 
   renderComment(comment, i) {

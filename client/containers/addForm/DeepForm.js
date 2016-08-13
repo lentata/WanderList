@@ -32,6 +32,17 @@ export class DeepForm extends Component {
     }
   }
 
+  // handleSubmit(evt) {
+  //   evt.preventDefault();
+  //
+  //     if(author) {
+  //       this.props.createList(props);
+  //       browserHistory.push('/');
+  //     } else {
+  //       alert("You must log in to post a list!")
+  //     }
+  //   }
+
   render() {
     const {
       asyncValidating,
@@ -46,12 +57,10 @@ export class DeepForm extends Component {
 
     var divStyle = {
       color: 'red',
-      // backgroundImage: 'url(' + imgUrl + ')',
-      // WebkitTransition: 'all', // note the capital 'W' here
-      // msTransition: 'all' // 'ms' is the only lowercase vendor prefix
     };
 
-// ReactDOM.render(<div style={divStyle}>Hello World!</div>, mountNode);
+    // REPLACE THIS onSubmit={ handleSubmit(this.onSubmit) }
+    // onSubmit={this.handleSubmit.bind(this, props)}
 
     if(author) {
       return (
@@ -111,7 +120,7 @@ export class DeepForm extends Component {
 
                 <label className="control-label"><span style={divStyle}>*</span> Image url for list item #{index + 1}</label>
                 <div>
-                  <PureInput className="form-control" type="url" pattern="(/\.(gif|jpg|jpeg|tiff|png/i)" placeholder="img URL" field={child.image} required/>
+                  <PureInput className="form-control" type="url" placeholder="img URL" field={child.image} pattern="https?:\/\/.+\.(gif|jpg|jpeg|tiff|png|GIF|JPG|JPEG|TIFF|PNG)" required/>
                 </div>
 
                 <label className="control-label"><span style={divStyle}>*</span> Details for list item #{index + 1}</label>
