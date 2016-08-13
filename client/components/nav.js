@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import OurModal from '../containers/modal';
 import SignOut from './signoutButton';
-
+import SignUp from './signup';
 
 
 export default class navBar extends Component {
   constructor(props){
     super(props);
+    
+ 
+    
 
   }
 
@@ -19,8 +22,7 @@ export default class navBar extends Component {
  }
   
   render(){
-    console.log("pfunk", this.props);
-
+  const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
     return(
       <div>
         <nav className="navbar navbar-fixed-top">
@@ -44,12 +46,8 @@ export default class navBar extends Component {
               <Link to="/lists/new" className="btn btn-primary navbar-nav">
                 Add a list
               </Link>
-              {false ? null : <OurModal /> }
-              <Link to='/signup' className="btn btn-default">
-                Sign Up
-              </Link>
-
-              <SignOut />
+              {author ? <SignOut />  : <OurModal />}
+              {author ? null : <SignUp /> }
 
             </div>
             

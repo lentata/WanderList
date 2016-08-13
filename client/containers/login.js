@@ -125,12 +125,6 @@ export class Login extends Component {
           </Link>
         </form>
 
-        <form className="form-actions" onSubmit={handleSubmit(this.logout.bind(this))}>
-          <button type="submit" className="btn btn-warning">
-            Log out
-          </button>
-        </form>
-
       </div>
     );
   }
