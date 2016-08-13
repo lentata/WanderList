@@ -6,6 +6,10 @@ import {Link} from 'react-router';
 var provider = null;
 
 export class Login extends Component {
+   constructor(props){
+    super(props);
+
+  }
   static contextTypes = {
     router: PropTypes.object
   };
@@ -21,6 +25,9 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
+
+      this.props.userAuth(userDataStorage);
+      console.log('userauthfired');
       alert(firebase.auth().currentUser);
       console.log('result in username signin: ', userDataStorage)
     }).catch(function(error) {
@@ -52,8 +59,9 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
-      console.log('firebase.auth().currentUser: ', firebase.auth().currentUser);
-      console.log('result: ', userDataStorage)
+      console.log("SOCIALLOGIN");
+      userAuth(userDataStorage);
+      console.log('result: ', userDataStorage);
     }).catch(function(error) {
       alert(error.message)
     });
@@ -117,18 +125,13 @@ export class Login extends Component {
           </Link>
         </form>
 
-        <form className="form-actions" onSubmit={handleSubmit(this.logout.bind(this))}>
-          <button type="submit" className="btn btn-warning">
-            Log out
-          </button>
-        </form>
-
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  console.log("MAPSTATE", state);
   return {
     authStatus: state.auth.authState
   }
