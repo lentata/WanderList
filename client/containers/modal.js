@@ -24,6 +24,7 @@ export default class OurModal extends Component{
   }
 
   render() {
+
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement
@@ -36,11 +37,7 @@ export default class OurModal extends Component{
     );
     return (
       <div>
-        <Button
-          bsStyle="primary"
-          bsSize="small"
-          onClick={this.open}
-        >
+        <Button onClick={this.open}>
           Sign In
         </Button>
 
