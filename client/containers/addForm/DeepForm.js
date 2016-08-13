@@ -17,22 +17,21 @@ export const fields = [
 ]
 
 export class DeepForm extends Component {
-  
+
   constructor(props){
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  
-
   onSubmit(props) {
-    console.log('PROPS TEST', props);
+    const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 
-    this.props.createList(props)
-     
-    console.log("BEFORE REDIRECT!!!!!");
-    browserHistory.push('/');
-     
+    if(author) {
+      this.props.createList(props);
+      browserHistory.push('/');
+    } else {
+      alert("You must log in to post a list!")
+    }
   }
 
   render() {
@@ -45,101 +44,121 @@ export class DeepForm extends Component {
       submitting
     } = this.props
 
-    return (
-      <form onSubmit={ handleSubmit(this.onSubmit) }>
-        <div className="form-group">
+    const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
+
+    if(author) {
+      return (
+        <form onSubmit={ handleSubmit(this.onSubmit) }>
+          <div className="form-group">
             <legend>Create a new list!</legend>
 
-          <div className={`form-group ${title.touched && title.invalid ? 'has-error' : ''}`}>
-            <label className="control-label">Title for your list*</label>
-            <PureInput type="text" className="form-control" placeholder="List Title" field={title}/>
-            <div className="help-block">
-              {title.touched ? title.error : ''}
+            <div className={`form-group ${title.touched && title.invalid ? 'has-error' : ''}`}>
+              <label className="control-label">Title for your list*</label>
+              <PureInput type="text" className="form-control" placeholder="List Title" field={title}/>
+              <div className="help-block">
+                {title.touched ? title.error : ''}
+              </div>
+              <div className="help-block">
+                {asyncValidating === 'title' ? 'validating..': ''}
+              </div>
             </div>
-            <div className="help-block">
-              {asyncValidating === 'title' ? 'validating..': ''}
+
+            <div>
+              <label className="control-label">Categories for your list</label>
+              <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error} />
             </div>
           </div>
 
-          <div>
-            <label className="control-label">Categories for your list</label>
-            <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error} />
-          </div>
-        </div>
+          {!content.length && <div><label>Add some items to your list!</label></div>}
 
-        {!content.length && <div><label>Add some items to your list!</label></div>}
-
-        <div className="form-group">
-          {/*
-          <button className="btn btn-primary btn-sm" type="button" onClick={() => {
-            content.addField()    // pushes empty child field onto the end of the array
-          }}><i/> Add Item
-          </button>
-          */}
-
-          <button className="btn btn-primary btn-sm" type="button" onClick={() => {
-            for (let childIndex = 0; childIndex < 10; childIndex++) {
-              addValue('deep', 'content')
-            }
-          }}><i/> Show me 10!</button>
-
-        </div>
-
-        {content.map((child, index) => <div key={index}>
           <div className="form-group">
-            <label className="control-label">List item #{index + 1}</label>
-            <div>
-              <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.headline} />
-            </div>
+            {/*
+              <button className="btn btn-primary btn-sm" type="button" onClick={() => {
+              content.addField()    // pushes empty child field onto the end of the array
+              }}><i/> Add Item
+              </button>
+              */}
 
-            <label className="control-label">Image url for list item #{index + 1}</label>
-            <div>
-              <PureInput className="form-control" type="text" placeholder="img URL" field={child.image} />
-            </div>
+              <button className="btn btn-primary btn-sm" type="button" onClick={() => {
+                  for (let childIndex = 0; childIndex < 10; childIndex++) {
+                    addValue('deep', 'content')
+                  }
+                }}><i/> Show me 10!</button>
 
-            <label className="control-label">Details for list item #{index + 1}</label>
-            <div>
-              <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description} />
-            </div>
-
-            <div>
-              <div>
-                <button className="fa fa-chevron-up btn-link" type="button" disabled={index === 0} onClick={() => {
-                  content.swapFields(index, index - 1)  // swap field with it's predecessor
-                }}><i/>
-                </button>
-
-                <button className="fa fa-chevron-down btn-link" type="button" disabled={index === content.length - 1} onClick={() => {
-                  content.swapFields(index, index + 1)  // swap field with it's successor
-                }}><i/>
-                </button>
               </div>
 
-              <button className="btn btn-danger btn-sm" type="button" onClick={() => {
-                content.removeField(index)  // remove from index
-              }}><i/> Remove
+              {content.map((child, index) => <div key={index}>
+              <div className="form-group">
+                <label className="control-label">List item #{index + 1}</label>
+                <div>
+                  <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.headline} />
+                </div>
+
+                <label className="control-label">Image url for list item #{index + 1}</label>
+                <div>
+                  <PureInput className="form-control" type="text" placeholder="img URL" field={child.image} />
+                </div>
+
+                <label className="control-label">Details for list item #{index + 1}</label>
+                <div>
+                  <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description} />
+                </div>
+
+                <div>
+                  <div>
+                    <button className="fa fa-chevron-up btn-link" type="button" disabled={index === 0} onClick={() => {
+                        content.swapFields(index, index - 1)  // swap field with it's predecessor
+                      }}><i/>
+                    </button>
+
+                    <button className="fa fa-chevron-down btn-link" type="button" disabled={index === content.length - 1} onClick={() => {
+                        content.swapFields(index, index + 1)  // swap field with it's successor
+                      }}><i/>
+                    </button>
+                  </div>
+
+                  <button className="btn btn-danger btn-sm" type="button" onClick={() => {
+                      content.removeField(index)  // remove from index
+                    }}><i/> Remove
+                  </button>
+                </div>
+
+              </div>
+            </div>)}
+
+            <div>
+              <button className="btn btn-primary btn-sm" type="button" onClick={() => {
+                  content.addField()    // pushes empty child field onto the end of the array
+                }}><i/> Add Item
               </button>
+
+              <legend className="list-legend">List done, time to submit!</legend>
+              <button className="btn btn-success" type="submit" disabled={submitting || invalid}>
+                {submitting ? <i/> : <i/>} Submit
+              </button>
+              <Link to="/" className="btn btn-error">Cancel</Link>
             </div>
-
-          </div>
-        </div>)}
-
+          </form>
+        )
+    } else {
+      return (
         <div>
-          <button className="btn btn-primary btn-sm" type="button" onClick={() => {
-            content.addField()    // pushes empty child field onto the end of the array
-          }}><i/> Add Item
-          </button>
-
-          <legend className="list-legend">List done, time to submit!</legend>
-          <button className="btn btn-success" type="submit" disabled={submitting || invalid}>
-            {submitting ? <i/> : <i/>} Submit
-          </button>
-          <Link to="/" className="btn btn-error">Cancel</Link>
+          <h1>You must be logged in to post a list!</h1>
+          <img height="100%" src="https://media.giphy.com/media/3o85xziIp4uruHAtB6/giphy.gif" alt="Huh?" />
+          <div className="mainBtns">
+            <Link to='/login' className="btn btn-default">
+              Log In  <span className="caret"></span>
+            </Link>
+            <Link to='/signup' className="btn btn-default">
+              Sign Up
+            </Link>
+          </div>
         </div>
-      </form>
-    )
-  }
-}
+      )
+    }
+
+  } //closes render
+} //closes class
 
 DeepForm.propTypes = {
   addValue: PropTypes.func.isRequired,

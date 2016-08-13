@@ -66,7 +66,6 @@ export class ListDetail extends Component {
               </button>
       */}
 
-
       {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="container-fluid pull-left">
           <div className="button fa fa-chevron-up"></div>

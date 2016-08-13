@@ -15,7 +15,7 @@ describe('Opening Test', () => {
 describe("<App />", ()=>{
   it('should render mock comments', ()=>{
     let wrapper = shallow(<App />);
-    console.log(wrapper);
+    // console.log(wrapper);
     expect(wrapper.props()).to.not.be.undefined;
   });
 });

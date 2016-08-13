@@ -6,66 +6,74 @@ import {Link} from 'react-router';
 var provider = null;
 
 export class Login extends Component {
+   constructor(props){
+    super(props);
+
+  }
   static contextTypes = {
     router: PropTypes.object
   };
 
-  setProviderFacebook() {
-    provider = new firebase.auth.FacebookAuthProvider();
+  emailSignIn(props) {
+    firebase.auth().signInWithEmailAndPassword(props.username, props.password).then(function(result) {
+      alert("Logged in")
+      var user = firebase.auth().currentUser;
+      var userData = user.providerData[0]
+      var userDataStorage = {
+        displayName: userData.displayName,
+        email: userData.email,
+        photo: userData.photoURL,
+        userId: userData.uid
+      };
+
+      this.props.userAuth(userDataStorage);
+      console.log('userauthfired');
+      alert(firebase.auth().currentUser);
+      console.log('result in username signin: ', userDataStorage)
+    }).catch(function(error) {
+      alert(error.message)
+    });
   }
 
   setProviderGoogle() {
     provider = new firebase.auth.GoogleAuthProvider();
   }
 
+  setProviderFacebook() {
+    provider = new firebase.auth.FacebookAuthProvider();
+  }
+
   setProviderGithub() {
     provider = new firebase.auth.GithubAuthProvider();
   }
 
-  emailSignIn(props) {
-    console.log('props: ', props)
-    firebase.auth().signInWithEmailAndPassword(props.username, props.password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
+  socialLogin(props) {
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // alert("Logged in")
+      var token = result.credential.accessToken;
+      var user = firebase.auth().currentUser;
+      var userData = user.providerData[0]
+      var userDataStorage = {
+        displayName: userData.displayName,
+        email: userData.email,
+        photo: userData.photoURL,
+        userId: userData.uid
+      };
+      console.log("SOCIALLOGIN");
+      userAuth(userDataStorage);
+      console.log('result: ', userDataStorage);
+    }).catch(function(error) {
+      alert(error.message)
     });
-    var user = firebase.auth().currentUser;
-    if (user) {
-      console.log("User is authenticated: ", user)
-    } else {
-      console.log("Try again")
-    }
   }
 
-  onSubmit(props) {
-    if (!firebase.auth().currentUser) {
-
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        if(user) {
-          console.log("User is authenticated: ", user)
-        }
-      // ...
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      })
+  logout() {
+    if(firebase.auth().currentUser) {
+      firebase.auth().signOut();
+      alert("Signed out successfully");
     } else {
-        firebase.auth().signOut().then(function() {
-          console.log("Sign-out successful")
-        }, function(error) {
-          console.log("An error happened")
-      })};
+      alert("Not signed in")
+    }
   }
 
   render() {
@@ -74,15 +82,15 @@ export class Login extends Component {
     return (
       <div>
         <h2>Login</h2>
-        <div onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <form onSubmit={handleSubmit(this.setProviderFacebook.bind(this))}>
-            <button className="btn btn-block btn-social btn-facebook">
-              <span className="fa fa-facebook" /> Sign in with Facebook
-            </button>
-          </form>
+        <div onSubmit={handleSubmit(this.socialLogin.bind(this))}>
           <form onSubmit={handleSubmit(this.setProviderGoogle.bind(this))}>
             <button className="btn btn-block btn-social btn-google">
               <span className="fa fa-google" /> Sign in with Google
+            </button>
+          </form>
+          <form onSubmit={handleSubmit(this.setProviderFacebook.bind(this))}>
+            <button className="btn btn-block btn-social btn-facebook">
+              <span className="fa fa-facebook" /> Sign in with Facebook
             </button>
           </form>
           <form onSubmit={handleSubmit(this.setProviderGithub.bind(this))}>
@@ -101,28 +109,29 @@ export class Login extends Component {
             <label>Password</label>
             <input type="password" className="form-control" {...password}/>
           </div>
+          <button type="submit" className="btn btn-primary">
+            Sign in
+          </button>
           <Link to="/">
             <button type="button" className="btn btn-error">
               Cancel
             </button>
           </Link>
-          <button type="submit" className="btn btn-primary">
-            Sign in
-          </button>
+          Need an account?
           <Link to="/signup" className="btn btn-error">
-            <button type="submit" className="btn btn-error">
+            <a type="submit" className="btn btn-error">
               Sign up
-            </button>
+            </a>
           </Link>
         </form>
+
       </div>
     );
   }
 }
 
-
-
 function mapStateToProps(state) {
+  console.log("MAPSTATE", state);
   return {
     authStatus: state.auth.authState
   }
