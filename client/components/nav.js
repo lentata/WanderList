@@ -39,8 +39,8 @@ export default class navBar extends Component {
                 Add a list
               </Link>
               </li>
-              <li>{(Object.keys(window.localStorage)).length ? <SignOut />  : <OurModal />}</li>
-              <li>{(Object.keys(window.localStorage)).length ? null : <SignUp /> }</li>
+              <li>{localStorage.getItem('logged') ? <SignOut />  : <OurModal />}</li>
+              <li>{localStorage.getItem('logged') ? null : <SignUp /> }</li>
             </div>
 
           </div>

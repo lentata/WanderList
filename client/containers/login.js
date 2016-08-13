@@ -58,8 +58,10 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
-      console.log("SOCIALLOGIN");
+      console.log("SOCIALLOGIN", userData);
       Login.context.userAuth(userDataStorage);
+      let logged = {logged: true};
+      localStorage.setItem('logged', JSON.stringify(logged));
       console.log('result: ', userDataStorage);
     }).catch(function(error) {
       alert(error.message)
@@ -69,6 +71,7 @@ export class Login extends Component {
   logout() {
     if(firebase.auth().currentUser) {
       firebase.auth().signOut();
+      localStorage.removeItem("logged");
       alert("Signed out successfully");
     } else {
       alert("Not signed in")
