@@ -58,19 +58,20 @@ export function deleteList(id) {
 
 export function userAuth(props) {
   console.log("AUTH IN HAS BEEN HIT", props);
+  const request = axios.post(`/api/auth`, props);
   return {
     type: AUTH_IN,
-    payload: props
-  };
-}
-
-export function userCreate(props) {
-  const request = axios.post('/api/auth', props);
-  return {
-    type: SIGN_UP,
     payload: request
   };
 }
+
+// export function userCreate(props) {
+//   const request = axios.post('/api/auth', props);
+//   return {
+//     type: SIGN_UP,
+//     payload: request
+//   };
+// }
 
 export function upvote(lid, uid) {
   const data = {

@@ -51,9 +51,26 @@ module.exports = function(app) {
 
   app.post('/api/auth', function(req, res) {
     var info = req.body;
-    new User({username: info.username, password: info.password}).save().then(function() {
-      res.sendStatus(201);
-    });
+    let userSetup = {
+      username: req.body.displayName,
+      email: req.body.email,
+      userId: req.body.userId,
+      photo: req.body.photo,
+      upvotedLists: [],
+      downvotedLists: []
+
+    }
+    console.log("INFO", info);
+    User.findOne({email: req.body.email}, function(err, user){
+      if(err) throw err;
+      if(!user){
+        new User(userSetup).save(function(err){
+          if(err) throw err;
+        });
+      }
+      res.status(201).json(userSetup);
+      console.log("USERFOUND?", user);
+    })
   });
   //get individual list
   app.get('/api/lists/:id', function(req, res) {
