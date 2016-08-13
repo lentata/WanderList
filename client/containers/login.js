@@ -6,6 +6,10 @@ import {Link} from 'react-router';
 var provider = null;
 
 export class Login extends Component {
+   constructor(props){
+    super(props);
+
+  }
   static contextTypes = {
     router: PropTypes.object
   };
@@ -21,7 +25,9 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
-      console.log('result in username signin: ', userDataStorage)
+      this.props.userAuth(userDataStorage);
+      console.log('userauthfired');
+      console.log('result in username signin: ', userDataStorage);
     }).catch(function(error) {
       alert(error.message)
     });
@@ -51,7 +57,10 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
-      console.log('result: ', userDataStorage)
+      console.log("SOCIALLOGIN");
+      userAuth(userDataStorage);
+      console.log('result: ', userDataStorage);
+
     }).catch(function(error) {
       alert(error.message)
     });
@@ -127,6 +136,7 @@ export class Login extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log("MAPSTATE", state);
   return {
     authStatus: state.auth.authState
   }

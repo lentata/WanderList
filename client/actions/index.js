@@ -48,10 +48,10 @@ export function deleteList(id) {
 }
 
 export function userAuth(props) {
-  const request = axios.get(`/api/auth?username=${props.username}&password=${props.password}`);
+  console.log("AUTH IN HAS BEEN HIT", props);
   return {
     type: AUTH_IN,
-    payload: request
+    payload: props
   };
 }
 
