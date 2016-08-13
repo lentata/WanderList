@@ -9,20 +9,14 @@ import SignUp from './signup';
 export default class navBar extends Component {
   constructor(props){
     super(props);
-    
- 
-    
-
   }
 
- loggedIn() {
-  console.log("EVERYTIME");
-   return firebase.auth().currentUser();
-
- }
+ 
   
   render(){
+    console.log("locallllllySTORRED!!!!", (Object.keys(window.localStorage)).length);
   const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
+  console.log("STATEOFTHEUNION", this.props.loginState.auth.authState);
     return(
       <div>
         <nav className="navbar navbar-fixed-top">
@@ -43,12 +37,13 @@ export default class navBar extends Component {
             
             
             <div className="nav navbar-nav navbar-right mainBtns"> 
-              <Link to="/lists/new" className="btn btn-primary navbar-nav">
+              <li>
+              <Link to="/lists/new">
                 Add a list
               </Link>
-              {author ? <SignOut />  : <OurModal />}
-              {author ? null : <SignUp /> }
-
+              </li>
+              <li>{(Object.keys(window.localStorage)).length ? <SignOut />  : <OurModal />}</li>
+              <li>{(Object.keys(window.localStorage)).length ? null : <SignUp /> }</li>
             </div>
             
           </div>
@@ -59,7 +54,7 @@ export default class navBar extends Component {
 }
 function mapStateToProps(state) {
   return {
-    state: state
+    loginState: state
   };
 }
 

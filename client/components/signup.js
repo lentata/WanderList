@@ -8,7 +8,7 @@ export default class SignUp extends Component {
 
   render(){
     return(
-      <Link to='/signup' className="btn btn-default">
+      <Link to='/signup'>
         Sign Up
       </Link>
     );

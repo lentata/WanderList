@@ -21,7 +21,7 @@ export class ListGrid extends Component {
   render() {
     return (
       <div>
-       <NavBar auth={this.props.auth} />
+       <NavBar />
       
               
         <div>

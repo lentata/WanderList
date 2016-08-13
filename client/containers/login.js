@@ -8,14 +8,15 @@ var provider = null;
 export class Login extends Component {
    constructor(props){
     super(props);
+    Login.context = this.props;
 
   }
   static contextTypes = {
     router: PropTypes.object
   };
 
-  emailSignIn(props) {
-    firebase.auth().signInWithEmailAndPassword(props.username, props.password).then(function(result) {
+  emailSignIn(prop) {
+    firebase.auth().signInWithEmailAndPassword(prop.username, prop.password).then(function(result) {
       alert("Logged in")
       var user = firebase.auth().currentUser;
       var userData = user.providerData[0]
@@ -25,10 +26,8 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: userData.uid
       };
-
-      this.props.userAuth(userDataStorage);
+      Login.context.userAuth(userDataStorage);
       console.log('userauthfired');
-      alert(firebase.auth().currentUser);
       console.log('result in username signin: ', userDataStorage)
     }).catch(function(error) {
       alert(error.message)
@@ -47,7 +46,7 @@ export class Login extends Component {
     provider = new firebase.auth.GithubAuthProvider();
   }
 
-  socialLogin(props) {
+  socialLogin(prop) {
     firebase.auth().signInWithPopup(provider).then(function(result) {
       // alert("Logged in")
       var token = result.credential.accessToken;
@@ -60,7 +59,7 @@ export class Login extends Component {
         userId: userData.uid
       };
       console.log("SOCIALLOGIN");
-      userAuth(userDataStorage);
+      Login.context.userAuth(userDataStorage);
       console.log('result: ', userDataStorage);
     }).catch(function(error) {
       alert(error.message)
@@ -136,6 +135,11 @@ function mapStateToProps(state) {
     authStatus: state.auth.authState
   }
 }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ userAuth }, dispatch);
+}
+
+
 export default reduxForm({
   form: 'loginForm',
   fields: ['username', 'password']
