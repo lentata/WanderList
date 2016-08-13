@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import {userAuth} from '../actions/index';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
+
 
 var provider = null;
 
@@ -63,20 +64,14 @@ export class Login extends Component {
       let logged = {logged: true};
       localStorage.setItem('logged', JSON.stringify(logged));
       console.log('result: ', userDataStorage);
+      browserHistory.push('/');
     }).catch(function(error) {
       alert(error.message)
     });
   }
 
-  logout() {
-    if(firebase.auth().currentUser) {
-      firebase.auth().signOut();
-      localStorage.removeItem("logged");
-      alert("Signed out successfully");
-    } else {
-      alert("Not signed in")
-    }
-  }
+
+
 
   render() {
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;

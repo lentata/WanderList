@@ -24,7 +24,6 @@ export default class OurModal extends Component{
   }
 
   render() {
-
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement
