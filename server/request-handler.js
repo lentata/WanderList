@@ -61,13 +61,13 @@ module.exports = function(app) {
 
     }
     console.log("INFO", info);
-    User.findOne({email: req.body.email}, function(err, user){
+    User.findOne({userId: req.body.userId}, function(err, user){
       if(err) throw err;
       if(!user){
         new User(userSetup).save(function(err){
           if(err) throw err;
         });
-      }
+      } 
       res.status(201).json(userSetup);
       console.log("USERFOUND?", user);
     })
