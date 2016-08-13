@@ -32,17 +32,6 @@ export class DeepForm extends Component {
     }
   }
 
-  // handleSubmit(evt) {
-  //   evt.preventDefault();
-  //
-  //     if(author) {
-  //       this.props.createList(props);
-  //       browserHistory.push('/');
-  //     } else {
-  //       alert("You must log in to post a list!")
-  //     }
-  //   }
-
   render() {
     const {
       asyncValidating,
@@ -58,9 +47,6 @@ export class DeepForm extends Component {
     var divStyle = {
       color: 'red',
     };
-
-    // REPLACE THIS onSubmit={ handleSubmit(this.onSubmit) }
-    // onSubmit={this.handleSubmit.bind(this, props)}
 
     if(author) {
       return (
