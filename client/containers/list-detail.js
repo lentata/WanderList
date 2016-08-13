@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
 import NavBar from '../components/nav';
+import Linkify from 'react-linkify';
 
 export class ListDetail extends Component {
 
@@ -21,7 +22,9 @@ export class ListDetail extends Component {
           <li>
             <h2>{item.headline}</h2>
             <img src={item.image} alt={item.headline} />
-            <p className="h6">{item.desc}</p>
+            <p className="h6">
+              <Linkify>{item.description}</Linkify>
+            </p>
           </li>
         </div>
       );
@@ -31,7 +34,7 @@ export class ListDetail extends Component {
   onDeleteClick() {
     console.log("ERRRR, delete", this.props);
     this.props.deleteList(this.props.list._id);
-    // this.props.deleteList(this.props.params.id)  
+    // this.props.deleteList(this.props.params.id)
     browserHistory.push('/');
   }
 
