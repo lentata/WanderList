@@ -6,8 +6,6 @@ import PureInput from './PureInput';
 import PureTextarea from './PureTextarea';
 import validate from './validateDeepForm';
 
-
-
 export const fields = [
   'title',
   'categories',
@@ -46,6 +44,15 @@ export class DeepForm extends Component {
 
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 
+    var divStyle = {
+      color: 'red',
+      // backgroundImage: 'url(' + imgUrl + ')',
+      // WebkitTransition: 'all', // note the capital 'W' here
+      // msTransition: 'all' // 'ms' is the only lowercase vendor prefix
+    };
+
+// ReactDOM.render(<div style={divStyle}>Hello World!</div>, mountNode);
+
     if(author) {
       return (
         <form onSubmit={ handleSubmit(this.onSubmit) }>
@@ -53,7 +60,7 @@ export class DeepForm extends Component {
             <legend>Create a new list!</legend>
 
             <div className={`form-group ${title.touched && title.invalid ? 'has-error' : ''}`}>
-              <label className="control-label">Title for your list*</label>
+              <label className="control-label"><span style={divStyle}>*</span> Title for your list</label>
               <PureInput type="text" className="form-control" placeholder="List Title" field={title}/>
               <div className="help-block">
                 {title.touched ? title.error : ''}
@@ -63,10 +70,17 @@ export class DeepForm extends Component {
               </div>
             </div>
 
-            <div>
-              <label className="control-label">Categories for your list</label>
-              <PureInput className="form-control" type="text" placeholder="List categories" field={categories} title={categories.error} />
+            <div className={`form-group ${categories.touched && categories.invalid ? 'has-error' : ''}`}>
+              <label className="control-label"><span style={divStyle}>*</span> Categories for your list</label>
+              <PureInput type="text" className="form-control" placeholder="List Title" field={categories}/>
+              <div className="help-block">
+                {categories.touched ? categories.error : ''}
+              </div>
+              <div className="help-block">
+                {asyncValidating === 'categories' ? 'validating..': ''}
+              </div>
             </div>
+
           </div>
 
           {!content.length && <div><label>Add some items to your list!</label></div>}
@@ -89,19 +103,20 @@ export class DeepForm extends Component {
 
               {content.map((child, index) => <div key={index}>
               <div className="form-group">
-                <label className="control-label">List item #{index + 1}</label>
+
+                <label className="control-label"><span style={divStyle}>*</span> List item #{index + 1}</label>
                 <div>
-                  <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.headline} />
+                  <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.headline} required/>
                 </div>
 
-                <label className="control-label">Image url for list item #{index + 1}</label>
+                <label className="control-label"><span style={divStyle}>*</span> Image url for list item #{index + 1}</label>
                 <div>
-                  <PureInput className="form-control" type="text" placeholder="img URL" field={child.image} />
+                  <PureInput className="form-control" type="url" pattern="(/\.(gif|jpg|jpeg|tiff|png/i)" placeholder="img URL" field={child.image} required/>
                 </div>
 
-                <label className="control-label">Details for list item #{index + 1}</label>
+                <label className="control-label"><span style={divStyle}>*</span> Details for list item #{index + 1}</label>
                 <div>
-                  <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description} />
+                  <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description} required/>
                 </div>
 
                 <div>
@@ -124,7 +139,7 @@ export class DeepForm extends Component {
                 </div>
 
               </div>
-            </div>)}
+            </div>, this)}
 
             <div>
               <button className="btn btn-primary btn-sm" type="button" onClick={() => {

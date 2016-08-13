@@ -13,6 +13,21 @@ const validateDeepForm = data => {
   if (!data.title || data.title.trim() === '') {
     errors.title = 'Enter a Header for Your List';
   }
+
+  if (!data.categories || data.categories.trim() === '') {
+    errors.categories = 'Enter Categories for Your List';
+  }
+
+  // console.log("DATA", data);
+  // data.content.forEach((child) => {
+  //   if (!child.headline || child.headline.trim() === '') {
+  //     errors.child.headline = 'Enter a Headline for Your List Item';
+  //   }
+  // }, this);
+
+  // if (!data.children || data.children.trim() === '') {
+  //   errors.children = 'Enter a Headline for Your List Item';
+  // }
   //DON'T DELETE COMMENTS BELOW FOR NOW
   // if (!data.ListHeader) {
   //   errors.ListHeader = 'Required'
