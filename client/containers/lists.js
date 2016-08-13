@@ -9,7 +9,7 @@ import ListComponent from '../components/listcomponent';
 export class Lists extends Component {
 
   renderLists() {
-    const { list, i, upvote, downvote, info } = this.props;
+    const { list, i, upvote, downvote, info, upLists, downLists } = this.props;
     return (
       <div className="media" key={ list._id }>
         <div className="row">
@@ -17,7 +17,9 @@ export class Lists extends Component {
             list={list}
             info={info}
             upvoteAction={upvote}
-            downvoteAction={downvote} />
+            downvoteAction={downvote}
+            upLists={upLists}
+            downLists={downLists} />
           <ListComponent
             list={list} />
         </div>
@@ -37,7 +39,8 @@ export class Lists extends Component {
 
 function mapStateToProps(state) {
   return {
-    userInfo: state.lists.info
+    userInfo: state.lists.info,
+
   }
 }
 

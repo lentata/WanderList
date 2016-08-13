@@ -4,7 +4,9 @@ const INITIAL_STATE = {
   all: [],
   list: null,
   createdList: null,
-  info: null
+  info: null,
+  upvotedLists: [],
+  downvotedLists: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -14,7 +16,7 @@ export default function(state = INITIAL_STATE, action) {
     console.log('createdList', action.payload.data);
     return { ...state, createdList: action.payload.data};
   } else if(action.type === USER_INFO) {
-    return { ...state, info: action.payload.data };
+    return { ...state, info: action.payload.data, upvotedLists: action.payload.data.upvotedLists, downvotedLists: action.payload.data.downvotedLists };
   } else if(action.type === FETCH_LISTS) {
     return {
       ...state, all: action.payload.data
@@ -22,6 +24,8 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === UPVOTE) {
     const { up, down } = action.payload.data;
     let index = 0;
+    let upIndex = state.upvotedLists.indexOf(action.id);
+    let downIndex = state.downvotedLists.indexOf(action.id);
     state.all.forEach((list, i) => {
       if (list._id.toString() === action.id) {
         index = i;
@@ -30,17 +34,57 @@ export default function(state = INITIAL_STATE, action) {
     let targetList = state.all[index];
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
-    return {
-      ...state,
-      all:[
-        ...state.all.slice(0, index),
-        Object.assign({}, targetList, targetList.upvote, targetList.downvote),
-        ...state.all.slice(index + 1)
-      ]
-    };
+    if (upIndex === -1) {
+      if (downIndex === -1) {
+        return {
+          ...state,
+          all:[
+            ...state.all.slice(0, index),
+            Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+            ...state.all.slice(index + 1)
+          ],
+          upvotedLists: [
+            ...state.upvotedLists,
+            action.id
+          ]
+        };
+      } else {
+        return {
+          ...state,
+          all:[
+            ...state.all.slice(0, index),
+            Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+            ...state.all.slice(index + 1)
+          ],
+          upvotedLists: [
+            ...state.upvotedLists,
+            action.id
+          ],
+          downvotedLists: [
+            ...state.downvotedLists.slice(0, downIndex),
+            ...state.downvotedLists.slice(downIndex + 1)
+          ]
+        };
+      }
+    } else {
+      return {
+        ...state,
+        all:[
+          ...state.all.slice(0, index),
+          Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+          ...state.all.slice(index + 1)
+        ],
+        upvotedLists: [
+          ...state.upvotedLists.slice(0, upIndex),
+          ...state.upvotedLists.slice(upIndex + 1)
+        ]
+      };
+    }
   } else if(action.type === DOWNVOTE) {
     const { up, down } = action.payload.data;
     let index = 0;
+    let upIndex = state.upvotedLists.indexOf(action.id);
+    let downIndex = state.downvotedLists.indexOf(action.id);
     state.all.forEach((list, i) => {
       if (list._id.toString() === action.id) {
         index = i;
@@ -49,14 +93,52 @@ export default function(state = INITIAL_STATE, action) {
     let targetList = state.all[index];
     targetList.upvote = +targetList.upvote + (+up);
     targetList.downvote = +targetList.downvote + (+down);
-    return {
-      ...state,
-      all:[
-        ...state.all.slice(0, index),
-        Object.assign({}, targetList, targetList.upvote, targetList.downvote),
-        ...state.all.slice(index + 1)
-      ]
-    };
+    if (downIndex === -1) {
+      if (upIndex === -1) {
+        return {
+          ...state,
+          all:[
+            ...state.all.slice(0, index),
+            Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+            ...state.all.slice(index + 1)
+          ],
+          downvotedLists: [
+            ...state.downvotedLists,
+            action.id
+          ]
+        };
+      } else {
+        return {
+          ...state,
+          all:[
+            ...state.all.slice(0, index),
+            Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+            ...state.all.slice(index + 1)
+          ],
+          downvotedLists: [
+            ...state.downvotedLists,
+            action.id
+          ],
+          upvotedLists: [
+            ...state.upvotedLists.slice(0, upIndex),
+            ...state.upvotedLists.slice(upIndex + 1)
+          ]
+        };
+      }
+    } else {
+      return {
+        ...state,
+        all:[
+          ...state.all.slice(0, index),
+          Object.assign({}, targetList, targetList.upvote, targetList.downvote),
+          ...state.all.slice(index + 1)
+        ],
+        downvotedLists: [
+          ...state.downvotedLists.slice(0, downIndex),
+          ...state.downvotedLists.slice(downIndex + 1)
+        ]
+      };
+    }
   } else if(action.type === ADD_COMMENT) {
     return {
       ...state,

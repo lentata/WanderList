@@ -32,7 +32,7 @@ export class ListGrid extends Component {
         </div>
 
         <ul className="list-group">
-          {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} key={i} i={i} list={list} />)}
+          {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />)}
         </ul>
       </div>
     )
@@ -43,7 +43,9 @@ function mapStateToProps(state) {
 
   return {
     lists: state.lists.all,
-    info: state.lists.info
+    info: state.lists.info,
+    upLists: state.lists.upvotedLists,
+    downLists: state.lists.downvotedLists
   };
 }
 
