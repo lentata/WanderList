@@ -57,9 +57,9 @@ export class Login extends Component {
         displayName: userData.displayName,
         email: userData.email,
         photo: userData.photoURL,
-        userId: userData.uid
+        userId: user.uid
       };
-      console.log("SOCIALLOGIN", userData);
+      console.log("SOCIALLOGIN", user);
       Login.context.userAuth(userDataStorage);
       let logged = {logged: true};
       localStorage.setItem('logged', JSON.stringify(logged));

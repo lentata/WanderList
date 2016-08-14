@@ -12,7 +12,7 @@ export default class Votes extends Component {
 
   upvoteFunc() {
     if(firebase.auth().currentUser) {
-      this.props.upvoteAction(this.props.list._id, "57acacb4b086aca01bc783ea");
+      this.props.upvoteAction(this.props.list._id, firebase.auth().currentUser.uid);
     } else {
       alert("You must be signed in to upvote lists!");
     }
@@ -20,7 +20,7 @@ export default class Votes extends Component {
 
   downvoteFunc() {
     if(firebase.auth().currentUser) {
-      this.props.downvoteAction(this.props.list._id.toString(), "57acacb4b086aca01bc783ea");
+      this.props.downvoteAction(this.props.list._id.toString(), firebase.auth().currentUser.uid);
     } else {
       alert("You must be signed in to downvote lists!");
     }
