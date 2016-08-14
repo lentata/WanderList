@@ -9,18 +9,13 @@ import SignUp from './signup';
 export default class navBar extends Component {
   constructor(props){
     super(props);
-    
- 
-    
-
   }
 
  loggedIn() {
   console.log("EVERYTIME");
    return firebase.auth().currentUser();
-
  }
-  
+
   render(){
   const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
     return(
@@ -40,9 +35,9 @@ export default class navBar extends Component {
               <li><a href="#">My Lists</a></li>
               <li><a href="#">My Drafts</a></li>
             </ul>
-            
-            
-            <div className="nav navbar-nav navbar-right mainBtns"> 
+
+
+            <div className="nav navbar-nav navbar-right mainBtns">
               <Link to="/lists/new" className="btn btn-primary navbar-nav">
                 Add a list
               </Link>
@@ -50,7 +45,7 @@ export default class navBar extends Component {
               {author ? null : <SignUp /> }
 
             </div>
-            
+
           </div>
         </nav>
       </div>
@@ -65,4 +60,3 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps, null)(navBar);
-

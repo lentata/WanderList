@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addComment, removeComment } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Linkify from 'react-linkify';
+import moment from 'moment';
 
 export class Comments extends Component {
   constructor(props){
@@ -15,9 +16,13 @@ export class Comments extends Component {
     return (
       <div className="comment" key={i}>
         <p>
-          <strong>{comment.user}</strong>
-          <Linkify>{comment.text}</Linkify>
-          <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
+
+          <h5>
+            <strong>{comment.user}</strong>
+            <small><em> posted {moment(comment.posted).fromNow()} &nbsp;</em></small>
+            <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
+          </h5>
+          <h5><Linkify>{comment.text}</Linkify></h5>
         </p>
       </div>
     )
@@ -46,7 +51,7 @@ export class Comments extends Component {
         <legend className="list-legend">Comments</legend>
         {this.props.list.comments.map(this.renderComment, this)}
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="comment" placeholder="comment" />
+          <input type="text" ref="comment" placeholder="leave a comment!" />
           <input type="submit" hidden />
         </form>
       </div>
