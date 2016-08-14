@@ -22,14 +22,12 @@ export class ListGrid extends Component {
     return (
       <div>
        <NavBar auth={this.props.auth} />
-      
-              
         <div>
-        <Panel />
           <form>
             <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
           </form>
         </div>
+        <Panel />
 
         <ul className="list-group">
           {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />)}

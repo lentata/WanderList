@@ -38,6 +38,7 @@ export function fetchList(id) {
 }
 
 export function createList(props) {
+  props.author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : "idk  ¯\_(ツ)_/¯";
   const request = axios.post(`/api/lists`, props);
   return {
     type: CREATE_LIST,

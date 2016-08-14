@@ -6,6 +6,7 @@ import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
 import NavBar from '../components/nav';
 import Linkify from 'react-linkify';
+import moment from 'moment';
 
 export class ListDetail extends Component {
 
@@ -61,13 +62,6 @@ export class ListDetail extends Component {
                 Delete List
               </button>
             </div>
-    {/*
-              <button
-                className="btn btn-danger navbar-btn navbar-right col-md-1"
-                onClick={ this.onDeleteClick.bind(this) }>
-                Delete List
-              </button>
-      */}
 
       {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="container-fluid pull-left">
@@ -78,7 +72,10 @@ export class ListDetail extends Component {
 
         <div className="container-fluid">
           <div className="h1">{ list.title }</div>
-          <h5>{ list.author } </h5>
+          <span className="fa fa-user"/>
+          <span> by {list.author ? list.author :  "¯\\_(ツ)_/¯"} &nbsp;</span>
+          <span className="fa fa-clock-o"/>
+          <span> posted {moment(list.createdAt).fromNow()} &nbsp;</span>
           <h6>Categories: { list.categories }</h6>
         </div>
 

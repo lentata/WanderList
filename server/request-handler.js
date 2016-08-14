@@ -78,6 +78,8 @@ module.exports = function(app) {
     req.body.upvote = 0;
     req.body.downvote = 0;
     req.body.comments = [];
+    req.body.createdAt = Date.now();
+
     var posted = req.body;
 
     new List(posted).save(function(err){
@@ -90,7 +92,11 @@ module.exports = function(app) {
   app.post('/api/comments/', function(req, res){
     List.findById(req.body._id).exec()
     .then(function(doc) {
-      doc.comments.push({"user": req.body.user, "text": req.body.text});
+      doc.comments.push({
+        "user": req.body.user,
+        "text": req.body.text,
+        posted: Date.now()
+      });
 
       return doc.save(); //returns a promise
     })
