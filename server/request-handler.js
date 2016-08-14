@@ -29,8 +29,9 @@ module.exports = function(app) {
   });
 
   app.get('/api/user', function(req, res) {
-    User.findOne({'_id': '57acacb4b086aca01bc783ea'}, function(err, user) {
+    User.findOne({'userId': '6pYSzmFLhJVQAVkvo8xFXDcd8Pe2'}, function(err, user) {
       if(err) throw err;
+      console.log("DOC", user);
       res.send(user);
     });
   });
@@ -153,9 +154,11 @@ module.exports = function(app) {
     var vflag = req.body.votes;
     var uid = req.body.uid;
 
+    console.log("USERID", uid);
+
     var mapUpLists = {};
     var mapDownLists = {};
-    User.findOne({'_id': uid}, function(err, info) {
+    User.findOne({'userId': uid}, function(err, info) {
       if(err) throw err;
       var upflag = info.upvotedLists.map(function(objId) {
         return objId.toString();
@@ -239,12 +242,12 @@ module.exports = function(app) {
             });
           }
           if(delUpFlag) {
-            User.update({'_id': uid}, { $pullAll: {'upvotedLists': [lid]}}, function(err) {
+            User.update({'userId': uid}, { $pullAll: {'upvotedLists': [lid]}}, function(err) {
               if(err) throw err;
             });
           }
           if(delDownFlag) {
-            User.update({'_id': uid}, { $pullAll: {'downvotedLists': [lid]}}, function(err) {
+            User.update({'userId': uid}, { $pullAll: {'downvotedLists': [lid]}}, function(err) {
               if(err) throw err;
             });
           }
