@@ -11,19 +11,18 @@ export class Comments extends Component {
   }
 
   renderComment(comment, i) {
-    console.log("COMMENT PROPS", this.props)
+    // console.log("COMMENT PROPS", this.props)
+    let commenter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
 
     return (
       <div className="comment" key={i}>
-        <p>
+        <h5>
+          <strong>{comment.user}</strong>
+          <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
 
-          <h5>
-            <strong>{comment.user}</strong>
-            <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
-            <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
-          </h5>
-          <h5><Linkify>{comment.text}</Linkify></h5>
-        </p>
+          <button className="remove-comment" onClick={comment.userId === commenter ? this.props.removeComment.bind(this, this.props.list._id, i) : null}>&times;</button>
+        </h5>
+        <h5><Linkify>{comment.text}</Linkify></h5>
       </div>
     )
   }
@@ -33,10 +32,12 @@ export class Comments extends Component {
 
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 
-    if(author) {
+    const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
+
+    if(author && userId) {
       const postId = this.props.list._id;
       const comment = this.refs.comment.value;
-      this.props.addComment(postId, author, comment);
+      this.props.addComment(postId, userId, author, comment);
       this.refs.commentForm.reset();
     } else {
       alert("You must log in to post a comment!")

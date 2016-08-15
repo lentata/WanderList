@@ -144,6 +144,7 @@ module.exports = function(app) {
     List.findById(req.body._id).exec()
     .then(function(doc) {
       doc.comments.push({
+        "userId": req.body.userId,
         "user": req.body.user,
         "text": req.body.text,
         posted: Date.now()
