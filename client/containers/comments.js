@@ -19,7 +19,7 @@ export class Comments extends Component {
 
           <h5>
             <strong>{comment.user}</strong>
-            <small><em> posted {moment(comment.posted).fromNow()} &nbsp;</em></small>
+            <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
             <button className="remove-comment" onClick={this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button>
           </h5>
           <h5><Linkify>{comment.text}</Linkify></h5>

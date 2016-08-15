@@ -79,10 +79,12 @@ export class ListDetail extends Component {
         <div className="container-fluid">
           <div className="h1">{ list.title }</div>
           <span className="fa fa-user"/>
-          <span> by {list.author ? list.author :  "¯\\_(ツ)_/¯"} &nbsp;</span>
+          <span> {list.author ? list.author :  "¯\\_(ツ)_/¯"} &nbsp;</span>
           <span className="fa fa-clock-o"/>
-          <span> posted {moment(list.createdAt).fromNow()} &nbsp;</span>
-          <h6>Categories: { list.categories }</h6>
+          <span>  {moment(list.createdAt).fromNow()} &nbsp;</span>
+          <br/>
+          <span className="fa fa-tags"/>
+          <span><em> {list.categories}</em></span>
         </div>
         <ol className="h2">
           {this.renderList()}
