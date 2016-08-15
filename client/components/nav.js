@@ -11,10 +11,8 @@ export default class navBar extends Component {
     super(props);
   }
 
-  render(){
-    console.log("locallllllySTORRED!!!!", (Object.keys(window.localStorage)).length);
+  render() {
   const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
-  console.log("STATEOFTHEUNION", this.props.loginState.auth.authState);
     return(
       <div>
         <nav className="navbar navbar-fixed-top">
@@ -25,15 +23,14 @@ export default class navBar extends Component {
               </Link>
             </div>
 
-
             <ul className="nav navbar-nav navBtns">
               <li className="active"><a href="#">Main<span className="sr-only">(current)</span></a></li>
               <li><a href="#">Favorites</a></li>
               <li><a href="#">My Lists</a></li>
               <li><a href="#">My Drafts</a></li>
             </ul>
-            
-            <div className="nav navbar-nav navbar-right mainBtns"> 
+
+            <div className="nav navbar-nav navbar-right mainBtns">
               <li>
               <Link to="/lists/new">
                 Add a list
@@ -42,7 +39,6 @@ export default class navBar extends Component {
               <li>{localStorage.getItem('logged') ? <SignOut />  : <OurModal />}</li>
               <li>{localStorage.getItem('logged') ? null : <SignUp /> }</li>
             </div>
-
           </div>
         </nav>
       </div>

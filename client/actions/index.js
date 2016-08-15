@@ -12,27 +12,15 @@ export const DOWNVOTE = 'DOWNVOTE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
-export function fetchUserInfo() {
-  const request = axios.get(`/api/user`);
+export function fetchUserInfo(uid) {
+  const request = axios.get(`/api/user/${uid}`);
   return {
     type: USER_INFO,
     payload: request
   };
 }
 
-// export function fetchLists(props) {
-//   console.log("fetcherprops", props);
-
-//   const request = axios.get(`/api/lists`, props);
-//   return {
-//     type: FETCH_LISTS,
-//     payload: request
-//   };
-// }
-
 export function fetchLists(props) {
-  console.log("fetcherprops", props);
-
   const request = axios.post(`/api/lists1`, props);
   return {
     type: FETCH_LISTS,
@@ -43,7 +31,6 @@ export function fetchLists(props) {
 
 export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
-  // console.log('REQUEST FROM ACTION:', request);
   return {
     type: FETCH_LIST,
     payload: request
@@ -60,10 +47,7 @@ export function createList(props) {
 }
 
 export function deleteList(id) {
-  //const request = axios.delete(`/api/lists/${id}`);
   const request = axios.delete(`/api/lists/${id}`);
-
-
   return {
     type: DELETE_LIST,
     payload: request
@@ -96,8 +80,7 @@ export function upvote(lid, uid) {
   const request = axios.post(`/api/votes`, data);
   return {
     type: UPVOTE,
-    id: lid,
-    //payload: request
+    id: lid
   };
 }
 
@@ -110,8 +93,7 @@ export function downvote(lid, uid) {
   const request = axios.post(`/api/votes`, data);
   return {
     type: DOWNVOTE,
-    id: lid,
-    //payload: request
+    id: lid
   };
 }
 
