@@ -57,9 +57,7 @@ module.exports = function(app) {
       photo: req.body.photo,
       upvotedLists: [],
       downvotedLists: []
-
     }
-    console.log("INFO", info);
     User.findOne({userId: req.body.userId}, function(err, user){
       if(err) throw err;
       if(!user){
@@ -68,7 +66,6 @@ module.exports = function(app) {
         });
       } 
       res.status(201).json(userSetup);
-      console.log("USERFOUND?", user);
     })
   });
   //get individual list
@@ -126,8 +123,6 @@ module.exports = function(app) {
 
   //remove a comment
   app.post('/api/comments/:listId', function(req, res) {
-    // console.log("ID?!", typeof req.params.listId);
-    // console.log("req body:", req.body);
     List.findById(req.params.listId).exec()
     .then(function(doc) {
       doc.comments.splice(req.body.commentIndex, 1);
@@ -152,8 +147,6 @@ module.exports = function(app) {
     var vflag = req.body.votes;
     var uid = req.body.uid;
 
-    console.log("USERID", uid);
-
     var mapUpLists = {};
     var mapDownLists = {};
     User.findOne({'userId': uid}, function(err, info) {
@@ -173,55 +166,31 @@ module.exports = function(app) {
         if(vflag) {
           if(!upflag && !downflag) {
             list.upvote = +list.upvote + 1;
-            resObj = {
-              up: 1,
-              down: 0
-            };
             addUpFlag = true;
           }
           else if(!upflag && downflag) {
             list.upvote = +list.upvote + 1;
             list.downvote = +list.downvote - 1;
-            resObj = {
-              up: 1,
-              down: -1
-            };
             addUpFlag = true;
             delDownFlag = true;
           }
           else if(upflag && !downflag) {
             list.upvote = +list.upvote - 1;
-            resObj = {
-              up: -1,
-              down: 0
-            };
             delUpFlag = true;
           }
         } else {
           if(!upflag && !downflag) {
             list.downvote = +list.downvote + 1;
-            resObj = {
-              up: 0,
-              down: 1
-            };
             addDownFlag = true;
           }
           else if(upflag && !downflag) {
             list.downvote = +list.downvote + 1;
             list.upvote = +list.upvote - 1;
-            resObj = {
-              up: -1,
-              down: 1
-            };
             addDownFlag = true;
             delUpFlag = true;
           }
           else if(!upflag && downflag) {
             list.downvote = +list.downvote - 1;
-            resObj = {
-              up: 0,
-              down: -1
-            };
             delDownFlag = true;
           }
         }
@@ -250,7 +219,7 @@ module.exports = function(app) {
             });
           }
         });
-        res.send(resObj);
+        res.sendStatus(201);
       });
     });
   });
