@@ -84,7 +84,7 @@ export function upvote(lid, uid) {
   return {
     type: UPVOTE,
     id: lid,
-    payload: request
+    //payload: request
   };
 }
 
@@ -98,7 +98,7 @@ export function downvote(lid, uid) {
   return {
     type: DOWNVOTE,
     id: lid,
-    payload: request
+    //payload: request
   };
 }
 

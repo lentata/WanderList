@@ -31,7 +31,7 @@ export class ListGrid extends Component {
         <Panel />
 
         <ul className="list-group">
-          {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />)}
+          {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />)}
         </ul>
       </div>
     )

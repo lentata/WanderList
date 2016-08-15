@@ -29,7 +29,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/user', function(req, res) {
-    User.findOne({'userId': '6pYSzmFLhJVQAVkvo8xFXDcd8Pe2'}, function(err, user) {
+    User.findOne({'userId': 'IdsmlJL8EASGrdmZutK9P6HB2443'}, function(err, user) {
       if(err) throw err;
       console.log("DOC", user);
       res.send(user);
