@@ -32,19 +32,19 @@ export class Login extends Component {
     });
   }
 
-  setProvider(providerName) {
+  setProvider(providerName, props) {
     switch(providerName) {
       case 'Google':
         this.provider = new firebase.auth.GoogleAuthProvider();
-        this.socialLogin();
+        this.socialLogin(props);
         break;
       case 'Facebook':
         this.provider = new firebase.auth.FacebookAuthProvider();
-        this.socialLogin();
+        this.socialLogin(props);
         break;
       case 'Github':
         this.provider = new firebase.auth.GithubAuthProvider();
-        this.socialLogin();
+        this.socialLogin(props);
         break;
       default:
         throw new Error('providerName is not valid -_-');
@@ -62,34 +62,33 @@ export class Login extends Component {
         photo: userData.photoURL,
         userId: user.uid
       };
-      console.log("SOCIALLOGIN", user);
       Login.context.userAuth(userDataStorage);
       let logged = {logged: true};
-      let uid = {uid: userDataStorage.userId}
+      let userId = {userId: userDataStorage.userId}
       localStorage.setItem('logged', JSON.stringify(logged));
-      console.log('YL: GOOD STUFF, ', props);
-      // console.log('are you running!??!: ', this.props.fetchUserInfo();
+      localStorage.setItem('userId', JSON.stringify(userId));
+      props.fetchUserInfo(userId.userId);
       browserHistory.push('/');
     }).catch(function(error) {
       alert(error.message)
     });
   }
-  
+
   render() {
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;
     console.log('WHAT IS THIS THIS: ', this)
     return (
       <div>
         <h2>Login</h2>
-          <button onClick={this.setProvider.bind(this, 'Google')} className="btn btn-block btn-social btn-google">
+          <button onClick={this.setProvider.bind(this, 'Google', this.props)} className="btn btn-block btn-social btn-google">
             <span className="fa fa-google" /> Sign in with Google
           </button>
 
-          <button onClick={this.setProvider.bind(this, 'Facebook')} className="btn btn-block btn-social btn-facebook">
+          <button onClick={this.setProvider.bind(this, 'Facebook', this.props)} className="btn btn-block btn-social btn-facebook">
             <span className="fa fa-facebook" /> Sign in with Facebook
           </button>
 
-          <button onClick={this.setProvider.bind(this, 'Github')} className="btn btn-block btn-social btn-github">
+          <button onClick={this.setProvider.bind(this, 'Github', this.props)} className="btn btn-block btn-social btn-github">
             <span className="fa fa-github" /> Sign in with Github
           </button>
 
@@ -98,26 +97,26 @@ export class Login extends Component {
             <label>Username</label>
             <input type="username" className="form-control" {...username}/>
           </div>
+
           <div>
             <label>Password</label>
             <input type="password" className="form-control" {...password}/>
           </div>
+
           <button type="submit" className="btn btn-primary">
             Sign in
           </button>
+
           <Link to="/">
             <button type="button" className="btn btn-error">
               Cancel
             </button>
           </Link>
-          Need an account?
+            Need an account?
           <Link to="/signup" className="btn btn-error">
-            <a type="submit" className="btn btn-error">
-              Sign up
-            </a>
+            Sign up
           </Link>
         </form>
-
       </div>
     );
   }
