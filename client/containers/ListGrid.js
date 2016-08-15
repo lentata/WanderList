@@ -11,10 +11,10 @@ import { Pagination } from 'react-bootstrap';
 export class ListGrid extends Component {
 
   componentWillMount() {
-    
+
     this.state = {term: "",
                   activePage: 1};
-    this.props.fetchUserInfo();
+    // this.props.fetchUserInfo();
     this.props.fetchLists({type: 1});
   }
 
@@ -32,7 +32,7 @@ export class ListGrid extends Component {
     console.log('content', this.props);
     return (
       <div>
-        <NavBar />        
+        <NavBar />
         <div>
 
           <form>

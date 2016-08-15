@@ -12,8 +12,8 @@ export const DOWNVOTE = 'DOWNVOTE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
-export function fetchUserInfo() {
-  const request = axios.get(`/api/user`);
+export function fetchUserInfo(uid) {
+  const request = axios.get(`/api/user/${uid}`);
   return {
     type: USER_INFO,
     payload: request
