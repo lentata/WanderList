@@ -28,8 +28,8 @@ export default class ListComponent extends Component {
               <span className="fa fa-commenting"/> <span>{list.comments.length > 1 ? list.comments.length+" comments" : list.comments.length === 1 ? 1+" comment" : "leave a comment!"}</span>
             </div>
             <div>
-              <span className="fa fa-flag-o"/>
-              <span><em> #{ list.categories }</em></span>
+              <span className="fa fa-tags"/>
+              <span><em> { list.categories }</em></span>
             </div>
           </div>
         </div>
