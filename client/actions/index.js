@@ -20,15 +20,15 @@ export function fetchUserInfo() {
   };
 }
 
-export function fetchLists(props) {
-  console.log("fetcherprops", props);
+// export function fetchLists(props) {
+//   console.log("fetcherprops", props);
 
-  const request = axios.get(`/api/lists`, props);
-  return {
-    type: FETCH_LISTS,
-    payload: request
-  };
-}
+//   const request = axios.get(`/api/lists`, props);
+//   return {
+//     type: FETCH_LISTS,
+//     payload: request
+//   };
+// }
 
 export function fetchLists(props) {
   console.log("fetcherprops", props);
@@ -39,9 +39,6 @@ export function fetchLists(props) {
     payload: request
   };
 }
-
-
-
 
 
 export function fetchList(id) {
