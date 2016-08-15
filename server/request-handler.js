@@ -20,14 +20,48 @@ module.exports = function(app) {
 
   //get all lists, ADAPTED FOR MONGO
   app.get('/api/lists', function(req, res) {
+    console.log("myreq", req);
     List.find({}, function(err, docs) {
       if(err) throw err;
       res.send(docs);
     });
   });
 
+//List1 is Temporary for Pagination, Testing purposes only
+   app.post('/api/lists1', function(req, res) {
+    console.log("myreq", req.body);
+    // List.find({}, function(err, docs) {
+    //   if(err) throw err;
+    //   res.send(docs);
+    // });
+      let p = (req.body.type - 1) * 10;
+      console.log(p);
+
+
+     List
+    .find({})
+    .sort({createdAt: 'asc'})
+    .limit(10)
+    .skip(p)
+    .exec(function (err, posts) {
+       res.send(posts);
+      })
+  
+
+
+
+
+     //  List.find({}, { skip: p, limit: 5 }, function(err, results) {
+     //    if(err) throw err;
+     //    res.send(results);
+     // });
+  });
+
+
+
+
   app.get('/api/user', function(req, res) {
-    User.findOne({'userId': 'IdsmlJL8EASGrdmZutK9P6HB2443'}, function(err, user) {
+    User.findOne({'userId': '6pYSzmFLhJVQAVkvo8xFXDcd8Pe2'}, function(err, user) {
       if(err) throw err;
       console.log("DOC", user);
       res.send(user);
@@ -57,7 +91,9 @@ module.exports = function(app) {
       photo: req.body.photo,
       upvotedLists: [],
       downvotedLists: []
+
     }
+
     User.findOne({userId: req.body.userId}, function(err, user){
       if(err) throw err;
       if(!user){
@@ -66,6 +102,7 @@ module.exports = function(app) {
         });
       } 
       res.status(201).json(userSetup);
+
     })
   });
   //get individual list
@@ -146,6 +183,8 @@ module.exports = function(app) {
     var lid = req.body.lid;
     var vflag = req.body.votes;
     var uid = req.body.uid;
+
+    console.log("USERID", uid);
 
     var mapUpLists = {};
     var mapDownLists = {};
