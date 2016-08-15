@@ -36,11 +36,7 @@ export default class OurModal extends Component{
     );
     return (
       <div>
-        <Button
-          bsStyle="primary"
-          bsSize="small"
-          onClick={this.open}
-        >
+        <Button onClick={this.open}>
           Sign In
         </Button>
 

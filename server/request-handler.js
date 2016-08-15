@@ -13,8 +13,6 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
 module.exports = function(app) {
-  var id = 7; //get rid of this???
-
   //go to homepage
   app.get('/', function(req, res) {
     res.sendFile('index.html');
@@ -29,8 +27,9 @@ module.exports = function(app) {
   });
 
   app.get('/api/user', function(req, res) {
-    User.findOne({'_id': '57acacb4b086aca01bc783ea'}, function(err, user) {
+    User.findOne({'userId': 'IdsmlJL8EASGrdmZutK9P6HB2443'}, function(err, user) {
       if(err) throw err;
+      console.log("DOC", user);
       res.send(user);
     });
   });
@@ -51,9 +50,23 @@ module.exports = function(app) {
 
   app.post('/api/auth', function(req, res) {
     var info = req.body;
-    new User({username: info.username, password: info.password}).save().then(function() {
-      res.sendStatus(201);
-    });
+    let userSetup = {
+      username: req.body.displayName,
+      email: req.body.email,
+      userId: req.body.userId,
+      photo: req.body.photo,
+      upvotedLists: [],
+      downvotedLists: []
+    }
+    User.findOne({userId: req.body.userId}, function(err, user){
+      if(err) throw err;
+      if(!user){
+        new User(userSetup).save(function(err){
+          if(err) throw err;
+        });
+      } 
+      res.status(201).json(userSetup);
+    })
   });
   //get individual list
   app.get('/api/lists/:id', function(req, res) {
@@ -110,8 +123,6 @@ module.exports = function(app) {
 
   //remove a comment
   app.post('/api/comments/:listId', function(req, res) {
-    // console.log("ID?!", typeof req.params.listId);
-    // console.log("req body:", req.body);
     List.findById(req.params.listId).exec()
     .then(function(doc) {
       doc.comments.splice(req.body.commentIndex, 1);
@@ -138,7 +149,7 @@ module.exports = function(app) {
 
     var mapUpLists = {};
     var mapDownLists = {};
-    User.findOne({'_id': uid}, function(err, info) {
+    User.findOne({'userId': uid}, function(err, info) {
       if(err) throw err;
       var upflag = info.upvotedLists.map(function(objId) {
         return objId.toString();
@@ -155,55 +166,31 @@ module.exports = function(app) {
         if(vflag) {
           if(!upflag && !downflag) {
             list.upvote = +list.upvote + 1;
-            resObj = {
-              up: 1,
-              down: 0
-            };
             addUpFlag = true;
           }
           else if(!upflag && downflag) {
             list.upvote = +list.upvote + 1;
             list.downvote = +list.downvote - 1;
-            resObj = {
-              up: 1,
-              down: -1
-            };
             addUpFlag = true;
             delDownFlag = true;
           }
           else if(upflag && !downflag) {
             list.upvote = +list.upvote - 1;
-            resObj = {
-              up: -1,
-              down: 0
-            };
             delUpFlag = true;
           }
         } else {
           if(!upflag && !downflag) {
             list.downvote = +list.downvote + 1;
-            resObj = {
-              up: 0,
-              down: 1
-            };
             addDownFlag = true;
           }
           else if(upflag && !downflag) {
             list.downvote = +list.downvote + 1;
             list.upvote = +list.upvote - 1;
-            resObj = {
-              up: -1,
-              down: 1
-            };
             addDownFlag = true;
             delUpFlag = true;
           }
           else if(!upflag && downflag) {
             list.downvote = +list.downvote - 1;
-            resObj = {
-              up: 0,
-              down: -1
-            };
             delDownFlag = true;
           }
         }
@@ -222,17 +209,17 @@ module.exports = function(app) {
             });
           }
           if(delUpFlag) {
-            User.update({'_id': uid}, { $pullAll: {'upvotedLists': [lid]}}, function(err) {
+            User.update({'userId': uid}, { $pullAll: {'upvotedLists': [lid]}}, function(err) {
               if(err) throw err;
             });
           }
           if(delDownFlag) {
-            User.update({'_id': uid}, { $pullAll: {'downvotedLists': [lid]}}, function(err) {
+            User.update({'userId': uid}, { $pullAll: {'downvotedLists': [lid]}}, function(err) {
               if(err) throw err;
             });
           }
         });
-        res.send(resObj);
+        res.sendStatus(201);
       });
     });
   });

@@ -12,7 +12,7 @@ export default class Votes extends Component {
 
   upvoteFunc() {
     if(firebase.auth().currentUser) {
-      this.props.upvoteAction(this.props.list._id, "57acacb4b086aca01bc783ea");
+      this.props.upvoteAction(this.props.list._id, firebase.auth().currentUser.uid);
     } else {
       alert("You must be signed in to upvote lists!");
     }
@@ -20,7 +20,7 @@ export default class Votes extends Component {
 
   downvoteFunc() {
     if(firebase.auth().currentUser) {
-      this.props.downvoteAction(this.props.list._id.toString(), "57acacb4b086aca01bc783ea");
+      this.props.downvoteAction(this.props.list._id.toString(), firebase.auth().currentUser.uid);
     } else {
       alert("You must be signed in to downvote lists!");
     }
@@ -30,12 +30,13 @@ export default class Votes extends Component {
     const { list, info } = this.props;
     const upflag = this.props.upLists.includes(list._id.toString());
     const downflag = this.props.downLists.includes(list._id.toString());
+    const votes = this.props.votes;
     return (
       <div className="col-md-1">
         <div className="text-center">
           <i className="button text-center fa fa-chevron-up" style={{color: upflag ? "blue" : "grey"}} onClick={this.upvoteFunc}></i>
         </div>
-        <div className="text-center" style={{color: downflag ? "red" : upflag ? "blue" : "grey"}}>{list.upvote - list.downvote}</div>
+        <div className="text-center" style={{color: downflag ? "red" : upflag ? "blue" : "grey"}}>{votes}</div>
         <div className="text-center">
           <i className="button text-center fa fa-chevron-down" style={{color: downflag ? "red" : "grey"}} onClick={this.downvoteFunc}></i>
         </div>

@@ -9,7 +9,7 @@ import ListComponent from '../components/listcomponent';
 export class Lists extends Component {
 
   renderLists() {
-    const { list, i, upvote, downvote, info, upLists, downLists } = this.props;
+    const { list, upvote, downvote, info, upLists, downLists, votes } = this.props;
     return (
       <div className="media" key={ list._id }>
         <div className="row">
@@ -18,6 +18,7 @@ export class Lists extends Component {
             info={info}
             upvoteAction={upvote}
             downvoteAction={downvote}
+            votes={votes}
             upLists={upLists}
             downLists={downLists} />
           <ListComponent
@@ -37,15 +38,8 @@ export class Lists extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userInfo: state.lists.info,
-
-  }
-}
-
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ upvote, downvote, fetchUserInfo }, dispatch);
+  return bindActionCreators({ upvote, downvote }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Lists);
+export default connect(null, mapDispatchToProps)(Lists);

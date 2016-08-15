@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchList, deleteList } from '../actions/index';
+import { upvote, downvote, fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
+import Votes from './vote';
 import NavBar from '../components/nav';
 import Linkify from 'react-linkify';
 import moment from 'moment';
@@ -33,15 +34,14 @@ export class ListDetail extends Component {
   }
 
   onDeleteClick() {
-    console.log("ERRRR, delete", this.props);
     this.props.deleteList(this.props.list._id);
     // this.props.deleteList(this.props.params.id)
     browserHistory.push('/');
   }
 
   render() {
-    const { list } = this.props;
-    console.log("PROPS HERE", this.props);
+    const { upvote, downvote, list, info, upLists, downLists } = this.props;
+    console.log("list-detial, ", this.props);
 
     if(!list) {
       return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
@@ -65,9 +65,14 @@ export class ListDetail extends Component {
 
       {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="container-fluid pull-left">
-          <div className="button fa fa-chevron-up"></div>
-          <div>{ list.upvote - list.downvote }</div>
-          <div className="button fa fa-chevron-down"></div>
+          <Votes
+            list={list}
+            info={info}
+            upvoteAction={upvote}
+            downvoteAction={downvote}
+            votes={list.upvote - list.downvote}
+            upLists={upLists}
+            downLists={downLists} />
         </div>
 
         <div className="container-fluid">
@@ -91,12 +96,15 @@ export class ListDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    list: state.lists.list
+    list: state.lists.list,
+    info: state.lists.info,
+    upLists: state.lists.upvotedLists,
+    downLists: state.lists.downvotedLists
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchList, deleteList }, dispatch);
+  return bindActionCreators({ upvote, downvote, fetchList, deleteList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListDetail);
