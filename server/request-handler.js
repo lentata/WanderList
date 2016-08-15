@@ -13,8 +13,6 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
 module.exports = function(app) {
-  var id = 7; //get rid of this???
-
   //go to homepage
   app.get('/', function(req, res) {
     res.sendFile('index.html');
