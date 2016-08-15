@@ -7,6 +7,7 @@ import Comments from './comments';
 import NavBar from '../components/nav';
 import Linkify from 'react-linkify';
 
+
 export class ListDetail extends Component {
 
   componentWillMount() {
@@ -81,11 +82,9 @@ export class ListDetail extends Component {
           <h5>{ list.author } </h5>
           <h6>Categories: { list.categories }</h6>
         </div>
-
         <ol className="h2">
           {this.renderList()}
         </ol>
-
         <Comments list={this.props.list}/>
       </div>
     );

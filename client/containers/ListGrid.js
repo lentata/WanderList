@@ -6,34 +6,55 @@ import List from './lists';
 import { Link } from 'react-router';
 import NavBar from '../components/nav';
 import {Panel} from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap';
 
 export class ListGrid extends Component {
+
   componentWillMount() {
+    
+    this.state = {term: "",
+                  activePage: 1};
     this.props.fetchUserInfo();
-    this.props.fetchLists();
-    this.state = {term: ""};
+    this.props.fetchLists({type: 1});
   }
 
  onInputChange(term) {
     this.setState({term: term});
   }
 
+  handleSelect(eventKey) {
+    this.setState({activePage: eventKey});
+    console.log(eventKey);
+    this.props.fetchLists({type: eventKey});
+  }
+
   render() {
+    console.log('content', this.props);
     return (
       <div>
        <NavBar />
-      
-              
         <div>
-        <Panel />
+          <Panel />
           <form>
-            <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
+              <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
           </form>
         </div>
-
         <ul className="list-group">
           {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />)}
         </ul>
+
+         <Pagination
+          className={this.props.lists.length === 0? 'hidden':'shown'}
+          prev
+          next
+          first
+          last
+          ellipsis
+          items={2}
+          activePage={this.state.activePage}
+          onSelect={this.handleSelect.bind(this)}
+          >
+        </Pagination>
       </div>
     )
   }
@@ -45,7 +66,8 @@ function mapStateToProps(state) {
     lists: state.lists.all,
     info: state.lists.info,
     upLists: state.lists.upvotedLists,
-    downLists: state.lists.downvotedLists
+    downLists: state.lists.downvotedLists,
+    activePage: state.activePage
   };
 }
 

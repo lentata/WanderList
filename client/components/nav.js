@@ -14,9 +14,7 @@ export default class navBar extends Component {
  
   
   render(){
-    console.log("locallllllySTORRED!!!!", (Object.keys(window.localStorage)).length);
   const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
-  console.log("STATEOFTHEUNION", this.props.loginState.auth.authState);
     return(
       <div>
         <nav className="navbar navbar-fixed-top">
