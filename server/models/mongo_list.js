@@ -10,6 +10,7 @@ var contentSchema = new mongoose.Schema({
 
 /*** COMMENT SCHEMA ***/
 var commentSchema = new mongoose.Schema({
+  userId: String,
   user: String,
   text: String,
   posted: Date

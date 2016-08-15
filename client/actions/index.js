@@ -39,6 +39,7 @@ export function fetchList(id) {
 
 export function createList(props) {
   props.author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : "idk  ¯\_(ツ)_/¯";
+
   const request = axios.post(`/api/lists`, props);
   return {
     type: CREATE_LIST,
@@ -97,12 +98,17 @@ export function downvote(lid, uid) {
   };
 }
 
-export function addComment(postId, author, comment) {
+export function addComment(postId, userId, author, comment) {
+
   const data = {
     _id: postId,
+    userId: userId,
     user: author,
     text: comment
-  }
+  };
+  //DELETE ME AFTER WORKING
+  console.log(data);
+
   const request = axios.post(`/api/comments`, data);
   return {
     type: ADD_COMMENT,

@@ -25,6 +25,18 @@ export class DeepForm extends Component {
   }
 
   onSubmit(props) {
+    const firstListItem = {
+      headline: props.itemTitle,
+      image: props.itemImage,
+      description: props.itemDescription
+    };
+
+    delete props.itemTitle;
+    delete props.itemImage;
+    delete props.itemDescription;
+
+    props.content.unshift(firstListItem);
+
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 
     if(author) {
