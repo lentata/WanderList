@@ -76,7 +76,6 @@ export class Login extends Component {
 
   render() {
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;
-    console.log('WHAT IS THIS THIS: ', this)
     return (
       <div>
         <h2>Login</h2>
