@@ -20,13 +20,29 @@ export function fetchUserInfo() {
   };
 }
 
-export function fetchLists() {
-  const request = axios.get('/api/lists');
+export function fetchLists(props) {
+  console.log("fetcherprops", props);
+
+  const request = axios.get(`/api/lists`, props);
   return {
     type: FETCH_LISTS,
     payload: request
   };
 }
+
+export function fetchLists(props) {
+  console.log("fetcherprops", props);
+
+  const request = axios.post(`/api/lists1`, props);
+  return {
+    type: FETCH_LISTS,
+    payload: request
+  };
+}
+
+
+
+
 
 export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);

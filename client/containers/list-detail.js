@@ -9,6 +9,7 @@ import NavBar from '../components/nav';
 import Linkify from 'react-linkify';
 import moment from 'moment';
 
+
 export class ListDetail extends Component {
 
   componentWillMount() {
@@ -83,11 +84,9 @@ export class ListDetail extends Component {
           <span> posted {moment(list.createdAt).fromNow()} &nbsp;</span>
           <h6>Categories: { list.categories }</h6>
         </div>
-
         <ol className="h2">
           {this.renderList()}
         </ol>
-
         <Comments list={this.props.list}/>
       </div>
     );
