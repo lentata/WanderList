@@ -91,8 +91,8 @@ module.exports = function(app) {
       userId: req.body.userId,
       photo: req.body.photo,
       upvotedLists: [],
-      downvotedLists: []
-
+      downvotedLists: [],
+      favoriteLists: []
     }
 
     User.findOne({userId: req.body.userId}, function(err, user){
@@ -264,6 +264,27 @@ module.exports = function(app) {
       });
     });
   });
+
+  app.post('/api/favorite', function(req, res) {
+    var lid = req.body.lid.toString();
+    var uid = req.body.uid;
+    var favorite = req.body.favorite;
+    if(favorite) {
+      User.update({'userId': uid}, { $pullAll: {'favLists': [lid]}}, function(err) {
+        if(err) throw err;
+      });
+    } else {
+      User.findOne({'userId': uid}, function(err, user) {
+        if(err) throw err;
+        user.favLists.push(lid);
+        user.save(function(err) {
+          if(err) throw err;
+        });
+      });
+    }
+    res.sendStatus(201);
+  });
+
 
   app.use(function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));

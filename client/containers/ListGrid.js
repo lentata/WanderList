@@ -38,11 +38,21 @@ export class ListGrid extends Component {
 
         <Panel />
         <ul className="list-group">
-          {this.props.lists.filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi"))).map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />)}
+          {this.props.lists
+            .filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi")))
+            .map((list, i) => <List {...this.props}
+              info={this.props.info}
+              votes={list.upvote - list.downvote}
+              upLists={this.props.upLists}
+              downLists={this.props.downLists}
+              favoriteLists={this.props.favoriteLists}
+              key={i}
+              i={i}
+              list={list} />)}
         </ul>
 
          <Pagination
-          className={this.props.lists.length === 0? 'hidden':'shown'}
+          className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
           prev
           next
           first
@@ -59,12 +69,12 @@ export class ListGrid extends Component {
 };
 
 function mapStateToProps(state) {
-
   return {
     lists: state.lists.all,
     info: state.lists.info,
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
+    favoriteLists: state.lists.favoriteLists,
     activePage: state.activePage
   };
 }

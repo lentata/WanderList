@@ -9,6 +9,7 @@ export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
+export const TOGGLEFAV = 'TOGGLEFAV';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
@@ -98,8 +99,21 @@ export function downvote(lid, uid) {
   };
 }
 
-export function addComment(postId, userId, author, comment) {
+export function favorite(lid, uid, favStatus) {
+  const data = {
+    lid: lid,
+    favorite: favStatus,
+    uid: uid
+  };
+  const request = axios.post(`/api/favorite`, data);
+  return {
+    type: TOGGLEFAV,
+    id: lid,
+    fav: favStatus
+  };
+}
 
+export function addComment(postId, userId, author, comment) {
   const data = {
     _id: postId,
     userId: userId,

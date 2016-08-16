@@ -1,4 +1,4 @@
-import { USER_INFO,FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, ADD_COMMENT, REMOVE_COMMENT, CREATE_LIST } from '../actions/index';
+import { USER_INFO,FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, TOGGLEFAV, ADD_COMMENT, REMOVE_COMMENT, CREATE_LIST } from '../actions/index';
 
 const INITIAL_STATE = {
   all: [],
@@ -6,24 +6,22 @@ const INITIAL_STATE = {
   createdList: null,
   info: null,
   upvotedLists: [],
-  downvotedLists: []
+  downvotedLists: [],
+  favoriteLists: []
 };
 
 export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
   } else if(action.type === CREATE_LIST) {
-    console.log('createdList', action.payload.data);
     return { ...state, createdList: action.payload.data};
   } else if(action.type === USER_INFO) {
-    console.log("USERINFO", action.payload.data)
-    return { ...state, info: action.payload.data, upvotedLists: action.payload.data.upvotedLists, downvotedLists: action.payload.data.downvotedLists };
+    return { ...state, info: action.payload.data, upvotedLists: action.payload.data.upvotedLists, downvotedLists: action.payload.data.downvotedLists, favoriteLists: action.payload.data.favLists };
   } else if(action.type === FETCH_LISTS) {
     return {
       ...state, all: action.payload.data
     };
   } else if(action.type === UPVOTE) {
-    //const { up, down } = action.payload.data;
     let index = 0;
     let upIndex = state.upvotedLists.indexOf(action.id);
     let downIndex = state.downvotedLists.indexOf(action.id);
@@ -33,9 +31,6 @@ export default function(state = INITIAL_STATE, action) {
       }
     });
     let targetList = state.all[index];
-    console.log("reducer_lists", targetList)
-    //targetList.upvote = +targetList.upvote + (+up);
-    //targetList.downvote = +targetList.downvote + (+down);
     if (upIndex === -1) {
       if (downIndex === -1) {
         targetList.upvote += 1;
@@ -90,7 +85,6 @@ export default function(state = INITIAL_STATE, action) {
       };
     }
   } else if(action.type === DOWNVOTE) {
-    //const { up, down } = action.payload.data;
     let index = 0;
     let upIndex = state.upvotedLists.indexOf(action.id);
     let downIndex = state.downvotedLists.indexOf(action.id);
@@ -100,8 +94,6 @@ export default function(state = INITIAL_STATE, action) {
       }
     });
     let targetList = state.all[index];
-    //targetList.upvote = +targetList.upvote + (+up);
-    //targetList.downvote = +targetList.downvote + (+down);
     if (downIndex === -1) {
       if (upIndex === -1) {
         targetList.downvote += 1;
@@ -158,7 +150,7 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === ADD_COMMENT) {
     return {
       ...state,
-        list:{
+        list: {
           ...state.list,
           comments: [
             ...state.list.comments,
@@ -175,6 +167,25 @@ export default function(state = INITIAL_STATE, action) {
           comments: [
             ...state.list.comments.slice(0, action.commentIndex),
             ...state.list.comments.slice(action.commentIndex + 1)
+          ]
+        }
+      }
+  } else if(action.type === TOGGLEFAV) {
+      if(action.fav) {
+        const index = state.favoriteLists.indexOf(action.id);
+        return {
+          ...state,
+          favoriteLists: [
+            ...state.favoriteLists.slice(0, index),
+            ...state.favoriteLists.slice(index + 1)
+          ]
+        }
+      } else {
+        return {
+          ...state,
+          favoriteLists: [
+            ...state.favoriteLists,
+            action.id
           ]
         }
       }
