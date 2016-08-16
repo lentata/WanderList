@@ -21,10 +21,11 @@ export class UserProfile extends Component {
     });
 
 
+}
+
   fetchMyUpvotes(ids){
     this.props.fetchListsForUser(ids);
   }
-
   renderList(arr) {
     var out = [];
     for(var piece in arr) {
