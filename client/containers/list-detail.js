@@ -15,7 +15,8 @@ export class ListDetail extends Component {
   componentWillMount() {
     console.log("THISISIT", this.props.params.id);
     this.props.fetchList(this.props.params.id);
-    this.onDeleteClick = this.onDeleteClick.bind(this)
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+
   }
 
   renderList() {
@@ -35,14 +36,27 @@ export class ListDetail extends Component {
   }
 
   onDeleteClick() {
-    this.props.deleteList(this.props.list._id);
+    const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
+
+    if(deleter === this.props.list.authorId) {
+      this.props.deleteList(this.props.list._id);
+      browserHistory.push('/');
+    } else {
+      alert("Can only delete your own lists!");
+    }
+
+    // this.props.deleteList(this.props.list._id);
     // this.props.deleteList(this.props.params.id)
-    browserHistory.push('/');
+
   }
 
   render() {
     const { upvote, downvote, list, info, upLists, downLists } = this.props;
     console.log("list-detial, ", this.props);
+
+    const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
+
+    const author = this.props.list ? this.props.list.authorId : null;
 
     if(!list) {
       return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
@@ -57,11 +71,16 @@ export class ListDetail extends Component {
                 Back to Main
               </Link>
 
-              <button
+              {deleter === author ? <button
                 className="btn btn-danger navbar-btn navbar-right col-md-1"
                 onClick={ this.onDeleteClick }>
                 Delete List
-              </button>
+              </button> : <div/>}
+              {/*<button
+                className="btn btn-danger navbar-btn navbar-right col-md-1"
+                onClick={ this.onDeleteClick }>
+                Delete List
+              </button>*/}
             </div>
 
       {/* TODO: Refactor this to be the <VOTE /> component  */}
