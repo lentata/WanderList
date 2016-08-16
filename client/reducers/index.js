@@ -16,6 +16,8 @@ const rootReducer = combineReducers({
   auth: AuthReducer,
   upvoter: UpvoteReducer,
   itemsNo: ItemsReducer
+
+
 });
 
 export default rootReducer;

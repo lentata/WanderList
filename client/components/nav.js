@@ -36,9 +36,6 @@ export default class navBar extends Component {
                 Add a list
               </Link>
               </li>
-              <li>
-              
-              </li>
               <li>{localStorage.getItem('logged') ? <SignOut />  : <OurModal />}</li>
               <li>{localStorage.getItem('logged') ? <Link to={'/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId}>Profile</Link> : <SignUp /> }</li>
             </div>

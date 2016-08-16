@@ -150,8 +150,6 @@ export function removeComment(listId, commentIndex) {
   }
   const request = axios.post(`/api/comments/${listId}`, data)
 
-  console.log("removing a comment!");
-
   return {
     type: REMOVE_COMMENT,
     listId,
