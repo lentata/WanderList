@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { upvote, downvote, fetchList, deleteList } from '../actions/index';
+import { upvote, downvote, favorite, fetchList, deleteList } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
 import Votes from './vote';
+import Favorites from './favorite';
 import NavBar from '../components/nav';
 import Linkify from 'react-linkify';
 import moment from 'moment';
@@ -47,7 +48,7 @@ export class ListDetail extends Component {
   }
 
   render() {
-    const { upvote, downvote, list, info, upLists, downLists } = this.props;
+    const { upvote, downvote, list, info, upLists, downLists, favorite, favLists } = this.props;
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
     const author = this.props.list ? this.props.list.authorId : null;
 
@@ -81,6 +82,10 @@ export class ListDetail extends Component {
             votes={list.upvote - list.downvote}
             upLists={upLists}
             downLists={downLists} />
+          <Favorites
+            list={list}
+            favoriteAction={favorite}
+            favoriteLists={favLists} />
         </div>
 
         <div className="container-fluid">
@@ -103,16 +108,18 @@ export class ListDetail extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('STATE: ', state);
   return {
     list: state.lists.list,
     info: state.lists.info,
     upLists: state.lists.upvotedLists,
-    downLists: state.lists.downvotedLists
+    downLists: state.lists.downvotedLists,
+    favLists: state.lists.favoriteLists
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ upvote, downvote, fetchList, deleteList }, dispatch);
+  return bindActionCreators({ upvote, downvote, favorite, fetchList, deleteList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListDetail);
