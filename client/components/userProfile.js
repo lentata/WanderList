@@ -17,7 +17,6 @@ import List from '../containers/lists';
 export class UserProfile extends Component {
   constructor(props){
     super(props);
-    console.log("MADPROPS", props);
     this.renderList = this.renderList.bind(this);
   }
 
@@ -38,10 +37,9 @@ export class UserProfile extends Component {
   renderList(arr) {
     var out = [];
     for(var piece in arr) {
-      console.log('piece', arr[piece]);
       out.push(arr[piece]);
     }
-    return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />);
+    return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} favoriteLists={this.props.favoriteLists} key={i} i={i} list={list} />);
   }
 
   render(){
@@ -84,6 +82,7 @@ function mapStateToProps(state) {
     info: state.lists.info,
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
+    favoriteLists: state.lists.favoriteLists,
     upBoat: state.upvoter
 
   };
