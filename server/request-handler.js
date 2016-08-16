@@ -27,6 +27,22 @@ module.exports = function(app) {
     });
   });
 
+  //get all upvotes
+  app.post('/api/lists/upvote', function(req, res) {
+    var ids = [];
+    List.find({}, function(err, docs) {
+      docs.forEach(function(item){
+        if(req.body.indexOf("" + item._id) !== -1){
+          ids.push(item);
+        }
+      })
+      res.status(201).json(ids);
+    });
+  });
+
+
+
+
 //List1 is Temporary for Pagination, Testing purposes only
    app.post('/api/lists1', function(req, res) {
     console.log("myreq", req.body);
@@ -64,7 +80,6 @@ module.exports = function(app) {
 
     User.findOne({'userId': uid}, function(err, user) {
       if(err) throw err;
-      console.log("DOC", user);
       res.send(user);
     });
   });
