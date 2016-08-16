@@ -17,7 +17,6 @@ const rootReducer = combineReducers({
   upvoter: UpvoteReducer,
   itemsNo: ItemsReducer
 
-
 });
 
 export default rootReducer;

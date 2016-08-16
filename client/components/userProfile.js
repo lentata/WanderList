@@ -59,7 +59,6 @@ export class UserProfile extends Component {
           <h1>Downvoted Lists</h1>
         </ul>  
 
-
       </div>
     );
 
@@ -76,7 +75,6 @@ function mapStateToProps(state) {
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
     upBoat: state.upvoter
-
   };
 }
 
