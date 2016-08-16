@@ -23,7 +23,6 @@ export function fetchUserInfo(uid) {
   };
 }
 
-
 export function fetchListsForUser(props) {
   console.log("fetcherprops", props);
 
@@ -41,7 +40,6 @@ export function fetchLists(props) {
     payload: request
   };
 }
-
 
 export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
@@ -77,14 +75,6 @@ export function userAuth(props) {
     payload: request
   };
 }
-
-// export function userCreate(props) {
-//   const request = axios.post('/api/auth', props);
-//   return {
-//     type: SIGN_UP,
-//     payload: request
-//   };
-// }
 
 export function upvote(lid, uid) {
   const data = {
@@ -133,8 +123,6 @@ export function addComment(postId, userId, author, comment) {
     user: author,
     text: comment
   };
-  //DELETE ME AFTER WORKING
-  console.log(data);
 
   const request = axios.post(`/api/comments`, data);
   return {
@@ -143,7 +131,6 @@ export function addComment(postId, userId, author, comment) {
   }
 }
 
-//remove comment, need to get this to work
 export function removeComment(listId, commentIndex) {
   const data = {
     commentIndex
