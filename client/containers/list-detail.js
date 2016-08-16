@@ -49,7 +49,6 @@ export class ListDetail extends Component {
 
   render() {
     const { list, upvote, downvote, info, upLists, downLists, favorite, favLists } = this.props;
-
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
     const author = this.props.list ? this.props.list.authorId : null;
 
