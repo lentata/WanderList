@@ -28,6 +28,7 @@ export class UserProfile extends Component {
       console.log("THE THING", thing);
       that.fetchMyUpvotes(that.props.info.upvotedLists);
     });
+
   }
 
   fetchMyUpvotes(ids){
@@ -50,6 +51,7 @@ export class UserProfile extends Component {
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
         );
+
     }
   
     return(
@@ -58,8 +60,6 @@ export class UserProfile extends Component {
         <img src={info.photo} alt="Profile Picture" />
         <h3>{info.username}</h3>
         <h3>{info.email}</h3>
-
-
         <ul>
           <h1>Upvoted Lists</h1>
           {this.renderList(upBoat.upvotes.data)}
@@ -71,6 +71,7 @@ export class UserProfile extends Component {
       </div>
     );
     // {upBoat.upvotes.data}
+
   }
 }
 
