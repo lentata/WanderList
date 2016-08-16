@@ -30,7 +30,7 @@ export class UserProfile extends Component {
     for(var piece in arr) {
       out.push(arr[piece]);
     }
-    return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />);
+    return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} favoriteLists={this.props.favoriteLists} key={i} i={i} list={list} />);
   }
 
   render(){
@@ -69,6 +69,7 @@ function mapStateToProps(state) {
     info: state.lists.info,
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
+    favoriteLists: state.lists.favoriteLists,
     upBoat: state.upvoter
 
   };
