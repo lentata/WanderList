@@ -48,7 +48,8 @@ export class ListDetail extends Component {
   }
 
   render() {
-    const { upvote, downvote, list, info, upLists, downLists, favorite, favLists } = this.props;
+    const { list, upvote, downvote, info, upLists, downLists, favorite, favLists } = this.props;
+
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
     const author = this.props.list ? this.props.list.authorId : null;
 
@@ -61,10 +62,6 @@ export class ListDetail extends Component {
           list={list}
           />
              <div className="btn-toolbar">
-              <Link to="/" className="btn btn-default navbar-btn navbar-right col-md-1">
-                Back to Main
-              </Link>
-
               {deleter === author ? <button
                 className="btn btn-danger navbar-btn navbar-right col-md-1"
                 onClick={ this.onDeleteClick }>

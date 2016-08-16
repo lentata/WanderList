@@ -51,11 +51,11 @@ export class Comments extends Component {
     return (
       <div className="comments">
         <legend className="list-legend">Comments</legend>
-        {this.props.list.comments.map(this.renderComment, this)}
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="comment" placeholder="leave a comment!" />
+          <input type="text" ref="comment" placeholder="Leave a comment!" />
           <input type="submit" hidden />
         </form>
+        {this.props.list.comments.map(this.renderComment, this)}
       </div>
     )
   }
