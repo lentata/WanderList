@@ -27,6 +27,18 @@ module.exports = function(app) {
     });
   });
 
+  //Get Quantity of lists
+  app.get('/api/list', function(req, res) {
+    console.log("myreq", req);
+    List.count({}, function(err, num) {
+      if(err) throw err;
+      console.log('how manny', num);
+      res.status(201).json(num);
+    });
+  });
+
+
+
   //get all upvotes
   app.post('/api/lists/upvote', function(req, res) {
     var ids = [];
@@ -45,13 +57,11 @@ module.exports = function(app) {
 
 //List1 is Temporary for Pagination, Testing purposes only
    app.post('/api/lists1', function(req, res) {
-    console.log("myreq", req.body);
     // List.find({}, function(err, docs) {
     //   if(err) throw err;
     //   res.send(docs);
     // });
     let p = (req.body.type - 1) * 10;
-    console.log(p);
 
     List
     .find({})
