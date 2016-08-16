@@ -45271,15 +45271,6 @@
 	              _react2.default.createElement(
 	                'li',
 	                null,
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId },
-	                  'Profile'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
 	                localStorage.getItem('logged') ? _react2.default.createElement(_signoutButton2.default, null) : _react2.default.createElement(_modal2.default, null)
 	              ),
 	              _react2.default.createElement(
