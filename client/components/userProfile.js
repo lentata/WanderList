@@ -60,12 +60,15 @@ export class UserProfile extends Component {
         <img src={info.photo} alt="Profile Picture" />
         <h3>{info.username}</h3>
         <h3>{info.email}</h3>
-        <div>
-         <h1>Upvoted Lists</h1>
-        </div>
-          <ul>
+
+
+        <ul>
+          <h1>Upvoted Lists</h1>
           {this.renderList(upBoat.upvotes.data)}
-          </ul>
+        </ul>
+        <ul>
+          <h1>Downvoted Lists</h1>
+        </ul>
         
       </div>
     );
