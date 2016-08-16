@@ -36,6 +36,7 @@ export class DeepForm extends Component {
     delete props.itemDescription;
 
     props.content.unshift(firstListItem);
+    props.authorId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
 
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 

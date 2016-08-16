@@ -20,6 +20,7 @@ var commentSchema = new mongoose.Schema({
 var listSchema = new mongoose.Schema({
   createdAt: Date,
   title: String,
+  authorId: String,
   author: String,
   upvote: Number,
   downvote: Number,
