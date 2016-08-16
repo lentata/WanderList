@@ -3,8 +3,10 @@ var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
+var firebase = require("firebase/app");
+require("firebase/auth");
 // var db = require('./server/config');
-
+firebase.initializeApp(config);
 var bodyParser = require('body-parser');
 
 var app = express();
