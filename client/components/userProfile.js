@@ -20,6 +20,8 @@ export class UserProfile extends Component {
     console.log("MADPROPS", props);
     this.renderList = this.renderList.bind(this);
   }
+
+  //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
   componentWillMount(){
     var that = this;
     this.props.fetchUserInfo(window.location.pathname.split('/')[2])
@@ -37,16 +39,14 @@ export class UserProfile extends Component {
     var out = [];
     for(var piece in arr) {
       console.log('piece', arr[piece]);
-      out.push(arr[piece].title);
+      out.push(arr[piece]);
     }
-    return out;
+    return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} key={i} i={i} list={list} />);
   }
 
   render(){
-    const { upvote, downvote, list, info, upLists, downLists, upBoat } = this.props;
+    const { list, info, upBoat } = this.props;
     console.log('userprofile', this.props);
-
-    
     console.log('list', upBoat);
 
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
@@ -61,12 +61,11 @@ export class UserProfile extends Component {
         <h3>{info.username}</h3>
         <h3>{info.email}</h3>
         <div>
-         <h1>LISTSSSS</h1>
-
-          
-          {this.renderList(upBoat.upvotes.data)}
+         <h1>Upvoted Lists</h1>
         </div>
-
+          <ul>
+          {this.renderList(upBoat.upvotes.data)}
+          </ul>
         
       </div>
     );
