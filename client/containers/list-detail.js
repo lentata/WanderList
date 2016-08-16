@@ -11,12 +11,9 @@ import moment from 'moment';
 
 
 export class ListDetail extends Component {
-
   componentWillMount() {
-    console.log("THISISIT", this.props.params.id);
     this.props.fetchList(this.props.params.id);
     this.onDeleteClick = this.onDeleteClick.bind(this);
-
   }
 
   renderList() {
@@ -47,15 +44,11 @@ export class ListDetail extends Component {
 
     // this.props.deleteList(this.props.list._id);
     // this.props.deleteList(this.props.params.id)
-
   }
 
   render() {
     const { upvote, downvote, list, info, upLists, downLists } = this.props;
-    // console.log("list-detail, ", this.props);
-
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
-
     const author = this.props.list ? this.props.list.authorId : null;
 
     if(!list) {
