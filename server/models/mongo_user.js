@@ -7,7 +7,8 @@ var userSchema = new mongoose.Schema({
   photo: String,
   userId: String,
   upvotedLists: [mongoose.Schema.Types.ObjectId],
-  downvotedLists: [mongoose.Schema.Types.ObjectId]
+  downvotedLists: [mongoose.Schema.Types.ObjectId],
+  favLists: [mongoose.Schema.Types.ObjectId]
 });
 
 var User = mongoose.model('User', userSchema);
