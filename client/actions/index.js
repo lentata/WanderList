@@ -114,7 +114,7 @@ export function downvote(lid, uid) {
 export function favorite(lid, uid, favStatus) {
   const data = {
     lid: lid,
-    favorite: !favStatus,
+    favorite: favStatus,
     uid: uid
   };
   const request = axios.post(`/api/favorite`, data);
