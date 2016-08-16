@@ -92,7 +92,6 @@ function mapStateToProps(state) {
     favoriteLists: state.lists.favoriteLists,
     activePage: state.activePage,
     itemNo: state.itemsNo
-
   };
 }
 
