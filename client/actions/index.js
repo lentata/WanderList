@@ -106,8 +106,6 @@ export function favorite(lid, uid, favStatus) {
   const data = {
     lid: lid,
     favorite: favStatus,
-
-
     uid: uid
   };
   const request = axios.post(`/api/favorite`, data);

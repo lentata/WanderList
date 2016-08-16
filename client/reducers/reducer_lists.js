@@ -173,7 +173,6 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === TOGGLEFAV) {
       if(action.fav) {
         const index = state.favoriteLists.indexOf(action.id);
-
         return {
           ...state,
           favoriteLists: [
