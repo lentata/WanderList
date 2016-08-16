@@ -14,10 +14,8 @@ export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
   } else if(action.type === CREATE_LIST) {
-    console.log('createdList', action.payload.data);
     return { ...state, createdList: action.payload.data};
   } else if(action.type === USER_INFO) {
-    console.log("USERINFO", action.payload.data)
     return { ...state, info: action.payload.data, upvotedLists: action.payload.data.upvotedLists, downvotedLists: action.payload.data.downvotedLists, favoriteLists: action.payload.data.favLists };
   } else if(action.type === FETCH_LISTS) {
     return {
@@ -173,10 +171,8 @@ export default function(state = INITIAL_STATE, action) {
         }
       }
   } else if(action.type === TOGGLEFAV) {
-      console.log('type of action.fav: ', typeof(action.fav))
       if(action.fav) {
         const index = state.favoriteLists.indexOf(action.id);
-        console.log('favorite list index: ', index)
         return {
           ...state,
           favoriteLists: [

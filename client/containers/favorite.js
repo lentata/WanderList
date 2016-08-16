@@ -18,7 +18,6 @@ export default class Favorite extends Component {
   render() {
     const { list, info } = this.props;
     const favStatus = this.props.favoriteLists.includes(list._id.toString());
-    console.log('THIS IS FAVSTATUS: ', favStatus)
 
     return (
       <div className="col-md-1">

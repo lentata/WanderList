@@ -91,8 +91,8 @@ module.exports = function(app) {
       userId: req.body.userId,
       photo: req.body.photo,
       upvotedLists: [],
-      downvotedLists: []
-
+      downvotedLists: [],
+      favoriteLists: []
     }
 
     User.findOne({userId: req.body.userId}, function(err, user){
@@ -266,14 +266,13 @@ module.exports = function(app) {
   });
 
   app.post('/api/favorite', function(req, res) {
-    var lid = req.body.lid;
+    var lid = req.body.lid.toString();
     var uid = req.body.uid;
     var favorite = req.body.favorite;
-    console.log('ALL OF THE FAVS: ', favorite)
     if(favorite) {
-      User.update({'userId': uid}, {$pullAll: {'favLists': [lid]}}, function(err) {
+      User.update({'userId': uid}, { $pullAll: {'favLists': [lid]}}, function(err) {
         if(err) throw err;
-      })
+      });
     } else {
       User.findOne({'userId': uid}, function(err, user) {
         if(err) throw err;
