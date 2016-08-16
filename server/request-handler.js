@@ -209,10 +209,10 @@ module.exports = function(app) {
       if(err) throw err;
       var upflag = info.upvotedLists.map(function(objId) {
         return objId.toString();
-      }).includes(lid) || false;
+      }).indexOf(lid) === -1 ? false : true;
       var downflag = info.downvotedLists.map(function(objId) {
         return objId.toString();
-      }).includes(lid) || false;
+      }).indexOf(lid) === -1 ? false : true;
       var addUpFlag = false;
       var addDownFlag = false;
       var delUpFlag = false;
