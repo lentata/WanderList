@@ -17,16 +17,29 @@ import List from '../containers/lists';
 export class UserProfile extends Component {
   constructor(props){
     super(props);
-
+    console.log("MADPROPS", props);
+    this.renderList = this.renderList.bind(this);
   }
   componentWillMount(){
-    this.props.fetchUserInfo();
-
-   
+    var that = this;
+    this.props.fetchUserInfo(window.location.pathname.split('/')[2])
+    .then(function(thing) {
+      console.log("THE THING", thing);
+      that.fetchMyUpvotes(that.props.info.upvotedLists);
+    });
   }
 
   fetchMyUpvotes(ids){
     this.props.fetchListsForUser(ids);
+  }
+
+  renderList(arr) {
+    var out = [];
+    for(var piece in arr) {
+      console.log('piece', arr[piece]);
+      out.push(arr[piece].title);
+    }
+    return out;
   }
 
   render(){
@@ -36,12 +49,9 @@ export class UserProfile extends Component {
     
     console.log('list', upBoat);
 
-    if(!info) {
-     
+    if(!upBoat.upvotes || !upBoat.upvotes.data) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
-
         );
-
     }
   
     return(
@@ -54,12 +64,13 @@ export class UserProfile extends Component {
          <h1>LISTSSSS</h1>
 
           
-          {this.fetchMyUpvotes(this.props.info.upvotedLists)}
+          {this.renderList(upBoat.upvotes.data)}
         </div>
 
-
+        
       </div>
     );
+    // {upBoat.upvotes.data}
   }
 }
 
