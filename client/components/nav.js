@@ -11,11 +11,11 @@ export default class navBar extends Component {
     super(props);
   }
 
-  render() {
-  const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
+  render(){
+
     return(
       <div>
-        <nav className="navbar navbar-fixed-top">
+        <nav className="navbar navbar-fixed-top navcol">
           <div className="container-fluid">
             <div className="navbar-header">
               <Link to="/"  className="navbar-brand">
@@ -35,6 +35,9 @@ export default class navBar extends Component {
               <Link to="/lists/new">
                 Add a list
               </Link>
+              </li>
+              <li>
+              <Link to={'/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId}>Profile</Link>
               </li>
               <li>{localStorage.getItem('logged') ? <SignOut />  : <OurModal />}</li>
               <li>{localStorage.getItem('logged') ? null : <SignUp /> }</li>

@@ -7,6 +7,7 @@ import NewList from './containers/addForm/DeepForm'
 import ListDetail from './containers/list-detail';
 import Login from './containers/login';
 import Signup from './containers/signup';
+import UserProfile from './components/userProfile'
 
 export default (
   <Route path='/' component={ App }>
@@ -16,5 +17,6 @@ export default (
     <Route path='login' component={ Login } />
     <Route path='signup' component={ Signup } />
     <Route path='votes' component={ ListGrid } />
+    <Route path='userProfile/:id' component={UserProfile} />
   </Route>
 );
