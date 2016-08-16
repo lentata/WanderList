@@ -48,7 +48,7 @@ export class ListDetail extends Component {
   }
 
   render() {
-    const { upvote, downvote, list, info, upLists, downLists, favorite, favLists, votes } = this.props;
+    const { list, upvote, downvote, info, upLists, downLists, favorite, favLists } = this.props;
 
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
     const author = this.props.list ? this.props.list.authorId : null;
@@ -76,7 +76,7 @@ export class ListDetail extends Component {
             info={info}
             upvoteAction={upvote}
             downvoteAction={downvote}
-            votes={votes}
+            votes={list.upvote - list.downvote}
             upLists={upLists}
             downLists={downLists} />
           <Favorites
