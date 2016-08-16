@@ -21,7 +21,6 @@ export class UserProfile extends Component {
     });
 
 
-}
 
   fetchMyUpvotes(ids){
     this.props.fetchListsForUser(ids);
@@ -33,6 +32,7 @@ export class UserProfile extends Component {
     }
     return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} favoriteLists={this.props.favoriteLists} key={i} i={i} list={list} />);
   }
+
 
   render(){
     const { list, info, upBoat } = this.props;
@@ -59,8 +59,8 @@ export class UserProfile extends Component {
       </div>
     );
   }
-}
 
+}
 
 function mapStateToProps(state) {
   console.log("ProfileState", state);
