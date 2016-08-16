@@ -38,7 +38,6 @@ module.exports = function(app) {
   });
 
 
-
   //get all upvotes
   app.post('/api/lists/upvote', function(req, res) {
     var ids = [];
