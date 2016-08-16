@@ -301,6 +301,7 @@ module.exports = function(app) {
       User.update({'userId': uid}, { $pullAll: {'favLists': [lid]}}, function(err) {
         if(err) throw err;
       });
+
     } else {
       User.findOne({'userId': uid}, function(err, user) {
         if(err) throw err;
