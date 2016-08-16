@@ -12,7 +12,7 @@ export class Comments extends Component {
 
   renderComment(comment, i) {
     // console.log("COMMENT PROPS", this.props)
-    let commenter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
+    let deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
 
     return (
       <div className="comment" key={i}>
@@ -20,7 +20,8 @@ export class Comments extends Component {
           <strong>{comment.user}</strong>
           <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
 
-          <button className="remove-comment" onClick={comment.userId === commenter ? this.props.removeComment.bind(this, this.props.list._id, i) : null}>&times;</button>
+          {deleter === comment.userId ? <button className="remove-comment" onClick={ this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button> : <div/>}
+          {/*<button className="remove-comment" onClick={comment.userId === deleter ? this.props.removeComment.bind(this, this.props.list._id, i) : null}>&times;</button>*/}
         </h5>
         <h5><Linkify>{comment.text}</Linkify></h5>
       </div>
@@ -45,7 +46,7 @@ export class Comments extends Component {
   }
   //ref attributes on form allow us to use them in handle submit function
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div className="comments">

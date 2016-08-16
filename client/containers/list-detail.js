@@ -52,7 +52,7 @@ export class ListDetail extends Component {
 
   render() {
     const { upvote, downvote, list, info, upLists, downLists } = this.props;
-    console.log("list-detial, ", this.props);
+    // console.log("list-detail, ", this.props);
 
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
 
@@ -76,11 +76,6 @@ export class ListDetail extends Component {
                 onClick={ this.onDeleteClick }>
                 Delete List
               </button> : <div/>}
-              {/*<button
-                className="btn btn-danger navbar-btn navbar-right col-md-1"
-                onClick={ this.onDeleteClick }>
-                Delete List
-              </button>*/}
             </div>
 
       {/* TODO: Refactor this to be the <VOTE /> component  */}
