@@ -50,7 +50,7 @@ module.exports = function(app) {
     //   if(err) throw err;
     //   res.send(docs);
     // });
-    let p = (req.body.type - 1) * 10;
+    var p = (req.body.type - 1) * 10;
     console.log(p);
 
     List
@@ -100,7 +100,7 @@ module.exports = function(app) {
 
   app.post('/api/auth', function(req, res) {
     var info = req.body;
-    let userSetup = {
+    var userSetup = {
       username: req.body.displayName,
       email: req.body.email,
       userId: req.body.userId,
@@ -209,10 +209,10 @@ module.exports = function(app) {
       if(err) throw err;
       var upflag = info.upvotedLists.map(function(objId) {
         return objId.toString();
-      }).includes(lid) || false;
+      }).indexOf(lid) === -1 ? false : true;
       var downflag = info.downvotedLists.map(function(objId) {
         return objId.toString();
-      }).includes(lid) || false;
+      }).indexOf(lid) === -1 ? false : true;
       var addUpFlag = false;
       var addDownFlag = false;
       var delUpFlag = false;

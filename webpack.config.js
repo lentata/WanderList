@@ -1,8 +1,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var env = process.env.WEBPACK_ENV;
-var firebase = require("firebase/app");
-require("firebase/auth");
+
 
 var config = {
   devtool: 'source-map',
@@ -26,7 +25,7 @@ var config = {
   plugins: []
 }
 
-firebase.initializeApp(config);
+
 
 if (env === 'dev') {
   config.entry.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server");

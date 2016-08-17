@@ -3,8 +3,6 @@ var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
-// var db = require('./server/config');
-
 var bodyParser = require('body-parser');
 
 var app = express();
