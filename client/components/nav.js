@@ -23,13 +23,7 @@ export default class navBar extends Component {
               </Link>
             </div>
 
-            <ul className="nav navbar-nav navBtns">
-              <li className="active"><a href="#">Main<span className="sr-only">(current)</span></a></li>
-              <li><a href="#">Favorites</a></li>
-              <li><a href="#">My Lists</a></li>
-              <li><a href="#">My Drafts</a></li>
-            </ul>
-
+        
             <div className="nav navbar-nav navbar-right mainBtns">
               <li>
               <Link to="/lists/new">
