@@ -1,18 +1,23 @@
 .container {
   margin-top: 10%
 }
-.navcol{
+/*.navcol{
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ededed+56,feffff+100 */
-background: #ffffff; /* Old browsers */
+background: #f3f4f5; /* Old browsers */
 background: -moz-linear-gradient(top, #ffffff 0%, #ededed 56%, #feffff 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, #ffffff 0%,#ededed 56%,#feffff 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #ffffff 0%,#ededed 56%,#feffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
 copy
-}
+}*/
 
 .navContainer {
   background-color: #ecf0f1;
+}
+
+.navbar {
+  background-color: #fff;
+  height: 7%;
 }
 
 .img-responsive2 {
@@ -120,6 +125,7 @@ button.close {
 
 .mainBtns {
   margin-top: 0.75%;
+  margin-right: 5%;
 }
 
 .navBtns {
@@ -143,8 +149,23 @@ button.close {
   border-radius: 0px
 }
 
-.navbar {
-  background-color: #e6e6e6
+.list-group-item {
+  border-radius: 0px !important;
+  margin-bottom: 1.5% !important;
+  padding: 0px;
+}
+
+.list_thumbnail {
+  display: inline-block;
+  width: 350px;
+}
+
+.list_overview_container {
+  margin-top: 3%;
+}
+
+.login_favorite {
+  display: inline-block;
 }
 
 .navbar-brand {
@@ -203,4 +224,18 @@ button.close {
 .media-heading {
   font-size: 1.75rem;
   text-decoration: none !important
+}
+
+.col-md-5 {
+  padding: 0px;
+}
+
+.img-thumbnail {
+  padding: 0px;
+  border: none;
+  border-radius: 0px;
+}
+
+body {
+  background-color: #f3f4f5;
 }
