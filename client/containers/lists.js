@@ -14,6 +14,12 @@ export class Lists extends Component {
     return (
       <div className="media" key={ list._id }>
         <div className="row">
+          <ListComponent
+            list={list} />
+          <Favorite
+            list={list}
+            favoriteAction={favorite}
+            favoriteLists={favoriteLists} />
           <Votes
             list={list}
             info={info}
@@ -22,12 +28,6 @@ export class Lists extends Component {
             votes={votes}
             upLists={upLists}
             downLists={downLists} />
-          <ListComponent
-            list={list} />
-          <Favorite
-            list={list}
-            favoriteAction={favorite}
-            favoriteLists={favoriteLists} />
         </div>
       </div>
     );

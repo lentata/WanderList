@@ -19,16 +19,14 @@ export class ListGrid extends Component {
   }
   componentWillMount() {
     let that = this;
-    
 
     if(localStorage.getItem('logged')) {
       this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId);
     }
-    this.props.fetchLists({type: 1, 
-                           filter: this.state.filter});
+    this.props.fetchLists({type: 1, filter: this.state.filter});
 
     this.props.postQuant().then(function(x){
-       console.log(that.props.itemNo.items);  
+       console.log(that.props.itemNo.items);
     });
   }
 
@@ -55,16 +53,19 @@ export class ListGrid extends Component {
 
   render() {
     if(!this.props.itemNo.items) {
-      return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
-        );
+      return (
+        <div>
+          <img height="100%" src="../loading_gangnam.gif" alt="loading" />
+        </div>);
     }
+
     return (
       <div>
         <NavBar />
         <div>
-        <button name="new" onClick={()=>this.filterList("new")} > New </button>
-        <button name="top" onClick={()=>this.filterList("top")} >Top</button>
-        <button name="controversial" onClick={()=>this.filterList("contro")} > Controversial</button>
+          <button name="new" onClick={()=>this.filterList("new")}>New</button>
+          <button name="top" onClick={()=>this.filterList("top")}>Top</button>
+          <button name="controversial" onClick={()=>this.filterList("contro")}>Controversial</button>
 
           <form>
             <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
@@ -86,7 +87,7 @@ export class ListGrid extends Component {
               list={list} />)}
         </ul>
 
-         <Pagination
+        <Pagination
           className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
           prev
           next
