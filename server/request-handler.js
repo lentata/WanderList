@@ -81,6 +81,20 @@ module.exports = function(app) {
       .exec(function (err, posts) {
         res.send(posts);
       });
+    } else 
+
+    if(req.body.filter === 'contro'){
+      List
+      .find({})
+      .exec(function (err, posts) {
+        posts = posts.sort(function(a, b){
+          return ((b.upvote+b.downvote) / Math.max(Math.abs(b.upvote-b.downvote), 1)) - 
+          ((a.upvote+a.downvote) / Math.max(Math.abs(a.upvote-a.downvote), 1))
+
+        })
+        //logic
+        res.send(posts);
+      });
     }
 
 

@@ -13,7 +13,8 @@ export class ListGrid extends Component {
   constructor(props){
     super(props);
     this.state = {term: "",
-                 activePage: 1};
+                 activePage: 1,
+                filter: "new"};
     this.filterList = this.filterList.bind(this);
   }
   componentWillMount() {
@@ -24,8 +25,7 @@ export class ListGrid extends Component {
       this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId);
     }
     this.props.fetchLists({type: 1, 
-                          filter: 'top'});
-
+                           filter: this.state.filter});
 
     this.props.postQuant().then(function(x){
        console.log(that.props.itemNo.items);  
@@ -39,19 +39,21 @@ export class ListGrid extends Component {
   handleSelect(eventKey) {
     this.setState({activePage: eventKey});
     this.props.fetchLists({type: eventKey,
-                           filter: 'top'});
+                           filter: this.state.filter});
   }
 
   filterList(prop){
-    console.log("where you called?");
-    //change filter property => PROP = 'top' || 'new'
-   this.props.fetchLists({type: this.state.activePage,
-                          filter: prop
+    let that = this;
+    this.setState({filter: prop}, function(x){
+      that.props.fetchLists(
+        {type: that.state.activePage,
+         filter: that.state.filter
+        }
+      );
     });
   }
 
   render() {
-
     if(!this.props.itemNo.items) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
         );
@@ -60,7 +62,9 @@ export class ListGrid extends Component {
       <div>
         <NavBar />
         <div>
-        <button name="top" onClick={()=>this.filterList("new")} >Test</button>
+        <button name="new" onClick={()=>this.filterList("new")} > New </button>
+        <button name="top" onClick={()=>this.filterList("top")} >Top</button>
+        <button name="controversial" onClick={()=>this.filterList("contro")} > Controversial</button>
 
           <form>
             <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
