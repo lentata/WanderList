@@ -38,6 +38,7 @@ module.exports = function(app) {
   //get all upvotes
   app.post('/api/lists/upvote', function(req, res) {
     var ids = [];
+    console.log("REQBODY", req.body);
     List.find({}, function(err, docs) {
       docs.forEach(function(item){
         if(req.body.indexOf("" + item._id) !== -1){

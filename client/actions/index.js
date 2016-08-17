@@ -14,6 +14,7 @@ export const TOGGLEFAV = 'TOGGLEFAV';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const FETCH_UP = 'FETCH_UP';
+export const FETCH_DOWN = 'FETCH_DOWN';
 export const ITEM_NO = 'ITEM_NO';
 
 export function fetchUserInfo(uid) {
@@ -23,19 +24,18 @@ export function fetchUserInfo(uid) {
     payload: request
   };
 }
-
-export function fetchListsForUser(props) {
-  console.log("fetcherprops", props);
-
+//Props here is userID
+export function fetchListsForUser(props, query) {
+  console.log("fetcherprops", query);
   const request = axios.post(`/api/lists/upvote`, props);
   return {
-    type: FETCH_UP,
+    type: query,
     payload: request
   };
 }
 //Pagination Post request for lists
 export function fetchLists(props) {
-  console.log("ACTION", props);
+  // console.log("ACTION", props);
   const request = axios.post(`/api/lists1`, props);
   return {
     type: FETCH_LISTS,

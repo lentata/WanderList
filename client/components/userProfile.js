@@ -15,15 +15,16 @@ export class UserProfile extends Component {
   //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
   componentWillMount(){
     var that = this;
-
+    console.log('downvotedLists', this.props.downLists);
     this.props.fetchUserInfo(window.location.pathname.split('/')[2])
     .then(function(thing) {
-      that.fetchMyUpvotes(that.props.info.upvotedLists);
+      that.fetchMyUpvotes(that.props.info.upvotedLists, 'FETCH_UP');
+      that.fetchMyUpvotes(that.props.downLists, 'FETCH_DOWN');
     });
   }
-
-  fetchMyUpvotes(listIds){
-    this.props.fetchListsForUser(listIds);
+ 
+  fetchMyUpvotes(listIds, query){
+    this.props.fetchListsForUser(listIds, query);
   }
   renderList(arr) {
     var out = [];
@@ -43,7 +44,7 @@ export class UserProfile extends Component {
 
   render(){
     const { list, info, upBoat } = this.props;
-
+    console.log('upBoat', upBoat);
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>);
     }
@@ -59,6 +60,8 @@ export class UserProfile extends Component {
         </ul>
         <ul>
           <h1>Downvoted Lists</h1>
+          {this.renderList(upBoat.downvotes.data)}
+
 
         </ul>
       </div>
@@ -67,7 +70,7 @@ export class UserProfile extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("ProfileState", state);
+  //console.log("ProfileState", state);
   return {
     list: state.lists.all,
     info: state.lists.info,
