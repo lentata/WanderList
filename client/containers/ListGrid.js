@@ -10,21 +10,26 @@ import { Pagination } from 'react-bootstrap';
 
 
 export class ListGrid extends Component {
+  constructor(props){
+    super(props);
+    this.state = {term: "",
+                 activePage: 1};
+    this.filterList = this.filterList.bind(this);
+  }
   componentWillMount() {
     let that = this;
     
-    this.state = {term: "", activePage: 1};
+
     if(localStorage.getItem('logged')) {
       this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId);
     }
-    this.props.fetchLists({type: 1});
+    this.props.fetchLists({type: 1, 
+                          filter: 'top'});
 
 
     this.props.postQuant().then(function(x){
        console.log(that.props.itemNo.items);  
     });
-    
-    
   }
 
   onInputChange(term) {
@@ -33,11 +38,20 @@ export class ListGrid extends Component {
 
   handleSelect(eventKey) {
     this.setState({activePage: eventKey});
-    this.props.fetchLists({type: eventKey});
+    this.props.fetchLists({type: eventKey,
+                           filter: 'top'});
+  }
+
+  filterList(prop){
+    console.log("where you called?");
+    //change filter property => PROP = 'top' || 'new'
+   this.props.fetchLists({type: this.state.activePage,
+                          filter: prop
+    });
   }
 
   render() {
-    console.log("PROPPY", this.props.itemNo.items);
+
     if(!this.props.itemNo.items) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
         );
@@ -46,6 +60,8 @@ export class ListGrid extends Component {
       <div>
         <NavBar />
         <div>
+        <button name="top" onClick={()=>this.filterList("new")} >Test</button>
+
           <form>
             <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
           </form>

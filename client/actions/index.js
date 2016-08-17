@@ -34,6 +34,7 @@ export function fetchListsForUser(props) {
 }
 //Pagination Post request for lists
 export function fetchLists(props) {
+  console.log("ACTION", props);
   const request = axios.post(`/api/lists1`, props);
   return {
     type: FETCH_LISTS,

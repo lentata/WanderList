@@ -20,7 +20,6 @@ module.exports = function(app) {
 
   //get all lists, ADAPTED FOR MONGO
   app.get('/api/lists', function(req, res) {
-    console.log("myreq", req);
     List.find({}, function(err, docs) {
       if(err) throw err;
       res.send(docs);
@@ -29,7 +28,6 @@ module.exports = function(app) {
 
   //Get Quantity of lists
   app.get('/api/list', function(req, res) {
-    console.log("myreq", req);
     List.count({}, function(err, num) {
       if(err) throw err;
       console.log('how manny', num);
@@ -54,6 +52,7 @@ module.exports = function(app) {
 
 
 //List1 is Temporary for Pagination, Testing purposes only
+//TODO: RENAME List1
    app.post('/api/lists1', function(req, res) {
     // List.find({}, function(err, docs) {
     //   if(err) throw err;
@@ -62,17 +61,34 @@ module.exports = function(app) {
 
     var p = (req.body.type - 1) * 10;
 
+    if(req.body.filter === 'top'){
+      List
+      .find({})
+      .exec(function (err, posts) {
+        posts = posts.sort(function(a, b){
+          return (b.upvote - b.downvote) - (a.upvote - a.downvote);
+        });
+        res.send(posts.slice(p, p + 9));
+      });
+    } else 
+    
+    if(req.body.filter === 'new'){
+        List
+      .find({})
+      .sort({createdAt: 'desc'})
+      .limit(10)
+      .skip(p)
+      .exec(function (err, posts) {
+        res.send(posts);
+      });
+    }
 
 
 
-    List
-    .find({})
-    .sort({createdAt: 'asc'})
-    .limit(10)
-    .skip(p)
-    .exec(function (err, posts) {
-      res.send(posts);
-    })
+    
+
+
+
   });
 
 
