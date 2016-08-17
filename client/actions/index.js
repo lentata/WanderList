@@ -9,6 +9,7 @@ export const AUTH_IN = 'AUTH_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
+export const FETCHCATEGORIES = 'FETCHCATEGORIES';
 export const TOGGLEFAV = 'TOGGLEFAV';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
@@ -103,6 +104,14 @@ export function downvote(lid, uid) {
   };
 }
 
+export function fetchListCategories(categories) {
+  const request = axios.get(`/api/categoryPage/${categories}`);
+  return {
+    type: FETCHCATEGORIES,
+    payload: request
+  };
+}
+
 export function favorite(lid, uid, favStatus) {
   const data = {
     lid: lid,
@@ -146,7 +155,6 @@ export function removeComment(listId, commentIndex) {
   }
 }
 
-
 export function postQuant(){
   const request = axios.get(`/api/list`);
 
@@ -154,5 +162,4 @@ export function postQuant(){
     type: ITEM_NO,
     payload: request
   }
-
 }

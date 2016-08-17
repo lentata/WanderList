@@ -163,6 +163,18 @@ module.exports = function(app) {
     });
   });
 
+  // Get category
+  app.get('/api/categoryPage/:categories', function(req, res) {
+    var categories = req.params.categories;
+    console.log('CATEGORIES: ', categories);
+    List.find({categories: {"$in" : [categories]}}, function(err, obj) {
+      if(err) throw err;
+      console.log('THIS IS OBJ: ', obj);
+      res.send(obj);
+    });
+  });
+
+
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
     List.findByIdAndRemove({_id: req.params.id}, function(err){
