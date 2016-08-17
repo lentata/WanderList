@@ -42,6 +42,10 @@ copy
   margin-top: 2%;
 }
 
+.label-default {
+  margin-right: 0.5%;
+}
+
 .form-control {
   margin-bottom: 4px
 }
@@ -115,4 +119,3 @@ copy
   font-size: 1.75rem;
   text-decoration: none !important
 }
-

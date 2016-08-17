@@ -27,15 +27,22 @@ export default class ListComponent extends Component {
               <span> {moment(list.createdAt).fromNow()} &nbsp;</span>
               <span className="fa fa-commenting"/> <span>{list.comments.length > 1 ? list.comments.length+" comments" : list.comments.length === 1 ? 1+" comment" : "leave a comment!"}</span>
             </div>
+
             <div>
               <span className="fa fa-tags"/>
-              <span><em> { list.categories }</em></span>
+              <span>
+                {list.categories.map(category => {
+                  return (
+                  <Link to={"categoryPage/" + category}>
+                    <span className="label label-default">
+                      { category }
+                    </span>
+                  </Link>);
+                })}
+              </span>
             </div>
           </div>
         </div>
-
     );
   }
-
-
 }

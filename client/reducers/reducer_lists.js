@@ -1,4 +1,13 @@
-import { USER_INFO,FETCH_LISTS, FETCH_LIST, UPVOTE, DOWNVOTE, TOGGLEFAV, ADD_COMMENT, REMOVE_COMMENT, CREATE_LIST } from '../actions/index';
+import { USER_INFO,
+         FETCH_LISTS,
+         FETCH_LIST,
+         UPVOTE,
+         DOWNVOTE,
+         FETCHCATEGORIES,
+         TOGGLEFAV,
+         ADD_COMMENT,
+         REMOVE_COMMENT,
+         CREATE_LIST } from '../actions/index';
 
 const INITIAL_STATE = {
   all: [],
@@ -7,7 +16,8 @@ const INITIAL_STATE = {
   info: null,
   upvotedLists: [],
   downvotedLists: [],
-  favoriteLists: []
+  favoriteLists: [],
+  categoryLists: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -189,6 +199,11 @@ export default function(state = INITIAL_STATE, action) {
           ]
         }
       }
+  } else if(action.type === FETCHCATEGORIES) {
+    return {
+      ...state,
+      categoryLists: [...action.payload.data]
+    };
   } else {
     return state;
   }

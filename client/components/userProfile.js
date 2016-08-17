@@ -5,6 +5,15 @@ import { bindActionCreators } from 'redux';
 import NavBar from './nav';
 import List from '../containers/lists';
 
+/*.map((list, i) =>
+           <List {...this.props}
+           info={this.props.info}
+           votes={list.upvote - list.downvote}
+           upLists={this.props.upLists}
+           downLists={this.props.downLists}
+           key={i} i={i} list={list} />)
+
+*/
 
 export class UserProfile extends Component {
   constructor(props){
@@ -22,8 +31,6 @@ export class UserProfile extends Component {
 
   }
 
-
-
   fetchMyUpvotes(ids){
     this.props.fetchListsForUser(ids);
   }
@@ -32,19 +39,24 @@ export class UserProfile extends Component {
     for(var piece in arr) {
       out.push(arr[piece]);
     }
-    return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} favoriteLists={this.props.favoriteLists} key={i} i={i} list={list} />);
+    return out.map((list, i) => <List {...this.props}
+      info={this.props.info}
+      votes={list.upvote - list.downvote}
+      upLists={this.props.upLists}
+      downLists={this.props.downLists}
+      favoriteLists={this.props.favoriteLists}
+      key={i}
+      i={i}
+      list={list} />);
   }
-
 
   render(){
     const { list, info, upBoat } = this.props;
 
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
-      return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
-        );
-
+      return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>);
     }
-  
+
     return(
       <div>
         <NavBar />
@@ -57,13 +69,10 @@ export class UserProfile extends Component {
         </ul>
         <ul>
           <h1>Downvoted Lists</h1>
-        </ul>  
-
+        </ul>
       </div>
     );
-
   }
-
 }
 
 function mapStateToProps(state) {
