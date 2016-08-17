@@ -31,6 +31,14 @@ export class DeepForm extends Component {
       description: props.itemDescription
     };
 
+    // Make categories distinct strings
+    var tempCategories = props.categories.split(",");
+    var finalCategories = [];
+    for(var i = 0; i < tempCategories.length; i++) {
+      finalCategories.push(tempCategories[i].trim())
+    }
+    props.categories = finalCategories;
+
     delete props.itemTitle;
     delete props.itemImage;
     delete props.itemDescription;
@@ -83,7 +91,7 @@ export class DeepForm extends Component {
 
             <div className={`form-group ${categories.touched && categories.invalid ? 'has-error' : ''}`}>
               <label className="control-label"><span style={divStyle}>*</span> Relevant Categories</label>
-              <PureInput type="text" className="form-control" placeholder="e.g. hamburglar, humor, food, cities" field={categories}/>
+              <PureInput type="text" className="form-control" placeholder="e.g. hamburglar, funny, food, cities" field={categories}/>
               <div className="help-block">
                 {categories.touched ? categories.error : ''}
               </div>
