@@ -77,8 +77,8 @@ export class Login extends Component {
   render() {
     const {fields: {username, password}, handleSubmit, resetForm} = this.props;
     return (
-      <div>
-        <h2>Login</h2>
+      <div className="login-form_container">
+        <div className="login-form_inner-container">
           <button onClick={this.setProvider.bind(this, 'Google', this.props)} className="btn btn-block btn-social btn-google">
             <span className="fa fa-google" /> Sign in with Google
           </button>
@@ -90,30 +90,29 @@ export class Login extends Component {
           <button onClick={this.setProvider.bind(this, 'Github', this.props)} className="btn btn-block btn-social btn-github">
             <span className="fa fa-github" /> Sign in with Github
           </button>
+        </div>
+
+        <div className="login-signup__sep">
+          <div className="login-signup__sep-text">or</div>
+        </div>
 
         <form className="form-actions" onSubmit={handleSubmit(this.emailSignIn.bind(this))}>
           <div className="form-group">
-            <label>Username</label>
-            <input type="username" className="form-control" {...username}/>
+            <label className="login_labels">Username</label>
+            <input type="username" className="form-control login_inputs" {...username}/>
           </div>
 
           <div>
-            <label>Password</label>
-            <input type="password" className="form-control" {...password}/>
+            <label className="login_labels">Password</label>
+            <input type="password" className="form-control login_inputs" {...password}/>
           </div>
 
-          <button type="submit" className="btn btn-primary">
-            Sign in
+          <button type="submit" className="btn login_btn">
+            Log In
           </button>
 
-          <Link to="/">
-            <button type="button" className="btn btn-error">
-              Cancel
-            </button>
-          </Link>
+          <Link to="/signup" className="btn login_signup_redirect">
             Need an account?
-          <Link to="/signup" className="btn btn-error">
-            Sign up
           </Link>
         </form>
       </div>

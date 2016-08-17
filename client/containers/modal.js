@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Modal, Popover, Tooltip, Button, OverlayTrigger } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import Login from './login';
-
-
 
 export default class OurModal extends Component{
    constructor(props){
@@ -25,16 +23,6 @@ export default class OurModal extends Component{
   }
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        wow.
-      </Tooltip>
-    );
     return (
       <div>
         <Button onClick={this.open}>
@@ -43,20 +31,16 @@ export default class OurModal extends Component{
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
+            <Modal.Title>
+              <h2 className="modal_title">
+                <img height="100%" src="../orange_logo.png" alt="wanderlist" />
+              </h2>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Hail Atlantis!</h4>
+            <h4 className="login_tagline">Let's Wander</h4>
             <Login />
-            <h4>Popovitch in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
-            <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
-            <hr />
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
         </Modal>
       </div>
     );
