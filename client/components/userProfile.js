@@ -5,15 +5,6 @@ import { bindActionCreators } from 'redux';
 import NavBar from './nav';
 import List from '../containers/lists';
 
-/*.map((list, i) =>
-           <List {...this.props}
-           info={this.props.info}
-           votes={list.upvote - list.downvote}
-           upLists={this.props.upLists}
-           downLists={this.props.downLists}
-           key={i} i={i} list={list} />)
-
-*/
 
 export class UserProfile extends Component {
   constructor(props){
@@ -24,15 +15,15 @@ export class UserProfile extends Component {
   //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
   componentWillMount(){
     var that = this;
+
     this.props.fetchUserInfo(window.location.pathname.split('/')[2])
     .then(function(thing) {
       that.fetchMyUpvotes(that.props.info.upvotedLists);
     });
-
   }
 
-  fetchMyUpvotes(ids){
-    this.props.fetchListsForUser(ids);
+  fetchMyUpvotes(listIds){
+    this.props.fetchListsForUser(listIds);
   }
   renderList(arr) {
     var out = [];
@@ -56,7 +47,6 @@ export class UserProfile extends Component {
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>);
     }
-
     return(
       <div>
         <NavBar />
@@ -69,6 +59,7 @@ export class UserProfile extends Component {
         </ul>
         <ul>
           <h1>Downvoted Lists</h1>
+
         </ul>
       </div>
     );
