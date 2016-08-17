@@ -19,7 +19,7 @@ export default class navBar extends Component {
           <div className="container-fluid">
             <div className="navbar-header">
               <Link to="/"  className="navbar-brand">
-                <img height="150%" src="../main_orange_logo.png" alt="WanderList-logo" />
+                <img height="100%" src="../final_logo.png" alt="WanderList-logo" />
               </Link>
             </div>
 
