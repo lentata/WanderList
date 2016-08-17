@@ -20,10 +20,18 @@ module.exports = function(app) {
 
   //get all lists, ADAPTED FOR MONGO
   app.get('/api/lists', function(req, res) {
-    console.log("myreq", req);
     List.find({}, function(err, docs) {
       if(err) throw err;
       res.send(docs);
+    });
+  });
+
+  //Get Quantity of lists
+  app.get('/api/list', function(req, res) {
+    List.count({}, function(err, num) {
+      if(err) throw err;
+      console.log('how manny', num);
+      res.status(201).json(num);
     });
   });
 
@@ -44,36 +52,46 @@ module.exports = function(app) {
 
 
 //List1 is Temporary for Pagination, Testing purposes only
+//TODO: RENAME List1
    app.post('/api/lists1', function(req, res) {
-    console.log("myreq", req.body);
     // List.find({}, function(err, docs) {
     //   if(err) throw err;
     //   res.send(docs);
     // });
-    var p = (req.body.type - 1) * 10;
-    console.log(p);
 
-    List
-    .find({})
-    .sort({createdAt: 'asc'})
-    .limit(10)
-    .skip(p)
-    .exec(function (err, posts) {
-      res.send(posts);
-    })
-    //  List.find({}, { skip: p, limit: 5 }, function(err, results) {
-    //    if(err) throw err;
-    //    res.send(results);
-    // });
+    var p = (req.body.type - 1) * 10;
+
+    if(req.body.filter === 'top'){
+      List
+      .find({})
+      .exec(function (err, posts) {
+        posts = posts.sort(function(a, b){
+          return (b.upvote - b.downvote) - (a.upvote - a.downvote);
+        });
+        res.send(posts.slice(p, p + 9));
+      });
+    } else 
+    
+    if(req.body.filter === 'new'){
+        List
+      .find({})
+      .sort({createdAt: 'desc'})
+      .limit(10)
+      .skip(p)
+      .exec(function (err, posts) {
+        res.send(posts);
+      });
+    }
+
+
+
+    
+
+
+
   });
 
-  // app.get('/api/user', function(req, res) {
-  //   User.findOne({'userId': '6pYSzmFLhJVQAVkvo8xFXDcd8Pe2'}, function(err, user) {
-  //     if(err) throw err;
-  //     console.log("DOC", user);
-  //     res.send(user);
-  //   });
-  // });
+
 
   app.get('/api/user/:uid', function(req, res) {
     var uid = req.params.uid;
@@ -288,6 +306,7 @@ module.exports = function(app) {
       User.update({'userId': uid}, { $pullAll: {'favLists': [lid]}}, function(err) {
         if(err) throw err;
       });
+
     } else {
       User.findOne({'userId': uid}, function(err, user) {
         if(err) throw err;

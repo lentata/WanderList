@@ -5,15 +5,7 @@ import { bindActionCreators } from 'redux';
 import NavBar from './nav';
 import List from '../containers/lists';
 
-/*.map((list, i) =>
-           <List {...this.props} 
-           info={this.props.info} 
-           votes={list.upvote - list.downvote} 
-           upLists={this.props.upLists} 
-           downLists={this.props.downLists} 
-           key={i} i={i} list={list} />)
 
-*/
 export class UserProfile extends Component {
   constructor(props){
     super(props);
@@ -25,15 +17,16 @@ export class UserProfile extends Component {
     var that = this;
     this.props.fetchUserInfo(window.location.pathname.split('/')[2])
     .then(function(thing) {
-      console.log("THE THING", thing);
       that.fetchMyUpvotes(that.props.info.upvotedLists);
     });
+
   }
+
+
 
   fetchMyUpvotes(ids){
     this.props.fetchListsForUser(ids);
   }
-
   renderList(arr) {
     var out = [];
     for(var piece in arr) {
@@ -42,14 +35,14 @@ export class UserProfile extends Component {
     return out.map((list, i) => <List {...this.props} info={this.props.info} votes={list.upvote - list.downvote} upLists={this.props.upLists} downLists={this.props.downLists} favoriteLists={this.props.favoriteLists} key={i} i={i} list={list} />);
   }
 
+
   render(){
     const { list, info, upBoat } = this.props;
-    console.log('userprofile', this.props);
-    console.log('list', upBoat);
 
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
       return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
         );
+
     }
   
     return(
@@ -58,22 +51,20 @@ export class UserProfile extends Component {
         <img src={info.photo} alt="Profile Picture" />
         <h3>{info.username}</h3>
         <h3>{info.email}</h3>
-
-
         <ul>
           <h1>Upvoted Lists</h1>
           {this.renderList(upBoat.upvotes.data)}
         </ul>
         <ul>
           <h1>Downvoted Lists</h1>
-        </ul>
-        
+        </ul>  
+
       </div>
     );
-    // {upBoat.upvotes.data}
-  }
-}
 
+  }
+
+}
 
 function mapStateToProps(state) {
   console.log("ProfileState", state);
@@ -84,7 +75,6 @@ function mapStateToProps(state) {
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
     upBoat: state.upvoter
-
   };
 }
 

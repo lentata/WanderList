@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchLists, fetchUserInfo } from '../actions/index';
+import { fetchLists, fetchUserInfo, postQuant } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import List from './lists';
 import { Link } from 'react-router';
@@ -8,13 +8,28 @@ import NavBar from '../components/nav';
 import {Panel} from 'react-bootstrap';
 import { Pagination } from 'react-bootstrap';
 
+
 export class ListGrid extends Component {
+  constructor(props){
+    super(props);
+    this.state = {term: "",
+                 activePage: 1};
+    this.filterList = this.filterList.bind(this);
+  }
   componentWillMount() {
-    this.state = {term: "", activePage: 1};
+    let that = this;
+    
+
     if(localStorage.getItem('logged')) {
       this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId);
     }
-    this.props.fetchLists({type: 1});
+    this.props.fetchLists({type: 1, 
+                          filter: 'top'});
+
+
+    this.props.postQuant().then(function(x){
+       console.log(that.props.itemNo.items);  
+    });
   }
 
   onInputChange(term) {
@@ -23,14 +38,30 @@ export class ListGrid extends Component {
 
   handleSelect(eventKey) {
     this.setState({activePage: eventKey});
-    this.props.fetchLists({type: eventKey});
+    this.props.fetchLists({type: eventKey,
+                           filter: 'top'});
+  }
+
+  filterList(prop){
+    console.log("where you called?");
+    //change filter property => PROP = 'top' || 'new'
+   this.props.fetchLists({type: this.state.activePage,
+                          filter: prop
+    });
   }
 
   render() {
+
+    if(!this.props.itemNo.items) {
+      return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div> 
+        );
+    }
     return (
       <div>
         <NavBar />
         <div>
+        <button name="top" onClick={()=>this.filterList("new")} >Test</button>
+
           <form>
             <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
           </form>
@@ -58,7 +89,7 @@ export class ListGrid extends Component {
           first
           last
           ellipsis
-          items={2}
+          items={Math.ceil(+this.props.itemNo.items / 10)}
           activePage={this.state.activePage}
           onSelect={this.handleSelect.bind(this)}
           >
@@ -75,12 +106,13 @@ function mapStateToProps(state) {
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
-    activePage: state.activePage
+    activePage: state.activePage,
+    itemNo: state.itemsNo
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchLists, fetchUserInfo }, dispatch);
+  return bindActionCreators({ fetchLists, fetchUserInfo, postQuant }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListGrid);

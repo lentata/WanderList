@@ -13,6 +13,7 @@ export const TOGGLEFAV = 'TOGGLEFAV';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const FETCH_UP = 'FETCH_UP';
+export const ITEM_NO = 'ITEM_NO';
 
 export function fetchUserInfo(uid) {
   const request = axios.get(`/api/user/${uid}`);
@@ -33,6 +34,7 @@ export function fetchListsForUser(props) {
 }
 //Pagination Post request for lists
 export function fetchLists(props) {
+  console.log("ACTION", props);
   const request = axios.post(`/api/lists1`, props);
   return {
     type: FETCH_LISTS,
@@ -142,4 +144,15 @@ export function removeComment(listId, commentIndex) {
     commentIndex,
     payload: request
   }
+}
+
+
+export function postQuant(){
+  const request = axios.get(`/api/list`);
+
+  return {
+    type: ITEM_NO,
+    payload: request
+  }
+
 }
