@@ -35,7 +35,7 @@ export default class ListComponent extends Component {
                 <span>
                   {list.categories.map((category, i) => {
                     return (
-                    <Link key={i} to={"categoryPage/" + category}>
+                    <Link key={i} to={"/categoryPage/" + category}>
                       <span className="label label-default">
                         { category }
                       </span>

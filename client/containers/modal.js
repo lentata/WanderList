@@ -26,7 +26,7 @@ export default class OurModal extends Component{
     return (
       <div>
         <Button onClick={this.open}>
-          Sign In
+          {this.props.status}
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close}>
