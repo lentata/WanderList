@@ -37,13 +37,12 @@ export default class navBar extends Component {
               </li>
 
               <li>
-                <Link to="/lists/new">
-                  Add a list
-                </Link>
+                {localStorage.getItem('logged') ?  <Link to="/lists/new">Add a list
+                </Link> : <OurModal status={'Add a List'} /> }
               </li>
 
               <li>
-                {localStorage.getItem('logged') ? <SignOut />  : <OurModal />}
+                {localStorage.getItem('logged') ? <SignOut />  : <OurModal status={'Sign In'}/>}
               </li>
 
               <li>

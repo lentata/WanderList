@@ -5,6 +5,8 @@ import { createList } from '../../actions/index'; //import our action creator
 import PureInput from './PureInput';
 import PureTextarea from './PureTextarea';
 import validate from './validateDeepForm';
+import Nav from '../../components/nav';
+
 
 export const fields = [
   'title',
@@ -66,15 +68,14 @@ export class DeepForm extends Component {
       submitting
     } = this.props
 
-    const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
-
     var divStyle = {
       color: 'red',
     };
-
-    if(author) {
+    
+    if(localStorage.getItem('logged')) {
       return (
         <form onSubmit={ handleSubmit(this.onSubmit) }>
+        <Nav />
           <div className="form-group">
             <legend>Create your headline and categories!</legend>
 
@@ -184,23 +185,9 @@ export class DeepForm extends Component {
               <Link to="/" className="btn btn-error">Cancel</Link>
             </div>
           </form>
+
         )
-    } else {
-      return (
-        <div>
-          <h1>You must be logged in to post a list!</h1>
-          <img height="100%" src="https://media.giphy.com/media/3o85xziIp4uruHAtB6/giphy.gif" alt="Huh?" />
-          <div className="mainBtns">
-            <Link to='/login' className="btn btn-default">
-              Log In  <span className="caret"></span>
-            </Link>
-            <Link to='/signup' className="btn btn-default">
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      )
-    }
+    } 
 
   } //closes render
 } //closes class
