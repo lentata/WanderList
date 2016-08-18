@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { fetchRandomList } from '../actions/index';
 import OurModal from '../containers/modal';
 import SignOut from './signoutButton';
 import SignUp from './signup';
@@ -25,13 +27,28 @@ export default class navBar extends Component {
 
             <div className="nav navbar-nav navbar-right mainBtns">
               <li>
-              <Link to="/lists/new">
-                Add a list
-              </Link>
+                <button
+                  name="random"
+                  onClick={()=>this.props.fetchRandomList()  .then(() => {
+                      browserHistory.push(`/lists/${this.props.id}`)
+                  })}>
+                  Random!
+                </button>
               </li>
 
-              <li>{localStorage.getItem('logged') ? <SignOut />  : <OurModal />}</li>
-              <li>{localStorage.getItem('logged') ? <Link to={'/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId}>Profile</Link> : <SignUp /> }</li>
+              <li>
+                <Link to="/lists/new">
+                  Add a list
+                </Link>
+              </li>
+
+              <li>
+                {localStorage.getItem('logged') ? <SignOut />  : <OurModal />}
+              </li>
+
+              <li>
+                {localStorage.getItem('logged') ? <Link to={'/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId}>Profile</Link> : <SignUp /> }
+              </li>
             </div>
           </div>
         </nav>
@@ -41,9 +58,13 @@ export default class navBar extends Component {
 }
 function mapStateToProps(state) {
   return {
-    loginState: state
+    loginState: state,
+    id: state.lists.id
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchRandomList }, dispatch);
+}
 
-export default connect(mapStateToProps, null)(navBar);
+export default connect(mapStateToProps, mapDispatchToProps)(navBar);

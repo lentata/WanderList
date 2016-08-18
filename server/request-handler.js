@@ -71,8 +71,8 @@ module.exports = function(app) {
         });
         res.send(posts.slice(p, p + 9));
       });
-    } else 
-    
+    } else
+
     if(req.body.filter === 'new'){
         List
       .find({})
@@ -82,7 +82,7 @@ module.exports = function(app) {
       .exec(function (err, posts) {
         res.send(posts);
       });
-    } else 
+    } else
 
     if(req.body.filter === 'contro'){
       List
@@ -91,7 +91,7 @@ module.exports = function(app) {
       .skip(p)
       .exec(function (err, posts) {
         posts = posts.sort(function(a, b){
-          return ((b.upvote+b.downvote) / Math.max(Math.abs(b.upvote-b.downvote), 1)) - 
+          return ((b.upvote+b.downvote) / Math.max(Math.abs(b.upvote-b.downvote), 1)) -
           ((a.upvote+a.downvote) / Math.max(Math.abs(a.upvote-a.downvote), 1))
 
         })
@@ -102,7 +102,7 @@ module.exports = function(app) {
 
 
 
-    
+
 
 
 
@@ -163,6 +163,18 @@ module.exports = function(app) {
     List.findOne({_id: id}, function(err, obj) {
       if(err) throw err;
       res.send(obj);
+    });
+  });
+
+  //get random list
+  app.get('/api/random', function(req, res) {
+    List.count().exec(function(err, count){
+      var random = Math.floor(Math.random() * count);
+
+      List.findOne().skip(random).exec(
+        function (err, result) {
+          res.send(result);
+      });
     });
   });
 

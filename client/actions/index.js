@@ -3,6 +3,7 @@ import axios from 'axios';
 export const USER_INFO = 'USER_INFO';
 export const FETCH_LISTS = 'FETCH_LISTS';
 export const FETCH_LIST = 'FETCH_LIST';
+export const FETCH_RANDOM = 'FETCH_RANDOM';
 export const CREATE_LIST = 'CREATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const AUTH_IN = 'AUTH_IN';
@@ -46,6 +47,14 @@ export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
   return {
     type: FETCH_LIST,
+    payload: request
+  };
+}
+
+export function fetchRandomList() {
+  const request = axios.get(`/api/random`);
+  return {
+    type: FETCH_RANDOM,
     payload: request
   };
 }
