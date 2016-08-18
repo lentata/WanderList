@@ -23,7 +23,8 @@ const INITIAL_STATE = {
   downvotedLists: [],
   favoriteLists: [],
   categoryLists: [],
-  searchLists: []
+  searchLists: [],
+  ownedLists: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -34,7 +35,13 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === CREATE_LIST) {
     return { ...state, createdList: action.payload.data};
   } else if(action.type === USER_INFO) {
-    return { ...state, info: action.payload.data, upvotedLists: action.payload.data.upvotedLists, downvotedLists: action.payload.data.downvotedLists, favoriteLists: action.payload.data.favLists };
+    return { ...state,
+      info: action.payload.data.user,
+      upvotedLists: action.payload.data.user.upvotedLists,
+      downvotedLists: action.payload.data.user.downvotedLists,
+      favoriteLists: action.payload.data.user.favLists,
+      ownedLists: action.payload.data.lists 
+    };
   } else if(action.type === FETCH_LISTS) {
     return {
       ...state, all: action.payload.data

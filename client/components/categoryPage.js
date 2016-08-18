@@ -51,7 +51,6 @@ function mapStateToProps(state) {
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
-    categoryLists: state.lists.categoryLists,
     searchLists: state.lists.searchLists
   };
 }

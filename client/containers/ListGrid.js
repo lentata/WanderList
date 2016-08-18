@@ -25,7 +25,6 @@ export class ListGrid extends Component {
     this.props.fetchLists({type: 1, filter: this.state.filter});
 
     this.props.postQuant().then(function(x){
-       console.log(that.props.itemNo.items);
     });
   }
 

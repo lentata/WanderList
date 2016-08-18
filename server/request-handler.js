@@ -102,10 +102,15 @@ module.exports = function(app) {
 
   app.get('/api/user/:uid', function(req, res) {
     var uid = req.params.uid;
-
+    var resObj = {};
     User.findOne({'userId': uid}, function(err, user) {
       if(err) throw err;
-      res.send(user);
+      resObj.user = user;
+      List.find({'authorId': uid}, function(err, lists) {
+        if(err) throw err;
+        resObj.lists = lists;
+        res.send(resObj);
+      });
     });
   });
 
