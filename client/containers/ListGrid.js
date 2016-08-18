@@ -12,12 +12,10 @@ import { Pagination } from 'react-bootstrap';
 export class ListGrid extends Component {
   constructor(props){
     super(props);
-    this.state = {term: "",
-                 activePage: 1,
-                filter: "new"};
+    this.state = {term: "", activePage: 1, filter: "new"};
     this.filterList = this.filterList.bind(this);
-    console.log('THIS IS THIS INSIDE CONSTUCTOR: ', props)
   }
+
   componentWillMount() {
     let that = this;
 
@@ -53,7 +51,6 @@ export class ListGrid extends Component {
   }
 
   render() {
-    console.log('this!!!!!!', this)
     if(!this.props.itemNo.items) {
       return (
         <div>

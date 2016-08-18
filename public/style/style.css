@@ -137,6 +137,10 @@ button.close {
   margin-top: 2%;
 }
 
+.search_by_cat_container {
+  margin-bottom: 10%
+}
+
 .label-default:before {
   content:'';
 
