@@ -51,6 +51,13 @@ module.exports = function(app) {
     })
   });
 
+  app.get('/api/lists/others', function(req, res) {
+    List.find({'authorId': req.query.id}, function(err, lists) {
+      if(err) throw err;
+      res.send(lists.map(list => list._id.toString()));
+    });
+  });
+
 //List1 is Temporary for Pagination, Testing purposes only
 //TODO: RENAME List1
    app.post('/api/lists1', function(req, res) {
