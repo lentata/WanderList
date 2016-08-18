@@ -71,9 +71,7 @@ module.exports = function(app) {
         });
         res.send(posts.slice(p, p + 9));
       });
-    } else
-
-    if(req.body.filter === 'new'){
+    } else if(req.body.filter === 'new'){
         List
       .find({})
       .sort({createdAt: 'desc'})
@@ -99,16 +97,7 @@ module.exports = function(app) {
         res.send(posts);
       });
     }
-
-
-
-
-
-
-
   });
-
-
 
   app.get('/api/user/:uid', function(req, res) {
     var uid = req.params.uid;
@@ -188,7 +177,6 @@ module.exports = function(app) {
       res.send(obj);
     });
   });
-
 
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
