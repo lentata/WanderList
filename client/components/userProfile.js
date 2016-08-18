@@ -14,12 +14,11 @@ export class UserProfile extends Component {
 
   //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
   componentWillMount(){
-    console.log("WILLMOUNT, ", this.props.params.id)
+    console.log("CHECKUSER, ", this.props.params.id===JSON.parse(localStorage.getItem('userId')).userId);
     this.props.fetchUserInfo(this.props.params.id)
-    .then(() => {
-      console.log("WILLMONT OWNLISTS, ", this.props.ownedLists);
-      this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
-    });
+      .then(() => {
+        this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
+      });
   }
 
   renderList() {
