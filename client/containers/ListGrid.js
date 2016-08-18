@@ -55,7 +55,7 @@ export class ListGrid extends Component {
     if(!this.props.itemNo.items) {
       return (
         <div>
-          <img height="100%" src="../loading_gangnam.gif" alt="loading" />
+          <img height="100%" src="../loading.gif" alt="loading" />
         </div>);
     }
 

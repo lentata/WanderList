@@ -10,6 +10,10 @@ export default class Votes extends Component {
     this.downvoteFunc = this.downvoteFunc.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('receiving votes for ', nextProps.list.title, nextProps.votes);
+  }
+
   upvoteFunc() {
     if(firebase.auth().currentUser) {
       this.props.upvoteAction(this.props.list._id, firebase.auth().currentUser.uid);

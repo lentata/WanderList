@@ -1,4 +1,4 @@
-import {FETCH_UP} from '../actions/index';
+import {FETCH_UP, FETCH_DOWN} from '../actions/index';
 
 const INITIAL_STATE = {
   upvotes: []
@@ -11,6 +11,8 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_UP:
       return { ...state, upvotes: action.payload} ;
       //return state;
+    case FETCH_DOWN:
+      return { ...state, downvotes: action.payload}
     default:
       return state;
   }
