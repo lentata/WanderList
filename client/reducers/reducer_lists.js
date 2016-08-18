@@ -1,6 +1,7 @@
 import { USER_INFO,
          FETCH_LISTS,
          FETCH_LIST,
+         FETCH_RANDOM,
          UPVOTE,
          DOWNVOTE,
          FETCHCATEGORIES,
@@ -12,6 +13,7 @@ import { USER_INFO,
 const INITIAL_STATE = {
   all: [],
   list: null,
+  id: null,
   createdList: null,
   info: null,
   upvotedLists: [],
@@ -23,6 +25,8 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
     return { ...state, list: action.payload.data };
+  } else if(action.type === FETCH_RANDOM) {
+    return { ...state, id: action.payload.data._id, list: action.payload.data };
   } else if(action.type === CREATE_LIST) {
     return { ...state, createdList: action.payload.data};
   } else if(action.type === USER_INFO) {
