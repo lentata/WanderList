@@ -8,7 +8,6 @@ export default class ListComponent extends Component {
   }
   render(){
     const { list } = this.props;
-    console.log("PROPPIES", this.props.list.authorId);
     return(
         <div className="col-md-10">
 

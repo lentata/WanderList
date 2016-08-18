@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case ITEM_NO:
-      console.log("upboat nummmys", action.payload.data);
       return { ...state, items: action.payload.data};
       //return state;
     default:

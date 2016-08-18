@@ -14,7 +14,11 @@ export class UserProfile extends Component {
 
   //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
   componentWillMount(){
-    this.props.fetchUserInfo(window.location.pathname.split('/')[2]);
+    console.log("CHECKUSER, ", this.props.params.id===JSON.parse(localStorage.getItem('userId')).userId);
+    this.props.fetchUserInfo(this.props.params.id)
+      .then(() => {
+        this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
+      });
   }
 
   renderList() {
@@ -30,8 +34,9 @@ export class UserProfile extends Component {
   }
 
   render(){
-    const { list, info, upLists, downLists } = this.props;
-    if(!upLists) {
+    const { list, info, upLists, downLists, favoriteLists, ownedLists } = this.props;
+    // console.log("LOCAL, ", localStorage.getItem('userId'))
+    if(!upLists || !info) {
       return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
     }
     return(
@@ -40,8 +45,10 @@ export class UserProfile extends Component {
         <img src={info.photo} alt="Profile Picture" />
         <h3>{info.username}</h3>
         <h3>{info.email}</h3>
+        <button className="main_tabs" onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
         <button className="main_tabs" onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</button>
         <button className="main_tabs" onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</button>
+        <button className="main_tabs" onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</button>
 
         <ul>
           {this.renderList()}
@@ -58,6 +65,7 @@ function mapStateToProps(state) {
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
+    ownedLists: state.lists.ownedLists
   };
 }
 

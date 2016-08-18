@@ -11,7 +11,6 @@ export class Lists extends Component {
 
   renderLists() {
     const { list, upvote, downvote, favorite, info, upLists, downLists, favoriteLists, votes } = this.props;
-    console.log('votes in lists', list.title,votes);
     return (
       <div className="media" key={ list._id }>
         <div className="row">
