@@ -4,11 +4,8 @@ var User = require('./models/mongo_user');
 var mongoose = require('mongoose');
 
 var path = require('path');
-// var Users = require('./collections/users');
-// var User = require('./models/user');
 var jsonfile = require('jsonfile');
 
-// var Q = require('q');
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
@@ -49,9 +46,6 @@ module.exports = function(app) {
     });
   });
 
-
-
-
 //List1 is Temporary for Pagination, Testing purposes only
 //TODO: RENAME List1
    app.post('/api/lists1', function(req, res) {
@@ -71,7 +65,9 @@ module.exports = function(app) {
         });
         res.send(posts.slice(p, p + 9));
       });
-    } else if(req.body.filter === 'new'){
+    } else
+
+    if(req.body.filter === 'new'){
         List
       .find({})
       .sort({createdAt: 'desc'})
@@ -172,6 +168,17 @@ module.exports = function(app) {
     var categories = req.params.categories;
     console.log('CATEGORIES: ', categories);
     List.find({categories: {"$in" : [categories]}}, function(err, obj) {
+      if(err) throw err;
+      console.log('THIS IS OBJ: ', obj);
+      res.send(obj);
+    });
+  });
+
+  // Get lists that match searched term
+  app.get('/api/search/:searchedTerm', function(req, res) {
+    var searchedTerm = req.params.searchedTerm;
+    console.log('SEARCHED TERMS: ', searchedTerm);
+    List.find({title: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
       if(err) throw err;
       console.log('THIS IS OBJ: ', obj);
       res.send(obj);

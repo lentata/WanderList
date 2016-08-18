@@ -5,6 +5,7 @@ import { USER_INFO,
          UPVOTE,
          DOWNVOTE,
          FETCHCATEGORIES,
+         SEARCHLISTS,
          TOGGLEFAV,
          ADD_COMMENT,
          REMOVE_COMMENT,
@@ -19,7 +20,8 @@ const INITIAL_STATE = {
   upvotedLists: [],
   downvotedLists: [],
   favoriteLists: [],
-  categoryLists: []
+  categoryLists: [],
+  searchLists: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -208,6 +210,12 @@ export default function(state = INITIAL_STATE, action) {
     return {
       ...state,
       categoryLists: [...action.payload.data]
+    };
+  } else if(action.type === SEARCHLISTS) {
+    console.log('THIS IS PAYLOAD DATA: ', action.payload)
+    return {
+      ...state,
+      searchLists: [...action.payload.data]
     };
   } else {
     return state;

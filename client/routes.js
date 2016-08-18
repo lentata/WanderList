@@ -9,6 +9,7 @@ import Login from './containers/login';
 import Signup from './containers/signup';
 import UserProfile from './components/userProfile';
 import CategoryPage from './components/categoryPage';
+import SearchPage from './components/searchPage';
 
 export default (
   <Route path='/' component={ App }>
@@ -20,5 +21,6 @@ export default (
     <Route path='votes' component={ ListGrid } />
     <Route path='userProfile/:id' component={ UserProfile } />
     <Route path='categoryPage/:categories' component={ CategoryPage } />
+    <Route path='search/:searchedTerm' component={ SearchPage } />
   </Route>
 );

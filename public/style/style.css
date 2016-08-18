@@ -270,7 +270,7 @@ button.close {
 
 .list-group-item {
   border-radius: 0px !important;
-  margin-bottom: 1.5% !important;
+  margin-bottom: 1% !important;
   padding: 0px;
 }
 
@@ -290,6 +290,10 @@ button.close {
 .navbar-brand {
   padding: 0 !important;
   margin: 0 !important;
+}
+
+.navbar-brand>img {
+  margin: 5% !important;
 }
 
 .nav-tabs {
@@ -353,6 +357,10 @@ button.close {
   padding: 0px;
   border: none;
   border-radius: 0px;
+}
+
+.form-control {
+  border-radius: 0px !important;
 }
 
 body {

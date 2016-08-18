@@ -33,7 +33,6 @@ export default class ListComponent extends Component {
               </div>
 
               <div>
-                <span className="fa fa-tags"/>
                 <span>
                   {list.categories.map((category, i) => {
                     return (

@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchListCategories } from '../actions/index';
+import { fetchedSearchLists } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import NavBar from './nav';
 import List from '../containers/lists';
 
-export class CategoryPage extends Component {
+export class SearchPage extends Component {
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
-    this.props.fetchListCategories(this.props.params.categories);
+    this.props.fetchedSearchLists(this.props.params.searchedTerm);
   }
 
-  renderCatList(arr) {
+  renderSearchedList(arr) {
     var out = [];
     for(var piece in arr) {
       out.push(arr[piece]);
     }
 
+    console.log('PROPS BEFORE RENDER: ', this.props)
     return out.map((list, i) => <List {...this.props}
       info={this.props.info}
       votes={list.upvote - list.downvote}
@@ -34,13 +35,14 @@ export class CategoryPage extends Component {
 
   render(){
     const { list, info } = this.props;
+    console.log('THIS IS THIS.PROPS: ', this.props)
     return(
       <div>
         <NavBar />
         <ul>
-          <h1>{this.props.params.categories}</h1>
+          <h1>{this.props.params.searchedTerm}</h1>
           <div>
-            {this.renderCatList(this.props.categoryLists)}
+            {this.renderSearchedList(this.props.searchLists)}
           </div>
         </ul>
       </div>
@@ -61,7 +63,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchListCategories }, dispatch);
+  return bindActionCreators({ fetchedSearchLists }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

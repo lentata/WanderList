@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchLists, fetchUserInfo, postQuant } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import List from './lists';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import NavBar from '../components/nav';
 import {Panel} from 'react-bootstrap';
 import { Pagination } from 'react-bootstrap';
@@ -16,6 +16,7 @@ export class ListGrid extends Component {
                  activePage: 1,
                 filter: "new"};
     this.filterList = this.filterList.bind(this);
+    console.log('THIS IS THIS INSIDE CONSTUCTOR: ', props)
   }
   componentWillMount() {
     let that = this;
@@ -37,7 +38,7 @@ export class ListGrid extends Component {
   handleSelect(eventKey) {
     this.setState({activePage: eventKey});
     this.props.fetchLists({type: eventKey,
-                           filter: this.state.filter});
+    filter: this.state.filter});
   }
 
   filterList(prop){
@@ -52,6 +53,7 @@ export class ListGrid extends Component {
   }
 
   render() {
+    console.log('this!!!!!!', this)
     if(!this.props.itemNo.items) {
       return (
         <div>
@@ -63,19 +65,18 @@ export class ListGrid extends Component {
       <div>
         <NavBar />
         <div>
-          <button name="new" onClick={()=>this.filterList("new")}>New</button>
-          <button name="top" onClick={()=>this.filterList("top")}>Top</button>
-          <button name="controversial" onClick={()=>this.filterList("contro")}>Controversial</button>
+          <button className="new main_tabs" onClick={()=>this.filterList("new")}>New</button>
+          <button className="top main_tabs" onClick={()=>this.filterList("top")}>Top</button>
+          <button className="controversial main_tabs" onClick={()=>this.filterList("contro")}>Controversial</button>
 
-          <form>
-            <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
-          </form>
+          <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
+          <Link to={'/search/' + this.state.term}>Search</Link>
+
         </div>
 
         <Panel />
         <ul className="list-group">
           {this.props.lists
-            .filter(list => list.title.match(new RegExp("\\b".concat(this.state.term), "gi")))
             .map((list, i) => <List {...this.props}
               info={this.props.info}
               votes={list.upvote - list.downvote}
