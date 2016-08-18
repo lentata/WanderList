@@ -11,6 +11,7 @@ export const SIGN_UP = 'SIGN_UP';
 export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
 export const FETCHCATEGORIES = 'FETCHCATEGORIES';
+export const SEARCHLISTS = 'SEARCHLISTS';
 export const TOGGLEFAV = 'TOGGLEFAV';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
@@ -116,6 +117,14 @@ export function fetchListCategories(categories) {
   const request = axios.get(`/api/categoryPage/${categories}`);
   return {
     type: FETCHCATEGORIES,
+    payload: request
+  };
+}
+
+export function fetchedSearchLists(searchedTerm) {
+  const request = axios.get(`/api/search/${searchedTerm}`);
+  return {
+    type: SEARCHLISTS,
     payload: request
   };
 }
