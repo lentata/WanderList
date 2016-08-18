@@ -52,9 +52,16 @@ module.exports = function(app) {
   });
 
   app.get('/api/lists/others', function(req, res) {
+    var resObj = {};
     List.find({'authorId': req.query.id}, function(err, lists) {
       if(err) throw err;
-      res.send(lists.map(list => list._id.toString()));
+      resObj.lists = lists.map(list => list._id.toString());
+      User.findOne({'userId': req.query.id}, function(err, user) {
+        if(err) throw err;
+        resObj.info = user;
+        console.log(resObj);
+        res.send(resObj);
+      });
     });
   });
 

@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   id: null,
   createdList: null,
   info: null,
+  otherInfo: null,
   upvotedLists: [],
   downvotedLists: [],
   favoriteLists: [],
@@ -240,7 +241,8 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === OTHERS_LISTS) {
     return {
       ...state,
-      othersLists: action.payload.data
+      otherInfo: action.payload.data.info,
+      othersLists: action.payload.data.lists
     }
   } else {
     return state;

@@ -40,11 +40,11 @@ export class UserProfile extends Component {
   }
 
   render(){
-    const { list, info, upLists, downLists, favoriteLists, ownedLists } = this.props;
-    if(!upLists || !info) {
-      return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
-    }
+    const { list, info, otherInfo, upLists, downLists, favoriteLists, ownedLists } = this.props;
     if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId) {
+      if(!upLists || !info) {
+        return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
+      }
       return(
         <div>
           <NavBar />
@@ -62,12 +62,15 @@ export class UserProfile extends Component {
         </div>
       );
     } else {
+      if(!upLists || !otherInfo) {
+        return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
+      }
       return(
         <div>
           <NavBar />
-          <img src={info.photo} alt="Profile Picture" />
-          <h3>{info.username}</h3>
-          <h3>{info.email}</h3>
+          <img src={otherInfo.photo} alt="Profile Picture" />
+          <h3>{otherInfo.username}</h3>
+          <h3>{otherInfo.email}</h3>
           <button className="main_tabs" onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
 
           <ul>
@@ -83,6 +86,7 @@ function mapStateToProps(state) {
   return {
     list: state.lists.all,
     info: state.lists.info,
+    otherInfo: state.lists.otherInfo,
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
