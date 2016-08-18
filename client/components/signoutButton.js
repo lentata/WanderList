@@ -9,7 +9,6 @@ export default class SignOut extends Component {
 
   }
   signOutFunc(){
-    console.log("HIIII");
     firebase.auth().signOut();
     localStorage.removeItem("logged");
   }

@@ -26,7 +26,6 @@ export function fetchUserInfo(uid) {
 }
 //Props here is userID
 export function fetchListsForUser(props, query) {
-  console.log("fetcherprops", query);
   const request = axios.post(`/api/lists/upvote`, props);
   return {
     type: query,
@@ -53,7 +52,7 @@ export function fetchList(id) {
 
 export function createList(props) {
   props.author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : "idk  ¯\_(ツ)_/¯";
-
+  props.authorId = firebase.auth().currentUser.uid;
   const request = axios.post(`/api/lists`, props);
   return {
     type: CREATE_LIST,

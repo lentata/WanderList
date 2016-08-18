@@ -8,6 +8,7 @@ export default class ListComponent extends Component {
   }
   render(){
     const { list } = this.props;
+    console.log("PROPPIES", this.props.list.authorId);
     return(
         <div className="col-md-10">
 
@@ -25,7 +26,7 @@ export default class ListComponent extends Component {
               <div>
                 {/*<span className="glyphicon glyphicon-user"> {list.author} &nbsp;</span>*/}
                 <span className="fa fa-user"/>
-                <span> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</span>
+                <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
                 <span className="fa fa-clock-o"/>
                 <span> {moment(list.createdAt).fromNow()} &nbsp;</span>
                 <span className="fa fa-commenting"/> <span>{list.comments.length > 1 ? list.comments.length+" comments" : list.comments.length === 1 ? 1+" comment" : "leave a comment!"}</span>
@@ -34,9 +35,9 @@ export default class ListComponent extends Component {
               <div>
                 <span className="fa fa-tags"/>
                 <span>
-                  {list.categories.map(category => {
+                  {list.categories.map((category, i) => {
                     return (
-                    <Link to={"categoryPage/" + category}>
+                    <Link key={i} to={"categoryPage/" + category}>
                       <span className="label label-default">
                         { category }
                       </span>

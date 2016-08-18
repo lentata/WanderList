@@ -44,9 +44,9 @@ export class UserProfile extends Component {
 
   render(){
     const { list, info, upBoat } = this.props;
-    console.log('upBoat', upBoat);
+    console.log("upBoat", upBoat);
     if(!upBoat.upvotes || !upBoat.upvotes.data) {
-      return (<div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>);
+      return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
     }
     return(
       <div>
@@ -70,7 +70,6 @@ export class UserProfile extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log("ProfileState", state);
   return {
     list: state.lists.all,
     info: state.lists.info,

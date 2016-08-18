@@ -53,7 +53,7 @@ export class ListDetail extends Component {
     const author = this.props.list ? this.props.list.authorId : null;
 
     if(!list) {
-      return <div><img height="100%" src="../loading_gangnam.gif" alt="loading" /></div>;
+      return <div><img height="100%" src="../loading.gif" alt="loading" /></div>;
     }
     return (
       <div>

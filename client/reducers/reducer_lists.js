@@ -104,6 +104,7 @@ export default function(state = INITIAL_STATE, action) {
       }
     });
     let targetList = state.all[index];
+    console.log('the target list', targetList);
     if (downIndex === -1) {
       if (upIndex === -1) {
         targetList.downvote += 1;

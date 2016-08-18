@@ -77,7 +77,7 @@ module.exports = function(app) {
         List
       .find({})
       .sort({createdAt: 'desc'})
-      .limit(10)
+      .limit(9)
       .skip(p)
       .exec(function (err, posts) {
         res.send(posts);
@@ -87,6 +87,8 @@ module.exports = function(app) {
     if(req.body.filter === 'contro'){
       List
       .find({})
+      .limit(9)
+      .skip(p)
       .exec(function (err, posts) {
         posts = posts.sort(function(a, b){
           return ((b.upvote+b.downvote) / Math.max(Math.abs(b.upvote-b.downvote), 1)) - 
@@ -190,6 +192,7 @@ module.exports = function(app) {
     req.body.downvote = 0;
     req.body.comments = [];
     req.body.createdAt = Date.now();
+
 
     var posted = req.body;
 
