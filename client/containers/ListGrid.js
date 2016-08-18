@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import { fetchLists, fetchUserInfo, postQuant } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import List from './lists';
-import { Link, browserHistory } from 'react-router';
+import { Link, browserHistory, history } from 'react-router';
 import NavBar from '../components/nav';
 import {Panel} from 'react-bootstrap';
 import { Pagination } from 'react-bootstrap';
-
+import { push } from 'react-router-redux';
 
 export class ListGrid extends Component {
   constructor(props){
     super(props);
     this.state = {term: "", activePage: 1, filter: "new"};
     this.filterList = this.filterList.bind(this);
+    this.searchWithEnter = this.searchWithEnter.bind(this);
   }
 
   componentWillMount() {
@@ -49,6 +50,14 @@ export class ListGrid extends Component {
     });
   }
 
+  searchWithEnter(event) {
+    console.log('OUTSIDE');
+    if(event.keyCode === 13) {
+      console.log('INSIDE BEST SIDE');
+      browserHistory.push(`/search/${this.state.term}`);
+    }
+  }
+
   render() {
     if(!this.props.itemNo.items) {
       return (
@@ -65,7 +74,7 @@ export class ListGrid extends Component {
           <button className="top main_tabs" onClick={()=>this.filterList("top")}>Top</button>
           <button className="controversial main_tabs" onClick={()=>this.filterList("contro")}>Controversial</button>
 
-          <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} />
+          <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} onKeyUp={this.searchWithEnter}/>
           <Link to={'/search/' + this.state.term}>Search</Link>
 
         </div>

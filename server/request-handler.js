@@ -197,7 +197,7 @@ module.exports = function(app) {
     // var searchedTerm = {'$regex': req.params.searchedTerm, '$options': "i"};
     // var searchedTerm = new RegExp(req.params.searchedTerm, "i");
     // console.log('THIS IS REGEX!!! ', searchedTermTwo);
-    List.find({categories: {"$in" : [searchedTerm]}}, function(err, obj) {
+    List.find({categories: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
       if(err) throw err;
       console.log('THIS IS OBJ2: ', obj);
       res.send(obj);
