@@ -14,13 +14,9 @@ export class CategoryPage extends Component {
     this.props.fetchListCategories(this.props.params.categories);
   }
 
-  renderCatList(arr) {
-    var out = [];
-    for(var piece in arr) {
-      out.push(arr[piece]);
-    }
+  renderCatList() {
 
-    return out.map((list, i) => <List {...this.props}
+    return this.props.list.map((list, i) => <List {...this.props}
       info={this.props.info}
       votes={list.upvote - list.downvote}
       upLists={this.props.upLists}
@@ -40,7 +36,7 @@ export class CategoryPage extends Component {
         <ul>
           <h1>{this.props.params.categories}</h1>
           <div>
-            {this.renderCatList(this.props.categoryLists)}
+            {this.renderCatList()}
           </div>
         </ul>
       </div>
