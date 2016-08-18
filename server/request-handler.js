@@ -186,6 +186,21 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/api/searchCat/:searchedTerm', function(req, res) {
+    var searchedTerm = req.params.searchedTerm;
+    // var searchedTermTwo = "/" + searchedTerm + "/i";
+    // var searchedTerm = {'$regex': req.params.searchedTerm, '$options': "i"};
+    // var searchedTerm = new RegExp(req.params.searchedTerm, "i");
+    // console.log('THIS IS REGEX!!! ', searchedTermTwo);
+    List.find({categories: {"$in" : [searchedTerm]}}, function(err, obj) {
+      if(err) throw err;
+      console.log('THIS IS OBJ2: ', obj);
+      res.send(obj);
+    });
+  });
+
+
+
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
     List.findByIdAndRemove({_id: req.params.id}, function(err){

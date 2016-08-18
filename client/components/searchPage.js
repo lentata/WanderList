@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchedSearchLists } from '../actions/index';
+import { fetchedSearchLists, fetchedSearchCategories } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import NavBar from './nav';
 import List from '../containers/lists';
@@ -12,6 +12,7 @@ export class SearchPage extends Component {
 
   componentWillMount() {
     this.props.fetchedSearchLists(this.props.params.searchedTerm);
+    this.props.fetchedSearchCategories(this.props.params.searchedTerm);
   }
 
   renderSearchedList(arr) {
@@ -35,13 +36,16 @@ export class SearchPage extends Component {
 
   render(){
     const { list, info } = this.props;
-    console.log('THIS IS THIS.PROPS: ', this.props)
     return(
       <div>
         <NavBar />
         <ul>
-          <h1>{this.props.params.searchedTerm}</h1>
-          <div>
+          <h1>By Categories: {this.props.params.searchedTerm}</h1>
+          <div className="search_by_cat_container">
+            {this.renderSearchedList(this.props.searchCats)}
+          </div>
+          <h1>By Title: {this.props.params.searchedTerm}</h1>
+          <div className="search_by_title_container">
             {this.renderSearchedList(this.props.searchLists)}
           </div>
         </ul>
@@ -58,12 +62,13 @@ function mapStateToProps(state) {
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
     categoryLists: state.lists.categoryLists,
-    searchLists: state.lists.searchLists
+    searchLists: state.lists.searchLists,
+    searchCats: state.lists.searchCats
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchedSearchLists }, dispatch);
+  return bindActionCreators({ fetchedSearchLists, fetchedSearchCategories }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

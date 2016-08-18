@@ -12,6 +12,7 @@ export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
 export const FETCHCATEGORIES = 'FETCHCATEGORIES';
 export const SEARCHLISTS = 'SEARCHLISTS';
+export const SEARCHCATS = 'SEARCHCATS';
 export const TOGGLEFAV = 'TOGGLEFAV';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
@@ -136,6 +137,14 @@ export function fetchedSearchLists(searchedTerm) {
   const request = axios.get(`/api/search/${searchedTerm}`);
   return {
     type: SEARCHLISTS,
+    payload: request
+  };
+}
+
+export function fetchedSearchCategories(searchedTerm) {
+  const request = axios.get(`/api/searchCat/${searchedTerm}`);
+  return {
+    type: SEARCHCATS,
     payload: request
   };
 }

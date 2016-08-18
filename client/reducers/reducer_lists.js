@@ -6,6 +6,7 @@ import { USER_INFO,
          DOWNVOTE,
          FETCHCATEGORIES,
          SEARCHLISTS,
+         SEARCHCATS,
          TOGGLEFAV,
          ADD_COMMENT,
          REMOVE_COMMENT,
@@ -222,6 +223,11 @@ export default function(state = INITIAL_STATE, action) {
       ...state,
       all: action.payload.data
     }
+  } else if(action.type === SEARCHCATS) {
+    return {
+      ...state,
+      searchCats: [...action.payload.data]
+    };
   } else {
     return state;
   }
