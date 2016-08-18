@@ -18,12 +18,12 @@ export class UserProfile extends Component {
     console.log('downvotedLists', this.props.downLists);
     this.props.fetchUserInfo(window.location.pathname.split('/')[2])
     .then(function(thing) {
-      that.fetchMyUpvotes(that.props.info.upvotedLists, 'FETCH_UP');
-      that.fetchMyUpvotes(that.props.downLists, 'FETCH_DOWN');
+      that.fetchVoteLists(that.props.upLists, 'FETCH_UP');
+      that.fetchVoteLists(that.props.downLists, 'FETCH_DOWN');
     });
   }
  
-  fetchMyUpvotes(listIds, query){
+  fetchVoteLists(listIds, query){
     this.props.fetchListsForUser(listIds, query);
   }
   renderList(arr) {

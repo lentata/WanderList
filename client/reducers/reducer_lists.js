@@ -209,7 +209,7 @@ export default function(state = INITIAL_STATE, action) {
   } else if(action.type === FETCHCATEGORIES) {
     return {
       ...state,
-      categoryLists: [...action.payload.data]
+      all: action.payload.data
     };
   } else if(action.type === SEARCHLISTS) {
     console.log('THIS IS PAYLOAD DATA: ', action.payload)
