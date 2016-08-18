@@ -18,6 +18,7 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const FETCH_UP = 'FETCH_UP';
 export const FETCH_DOWN = 'FETCH_DOWN';
 export const ITEM_NO = 'ITEM_NO';
+export const FILTER_LISTS = 'FILTER_LISTS';
 
 export function fetchUserInfo(uid) {
   const request = axios.get(`/api/user/${uid}`);
@@ -34,6 +35,16 @@ export function fetchListsForUser(props, query) {
     payload: request
   };
 }
+
+export function filterLists(props) {
+  const query = JSON.stringify(props);
+  const request = axios.get(`/api/lists/votelist?ids=${query}`);
+  return {
+    type: FILTER_LISTS,
+    payload: request
+  }
+}
+
 //Pagination Post request for lists
 export function fetchLists(props) {
   // console.log("ACTION", props);

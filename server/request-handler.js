@@ -27,7 +27,6 @@ module.exports = function(app) {
   app.get('/api/list', function(req, res) {
     List.count({}, function(err, num) {
       if(err) throw err;
-      console.log('how manny', num);
       res.status(201).json(num);
     });
   });
@@ -35,7 +34,6 @@ module.exports = function(app) {
   //get all upvotes
   app.post('/api/lists/upvote', function(req, res) {
     var ids = [];
-    console.log("REQBODY", req.body);
     List.find({}, function(err, docs) {
       docs.forEach(function(item){
         if(req.body.indexOf("" + item._id) !== -1){
@@ -44,6 +42,13 @@ module.exports = function(app) {
       })
       res.status(201).json(ids);
     });
+  });
+
+  app.get('/api/lists/votelist', function(req, res) {
+    List.find({'_id': {$in: JSON.parse(req.query.ids)}}, function(err, lists) {
+      if(err) throw err;
+      res.send(lists);
+    })
   });
 
 //List1 is Temporary for Pagination, Testing purposes only
@@ -166,10 +171,8 @@ module.exports = function(app) {
   // Get category
   app.get('/api/categoryPage/:categories', function(req, res) {
     var categories = req.params.categories;
-    console.log('CATEGORIES: ', categories);
     List.find({categories: {"$in" : [categories]}}, function(err, obj) {
       if(err) throw err;
-      console.log('THIS IS OBJ: ', obj);
       res.send(obj);
     });
   });
@@ -177,10 +180,8 @@ module.exports = function(app) {
   // Get lists that match searched term
   app.get('/api/search/:searchedTerm', function(req, res) {
     var searchedTerm = req.params.searchedTerm;
-    console.log('SEARCHED TERMS: ', searchedTerm);
     List.find({title: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
       if(err) throw err;
-      console.log('THIS IS OBJ: ', obj);
       res.send(obj);
     });
   });
@@ -255,8 +256,6 @@ module.exports = function(app) {
     var lid = req.body.lid;
     var vflag = req.body.votes;
     var uid = req.body.uid;
-
-    console.log("USERID", uid);
 
     var mapUpLists = {};
     var mapDownLists = {};
