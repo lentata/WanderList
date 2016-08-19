@@ -58,6 +58,9 @@ export class UserProfile extends Component {
   }
 
   renderList() {
+    if(!this.props.list.length){
+      return ("Add Some Lists");
+    }
     return this.props.list.map((list, i) => <List {...this.props}
       info={this.props.info}
       votes={list.upvote - list.downvote}

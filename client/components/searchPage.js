@@ -20,6 +20,9 @@ export class SearchPage extends Component {
     for(var piece in arr) {
       out.push(arr[piece]);
     }
+    if(!out.length){
+      return "NOTHING FOUND";
+    }
 
     console.log('PROPS BEFORE RENDER: ', this.props)
     return out.map((list, i) => <List {...this.props}
