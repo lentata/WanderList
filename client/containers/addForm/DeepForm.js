@@ -50,7 +50,7 @@ export class DeepForm extends Component {
 
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
 
-    if(author) {
+    if(props.authorId) {
       this.props.createList(props);
       browserHistory.push('/');
     } else {
@@ -71,7 +71,7 @@ export class DeepForm extends Component {
     var divStyle = {
       color: 'red',
     };
-    
+
     if(localStorage.getItem('logged')) {
       return (
         <form onSubmit={ handleSubmit(this.onSubmit) }>
@@ -187,7 +187,7 @@ export class DeepForm extends Component {
           </form>
 
         )
-    } 
+    }
 
   } //closes render
 } //closes class
