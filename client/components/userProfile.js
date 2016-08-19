@@ -27,19 +27,21 @@ export class UserProfile extends Component {
       });
   }
 
-  // componentWillUpdate(nextProps, nextState) {
-  //   this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId)
-  //     .then(() => {
-  //       if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId) {
-  //         this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
-  //       } else {
-  //         this.props.fetchOthersInfo(this.props.params.id)
-  //           .then(() => {
-  //             this.props.filterLists(this.props.othersLists);
-  //           });
-  //       }
-  //     });
-  // }
+  componentWillUpdate(nextProps, nextState) {
+    if(this.props.location.pathname !== nextProps.location.pathname) {
+      this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId)
+        .then(() => {
+          if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId) {
+            this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
+          } else {
+            this.props.fetchOthersInfo(this.props.params.id)
+              .then(() => {
+                this.props.filterLists(this.props.othersLists);
+              });
+          }
+        });
+    }
+  }
 
   renderList() {
     return this.props.list.map((list, i) => <List {...this.props}
@@ -56,7 +58,6 @@ export class UserProfile extends Component {
   render(){
     const { list, info, otherInfo, upLists, downLists, favoriteLists, ownedLists } = this.props;
     if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId) {
-      console.log("EQUAL");
       if(!upLists || !info) {
         return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
       }
@@ -77,7 +78,6 @@ export class UserProfile extends Component {
         </div>
       );
     } else {
-      console.log("NOT EQUAL");
       if(!otherInfo) {
         return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
       }
