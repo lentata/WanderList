@@ -21,7 +21,6 @@ export class Comments extends Component {
           <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
 
           {deleter === comment.userId ? <button className="remove-comment" onClick={ this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button> : <div/>}
-          {/*<button className="remove-comment" onClick={comment.userId === deleter ? this.props.removeComment.bind(this, this.props.list._id, i) : null}>&times;</button>*/}
         </h5>
         <h5><Linkify>{comment.text}</Linkify></h5>
       </div>
@@ -44,18 +43,29 @@ export class Comments extends Component {
       alert("You must log in to post a comment!")
     }
   }
-  //ref attributes on form allow us to use them in handle submit function
+
   render() {
-    // console.log(this.props);
+
+    // let sortedComments = this.props.list.comments.sort( (a, b) => {
+    //   console.log("a:", a, "b:", b);
+    //   return Date.parse(b.posted) - Date.parse(a.posted)
+    // });
+    //
+    // console.log('sorted comments!', sortedComments);
 
     return (
       <div className="comments">
         <legend className="list-legend">Comments</legend>
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="comment" placeholder="Leave a comment!" />
+          <input type="text" ref="comment" placeholder=" Leave a comment!" />
           <input type="submit" hidden />
         </form>
-        {this.props.list.comments.map(this.renderComment, this)}
+        {this.props.list.comments
+          .sort( (a, b) => {
+          // console.log("a:", a, "b:", b);
+          return Date.parse(b.posted) - Date.parse(a.posted);
+        })
+          .map(this.renderComment, this)}
       </div>
     )
   }
