@@ -9,18 +9,30 @@ export class Signup extends Component {
   };
 
   onSubmit(props) {
-    firebase.auth().createUserWithEmailAndPassword(props.username, props.password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });
+    var displayName = this.props.values.displayName;
+    var email = this.props.values.username;
+    var password = this.props.values.password;
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function() {
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: displayName
+        })
+      })
+      .catch(function(error) {
+        alert('Failed to sign up. ' + error.message);
+      });
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit} = this.props;
+    const {fields: {displayName, username, password}, handleSubmit} = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h2>Signup</h2>
+        <div>
+          <label>Name</label>
+          <input type="text" placeholder="Enter Your Name" {...displayName}/>
+        </div>
         <div>
           <label>Username</label>
           <input type="text" placeholder="Enter Username" {...username}/>
@@ -40,5 +52,5 @@ export class Signup extends Component {
 
 export default reduxForm({
   form: 'signupForm',
-  fields: ['username', 'password']
+  fields: ['displayName', 'username', 'password']
 }, null, {userCreate})(Signup);

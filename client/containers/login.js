@@ -15,18 +15,24 @@ export class Login extends Component {
     router: PropTypes.object
   };
 
-  emailSignIn(prop) {
-    firebase.auth().signInWithEmailAndPassword(prop.username, prop.password).then(function(result) {
+  emailSignIn(props) {
+    firebase.auth().signInWithEmailAndPassword(props.username, props.password).then(function(result) {
       alert("Logged in")
       var user = firebase.auth().currentUser;
       var userData = user.providerData[0]
       var userDataStorage = {
         displayName: userData.displayName,
         email: userData.email,
-        photo: userData.photoURL,
-        userId: userData.uid
+        photo: null,
+        userId: user.uid
       };
       Login.context.userAuth(userDataStorage);
+      let logged = {logged: true};
+      let userId = {userId: userDataStorage.userId}
+      localStorage.setItem('logged', JSON.stringify(logged));
+      localStorage.setItem('userId', JSON.stringify(userId));
+      fetchUserInfo(userId.userId);
+      browserHistory.push('/');
     }).catch(function(error) {
       alert(error.message)
     });
@@ -53,7 +59,6 @@ export class Login extends Component {
 
   socialLogin(props) {
     firebase.auth().signInWithPopup(this.provider).then(function(result) {
-      var token = result.credential.accessToken;
       var user = firebase.auth().currentUser;
       var userData = user.providerData[0]
       var userDataStorage = {
@@ -121,6 +126,7 @@ export class Login extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('THIS IS STATE: ', state)
   return {
     authStatus: state.auth.authState
   }
@@ -132,5 +138,5 @@ function mapDispatchToProps(dispatch) {
 
 export default reduxForm({
   form: 'loginForm',
-  fields: ['username', 'password']
+  fields: ['displayName', 'username', 'password']
 }, mapStateToProps, {userAuth, fetchUserInfo})(Login);
