@@ -15,6 +15,10 @@ copy
   background-color: #ecf0f1;
 }
 
+.container-fluid {
+  margin-bottom: 10px;
+}
+
 .navbar {
   background-color: #fff;
   /*height: 7%;*/
