@@ -51,6 +51,20 @@ module.exports = function(app) {
     })
   });
 
+  app.get('/api/lists/others', function(req, res) {
+    var resObj = {};
+    List.find({'authorId': req.query.id}, function(err, lists) {
+      if(err) throw err;
+      resObj.lists = lists.map(list => list._id.toString());
+      User.findOne({'userId': req.query.id}, function(err, user) {
+        if(err) throw err;
+        resObj.info = user;
+        console.log(resObj);
+        res.send(resObj);
+      });
+    });
+  });
+
 //List1 is Temporary for Pagination, Testing purposes only
 //TODO: RENAME List1
    app.post('/api/lists1', function(req, res) {

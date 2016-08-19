@@ -11,6 +11,7 @@ import { USER_INFO,
          ADD_COMMENT,
          REMOVE_COMMENT,
          FILTER_LISTS,
+         OTHERS_LISTS,
          CREATE_LIST } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -19,12 +20,14 @@ const INITIAL_STATE = {
   id: null,
   createdList: null,
   info: null,
+  otherInfo: null,
   upvotedLists: [],
   downvotedLists: [],
   favoriteLists: [],
   categoryLists: [],
   searchLists: [],
-  ownedLists: []
+  ownedLists: [],
+  othersLists: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -235,6 +238,12 @@ export default function(state = INITIAL_STATE, action) {
       ...state,
       searchCats: [...action.payload.data]
     };
+  } else if(action.type === OTHERS_LISTS) {
+    return {
+      ...state,
+      otherInfo: action.payload.data.info,
+      othersLists: action.payload.data.lists
+    }
   } else {
     return state;
   }
