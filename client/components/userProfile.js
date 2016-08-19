@@ -81,10 +81,7 @@ export class UserProfile extends Component {
           <img src={info.photo} alt="Profile Picture" />
           <h3>{info.username}</h3>
           <h3>{info.email}</h3>
-          {/*<button className="main_tabs" onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
-          <button className="main_tabs" onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</button>
-          <button className="main_tabs" onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</button>
-          <button className="main_tabs" onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</button>*/}
+          
           <Tabs onSelect={ this.handleSelect }>
             <TabList>
               <Tab>My Lists</Tab>
@@ -126,11 +123,7 @@ export class UserProfile extends Component {
           <img src={otherInfo.photo} alt="Profile Picture" />
           <h3>{otherInfo.username}</h3>
           <h3>{otherInfo.email}</h3>
-          {/*<button className="main_tabs" disabled={true} onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
-
-          <ul>
-            {this.renderList()}
-          </ul>*/}
+          
           <Tabs onSelect={ this.handleSelect }>
             <TabList>
               <Tab>Overview</Tab>
