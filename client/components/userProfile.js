@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserInfo, filterLists, fetchOthersInfo } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NavBar from './nav';
 import List from '../containers/lists';
 
@@ -11,7 +10,6 @@ export class UserProfile extends Component {
   constructor(props){
     super(props);
     this.renderList = this.renderList.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
@@ -45,18 +43,6 @@ export class UserProfile extends Component {
     }
   }
 
-  handleSelect(index, last) {
-    if(index === 0) {
-      this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()));
-    } else if(index === 1) {
-      this.props.filterLists(this.props.upLists);
-    } else if(index === 2) {
-      this.props.filterLists(this.props.downLists);
-    } else if(index === 3) {
-      this.props.filterLists(this.props.favoriteLists);
-    }
-  }
-
   renderList() {
     if(!this.props.list.length){
       return ("Add Some Lists");
@@ -84,36 +70,14 @@ export class UserProfile extends Component {
           <img src={info.photo} alt="Profile Picture" />
           <h3>{info.username}</h3>
           <h3>{info.email}</h3>
-          
-          <Tabs onSelect={ this.handleSelect }>
-            <TabList>
-              <Tab>My Lists</Tab>
-              <Tab>Upvoted Lists</Tab>
-              <Tab>Downvoted Lists</Tab>
-              <Tab>Favorite Lists</Tab>
-            </TabList>
+          <button className="main_tabs" onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
+          <button className="main_tabs" onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</button>
+          <button className="main_tabs" onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</button>
+          <button className="main_tabs" onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</button>
 
-            <TabPanel>
-              <ul>
-                {this.renderList()}
-              </ul>
-            </TabPanel>
-            <TabPanel>
-              <ul>
-                {this.renderList()}
-              </ul>
-            </TabPanel>
-            <TabPanel>
-              <ul>
-                {this.renderList()}
-              </ul>
-            </TabPanel>
-            <TabPanel>
-              <ul>
-                {this.renderList()}
-              </ul>
-            </TabPanel>
-          </Tabs>
+          <ul>
+            {this.renderList()}
+          </ul>
         </div>
       );
     } else {
@@ -126,18 +90,11 @@ export class UserProfile extends Component {
           <img src={otherInfo.photo} alt="Profile Picture" />
           <h3>{otherInfo.username}</h3>
           <h3>{otherInfo.email}</h3>
-          
-          <Tabs onSelect={ this.handleSelect }>
-            <TabList>
-              <Tab>Overview</Tab>
-            </TabList>
+          <button className="main_tabs" disabled={true} onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
 
-            <TabPanel>
-              <ul>
-                {this.renderList()}
-              </ul>
-            </TabPanel>
-          </Tabs>
+          <ul>
+            {this.renderList()}
+          </ul>
         </div>
       );
     }
