@@ -182,8 +182,8 @@ export default function(state = INITIAL_STATE, action) {
         list: {
           ...state.list,
           comments: [
-            ...state.list.comments,
-            JSON.parse(action.payload.config.data)
+            JSON.parse(action.payload.config.data),
+            ...state.list.comments
           ]
         }
     }

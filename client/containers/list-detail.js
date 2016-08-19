@@ -42,9 +42,6 @@ export class ListDetail extends Component {
     } else {
       alert("Can only delete your own lists!");
     }
-
-    // this.props.deleteList(this.props.list._id);
-    // this.props.deleteList(this.props.params.id)
   }
 
   render() {
