@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Modal, Button } from 'react-bootstrap';
 import Login from './login';
+import Signup from './signupTwo';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 export default class OurModal extends Component{
    constructor(props){
@@ -22,6 +24,10 @@ export default class OurModal extends Component{
     OurModal.context.setState({'showModal': true });
   }
 
+  handleSelect(index, last) {
+    console.log('Selected tab: ' + index + ', Last tab: ' + last);
+  }
+
   render() {
     return (
       <div>
@@ -36,11 +42,24 @@ export default class OurModal extends Component{
                 <img height="100%" src="../orange_logo.png" alt="wanderlist" />
               </h2>
             </Modal.Title>
+
+            <Tabs>
+              <TabList>
+                <Tab>Log In</Tab>
+                <Tab>Sign Up</Tab>
+              </TabList>
+
+              <TabPanel>
+                <h4 className="login_tagline">Let's Wander</h4>
+                <Login />
+              </TabPanel>
+
+              <TabPanel>
+                <h4 className="login_tagline">Join Wanderlist</h4>
+                <Signup />
+              </TabPanel>
+            </Tabs>
           </Modal.Header>
-          <Modal.Body>
-            <h4 className="login_tagline">Let's Wander</h4>
-            <Login />
-          </Modal.Body>
         </Modal>
       </div>
     );

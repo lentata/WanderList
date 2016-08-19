@@ -1,41 +1,38 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-import {userAuth, fetchUserInfo} from '../actions/index';
+import {userCreate, userAuth, fetchUserInfo} from '../actions/index';
 import {Link, browserHistory} from 'react-router';
 
 
-export class Login extends Component {
+export class Signup extends Component {
    constructor(props){
     super(props);
-    Login.context = this.props;
+    Signup.context = this.props;
     this.socialLogin = this.socialLogin.bind(this);
-    this.emailSignIn = this.emailSignIn.bind(this);
+    // this.emailSignIn = this.emailSignIn.bind(this);
     this.provider = null;
   }
   static contextTypes = {
     router: PropTypes.object
   };
 
-  emailSignIn(props) {
-    firebase.auth().signInWithEmailAndPassword(props.username, props.password).then(function(result) {
-      alert("Logged in")
-      var user = firebase.auth().currentUser;
-      var userDataStorage = {
-        displayName: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-        userId: user.uid
-      };
-      Login.context.userAuth(userDataStorage);
-      var logged = {logged: true};
-      var userId = {userId: userDataStorage.userId}
-      localStorage.setItem('logged', JSON.stringify(logged));
-      localStorage.setItem('userId', JSON.stringify(userId));
-      fetchUserInfo(userId.userId);
-      browserHistory.push('/');
-    }).catch(function(error) {
-      alert(error.message)
-    });
+  onSubmit(props) {
+    var displayName = this.props.values.displayName;
+    var email = this.props.values.username;
+    var password = this.props.values.password;
+    var photoURL = this.props.values.photoURL;
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function() {
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: displayName,
+          photoURL: photoURL
+        })
+        browserHistory.push('/');
+      })
+      .catch(function(error) {
+        alert('Failed to sign up. ' + error.message);
+      });
   }
 
   setProvider(providerName, props) {
@@ -80,20 +77,20 @@ export class Login extends Component {
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit, resetForm} = this.props;
+    const {fields: {username, password, displayName, photoURL}, handleSubmit, resetForm} = this.props;
     return (
       <div className="login-form_container">
         <div className="login-form_inner-container">
           <button onClick={this.setProvider.bind(this, 'Google', this.props)} className="btn btn-block btn-social btn-google">
-            <span className="fa fa-google" /> Log in with Google
+            <span className="fa fa-google" /> Sign up with Google
           </button>
 
           <button onClick={this.setProvider.bind(this, 'Facebook', this.props)} className="btn btn-block btn-social btn-facebook">
-            <span className="fa fa-facebook" /> Log in with Facebook
+            <span className="fa fa-facebook" /> Sign up with Facebook
           </button>
 
           <button onClick={this.setProvider.bind(this, 'Github', this.props)} className="btn btn-block btn-social btn-github">
-            <span className="fa fa-github" /> Log in with Github
+            <span className="fa fa-github" /> Sign up with Github
           </button>
         </div>
 
@@ -101,23 +98,33 @@ export class Login extends Component {
           <div className="login-signup__sep-text">or</div>
         </div>
 
-        <form className="form-actions" onSubmit={handleSubmit(this.emailSignIn.bind(this))}>
+        <form className="form-actions" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-group">
             <label className="login_labels">Email</label>
-            <input type="username" className="form-control login_inputs" {...username}/>
+            <input type="username" className="form-control login_inputs" placeholder="Enter Your Email" {...username}/>
+          </div>
+
+          <div className="form-group">
+            <label className="login_labels">Password</label>
+            <input type="password" className="form-control login_inputs" placeholder="Enter Your Password" {...password}/>
+          </div>
+
+          <div className="form-group">
+            <label className="login_labels">Name</label>
+            <input type="text" className="form-control login_inputs" placeholder="Enter Your Name" {...displayName}/>
           </div>
 
           <div>
-            <label className="login_labels">Password</label>
-            <input type="password" className="form-control login_inputs" {...password}/>
+            <label className="login_labels">Profile Image URL</label>
+            <input type="text" className="form-control login_inputs" placeholder="Enter Your Image URL" {...photoURL}/>
           </div>
 
           <button type="submit" className="btn login_btn">
-            Log In
+            Sign Up
           </button>
 
           {/*/ <Link to="/signup" className="btn login_signup_redirect">
-          //   Need an account?
+          //   Already have an account?
           // </Link>*/}
         </form>
       </div>
@@ -134,8 +141,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ userAuth, fetchUserInfo }, dispatch);
 }
 
-
 export default reduxForm({
-  form: 'loginForm',
-  fields: ['username', 'password', 'displayName', 'photo']
-}, mapStateToProps, {userAuth, fetchUserInfo})(Login);
+  form: 'signupForm',
+  fields: ['username', 'password', 'displayName', 'photoURL']
+}, mapStateToProps, {userCreate, userAuth, fetchUserInfo})(Signup);
