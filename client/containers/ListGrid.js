@@ -51,9 +51,9 @@ export class ListGrid extends Component {
   }
 
   searchWithEnter(event) {
-    console.log('OUTSIDE');
+    // console.log('OUTSIDE');
     if(event.keyCode === 13) {
-      console.log('INSIDE BEST SIDE');
+      // console.log('INSIDE BEST SIDE');
       browserHistory.push(`/search/${this.state.term}`);
     }
   }
