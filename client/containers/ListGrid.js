@@ -15,7 +15,6 @@ export class ListGrid extends Component {
     this.state = {term: "", activePage: 1, filter: "new"};
     this.filterList = this.filterList.bind(this);
     this.searchWithEnter = this.searchWithEnter.bind(this);
-    this.handleSelectTab = this.handleSelectTab.bind(this);
   }
 
   componentWillMount() {
@@ -40,17 +39,6 @@ export class ListGrid extends Component {
     filter: this.state.filter});
   }
 
-  handleSelectTab(index, last) {
-    if(index === 0) {
-      this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()));
-    } else if(index === 1) {
-      this.props.filterLists(this.props.upLists);
-    } else if(index === 2) {
-      this.props.filterLists(this.props.downLists);
-    } else if(index === 3) {
-      this.props.filterLists(this.props.favoriteLists);
-    }
-  }
   filterList(prop){
     let that = this;
     this.setState({filter: prop}, function(x){
