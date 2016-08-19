@@ -101,7 +101,6 @@ export function deleteList(id) {
 }
 
 export function userAuth(props) {
-  console.log("AUTH IN HAS BEEN HIT", props);
   const request = axios.post(`/api/auth`, props);
   return {
     type: AUTH_IN,
