@@ -12,11 +12,13 @@ export class Signup extends Component {
     var displayName = this.props.values.displayName;
     var email = this.props.values.username;
     var password = this.props.values.password;
+    var photoURL = this.props.values.photoURL;
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function() {
         var user = firebase.auth().currentUser;
         user.updateProfile({
-          displayName: displayName
+          displayName: displayName,
+          photoURL: photoURL
         })
       })
       .catch(function(error) {
@@ -25,21 +27,25 @@ export class Signup extends Component {
   }
 
   render() {
-    const {fields: {displayName, username, password}, handleSubmit} = this.props;
+    const {fields: {username, password, displayName, photoURL}, handleSubmit} = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h2>Signup</h2>
         <div>
-          <label>Name</label>
-          <input type="text" placeholder="Enter Your Name" {...displayName}/>
-        </div>
-        <div>
           <label>Username</label>
-          <input type="text" placeholder="Enter Username" {...username}/>
+          <input type="text" placeholder="Enter Your Email" {...username}/>
         </div>
         <div>
           <label>Password</label>
-          <input type="password" placeholder="Enter Password" {...password}/>
+          <input type="password" placeholder="Enter Your Password" {...password}/>
+        </div>
+        <div>
+          <label>Your Name</label>
+          <input type="text" placeholder="Enter Your Name" {...displayName}/>
+        </div>
+        <div>
+          <label>Your Photo</label>
+          <input type="text" placeholder="Enter Your Photo URL" {...photoURL}/>
         </div>
         <button type="submit" className="btn btn-primary">Sign Up</button>
         <Link to="/" className="btn btn-error">
@@ -52,5 +58,5 @@ export class Signup extends Component {
 
 export default reduxForm({
   form: 'signupForm',
-  fields: ['displayName', 'username', 'password']
+  fields: ['username', 'password', 'displayName', 'photoURL']
 }, null, {userCreate})(Signup);
