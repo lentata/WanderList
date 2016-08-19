@@ -59,6 +59,7 @@ export class ListGrid extends Component {
   }
 
   render() {
+
     if(!this.props.itemNo.items) {
       return (
         <div>
@@ -92,6 +93,7 @@ export class ListGrid extends Component {
               i={i}
               list={list} />)}
         </ul>
+        
 
         <Pagination
           className={this.props.lists.length === 0 ? 'hidden' : 'shown'}

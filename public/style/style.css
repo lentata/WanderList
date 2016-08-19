@@ -370,3 +370,40 @@ button.close {
 body {
   background-color: #f3f4f5;
 }
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #ff3f00;
+  border-color: #ff3f00;
+
+}
+
+.pagination>li>a, .pagination>li>span{
+
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #ff3f00;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.pagination>li>a:hover{
+  z-index: 2;
+  color: #ff3f00;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination>.active>a:hover {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #fa5935;
+  border-color: #fa5935;
+
+}
