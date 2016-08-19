@@ -4,9 +4,16 @@ import {userCreate} from '../actions/index';
 import {Link} from 'react-router';
 
 export class Signup extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  };
+    constructor(props){
+     super(props);
+     Login.context = this.props;
+     this.socialLogin = this.socialLogin.bind(this);
+     this.emailSignIn = this.emailSignIn.bind(this);
+     this.provider = null;
+   }
+   static contextTypes = {
+     router: PropTypes.object
+   };
 
   onSubmit(props) {
     var displayName = this.props.values.displayName;
