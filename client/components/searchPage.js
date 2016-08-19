@@ -16,13 +16,13 @@ export class SearchPage extends Component {
   }
 
   renderSearchedList(arr) {
-    // var out = [];
-    // for(var piece in arr) {
-    //   out.push(arr[piece]);
-    // }
+    var out = [];
+    for(var piece in arr) {
+      out.push(arr[piece]);
+    }
 
     console.log('PROPS BEFORE RENDER: ', this.props)
-    return arr.map((list, i) => <List {...this.props}
+    return out.map((list, i) => <List {...this.props}
       info={this.props.info}
       votes={list.upvote - list.downvote}
       upLists={this.props.upLists}
@@ -42,7 +42,7 @@ export class SearchPage extends Component {
         <ul>
           <h1>By Categories: {this.props.params.searchedTerm}</h1>
           <div className="search_by_cat_container">
-            {this.renderSearchedList()}
+            {this.renderSearchedList(this.props.searchCats)}
           </div>
           <h1>By Title: {this.props.params.searchedTerm}</h1>
           <div className="search_by_title_container">
