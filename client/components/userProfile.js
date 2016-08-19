@@ -14,7 +14,6 @@ export class UserProfile extends Component {
 
   //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
   componentWillMount(){
-    console.log("localStorage, ",localStorage.getItem('userId'));
     this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId)
       .then(() => {
         if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
