@@ -18,7 +18,7 @@ export default class ListComponent extends Component {
           </div>
 
           <div className="col-md-5 list_overview_container">
-              <Link to={ "lists/" + list._id } className="media-heading">
+              <Link to={ "/lists/" + list._id } className="media-heading">
                 { list.title }
               </Link>
 

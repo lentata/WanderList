@@ -78,7 +78,7 @@ export class UserProfile extends Component {
       );
     } else {
       console.log("NOT EQUAL");
-      if(!upLists || !otherInfo) {
+      if(!otherInfo) {
         return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
       }
       return(
@@ -87,7 +87,7 @@ export class UserProfile extends Component {
           <img src={otherInfo.photo} alt="Profile Picture" />
           <h3>{otherInfo.username}</h3>
           <h3>{otherInfo.email}</h3>
-          <button className="main_tabs" onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
+          <button className="main_tabs" disabled={true} onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
 
           <ul>
             {this.renderList()}
