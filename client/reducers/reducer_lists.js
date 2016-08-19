@@ -43,7 +43,7 @@ export default function(state = INITIAL_STATE, action) {
       upvotedLists: action.payload.data.user.upvotedLists,
       downvotedLists: action.payload.data.user.downvotedLists,
       favoriteLists: action.payload.data.user.favLists,
-      ownedLists: action.payload.data.lists 
+      ownedLists: action.payload.data.lists
     };
   } else if(action.type === FETCH_LISTS) {
     return {
@@ -224,9 +224,11 @@ export default function(state = INITIAL_STATE, action) {
       all: action.payload.data
     };
   } else if(action.type === SEARCHLISTS) {
+    //LINKED TO fetchedSearchLists
     return {
       ...state,
-      searchLists: [...action.payload.data]
+      searchLists: [...action.payload.data],
+      all: [...action.payload.data]
     };
   } else if(action.type === FILTER_LISTS) {
     return {
@@ -234,9 +236,11 @@ export default function(state = INITIAL_STATE, action) {
       all: action.payload.data
     }
   } else if(action.type === SEARCHCATS) {
+    //LINKED TO fetchedSearchCategories
     return {
       ...state,
-      searchCats: [...action.payload.data]
+      searchCats: [...action.payload.data],
+      all: [...action.payload.data]
     };
   } else if(action.type === OTHERS_LISTS) {
     return {

@@ -9,45 +9,54 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 export class SearchPage extends Component {
   constructor(props) {
     super(props);
-      this.renderSearchedList = this.renderSearchedList.bind(this);
-      this.renderSearchedCat = this.renderSearchedCat.bind(this);
+
+    this.renderSearchedList = this.renderSearchedList.bind(this);
+
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleSelect(index, last) {
-    console.log('Selected tab: ' + index + ', Last tab: ' + last);
+    // console.log('Selected tab: ' + index + ', Last tab: ' + last);
+    if(index === 0) {
+      this.props.fetchedSearchCategories(this.props.params.searchedTerm);
+    }
+    if(index === 1) {
+      this.props.fetchedSearchLists(this.props.params.searchedTerm);
+    }
   }
 
   componentWillMount() {
-    this.props.fetchedSearchLists(this.props.params.searchedTerm)
-    .then(()=>console.log("BLAHHHHH"));
-    this.props.fetchedSearchCategories(this.props.params.searchedTerm).then(()=>console.log("GLAHHHHHZ"));
+    this.props.fetchedSearchLists(this.props.params.searchedTerm);
+
+    this.props.fetchedSearchCategories(this.props.params.searchedTerm);
+
+    // Tabs.setUseDefaultStyles(false);
   }
 
   renderSearchedList() {
-    return this.props.searchLists.map((list, i) => <List {...this.props}
-      info={this.props.info}
-      votes={list.upvote - list.downvote}
-      upLists={this.props.upLists}
-      downLists={this.props.downLists}
-      favoriteLists={this.props.favoriteLists}
-      searchLists={this.props.searchLists}
-      key={i}
-      i={i}
-      list={list} />);
+    return this.props.list.map((list, i) =>
+      <List {...this.props}
+        info={this.props.info}
+        votes={list.upvote - list.downvote}
+        upLists={this.props.upLists}
+        downLists={this.props.downLists}
+        favoriteLists={this.props.favoriteLists}
+        searchLists={this.props.searchLists}
+        key={i}
+        i={i}
+        list={list} />);
   }
 
   render(){
-    console.log('CATS:', this.props.searchCats);
-    console.log('LISTS:', this.props.searchLists);
-
     const { list, info } = this.props;
-    if (!this.props.searchCats || !this.props.searchLists) {
-      return <div></div>
+
+    if (!this.props.list) {
+      return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
     }
+
     return (
       <div>
         <NavBar />
-
         <Tabs onSelect={this.handleSelect}>
           <TabList>
             <Tab>Lists by Categories</Tab>
@@ -56,13 +65,13 @@ export class SearchPage extends Component {
           <TabPanel>
             <h1>By Categories: {this.props.params.searchedTerm}</h1>
             <div className="search_by_cat_container">
-              {this.renderSearchedCat(this.props.searchCats)}
+              {this.renderSearchedList()}
             </div>
           </TabPanel>
           <TabPanel>
             <h1>By Title: {this.props.params.searchedTerm}</h1>
             <div className="search_by_title_container">
-              {this.renderSearchedList(this.props.searchLists)}
+              {this.renderSearchedList()}
             </div>
           </TabPanel>
         </Tabs>
