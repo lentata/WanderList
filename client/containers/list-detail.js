@@ -84,12 +84,22 @@ export class ListDetail extends Component {
         <div className="container-fluid">
           <div className="h1">{ list.title }</div>
           <span className="fa fa-user"/>
-          <span> {list.author ? list.author :  "¯\\_(ツ)_/¯"} &nbsp;</span>
+          <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
           <span className="fa fa-clock-o"/>
           <span>  {moment(list.createdAt).fromNow()} &nbsp;</span>
           <br/>
-          <span className="fa fa-tags"/>
-          <span><em> {list.categories}</em></span>
+          <div>
+            <span>
+              {list.categories.map((category, i) => {
+                return (
+                <Link key={i} to={"/categoryPage/" + category}>
+                  <span className="label label-default">
+                    { category }
+                  </span>
+                </Link>);
+              })}
+            </span>
+          </div>
         </div>
         <ol className="h2">
           {this.renderList()}
