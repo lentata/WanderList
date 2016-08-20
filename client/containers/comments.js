@@ -50,13 +50,14 @@ export class Comments extends Component {
   render() {
 
     return (
-      <div className="comments">
+      <div className="comments col-xs-3">
         <legend className="list-legend">Comments</legend>
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="comment" placeholder=" Leave a comment!" />
-          <input type="submit" hidden />
+          
+          <textarea className="textarea-comment" ref="comment" placeholder="Leave a comment!"></textarea>
+          <input className="submit-comment" type="submit" />
         </form>
-        <div className="comments-lists">
+        <div className="comments-lists col-xs-3">
           {this.props.list.comments
             .sort( (a, b) => {
             // console.log("a:", a, "b:", b);
