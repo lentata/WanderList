@@ -114,6 +114,7 @@ export class ListGrid extends Component {
             key={i}
             i={i}
             list={list} />)}
+            
       </ul>
       <Pagination
         className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
