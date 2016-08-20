@@ -1,5 +1,5 @@
 .container {
-  margin-top: 10%
+  margin-top: 3%
 }
 /*.navcol{
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ededed+56,feffff+100 */
@@ -9,7 +9,7 @@ background: -webkit-linear-gradient(top, #ffffff 0%,#ededed 56%,#feffff 100%); /
 background: linear-gradient(to bottom, #ffffff 0%,#ededed 56%,#feffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
 copy
-}*/
+}
 
 .navContainer {
   background-color: #ecf0f1;
@@ -409,5 +409,9 @@ body {
   cursor: default;
   background-color: #fa5935;
   border-color: #fa5935;
+
+}
+.navbar{
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
 
 }

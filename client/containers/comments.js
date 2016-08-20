@@ -12,7 +12,6 @@ export class Comments extends Component {
   }
 
   renderComment(comment, i) {
-    // console.log("COMMENT PROPS", this.props)
     let deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
 
     return (
@@ -36,7 +35,6 @@ export class Comments extends Component {
     evt.preventDefault();
 
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
-
     const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
 
     if(author && userId) {
@@ -50,13 +48,6 @@ export class Comments extends Component {
   }
 
   render() {
-
-    // let sortedComments = this.props.list.comments.sort( (a, b) => {
-    //   console.log("a:", a, "b:", b);
-    //   return Date.parse(b.posted) - Date.parse(a.posted)
-    // });
-    //
-    // console.log('sorted comments!', sortedComments);
 
     return (
       <div className="comments">
@@ -75,7 +66,6 @@ export class Comments extends Component {
     )
   }
 };
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addComment, removeComment }, dispatch);
 }
