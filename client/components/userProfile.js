@@ -126,7 +126,6 @@ export class UserProfile extends Component {
               </Tabs>
             </div>
           </div>
-          <button className="main_tabs" disabled={true} onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
           <ul>
             {this.renderList()}
           </ul>
