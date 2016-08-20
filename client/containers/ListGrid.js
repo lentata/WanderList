@@ -71,11 +71,11 @@ export class ListGrid extends Component {
     }
 
     return (
-      <div>
+      <div className="mother_div">
         <NavBar />
         <div className="container">
           <div className="row">
-         
+
           <div className="col-md-3">
             <Tabs>
               <TabList>

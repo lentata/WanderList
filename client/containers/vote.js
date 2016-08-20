@@ -32,14 +32,10 @@ export default class Votes extends Component {
     const downflag = this.props.downLists.includes(list._id.toString());
     const votes = this.props.votes;
     return (
-      <div className="col-md-1">
-        <div className="text-center">
-          <i className="button text-center fa fa-chevron-up" style={{color: upflag ? "blue" : "grey"}} onClick={this.upvoteFunc}></i>
-        </div>
-        <div className="text-center" style={{color: downflag ? "red" : upflag ? "blue" : "grey"}}>{votes}</div>
-        <div className="text-center">
-          <i className="button text-center fa fa-chevron-down" style={{color: downflag ? "red" : "grey"}} onClick={this.downvoteFunc}></i>
-        </div>
+      <div className="list_overview_votes">
+        <div className="button text-center fa fa-chevron-up fa-2x list_overview_votes_inner" style={{color: upflag ? "blue" : "grey"}} onClick={this.upvoteFunc}></div>
+        <div className="text-center list_overview_votes_count list_overview_votes_inner" style={{color: downflag ? "red" : upflag ? "blue" : "grey"}}>{votes}</div>
+        <div className="button text-center fa fa-chevron-down fa-2x list_overview_votes_inner" style={{color: downflag ? "red" : "grey"}} onClick={this.downvoteFunc}></div>
       </div>
     );
   }

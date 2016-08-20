@@ -8,18 +8,17 @@ import ListComponent from '../components/listcomponent';
 import Favorite from './favorite';
 
 export class Lists extends Component {
+  // <Favorite
+  //   list={list}
+  //   favoriteAction={favorite}
+  //   favoriteLists={favoriteLists} />
 
   renderLists() {
     const { list, upvote, downvote, favorite, info, upLists, downLists, favoriteLists, votes } = this.props;
     return (
       <div className="media" key={ list._id }>
-        <div className="row">
           <ListComponent
             list={list} />
-          <Favorite
-            list={list}
-            favoriteAction={favorite}
-            favoriteLists={favoriteLists} />
           <Votes
             list={list}
             info={info}
@@ -28,7 +27,6 @@ export class Lists extends Component {
             votes={votes}
             upLists={upLists}
             downLists={downLists} />
-        </div>
       </div>
     );
   }
