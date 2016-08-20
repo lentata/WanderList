@@ -18,7 +18,10 @@ export class Lists extends Component {
     return (
       <div className="media" key={ list._id }>
           <ListComponent
-            list={list} />
+            list={list}
+            favoriteAction={favorite}
+            favoriteLists={favoriteLists}
+            />
           <Votes
             list={list}
             info={info}

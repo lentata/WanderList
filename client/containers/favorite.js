@@ -23,7 +23,7 @@ export default class Favorite extends Component {
 
     return (
       <div>
-      {/*//   <div className="text-center fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />*/}
+        <div className="text-center fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />
       </div>
     );
   }

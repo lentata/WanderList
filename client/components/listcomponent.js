@@ -5,17 +5,32 @@ import moment from 'moment';
 export default class ListComponent extends Component {
   constructor(props){
     super(props);
+    this.toggleFavFunc = this.toggleFavFunc.bind(this);
   }
+
+  toggleFavFunc(favStatus) {
+    if(firebase.auth().currentUser) {
+      console.log('FAV!!!', favStatus);
+      this.props.favoriteAction(this.props.list._id, firebase.auth().currentUser.uid, favStatus);
+    } else {
+      alert("You must be signed in to favorite lists!");
+    }
+  }
+
   render(){
-    const { list } = this.props;
+    const { list, info } = this.props;
+
+    const favStatus = this.props.favoriteLists.includes(list._id.toString());
+
     return(
         <div className="list_main_container">
           <img className="img-thumbnail list_image_container" src={list.content[0].image } />
 
           <div className="list_overview_container">
-              <Link to={ "/lists/" + list._id } className="media-heading list_overview_title">
-                { list.title }
-              </Link>
+            <div className="list_overview_fav fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />
+            <Link to={ "/lists/" + list._id } className="media-heading list_overview_title">
+              { list.title }
+            </Link>
 
             <div className="list_overview_inner_container">
               <div className="list_overview_inner fa fa-user">
@@ -49,59 +64,3 @@ export default class ListComponent extends Component {
     );
   }
 }
-
-
-
-
-//
-// import React, { Component } from 'react';
-// import { Link } from 'react-router';
-// import moment from 'moment';
-//
-// export default class ListComponent extends Component {
-//   constructor(props){
-//     super(props);
-//   }
-//   render(){
-//     const { list } = this.props;
-//     return(
-//         <div className="col-md-10" >
-//
-//           <div className="col-md-5">
-//             <div className="list_thumbnail">
-//               <img className="img-thumbnail list_image_container" src={list.content[0].image } />
-//             </div>
-//           </div>
-//
-//           <div className="col-md-5 list_overview_container">
-//               <Link to={ "/lists/" + list._id } className="media-heading">
-//                 { list.title }
-//               </Link>
-//
-//               <div>
-//                 {/*<span className="glyphicon glyphicon-user"> {list.author} &nbsp;</span>*/}
-//                 <span className="fa fa-user"/>
-//                 <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
-//                 <span className="fa fa-clock-o"/>
-//                 <span> {moment(list.createdAt).fromNow()} &nbsp;</span>
-//                 <span className="fa fa-commenting"/> <span>{list.comments.length > 1 ? list.comments.length+" comments" : list.comments.length === 1 ? 1+" comment" : "leave a comment!"}</span>
-//               </div>
-//
-//               <div>
-//                 <span>
-//                   {list.categories.map((category, i) => {
-//                     return (
-//                     <Link key={i} to={"/categoryPage/" + category}>
-//                       <span className="label label-default">
-//                         { category }
-//                       </span>
-//                     </Link>);
-//                   })}
-//                 </span>
-//               </div>
-//
-//           </div>
-//         </div>
-//     );
-//   }
-// }
