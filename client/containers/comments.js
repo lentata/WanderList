@@ -56,12 +56,14 @@ export class Comments extends Component {
           <input type="text" ref="comment" placeholder=" Leave a comment!" />
           <input type="submit" hidden />
         </form>
-        {this.props.list.comments
-          .sort( (a, b) => {
-          // console.log("a:", a, "b:", b);
-          return Date.parse(b.posted) - Date.parse(a.posted);
-        })
-          .map(this.renderComment, this)}
+        <div className="comments-lists">
+          {this.props.list.comments
+            .sort( (a, b) => {
+            // console.log("a:", a, "b:", b);
+            return Date.parse(b.posted) - Date.parse(a.posted);
+          })
+            .map(this.renderComment, this)}
+        </div>
       </div>
     )
   }

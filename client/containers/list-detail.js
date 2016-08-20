@@ -23,7 +23,7 @@ export class ListDetail extends Component {
         <div key={i}>
           <li>
             <h2>{item.headline}</h2>
-            <img src={item.image} alt={item.headline} />
+            <img className="detail-img" src={item.image} alt={item.headline} />
             <p className="h6">
               <Linkify>{item.description}</Linkify>
             </p>

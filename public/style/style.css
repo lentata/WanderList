@@ -360,8 +360,18 @@ button.close {
   background-color: #e6e6e6;
 }
 
+.detail-img {
+  max-width: 70%;
+}
+
 .comments {
   position: fixed;
+}
+
+.comments-lists {
+  position: fixed;
+  max-height: 70%;
+  overflow-y:scroll;
 }
 
 .remove-comment {
