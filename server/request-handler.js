@@ -59,7 +59,6 @@ module.exports = function(app) {
       User.findOne({'userId': req.query.id}, function(err, user) {
         if(err) throw err;
         resObj.info = user;
-        console.log(resObj);
         res.send(resObj);
       });
     });
@@ -169,7 +168,7 @@ module.exports = function(app) {
   app.get('/api/lists/:id', function(req, res) {
     var id = req.params.id;
 
-    List.findOne({_id: id}, function(err, obj) {
+    List.find({_id: id}, function(err, obj) {
       if(err) throw err;
       res.send(obj);
     });
@@ -213,7 +212,6 @@ module.exports = function(app) {
     // console.log('THIS IS REGEX!!! ', searchedTermTwo);
     List.find({categories: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
       if(err) throw err;
-      console.log('THIS IS OBJ2: ', obj);
       res.send(obj);
     });
   });

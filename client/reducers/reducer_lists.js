@@ -32,7 +32,7 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
-    return { ...state, list: action.payload.data };
+    return { ...state, all: action.payload.data };
   } else if(action.type === FETCH_RANDOM) {
     return { ...state, id: action.payload.data._id, list: action.payload.data };
   } else if(action.type === CREATE_LIST) {
@@ -177,28 +177,39 @@ export default function(state = INITIAL_STATE, action) {
       };
     }
   } else if(action.type === ADD_COMMENT) {
+    let index = -1;
+    state.all.forEach((list, i) => {
+      if (list._id.toString() === action.lid) {
+        index = i;
+      }
+    });
+    let targetList = state.all[index];
+    targetList.comments = [JSON.parse(action.payload.config.data), ...targetList.comments];
     return {
       ...state,
-        list: {
-          ...state.list,
-          comments: [
-            JSON.parse(action.payload.config.data),
-            ...state.list.comments
-          ]
-        }
-    }
-
+      all:[
+        ...state.all.slice(0, index),
+        Object.assign({}, targetList, targetList.comments),
+        ...state.all.slice(index + 1)
+      ]
+    };
   } else if(action.type === REMOVE_COMMENT) {
-      return {
-        ...state,
-        list: {
-          ...state.list,
-          comments: [
-            ...state.list.comments.slice(0, action.commentIndex),
-            ...state.list.comments.slice(action.commentIndex + 1)
-          ]
-        }
+    let index = -1;
+    state.all.forEach((list, i) => {
+      if (list._id.toString() === action.listId) {
+        index = i;
       }
+    });
+    let targetList = state.all[index];
+    targetList.comments = [...targetList.comments.slice(0, action.commentIndex), ...targetList.comments.slice(action.commentIndex + 1)];
+    return {
+      ...state,
+      all:[
+        ...state.all.slice(0, index),
+        Object.assign({}, targetList, targetList.comments),
+        ...state.all.slice(index + 1)
+      ]
+    };
   } else if(action.type === TOGGLEFAV) {
       if(action.fav) {
         const index = state.favoriteLists.indexOf(action.id);

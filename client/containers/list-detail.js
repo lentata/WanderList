@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { upvote, downvote, favorite, fetchList, deleteList } from '../actions/index';
+import { upvote, downvote, favorite, fetchList, deleteList, fetchUserInfo } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import Comments from './comments';
@@ -14,6 +14,9 @@ import moment from 'moment';
 export class ListDetail extends Component {
   componentWillMount() {
     this.props.fetchList(this.props.params.id);
+    if(localStorage.getItem('logged')) {
+      this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId);
+    }
     this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
@@ -117,9 +120,8 @@ export class ListDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('STATE: ', state);
   return {
-    list: state.lists.list,
+    list: state.lists.all[0],
     info: state.lists.info,
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
@@ -128,7 +130,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ upvote, downvote, favorite, fetchList, deleteList }, dispatch);
+  return bindActionCreators({ upvote, downvote, favorite, fetchUserInfo, fetchList, deleteList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListDetail);
