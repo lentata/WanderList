@@ -315,8 +315,12 @@ button.close {
 }
 
 .list_overview_title {
-  display: block;
+  display: inline-block;
   margin-left: 5%;
+}
+
+.list_overview_inner_container {
+  display: block;
 }
 
 .list_overview_inner {

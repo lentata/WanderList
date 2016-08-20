@@ -17,17 +17,20 @@ export default class ListComponent extends Component {
                 { list.title }
               </Link>
 
-            <div className="list_overview_inner fa fa-user">
-              &nbsp;<Link to={'/userProfile/' + this.props.list.authorId}>{list.author ? list.author : "¯\\_(ツ)_/¯"}</Link>
+            <div className="list_overview_inner_container">
+              <div className="list_overview_inner fa fa-user">
+                &nbsp;<Link to={'/userProfile/' + this.props.list.authorId}>{list.author ? list.author : "¯\\_(ツ)_/¯"}</Link>
+              </div>
+
+              <div className="list_overview_inner fa fa-clock-o">
+                &nbsp;created {moment(list.createdAt).fromNow()}
+              </div>
+
+              <div className="list_overview_inner fa fa-commenting">
+                &nbsp;{list.comments.length > 1 ? list.comments.length + " comments" : list.comments.length === 1 ? "1 comment" : "no comments"}
+              </div>
             </div>
 
-            <div className="list_overview_inner fa fa-clock-o">
-              &nbsp;created {moment(list.createdAt).fromNow()}
-            </div>
-
-            <div className="list_overview_inner fa fa-commenting">
-              &nbsp;{list.comments.length > 1 ? list.comments.length + " comments" : list.comments.length === 1 ? "1 comment" : "no comments"}
-            </div>
             <div className="list_overview_cats">
               <span>
                 {list.categories.map((category, i) => {
