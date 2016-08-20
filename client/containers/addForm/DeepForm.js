@@ -107,15 +107,19 @@ export class DeepForm extends Component {
               <div>
                 <PureInput className="form-control" type="text" placeholder="e.g. Ronald's house" field={itemTitle} required/>
               </div>
+            </div>
 
+            <div className="form-group">
               <label className="control-label"><span style={divStyle}>*</span> Image URL for list item #1</label>
               <div>
                 <PureInput className="form-control" type="url" placeholder="e.g. http://www.ktvz.com/image/view/-/35908550/medRes/3/-/maxh/360/maxw/640/-/11prq7p/-/Ronald-McDonald-jpg.jpg" field={itemImage} pattern="https?:\/\/.+\.(gif|jpg|jpeg|tiff|png|GIF|JPG|JPEG|TIFF|PNG)" required/>
               </div>
+            </div>
 
-              <label className="control-label"><span style={divStyle}>*</span> Details for list item #1</label>
+            <div className="form-group">
+              <label className="control-label"> Details for list item #1</label>
               <div>
-                <PureTextarea className="form-control" type="textfield" placeholder="e.g. No, we're not talking about the foundation. We're talking about where Ronald lives. You know Hamburglar loves robbing his pals, especially Ronald." field={itemDescription} required/>
+                <PureTextarea className="form-control" type="textfield" placeholder="e.g. No, we're not talking about the foundation. We're talking about where Ronald lives. You know Hamburglar loves robbing his pals, especially Ronald." field={itemDescription}/>
               </div>
             </div>
 
@@ -134,45 +138,46 @@ export class DeepForm extends Component {
 
               {content.map((child, index) => <div key={index}>
               <div className="form-group">
-
                 <label className="control-label"><span style={divStyle}>*</span> List item #{index+ 2}</label>
                 <div>
                   <PureInput className="form-control" type="text" placeholder="Title for list item" field={child.headline} required/>
                 </div>
+              </div>
 
+              <div className="form-group">
                 <label className="control-label"><span style={divStyle}>*</span> Image url for list item #{index + 2}</label>
                 <div>
                   <PureInput className="form-control" type="url" placeholder="URL for image. Use gif, jpg, jpeg, tiff, or png." field={child.image} pattern="https?:\/\/.+\.(gif|jpg|jpeg|tiff|png|GIF|JPG|JPEG|TIFF|PNG)" required/>
                 </div>
+              </div>
 
-                <label className="control-label"><span style={divStyle}>*</span> Details for list item #{index + 2}</label>
+              <div className="form-group">
+                <label className="control-label"> Details for list item #{index + 2}</label>
                 <div>
-                  <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description} required/>
+                  <PureTextarea className="form-control" type="textfield" placeholder="Describe your list item" field={child.description}/>
                 </div>
+              </div>
 
-                <div>
-                  <div>
-                    <button className="fa fa-chevron-up btn-link" type="button" disabled={index === 0} onClick={() => {
-                        content.swapFields(index, index - 1)  // swap field with it's predecessor
-                      }}><i/>
-                    </button>
+                <div className="form-group">
+                  <button className="fa fa-chevron-up btn-link" type="button" disabled={index === 0} onClick={() => {
+                      content.swapFields(index, index - 1)  // swap field with it's predecessor
+                    }}><i/>
+                  </button>
 
-                    <button className="fa fa-chevron-down btn-link" type="button" disabled={index === content.length - 1} onClick={() => {
-                        content.swapFields(index, index + 1)  // swap field with it's successor
-                      }}><i/>
-                    </button>
-                  </div>
-
+                  <button className="fa fa-chevron-down btn-link" type="button" disabled={index === content.length - 1} onClick={() => {
+                      content.swapFields(index, index + 1)  // swap field with it's successor
+                    }}><i/>
+                  </button>
                   <button className="btn btn-danger btn-sm" type="button" onClick={() => {
                       content.removeField(index)  // remove from index
-                    }}><i/> Remove
+                    }}><i/> Remove #{index + 2}
                   </button>
                 </div>
 
-              </div>
+              {/*</div>*/}
             </div>, this)}
 
-            <div>
+            <div className="form-group">
               <button className="btn btn-primary btn-sm" type="button" onClick={() => {
                   content.addField()    // pushes empty child field onto the end of the array
                 }}><i/> Add Item

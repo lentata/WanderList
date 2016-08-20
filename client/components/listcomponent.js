@@ -25,7 +25,7 @@ export default class ListComponent extends Component {
               <div>
                 {/*<span className="glyphicon glyphicon-user"> {list.author} &nbsp;</span>*/}
                 <span className="fa fa-user"/>
-                <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
+                <span> <Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
                 <span className="fa fa-clock-o"/>
                 <span> {moment(list.createdAt).fromNow()} &nbsp;</span>
                 <span className="fa fa-commenting"/> <span>{list.comments.length > 1 ? list.comments.length+" comments" : list.comments.length === 1 ? 1+" comment" : "leave a comment!"}</span>
