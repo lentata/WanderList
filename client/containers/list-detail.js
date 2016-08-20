@@ -56,55 +56,61 @@ export class ListDetail extends Component {
       <div>
         <NavBar
           list={list}
-          />
-             <div className="btn-toolbar">
-              {deleter === author ? <button
-                className="btn btn-danger navbar-btn navbar-right col-md-1"
-                onClick={ this.onDeleteClick }>
-                Delete List
-              </button> : <div/>}
-            </div>
+        />
+          <div className="btn-toolbar">
+          {deleter === author ? <button
+            className="btn btn-danger navbar-btn navbar-right col-md-1"
+            onClick={ this.onDeleteClick }>
+            Delete List
+          </button> : <div/>}
+        </div>
 
       {/* TODO: Refactor this to be the <VOTE /> component  */}
-        <div className="container-fluid pull-left">
-          <Votes
-            list={list}
-            info={info}
-            upvoteAction={upvote}
-            downvoteAction={downvote}
-            votes={list.upvote - list.downvote}
-            upLists={upLists}
-            downLists={downLists} />
-          <Favorites
-            list={list}
-            favoriteAction={favorite}
-            favoriteLists={favLists} />
-        </div>
+        <div className="row">
+          <div className="col-xs-8">
+            <div>
+              <Votes
+                list={list}
+                info={info}
+                upvoteAction={upvote}
+                downvoteAction={downvote}
+                votes={list.upvote - list.downvote}
+                upLists={upLists}
+                downLists={downLists} />
+              <Favorites
+                list={list}
+                favoriteAction={favorite}
+                favoriteLists={favLists} />
+            </div>
 
-        <div className="container-fluid">
-          <div className="h1">{ list.title }</div>
-          <span className="fa fa-user"/>
-          <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
-          <span className="fa fa-clock-o"/>
-          <span>  {moment(list.createdAt).fromNow()} &nbsp;</span>
-          <br/>
-          <div>
-            <span>
-              {list.categories.map((category, i) => {
-                return (
-                <Link key={i} to={"/categoryPage/" + category}>
-                  <span className="label label-default">
-                    { category }
-                  </span>
-                </Link>);
-              })}
-            </span>
+            <div className="container-fluid">
+              <div className="h1">{ list.title }</div>
+              <span className="fa fa-user"/>
+              <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
+              <span className="fa fa-clock-o"/>
+              <span>  {moment(list.createdAt).fromNow()} &nbsp;</span>
+              <br/>
+              <div>
+                <span>
+                  {list.categories.map((category, i) => {
+                    return (
+                    <Link key={i} to={"/categoryPage/" + category}>
+                      <span className="label label-default">
+                        { category }
+                      </span>
+                    </Link>);
+                  })}
+                </span>
+              </div>
+            </div>
+            <ol>
+              {this.renderList()}
+            </ol>
+          </div>
+          <div className="col-xs-4">
+            <Comments className="fixed col-xs-3" list={this.props.list}/>
           </div>
         </div>
-        <ol className="h2">
-          {this.renderList()}
-        </ol>
-        <Comments list={this.props.list}/>
       </div>
     );
   }

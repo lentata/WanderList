@@ -308,6 +308,17 @@ button.close {
   background-color: #e6e6e6;
 }
 
+.list-container {
+  float: left;
+  width: 70%;
+}
+
+.comments {
+  float: left;
+  position: fixed;
+  width: 30%;
+}
+
 .remove-comment {
   background: none;
   border: 0;
@@ -350,6 +361,10 @@ button.close {
 
 .button:hover {
   cursor: pointer
+}
+
+.fixed {
+    position: fixed;
 }
 
 .media-heading {
