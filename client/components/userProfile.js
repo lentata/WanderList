@@ -111,24 +111,28 @@ export class UserProfile extends Component {
       return(
         <div>
           <NavBar />
-          <img src={otherInfo.photo} alt="Profile Picture" />
-          <h3>{otherInfo.username}</h3>
-
-
-          <div className="row">
-            <div className="col-md-2">
-              <Tabs>
-                <TabList>
-                  <Tab>Overview</Tab>
-                </TabList>
-                <TabPanel>
-                </TabPanel>
-              </Tabs>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 col-md-offset-4">
+              <img className="profilePic" src={otherInfo.photo} alt="Profile Picture" />
+              <h3 className="pacifico">{otherInfo.username}</h3>
+              </div>
             </div>
+            <div className="row">
+              <div className="col-md-2">
+                <Tabs>
+                  <TabList>
+                    <Tab>Overview</Tab>
+                  </TabList>
+                  <TabPanel>
+                  </TabPanel>
+                </Tabs>
+              </div>
+            </div>
+            <ul>
+              {this.renderList()}
+            </ul>
           </div>
-          <ul>
-            {this.renderList()}
-          </ul>
         </div>
       );
     }
