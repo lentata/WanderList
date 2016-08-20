@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import {reduxForm} from 'redux-form';
+import { Button } from 'react-bootstrap';
 
 export default class SignOut extends Component {
   constructor(props){
@@ -18,9 +19,9 @@ export default class SignOut extends Component {
     return(
       <div>
         <form className="form-actions" onSubmit={this.signOutFunc}>
-          <button type="submit" className="btn btn-warning">
+          <Button type="submit">
             Log out
-          </button>
+          </Button>
         </form>
       </div>
 
