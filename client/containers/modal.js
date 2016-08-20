@@ -12,12 +12,8 @@ export default class OurModal extends Component{
       showModal: false
     }
     OurModal.context = this;
-    this.close = this.close.bind(this);
+    // this.close = this.close.bind(this);
     this.open = this.open.bind(this);
-  }
-
-  close() {
-    OurModal.context.setState({'showModal': false});
   }
 
   open() {

@@ -5,18 +5,27 @@ import {Link, browserHistory} from 'react-router';
 
 
 export class Signup extends Component {
-   constructor(props){
+   constructor(props) {
     super(props);
     Signup.context = this.props;
     this.socialLogin = this.socialLogin.bind(this);
-    // this.emailSignIn = this.emailSignIn.bind(this);
     this.provider = null;
+    this.state = {
+      showModal: false
+    }
+
+    console.log("WhatProps", this.props);
   }
   static contextTypes = {
     router: PropTypes.object
   };
 
+  closeModal() {
+
+  }
+
   onSubmit(props) {
+    let that = this;
     var displayName = this.props.values.displayName;
     var email = this.props.values.username;
     var password = this.props.values.password;
@@ -28,6 +37,8 @@ export class Signup extends Component {
           displayName: displayName,
           photoURL: photoURL
         })
+        var logged = {logged: true};
+        localStorage.setItem('logged', JSON.stringify(logged));
         browserHistory.push('/');
       })
       .catch(function(error) {
@@ -119,13 +130,9 @@ export class Signup extends Component {
             <input type="text" className="form-control login_inputs" placeholder="Enter Your Image URL" {...photoURL}/>
           </div>
 
-          <button type="submit" className="btn login_btn">
+          <button type="submit" className="btn login_btn" onClick={this.props.onClose}>
             Sign Up
           </button>
-
-          {/*/ <Link to="/signup" className="btn login_signup_redirect">
-          //   Already have an account?
-          // </Link>*/}
         </form>
       </div>
     );
