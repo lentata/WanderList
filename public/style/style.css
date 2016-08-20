@@ -360,8 +360,54 @@ button.close {
   background-color: #e6e6e6;
 }
 
+.detail-img {
+  max-width: 70%;
+}
+
+.detail-lists {
+  font-size: 22px;
+}
+
 .comments {
   position: fixed;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.submit-comment {
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px !important;
+}
+
+.textarea-comment {
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  resize: none;
+  transition: height 0.5s;
+  -moz-transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  -o-transition: height 0.5s;
+}
+
+.textarea-comment:focus {
+  border: 2px solid #555;
+}
+
+.comments-lists {
+  position: fixed;
+  max-height: 70%;
+  overflow-y:scroll;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 .remove-comment {

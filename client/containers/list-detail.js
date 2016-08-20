@@ -21,9 +21,9 @@ export class ListDetail extends Component {
     return this.props.list.content.map((item, i) => {
       return (
         <div key={i}>
-          <li>
-            <h2>{item.headline}</h2>
-            <img src={item.image} alt={item.headline} />
+          <li className="detail-lists">
+            <h3>{item.headline}</h3>
+            <img className="detail-img" src={item.image} alt={item.headline} />
             <p className="h6">
               <Linkify>{item.description}</Linkify>
             </p>

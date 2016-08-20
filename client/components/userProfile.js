@@ -89,6 +89,8 @@ export class UserProfile extends Component {
                   </TabPanel>
                   <TabPanel>
                   </TabPanel>
+                  <TabPanel>
+                  </TabPanel>
                 </Tabs>
               </div>
             </div>
@@ -110,7 +112,17 @@ export class UserProfile extends Component {
           <img src={otherInfo.photo} alt="Profile Picture" />
           <h3>{otherInfo.username}</h3>
           <h3>{otherInfo.email}</h3>
-          <button className="main_tabs" disabled={true} onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
+          <div className="row">
+            <div className="col-md-2">
+              <Tabs>
+                <TabList>
+                  <Tab>Overview</Tab>
+                </TabList>
+                <TabPanel>
+                </TabPanel>
+              </Tabs>
+            </div>
+          </div>
 
           <ul>
             {this.renderList()}
