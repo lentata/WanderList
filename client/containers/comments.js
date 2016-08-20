@@ -48,17 +48,7 @@ export class Comments extends Component {
   }
 
   render() {
-<<<<<<< a81c3a1ef1f14aa331020426a1f7200a5e729cbf
 
-    // let sortedComments = this.props.list.comments.sort( (a, b) => {
-    //   console.log("a:", a, "b:", b);
-    //   return Date.parse(b.posted) - Date.parse(a.posted)
-    // });
-    //
-    // console.log('sorted comments!', sortedComments);
-
-=======
->>>>>>> [Component: Styling]
     return (
       <div className="comments">
         <legend className="list-legend">Comments</legend>
