@@ -4,12 +4,11 @@ import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { fetchRandomList } from '../actions/index';
 import OurModal from '../containers/modal';
+import { Button } from 'react-bootstrap';
 import SignOut from './signoutButton';
-import SignUp from './signup';
-
 
 export default class navBar extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
@@ -27,13 +26,12 @@ export default class navBar extends Component {
 
             <div className="nav navbar-nav navbar-right mainBtns">
               <li>
-                <button
-                  name="random"
-                  onClick={()=>this.props.fetchRandomList()  .then(() => {
-                      browserHistory.push(`/lists/${this.props.id}`)
+                <Button
+                  onClick={()=>this.props.fetchRandomList()
+                    .then(() => {browserHistory.push(`/lists/${this.props.id}`)
                   })}>
-                  Random!
-                </button>
+                  Wanderlist!
+                </Button>
               </li>
 
               <li>
@@ -42,7 +40,7 @@ export default class navBar extends Component {
               </li>
 
               <li>
-                {localStorage.getItem('logged') ? <SignOut />  : <OurModal status={'Sign In'}/>}
+                {localStorage.getItem('logged') ? <SignOut />  : <OurModal status={'Log in or sign up'}/>}
               </li>
 
               <li>
