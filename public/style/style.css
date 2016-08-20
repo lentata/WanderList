@@ -311,6 +311,7 @@ button.close {
 .list_overview_container {
   display: inline-block;
   margin-top: 3%;
+  padding-left: 4%;
   width: 60rem;
 }
 
