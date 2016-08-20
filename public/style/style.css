@@ -311,17 +311,35 @@ button.close {
 .list_overview_container {
   display: inline-block;
   margin-top: 3%;
+  padding-left: 4%;
   width: 60rem;
+}
+
+.list_overview_fav {
+  float: left;
+  margin-left: 3.85%;
+  margin-top: 0.85%;
 }
 
 .list_overview_title {
   display: block;
-  margin-left: 5%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 2%;
+}
+
+.list_overview_inner_container {
+  display: block;
 }
 
 .list_overview_inner {
   margin-left: 5%;
   font-size: 1.5rem;
+}
+
+.list_overview_inner > a {
+  text-decoration: none;
 }
 
 .list_overview_votes {
