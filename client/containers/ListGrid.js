@@ -68,7 +68,7 @@ export class ListGrid extends Component {
     }
 
     return (
-      <div>
+      <div className="mother_div">
         <NavBar />
         <div>
           <button className="new main_tabs" onClick={()=>this.filterList("new")}>New</button>
@@ -93,7 +93,7 @@ export class ListGrid extends Component {
               i={i}
               list={list} />)}
         </ul>
-        
+
 
         <Pagination
           className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
