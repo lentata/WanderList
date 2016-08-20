@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import NavBar from './nav';
 import List from '../containers/lists';
 import { Nav, NavItem } from 'react-bootstrap';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 
 export class UserProfile extends Component {
@@ -71,17 +72,25 @@ export class UserProfile extends Component {
           <div className="container">
 
             <img src={info.photo} alt="Profile Picture" />
-            <h3>{info.username}</h3>
-            <h3>{info.email}</h3>
+            <h5>{info.username}</h5>
+            <h5>{info.email}</h5>
             <div className="row">
-            <div className="col-md-5">
-              <Nav bsStyle="tabs">
-                <NavItem onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</NavItem>
-                <NavItem onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</NavItem>
-                <NavItem onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</NavItem>
-                <NavItem onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</NavItem>
-              </Nav>  
-            </div>
+              <div className="col-md-5">
+                <Tabs>
+                  <TabList>
+                    <Tab onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</Tab>
+                    <Tab onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</Tab>
+                    <Tab onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</Tab>
+                    <Tab onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</Tab>
+                  </TabList>
+                  <TabPanel>
+                  </TabPanel>
+                  <TabPanel>
+                  </TabPanel>
+                  <TabPanel>
+                  </TabPanel>
+                </Tabs>
+              </div>
             </div>
 
 

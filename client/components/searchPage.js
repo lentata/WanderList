@@ -55,7 +55,7 @@ export class SearchPage extends Component {
     }
 
     return (
-      <div>
+      <div className="container">
         <NavBar />
         <Tabs onSelect={this.handleSelect}>
           <TabList>

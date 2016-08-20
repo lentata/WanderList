@@ -20,10 +20,6 @@ export default class navBar extends Component {
     if(props==='profile'){
     browserHistory.push('/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId);
     }
-
-
-   // onClick={navigation('profile')}
-    //onClick={navigation('addList')}
   }
 
   render(){
