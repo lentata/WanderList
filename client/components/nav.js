@@ -10,6 +10,16 @@ import SignOut from './signoutButton';
 export default class navBar extends Component {
   constructor(props) {
     super(props);
+    this.navigation = this.navigation.bind(this);
+  }
+
+  navigation(props){
+    if(props === 'addList') {
+    browserHistory.push(`/lists/new`);
+    } else 
+    if(props==='profile'){
+    browserHistory.push('/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId);
+    }
   }
 
   render(){
@@ -35,8 +45,8 @@ export default class navBar extends Component {
               </li>
 
               <li>
-                {localStorage.getItem('logged') ?  <Link to="/lists/new">Add a list
-                </Link> : <OurModal status={'Add a List'} /> }
+                {localStorage.getItem('logged') ?  <Button onClick={()=>this.navigation('addList')}>Add a list
+                </Button> : <OurModal status={'Add a List'} /> }
               </li>
 
               <li>
@@ -44,7 +54,7 @@ export default class navBar extends Component {
               </li>
 
               <li>
-                {localStorage.getItem('logged') ? <Link to={'/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId}>Profile</Link> : null }
+                {localStorage.getItem('logged') ? <Button onClick={()=>this.navigation('profile')}>Profile</Button> : null }
               </li>
             </div>
           </div>

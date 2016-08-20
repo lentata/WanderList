@@ -53,7 +53,7 @@ export class ListDetail extends Component {
       return <div><img height="100%" src="../loading.gif" alt="loading" /></div>;
     }
     return (
-      <div>
+      <div className='container'>
         <NavBar
           list={list}
         />

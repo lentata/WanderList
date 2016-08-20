@@ -74,7 +74,7 @@ export class DeepForm extends Component {
 
     if(localStorage.getItem('logged')) {
       return (
-        <form onSubmit={ handleSubmit(this.onSubmit) }>
+        <form className="container" onSubmit={ handleSubmit(this.onSubmit) }>
         <Nav />
           <div className="form-group">
             <legend>Create your headline and categories!</legend>

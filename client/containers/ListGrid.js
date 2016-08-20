@@ -5,9 +5,10 @@ import { bindActionCreators } from 'redux';
 import List from './lists';
 import { Link, browserHistory, history } from 'react-router';
 import NavBar from '../components/nav';
-import {Panel} from 'react-bootstrap';
 import { Pagination, Nav, NavItem, Button } from 'react-bootstrap';
 import { push } from 'react-router-redux';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 
 export class ListGrid extends Component {
   constructor(props){
@@ -54,6 +55,11 @@ export class ListGrid extends Component {
     }
   }
 
+  searchButton(){
+    browserHistory.push('/search/' + this.state.term);
+
+  }
+
   render() {
 
     if(!this.props.itemNo.items) {
@@ -68,14 +74,22 @@ export class ListGrid extends Component {
       <div>
         <NavBar />
         <div className="container">
-          
           <div className="row">
-            <div className="col-md-3">
-            <Nav bsStyle="tabs">
-              <NavItem onClick={()=>this.filterList("new")}>New</NavItem>
-              <NavItem onClick={()=>this.filterList("top")}>Top</NavItem>
-              <NavItem onClick={()=>this.filterList("contro")}>Controversial</NavItem>
-            </Nav>
+         
+          <div className="col-md-3">
+            <Tabs>
+              <TabList>
+                <Tab onClick={()=>this.filterList("new")}>New</Tab>
+                <Tab onClick={()=>this.filterList("top")}>Top</Tab>
+                <Tab onClick={()=>this.filterList("contro")}>Controversial</Tab>
+              </TabList>
+              <TabPanel>
+              </TabPanel>
+              <TabPanel>
+              </TabPanel>
+              <TabPanel>
+              </TabPanel>
+            </Tabs>
             </div>
           </div>
 
@@ -84,7 +98,7 @@ export class ListGrid extends Component {
               <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} onKeyUp={this.searchWithEnter}/>
             </div>
             <div className="col-md-2">
-              <Link to={'/search/' + this.state.term}>Search</Link>
+              <Button onClick={()=>this.searchButton()}>Search</Button>
             </div>
           </div>
         </div>
