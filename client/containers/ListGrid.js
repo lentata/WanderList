@@ -68,7 +68,6 @@ export class ListGrid extends Component {
       <div>
         <NavBar />
         <div className="container">
-          
           <div className="row">
             <div className="col-md-3">
             <Nav bsStyle="tabs">

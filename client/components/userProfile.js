@@ -68,22 +68,29 @@ export class UserProfile extends Component {
       return(
         <div>
           <NavBar />
-          <img src={info.photo} alt="Profile Picture" />
-          <h3>{info.username}</h3>
-          <h3>{info.email}</h3>
-         
-          <Nav bsStyle="tabs">
-            <NavItem onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</NavItem>
-            <NavItem onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</NavItem>
-            <NavItem onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</NavItem>
-            <NavItem onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</NavItem>
-          </Nav>
+          <div className="container">
 
-          <ul>
-            {this.renderList()}
-          </ul>
+            <img src={info.photo} alt="Profile Picture" />
+            <h3>{info.username}</h3>
+            <h3>{info.email}</h3>
+            <div className="row">
+            <div className="col-md-5">
+              <Nav bsStyle="tabs">
+                <NavItem onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</NavItem>
+                <NavItem onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</NavItem>
+                <NavItem onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</NavItem>
+                <NavItem onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</NavItem>
+              </Nav>  
+            </div>
+            </div>
+
+
+            <ul>
+              {this.renderList()}
+            </ul>
+          </div>
         </div>
-      );
+        );
     } else {
       if(!otherInfo) {
         return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
