@@ -67,40 +67,52 @@ export class ListGrid extends Component {
     return (
       <div>
         <NavBar />
-          <div>
-          <Nav bsStyle="tabs">
-            <NavItem onClick={()=>this.filterList("new")}>New</NavItem>
-            <NavItem onClick={()=>this.filterList("top")}>Top</NavItem>
-            <NavItem onClick={()=>this.filterList("contro")}>Controversial</NavItem>
-          </Nav>
-            <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} onKeyUp={this.searchWithEnter}/>
-            <Link to={'/search/' + this.state.term}>Search</Link>
+        <div className="container">
+          
+          <div className="row">
+            <div className="col-md-3">
+            <Nav bsStyle="tabs">
+              <NavItem onClick={()=>this.filterList("new")}>New</NavItem>
+              <NavItem onClick={()=>this.filterList("top")}>Top</NavItem>
+              <NavItem onClick={()=>this.filterList("contro")}>Controversial</NavItem>
+            </Nav>
+            </div>
           </div>
-        <Panel />
-        <ul className="list-group">
-          {this.props.lists
-            .map((list, i) => <List {...this.props}
-              info={this.props.info}
-              votes={list.upvote - list.downvote}
-              upLists={this.props.upLists}
-              downLists={this.props.downLists}
-              favoriteLists={this.props.favoriteLists}
-              key={i}
-              i={i}
-              list={list} />)}
-        </ul>
-        <Pagination
-          className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
-          prev
-          next
-          first
-          last
-          ellipsis
-          items={Math.ceil(+this.props.itemNo.items / 10)}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect.bind(this)}
-          >
-        </Pagination>
+
+          <div className="row">
+            <div className="col-md-6">
+              <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} onKeyUp={this.searchWithEnter}/>
+            </div>
+            <div className="col-md-2">
+              <Link to={'/search/' + this.state.term}>Search</Link>
+            </div>
+          </div>
+        </div>
+
+      <ul className="list-group">
+        {this.props.lists
+          .map((list, i) => <List {...this.props}
+            info={this.props.info}
+            votes={list.upvote - list.downvote}
+            upLists={this.props.upLists}
+            downLists={this.props.downLists}
+            favoriteLists={this.props.favoriteLists}
+            key={i}
+            i={i}
+            list={list} />)}
+      </ul>
+      <Pagination
+        className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
+        prev
+        next
+        first
+        last
+        ellipsis
+        items={Math.ceil(+this.props.itemNo.items / 10)}
+        activePage={this.state.activePage}
+        onSelect={this.handleSelect.bind(this)}
+        >
+      </Pagination>
       </div>
     );
   }
