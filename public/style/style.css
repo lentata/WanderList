@@ -273,7 +273,9 @@ button.close {
 }
 
 .list-group {
-  border-radius: 0px
+  border-radius: 0px;
+  margin-top: 2%;
+  padding-left: 15px;
 }
 
 .mother_div {
@@ -292,21 +294,29 @@ button.close {
   border-radius: 0px !important;
 }
 
+.list_image_container {
+  float: left;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  max-width: 10em;
+  max-height: 10em;
+  margin: 10px;
+}
+
 .list_thumbnail {
   /*display: inline-block;
   width: 350px;*/
-}
-
-.list_image_container {
-  max-width: 12em;
-  max-height: 12em;
-  margin: 10px;
 }
 
 .img-thumbnail {
   padding: 0px;
   border: none;
   border-radius: 0px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 10em;
 }
 
 .list_overview_container {

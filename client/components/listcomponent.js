@@ -24,7 +24,9 @@ export default class ListComponent extends Component {
 
     return(
         <div className="list_main_container">
-          <img className="list_image_container img-thumbnail" src={list.content[0].image } />
+          <div className="list_image_container">
+            <img className="img-thumbnail" src={list.content[0].image } />
+          </div>
 
           <div className="list_overview_container">
             <div className="list_overview_fav fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />
