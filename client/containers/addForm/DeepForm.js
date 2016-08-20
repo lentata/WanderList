@@ -173,8 +173,6 @@ export class DeepForm extends Component {
                     }}><i/> Remove #{index + 2}
                   </button>
                 </div>
-
-              {/*</div>*/}
             </div>, this)}
 
             <div className="form-group">
@@ -210,5 +208,5 @@ export default reduxForm({
   fields,
   validate
 }, undefined, {
-  addValue: addArrayValue, createList // mapDispatchToProps (will bind action creator to dispatch)
+  addValue: addArrayValue, createList
 })(DeepForm)

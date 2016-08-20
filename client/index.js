@@ -6,7 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import {Router, browserHistory, withRouter} from 'react-router';
 import routes from './routes';
 import reducers from './reducers';
-import { loadState, saveState } from './localStorage';
 
 function isPromise(val) {
   return val && typeof val.then === 'function';

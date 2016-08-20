@@ -6,6 +6,7 @@ import { fetchRandomList } from '../actions/index';
 import OurModal from '../containers/modal';
 import { Button } from 'react-bootstrap';
 import SignOut from './signoutButton';
+import SearchBar from '../containers/searchBar';
 
 export default class navBar extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class navBar extends Component {
                 <img height="100%" src="../final_logo.png" alt="WanderList-logo" />
               </Link>
             </div>
-
+            <SearchBar />
             <div className="nav navbar-nav navbar-right mainBtns">
               <li>
                 <Button

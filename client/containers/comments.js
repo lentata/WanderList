@@ -13,6 +13,7 @@ export class Comments extends Component {
 
   renderComment(comment, i) {
     let deleter = localStorage.getItem('logged') ? JSON.parse(localStorage.getItem('userId')).userId : null;
+
     return (
       <div className="comment" key={i}>
         <h5>
@@ -32,7 +33,6 @@ export class Comments extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
     const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
     if(author && userId) {
@@ -51,7 +51,6 @@ export class Comments extends Component {
       <div className="comments col-xs-3">
         <legend className="list-legend">Comments</legend>
         <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-          
           <textarea className="textarea-comment" ref="comment" placeholder="Leave a comment!"></textarea>
           <input className="submit-comment" type="submit" />
         </form>
@@ -69,5 +68,4 @@ export class Comments extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addComment, removeComment }, dispatch);
 }
-
 export default connect(null, mapDispatchToProps)(Comments);

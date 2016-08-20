@@ -12,7 +12,6 @@ export default class OurModal extends Component{
       showModal: false
     }
     OurModal.context = this;
-    // this.close = this.close.bind(this);
     this.open = this.open.bind(this);
   }
 
@@ -34,7 +33,6 @@ export default class OurModal extends Component{
         <Button onClick={this.open}>
           {this.props.status}
         </Button>
-
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>
@@ -52,7 +50,6 @@ export default class OurModal extends Component{
                 <h4 className="login_tagline">Let's Wander</h4>
                 <Login />
               </TabPanel>
-
               <TabPanel>
                 <h4 className="login_tagline">Join Wanderlist</h4>
                 <Signup />

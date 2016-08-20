@@ -65,15 +65,8 @@ module.exports = function(app) {
   });
 
 //List1 is Temporary for Pagination, Testing purposes only
-//TODO: RENAME List1
-   app.post('/api/lists1', function(req, res) {
-    // List.find({}, function(err, docs) {
-    //   if(err) throw err;
-    //   res.send(docs);
-    // });
-
+   app.post('/api/listspag', function(req, res) {
     var p = (req.body.type - 1) * 10;
-
     if(req.body.filter === 'top'){
       List
       .find({})
@@ -89,7 +82,7 @@ module.exports = function(app) {
         List
       .find({})
       .sort({createdAt: 'desc'})
-      .limit(9)
+      .limit(10)
       .skip(p)
       .exec(function (err, posts) {
         res.send(posts);
@@ -99,15 +92,13 @@ module.exports = function(app) {
     if(req.body.filter === 'contro'){
       List
       .find({})
-      .limit(9)
+      .limit(10)
       .skip(p)
       .exec(function (err, posts) {
         posts = posts.sort(function(a, b){
           return ((b.upvote+b.downvote) / Math.max(Math.abs(b.upvote-b.downvote), 1)) -
           ((a.upvote+a.downvote) / Math.max(Math.abs(a.upvote-a.downvote), 1))
-
         })
-        //logic
         res.send(posts);
       });
     }
@@ -167,7 +158,6 @@ module.exports = function(app) {
   //get individual list
   app.get('/api/lists/:id', function(req, res) {
     var id = req.params.id;
-
     List.find({_id: id}, function(err, obj) {
       if(err) throw err;
       res.send(obj);
@@ -206,10 +196,6 @@ module.exports = function(app) {
 
   app.get('/api/searchCat/:searchedTerm', function(req, res) {
     var searchedTerm = req.params.searchedTerm;
-    // var searchedTermTwo = "/" + searchedTerm + "/i";
-    // var searchedTerm = {'$regex': req.params.searchedTerm, '$options': "i"};
-    // var searchedTerm = new RegExp(req.params.searchedTerm, "i");
-    // console.log('THIS IS REGEX!!! ', searchedTermTwo);
     List.find({categories: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
       if(err) throw err;
       res.send(obj);
@@ -223,7 +209,6 @@ module.exports = function(app) {
     List.findByIdAndRemove({_id: req.params.id}, function(err){
       if(err) throw err;
     });
-
   });
 
   //post a list
@@ -232,7 +217,6 @@ module.exports = function(app) {
     req.body.downvote = 0;
     req.body.comments = [];
     req.body.createdAt = Date.now();
-
 
     var posted = req.body;
 
@@ -276,15 +260,11 @@ module.exports = function(app) {
     .catch(function(err) {
       throw err;
     });
-
   });
 
   //post a vote for a list
   app.post('/api/votes', function(req, res){
     //params
-    //@req.body.lid string
-    //@req.body.votes boolean
-    //@req.body.uid string
     var lid = req.body.lid;
     var vflag = req.body.votes;
     var uid = req.body.uid;
@@ -386,8 +366,6 @@ module.exports = function(app) {
     }
     res.sendStatus(201);
   });
-
-
   app.use(function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });

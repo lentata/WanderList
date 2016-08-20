@@ -16,7 +16,6 @@ export class SearchPage extends Component {
   }
 
   handleSelect(index, last) {
-    // console.log('Selected tab: ' + index + ', Last tab: ' + last);
     if(index === 0) {
       this.props.fetchedSearchCategories(this.props.params.searchedTerm);
     }
@@ -27,10 +26,7 @@ export class SearchPage extends Component {
 
   componentWillMount() {
     this.props.fetchedSearchLists(this.props.params.searchedTerm);
-
     this.props.fetchedSearchCategories(this.props.params.searchedTerm);
-
-    // Tabs.setUseDefaultStyles(false);
   }
 
   renderSearchedList() {
@@ -53,7 +49,6 @@ export class SearchPage extends Component {
     if (!this.props.list) {
       return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
     }
-
     return (
       <div className="container">
         <NavBar />

@@ -6,6 +6,10 @@
   position: absolute;
   margin-top: 5%
 }
+.searchBar{
+  padding-top: 10px;
+
+}
 
 .navContainer {
   background-color: #ecf0f1;
@@ -24,10 +28,6 @@
   max-height: 15%;
   max-width: 15%
 }
-
-/*@media .container {
-  height: 2500px;
-}*/
 
 .btn {
   margin-right: 10px;
