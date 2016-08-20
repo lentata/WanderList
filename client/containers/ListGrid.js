@@ -10,7 +10,6 @@ import { push } from 'react-router-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SearchBar from './searchBar';
 
-
 export class ListGrid extends Component {
   constructor(props){
     super(props);
@@ -21,7 +20,6 @@ export class ListGrid extends Component {
 
   componentWillMount() {
     let that = this;
-
     if(localStorage.getItem('logged')) {
       this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId);
     }

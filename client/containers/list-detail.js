@@ -38,7 +38,6 @@ export class ListDetail extends Component {
 
   onDeleteClick() {
     const deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
-
     if(deleter === this.props.list.authorId) {
       this.props.deleteList(this.props.list._id);
       browserHistory.push('/');
@@ -67,8 +66,6 @@ export class ListDetail extends Component {
             Delete List
           </button> : <div/>}
         </div>
-
-      {/* TODO: Refactor this to be the <VOTE /> component  */}
         <div className="row">
           <div className="col-xs-8">
             <div>

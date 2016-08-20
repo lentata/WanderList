@@ -9,7 +9,6 @@ export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case ITEM_NO:
       return { ...state, items: action.payload.data};
-      //return state;
     default:
       return state;
   }

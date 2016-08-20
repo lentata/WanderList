@@ -59,7 +59,7 @@ export function fetchOthersInfo(props) {
 //Pagination Post request for lists
 export function fetchLists(props) {
   // console.log("ACTION", props);
-  const request = axios.post(`/api/lists1`, props);
+  const request = axios.post(`/api/listspag`, props);
   return {
     type: FETCH_LISTS,
     payload: request
@@ -193,7 +193,6 @@ export function removeComment(listId, commentIndex) {
     commentIndex
   }
   const request = axios.post(`/api/comments/${listId}`, data)
-
   return {
     type: REMOVE_COMMENT,
     listId,
@@ -203,7 +202,6 @@ export function removeComment(listId, commentIndex) {
 
 export function postQuant(){
   const request = axios.get(`/api/list`);
-
   return {
     type: ITEM_NO,
     payload: request

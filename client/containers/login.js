@@ -115,10 +115,6 @@ export class Login extends Component {
           <button type="submit" className="btn login_btn">
             Log In
           </button>
-
-          {/*/ <Link to="/signup" className="btn login_signup_redirect">
-          //   Need an account?
-          // </Link>*/}
         </form>
       </div>
     );

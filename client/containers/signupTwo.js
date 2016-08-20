@@ -20,10 +20,6 @@ export class Signup extends Component {
     router: PropTypes.object
   };
 
-  closeModal() {
-
-  }
-
   onSubmit(props) {
     let that = this;
     var displayName = this.props.values.displayName;

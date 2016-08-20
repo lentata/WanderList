@@ -28,10 +28,10 @@ export default class SearchBar extends Component {
   render(){
     return(
       <div>
-        <div className="col-md-4">
+        <div className="col-md-4 searchBar">
           <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} onKeyUp={this.searchWithEnter} />
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 searchBar">
           <Button onClick={()=>this.searchButton()}>Search</Button>
         </div>
       </div>

@@ -8,10 +8,6 @@ import ListComponent from '../components/listcomponent';
 import Favorite from './favorite';
 
 export class Lists extends Component {
-  // <Favorite
-  //   list={list}
-  //   favoriteAction={favorite}
-  //   favoriteLists={favoriteLists} />
 
   renderLists() {
     const { list, upvote, downvote, favorite, info, upLists, downLists, favoriteLists, votes } = this.props;
