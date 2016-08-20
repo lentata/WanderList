@@ -108,7 +108,7 @@ export class ListDetail extends Component {
             </ol>
           </div>
           <div className="col-xs-4">
-            <Comments className="fixed col-xs-3" list={this.props.list}/>
+            <Comments list={this.props.list}/>
           </div>
         </div>
       </div>
