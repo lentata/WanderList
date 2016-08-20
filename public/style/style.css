@@ -308,6 +308,10 @@ button.close {
   background-color: #e6e6e6;
 }
 
+.comments {
+  position: fixed;
+}
+
 .remove-comment {
   background: none;
   border: 0;
