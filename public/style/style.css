@@ -1,14 +1,9 @@
 .container {
   margin-top: 3%
 }
-/*.navcol{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ededed+56,feffff+100 */
-background: #f3f4f5; /* Old browsers */
-background: -moz-linear-gradient(top, #ffffff 0%, #ededed 56%, #feffff 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #ffffff 0%,#ededed 56%,#feffff 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #ffffff 0%,#ededed 56%,#feffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
-copy
+
+.inner {
+  position: absolute;
 }
 
 .navContainer {
@@ -28,6 +23,10 @@ copy
   max-height: 15%;
   max-width: 15%
 }
+
+/*@media .container {
+  height: 2500px;
+}*/
 
 .btn {
   margin-right: 10px;
@@ -181,7 +180,7 @@ button.close {
   margin-right: 0.5%;
 
   float:left;
-  margin:0 0 7px 20px;
+  margin: 2% 1% 7px 20px;
   position:relative;
 
   font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -276,19 +275,72 @@ button.close {
   border-radius: 0px
 }
 
+.mother_div {
+  height: 100%;
+  width: 100%;
+}
+
+.list_main_container {
+  display: inline-block;
+}
+
 .list-group-item {
-  border-radius: 0px !important;
   margin-bottom: 1% !important;
   padding: 0px;
+  border: 0.5px solid #eaebec;
+  border-radius: 0px !important;
 }
 
 .list_thumbnail {
-  display: inline-block;
-  width: 350px;
+  /*display: inline-block;
+  width: 350px;*/
+}
+
+.list_image_container {
+  max-width: 12em;
+  max-height: 12em;
+  margin: 10px;
+}
+
+.img-thumbnail {
+  padding: 0px;
+  border: none;
+  border-radius: 0px;
 }
 
 .list_overview_container {
+  display: inline-block;
   margin-top: 3%;
+  width: 60rem;
+}
+
+.list_overview_title {
+  display: block;
+  margin-left: 5%;
+}
+
+.list_overview_inner {
+  margin-left: 5%;
+  font-size: 1.5rem;
+}
+
+.list_overview_votes {
+  float: right;
+  margin-top: 3.3%;
+  margin-right: 3.3%;
+}
+
+.list_overview_votes_count {
+  font-size: 1.75rem;
+}
+
+.list_overview_votes_inner {
+  /*display: block*/
+}
+
+.list_overview_cats {
+  display: block;
+  margin-left: 3%;
 }
 
 .login_favorite {
@@ -357,7 +409,7 @@ button.close {
 }
 
 .media-heading {
-  font-size: 1.75rem;
+  font-size: 2.75rem;
   text-decoration: none !important
 }
 
@@ -365,11 +417,6 @@ button.close {
   padding: 0px;
 }
 
-.img-thumbnail {
-  padding: 0px;
-  border: none;
-  border-radius: 0px;
-}
 
 .form-control {
   border-radius: 0px !important;
@@ -415,7 +462,7 @@ body {
   border-color: #fa5935;
 
 }
+
 .navbar{
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
-
 }

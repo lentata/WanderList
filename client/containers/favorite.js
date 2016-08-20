@@ -22,8 +22,8 @@ export default class Favorite extends Component {
     const favStatus = this.props.favoriteLists.includes(list._id.toString());
 
     return (
-      <div className="col-md-1">
-        <div className="text-center fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />
+      <div>
+      {/*//   <div className="text-center fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />*/}
       </div>
     );
   }
