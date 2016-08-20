@@ -70,10 +70,12 @@ export class UserProfile extends Component {
         <div>
           <NavBar />
           <div className="container">
-
-            <img src={info.photo} alt="Profile Picture" />
-            <h5>{info.username}</h5>
-            <h5>{info.email}</h5>
+            <div className="row">
+              <div className="col-md-6 col-md-offset-4">
+                <img className="profilePic" src={info.photo} alt="Profile Picture" />
+                <p className="pacifico">{info.username}</p>
+              </div>
+            </div>
             <div className="row">
               <div className="col-md-5">
                 <Tabs>
@@ -111,7 +113,8 @@ export class UserProfile extends Component {
           <NavBar />
           <img src={otherInfo.photo} alt="Profile Picture" />
           <h3>{otherInfo.username}</h3>
-          <h3>{otherInfo.email}</h3>
+
+
           <div className="row">
             <div className="col-md-2">
               <Tabs>
@@ -123,7 +126,6 @@ export class UserProfile extends Component {
               </Tabs>
             </div>
           </div>
-
           <ul>
             {this.renderList()}
           </ul>

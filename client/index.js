@@ -40,4 +40,4 @@ if(module.hot) {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history} routes={routes} />
-  </Provider> , document.querySelector('.container'));
+  </Provider> , document.querySelector('.mainPage'));
