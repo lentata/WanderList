@@ -8,6 +8,7 @@ import NavBar from '../components/nav';
 import { Pagination, Nav, NavItem, Button } from 'react-bootstrap';
 import { push } from 'react-router-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import SearchBar from './searchBar';
 
 
 export class ListGrid extends Component {
@@ -75,30 +76,20 @@ export class ListGrid extends Component {
         <NavBar />
         <div className="container">
           <div className="row">
-
-          <div className="col-md-3">
-            <Tabs>
-              <TabList>
-                <Tab onClick={()=>this.filterList("new")}>New</Tab>
-                <Tab onClick={()=>this.filterList("top")}>Top</Tab>
-                <Tab onClick={()=>this.filterList("contro")}>Controversial</Tab>
-              </TabList>
-              <TabPanel>
-              </TabPanel>
-              <TabPanel>
-              </TabPanel>
-              <TabPanel>
-              </TabPanel>
-            </Tabs>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-6">
-              <input type="text" className="form-control" placeholder="Search" onChange={event => this.onInputChange(event.target.value)} onKeyUp={this.searchWithEnter}/>
-            </div>
-            <div className="col-md-2">
-              <Button onClick={()=>this.searchButton()}>Search</Button>
+            <div className="col-md-3">
+              <Tabs>
+                <TabList>
+                  <Tab onClick={()=>this.filterList("new")}>New</Tab>
+                  <Tab onClick={()=>this.filterList("top")}>Top</Tab>
+                  <Tab onClick={()=>this.filterList("contro")}>Controversial</Tab>
+                </TabList>
+                <TabPanel>
+                </TabPanel>
+                <TabPanel>
+                </TabPanel>
+                <TabPanel>
+                </TabPanel>
+              </Tabs>
             </div>
           </div>
         </div>
