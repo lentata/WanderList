@@ -42,7 +42,6 @@ export default class OurModal extends Component{
                 <img height="100%" src="../orange_logo.png" alt="wanderlist" />
               </h2>
             </Modal.Title>
-          </Modal.Header>
             <Tabs>
               <TabList>
                 <Tab>Log In</Tab>
@@ -59,6 +58,7 @@ export default class OurModal extends Component{
                 <Signup />
               </TabPanel>
             </Tabs>
+          </Modal.Header>
         </Modal>
       </div>
     );

@@ -70,10 +70,11 @@ export class UserProfile extends Component {
         <div>
           <NavBar />
           <div className="container">
-            <div className="row alignCenter">
-              <img className="profilePic" src={info.photo} alt="Profile Picture" />
-              <p className="pacifico">{info.username}</p>
-              <p>{info.email}</p>
+            <div className="row">
+              <div className="col-md-6 col-md-offset-4">
+                <img className="profilePic" src={info.photo} alt="Profile Picture" />
+                <p className="pacifico">{info.username}</p>
+              </div>
             </div>
             <div className="row">
               <div className="col-md-5">
@@ -112,7 +113,8 @@ export class UserProfile extends Component {
           <NavBar />
           <img src={otherInfo.photo} alt="Profile Picture" />
           <h3>{otherInfo.username}</h3>
-          <h3>{otherInfo.email}</h3>
+
+
           <div className="row">
             <div className="col-md-2">
               <Tabs>
@@ -124,7 +126,7 @@ export class UserProfile extends Component {
               </Tabs>
             </div>
           </div>
-
+          <button className="main_tabs" disabled={true} onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</button>
           <ul>
             {this.renderList()}
           </ul>
