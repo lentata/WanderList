@@ -512,3 +512,15 @@ body {
 .navbar{
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
+.alignCenter{
+  margin-left: 47%;
+}
+.profilePic{
+  border-radius: 100%;
+  align-items: center;
+}
+
+.pacifico{
+  font-family: Pacifico;
+  font-size: 2em;
+}

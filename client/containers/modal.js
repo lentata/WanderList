@@ -20,6 +20,10 @@ export default class OurModal extends Component{
     OurModal.context.setState({'showModal': true });
   }
 
+  close() {
+    OurModal.context.setState({'showModal': false });
+  }
+
   handleSelect(index, last) {
     console.log('Selected tab: ' + index + ', Last tab: ' + last);
   }
@@ -38,7 +42,7 @@ export default class OurModal extends Component{
                 <img height="100%" src="../orange_logo.png" alt="wanderlist" />
               </h2>
             </Modal.Title>
-
+          </Modal.Header>
             <Tabs>
               <TabList>
                 <Tab>Log In</Tab>
@@ -55,7 +59,6 @@ export default class OurModal extends Component{
                 <Signup />
               </TabPanel>
             </Tabs>
-          </Modal.Header>
         </Modal>
       </div>
     );

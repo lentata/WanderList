@@ -70,10 +70,11 @@ export class UserProfile extends Component {
         <div>
           <NavBar />
           <div className="container">
-
-            <img src={info.photo} alt="Profile Picture" />
-            <h5>{info.username}</h5>
-            <h5>{info.email}</h5>
+            <div className="row alignCenter">
+              <img className="profilePic" src={info.photo} alt="Profile Picture" />
+              <p className="pacifico">{info.username}</p>
+              <p>{info.email}</p>
+            </div>
             <div className="row">
               <div className="col-md-5">
                 <Tabs>
