@@ -12,8 +12,7 @@ export class Comments extends Component {
   }
 
   renderComment(comment, i) {
-    let deleter = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
-
+    let deleter = localStorage.getItem('logged') ? JSON.parse(localStorage.getItem('userId')).userId : null;
     return (
       <div className="comment" key={i}>
         <h5>
@@ -36,7 +35,6 @@ export class Comments extends Component {
 
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
     const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
-
     if(author && userId) {
       const postId = this.props.list._id;
       const comment = this.refs.comment.value;
@@ -60,7 +58,6 @@ export class Comments extends Component {
         <div className="comments-lists col-xs-3">
           {this.props.list.comments
             .sort( (a, b) => {
-            // console.log("a:", a, "b:", b);
             return Date.parse(b.posted) - Date.parse(a.posted);
           })
             .map(this.renderComment, this)}

@@ -183,7 +183,8 @@ export function addComment(postId, userId, author, comment) {
   const request = axios.post(`/api/comments`, data);
   return {
     type: ADD_COMMENT,
-    payload: request
+    payload: request,
+    lid: postId
   }
 }
 
@@ -197,7 +198,6 @@ export function removeComment(listId, commentIndex) {
     type: REMOVE_COMMENT,
     listId,
     commentIndex,
-    payload: request
   }
 }
 
