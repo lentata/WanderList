@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { addComment, removeComment } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Linkify from 'react-linkify';
@@ -17,7 +18,11 @@ export class Comments extends Component {
     return (
       <div className="comment" key={i}>
         <h5>
-          <strong>{comment.user}</strong>
+          <strong>
+            <Link to={'/userProfile/' + comment.userId}>
+            {comment.user}
+            </Link>
+          </strong>
           <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
 
           {deleter === comment.userId ? <button className="remove-comment" onClick={ this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button> : <div/>}
