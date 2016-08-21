@@ -25,9 +25,9 @@ export class ListDetail extends Component {
       return (
         <div key={i}>
           <li className="detail-lists">
-            <h3>{item.headline}</h3>
+            <div>{item.headline}</div>
             <img className="detail-img" src={item.image} alt={item.headline} />
-            <p className="h6">
+            <p className="detail-lists-caption">
               <Linkify>{item.description}</Linkify>
             </p>
           </li>
@@ -56,18 +56,17 @@ export class ListDetail extends Component {
     }
     return (
       <div className='container'>
-        <NavBar
-          list={list}
-        />
-          <div className="btn-toolbar">
-          {deleter === author ? <button
-            className="btn btn-danger navbar-btn navbar-right col-md-1"
-            onClick={ this.onDeleteClick }>
-            Delete List
-          </button> : <div/>}
+        <NavBar list={list} />
+
+        <div className="btn-toolbar">
+          {deleter === author ?
+          <button className="btn btn-danger navbar-btn navbar-right col-md-1"
+          onClick={ this.onDeleteClick }>
+          Delete List</button> : <div/>}
         </div>
+
         <div className="row">
-          <div className="col-xs-8">
+          <div className="col-xs-8 list-detail-container">
             <div>
               <Votes
                 list={list}
@@ -77,37 +76,54 @@ export class ListDetail extends Component {
                 votes={list.upvote - list.downvote}
                 upLists={upLists}
                 downLists={downLists} />
-              <Favorites
-                list={list}
-                favoriteAction={favorite}
-                favoriteLists={favLists} />
             </div>
 
-            <div className="container-fluid">
-              <div className="h1">{ list.title }</div>
-              <span className="fa fa-user"/>
-              <span><Link to={'/userProfile/' + this.props.list.authorId}> {list.author ? list.author : "¯\\_(ツ)_/¯"} &nbsp;</Link></span>
-              <span className="fa fa-clock-o"/>
-              <span>  {moment(list.createdAt).fromNow()} &nbsp;</span>
-              <br/>
+            <div>
+              <span>
+                <Favorites
+                  list={list}
+                  favoriteAction={favorite}
+                  favoriteLists={favLists} />
+              </span>
+              <div className="list_detail_title">{ list.title }</div>
+
+              <div className="list_detail_overview_inner_container">
+                <span className="fa fa-user list_detail_overview_inner" />
+                <span className="list_overview_words">
+                  &nbsp;<Link to={'/userProfile/' + this.props.list.authorId}>{list.author ? list.author : "¯\\_(ツ)_/¯"}</Link>
+                </span>
+
+                <span className="fa fa-clock-o list_detail_overview_inner" />
+                <span className="list_overview_words">
+                  &nbsp;created {moment(list.createdAt).fromNow()}
+                </span>
+
+                <span className="fa fa-commenting list_detail_overview_inner" />
+                <span className="list_overview_words">
+                  &nbsp;{list.comments.length > 1 ? list.comments.length + " comments" : list.comments.length === 1 ? "1 comment" : "no comments"}
+                </span>
+              </div>
+
               <div>
                 <span>
                   {list.categories.map((category, i) => {
                     return (
-                    <Link key={i} to={"/categoryPage/" + category}>
-                      <span className="label label-default">
-                        { category }
-                      </span>
-                    </Link>);
+                    <div className="list_detail_overview_cats">
+                      <Link key={i} to={"/categoryPage/" + category}>
+                        <span className="label label-default">
+                          { category }
+                        </span>
+                      </Link>
+                    </div>);
                   })}
                 </span>
               </div>
             </div>
-            <ol>
+            <ol className="overview-list-item-separation">
               {this.renderList()}
             </ol>
           </div>
-          <div className="col-xs-4">
+          <div className="col-xs-4 list-detail-container">
             <Comments list={this.props.list}/>
           </div>
         </div>
