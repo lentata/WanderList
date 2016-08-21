@@ -24,7 +24,9 @@ export default class ListComponent extends Component {
 
     return(
         <div className="list_main_container">
-          <img className="list_image_container img-thumbnail" src={list.content[0].image } />
+          <div className="list_image_container">
+            <img className="img-thumbnail" src={list.content[0].image } />
+          </div>
 
           <div className="list_overview_container">
             <div className="list_overview_fav fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />
@@ -33,17 +35,20 @@ export default class ListComponent extends Component {
             </Link>
 
             <div className="list_overview_inner_container">
-              <div className="list_overview_inner fa fa-user">
+              <span className="fa fa-user list_overview_inner" />
+              <span className="list_overview_words">
                 &nbsp;<Link to={'/userProfile/' + this.props.list.authorId}>{list.author ? list.author : "¯\\_(ツ)_/¯"}</Link>
-              </div>
+              </span>
 
-              <div className="list_overview_inner fa fa-clock-o">
+              <span className="fa fa-clock-o list_overview_inner" />
+              <span className="list_overview_words">
                 &nbsp;created {moment(list.createdAt).fromNow()}
-              </div>
+              </span>
 
-              <div className="list_overview_inner fa fa-commenting">
+              <span className="fa fa-commenting list_overview_inner" />
+              <span className="list_overview_words">
                 &nbsp;{list.comments.length > 1 ? list.comments.length + " comments" : list.comments.length === 1 ? "1 comment" : "no comments"}
-              </div>
+              </span>
             </div>
 
             <div className="list_overview_cats">

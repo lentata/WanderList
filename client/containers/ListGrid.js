@@ -70,10 +70,11 @@ export class ListGrid extends Component {
     }
 
     return (
-      <div className="mother_div">
+      <div>
         <NavBar />
+        <div className="mother_div">
         <div className="container">
-          <div className="row">
+          <div className="mainPage-tabs">
             <div className="col-md-3">
               <Tabs>
                 <TabList>
@@ -103,7 +104,7 @@ export class ListGrid extends Component {
             key={i}
             i={i}
             list={list} />)}
-            
+
       </ul>
       <Pagination
         className={this.props.lists.length === 0 ? 'hidden' : 'shown'}
@@ -117,6 +118,7 @@ export class ListGrid extends Component {
         onSelect={this.handleSelect.bind(this)}
         >
       </Pagination>
+    </div>
       </div>
     );
   }

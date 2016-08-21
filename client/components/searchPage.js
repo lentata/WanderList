@@ -58,13 +58,11 @@ export class SearchPage extends Component {
             <Tab>Lists by Headlines</Tab>
           </TabList>
           <TabPanel>
-            <h1>By Categories: {this.props.params.searchedTerm}</h1>
             <div className="search_by_cat_container">
               {this.renderSearchedList()}
             </div>
           </TabPanel>
           <TabPanel>
-            <h1>By Title: {this.props.params.searchedTerm}</h1>
             <div className="search_by_title_container">
               {this.renderSearchedList()}
             </div>
