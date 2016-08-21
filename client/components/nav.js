@@ -31,7 +31,7 @@ export default class navBar extends Component {
           <div className="container-fluid">
             <div className="navbar-header">
               <Link to="/"  className="navbar-brand">
-                <img height="100%" src="../final_logo.png" alt="WanderList-logo" />
+                <img height="75%" src="../final_logo.png" alt="WanderList-logo" />
               </Link>
             </div>
             <SearchBar />
@@ -51,7 +51,7 @@ export default class navBar extends Component {
               </li>
 
               <li>
-                {localStorage.getItem('logged') ? <SignOut />  : <OurModal status={'Log in or sign up'}/>}
+                {localStorage.getItem('logged') ? <SignOut />  : <OurModal status={'Log in / Sign up'}/>}
               </li>
 
               <li>
