@@ -9,9 +9,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 export class SearchPage extends Component {
   constructor(props) {
     super(props);
-
     this.renderSearchedList = this.renderSearchedList.bind(this);
-
     this.handleSelect = this.handleSelect.bind(this);
   }
 
@@ -28,6 +26,11 @@ export class SearchPage extends Component {
     this.props.fetchedSearchLists(this.props.params.searchedTerm);
     this.props.fetchedSearchCategories(this.props.params.searchedTerm);
   }
+
+  // componentWillUpdate(nextProps, nextStates) {
+  //   this.props.fetchedSearchLists(nextProps.params.searchedTerm);
+  //   this.props.fetchedSearchCategories(nextProps.params.searchedTerm);
+  // }
 
   renderSearchedList() {
     return this.props.list.map((list, i) =>

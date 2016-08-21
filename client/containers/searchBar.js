@@ -22,8 +22,7 @@ export default class SearchBar extends Component {
   }
 
   searchButton(){
-    browserHistory.push('/search/' + this.state.term);
-
+    browserHistory.push(`/search/${this.state.term}`);
   }
   render(){
     return(
