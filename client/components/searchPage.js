@@ -24,7 +24,6 @@ export class SearchPage extends Component {
     // this.props.fetchedSearchLists(nextProps.params.searchedTerm);
     if(this.props.params.searchedTerm !== nextProps.params.searchedTerm) {
       nextProps.fetchedSearchCategories(nextProps.params.searchedTerm);
-      console.log("STATE", nextState)
       nextState.tabNum = 0;
     }
   }
