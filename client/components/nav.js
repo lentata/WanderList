@@ -17,7 +17,7 @@ export default class navBar extends Component {
   navigation(props){
     if(props === 'addList') {
     browserHistory.push(`/lists/new`);
-    } else 
+    } else
     if(props==='profile'){
     browserHistory.push('/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId);
     }
@@ -27,7 +27,7 @@ export default class navBar extends Component {
 
     return(
       <div>
-        <nav className="navbar navbar-fixed-top navcol">
+        <nav className="navbar navbar-fixed-top" role="navigation">
           <div className="container-fluid">
             <div className="navbar-header">
               <Link to="/"  className="navbar-brand">
