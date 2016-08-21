@@ -10,27 +10,23 @@ export class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.renderSearchedList = this.renderSearchedList.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSelect(index, last) {
-    if(index === 0) {
-      this.props.fetchedSearchCategories(this.props.params.searchedTerm);
-    }
-    if(index === 1) {
-      this.props.fetchedSearchLists(this.props.params.searchedTerm);
+    this.state = {
+      tabNum: 0
     }
   }
 
   componentWillMount() {
-    this.props.fetchedSearchLists(this.props.params.searchedTerm);
+    //this.props.fetchedSearchLists(this.props.params.searchedTerm);
     this.props.fetchedSearchCategories(this.props.params.searchedTerm);
   }
 
-  // componentWillUpdate(nextProps, nextStates) {
-  //   this.props.fetchedSearchLists(nextProps.params.searchedTerm);
-  //   this.props.fetchedSearchCategories(nextProps.params.searchedTerm);
-  // }
+  componentWillUpdate(nextProps, nextState) {
+    // this.props.fetchedSearchLists(nextProps.params.searchedTerm);
+    if(this.props.params.searchedTerm !== nextProps.params.searchedTerm) {
+      nextProps.fetchedSearchCategories(nextProps.params.searchedTerm);
+      nextState.tabNum = 0;
+    }
+  }
 
   renderSearchedList() {
     return this.props.list.map((list, i) =>
@@ -48,29 +44,31 @@ export class SearchPage extends Component {
 
   render(){
     const { list, info } = this.props;
-
     if (!this.props.list) {
       return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
     }
     return (
       <div className="container">
         <NavBar />
-        <Tabs onSelect={this.handleSelect}>
+        <Tabs className="search-tabs" selectedIndex={this.state.tabNum}>
           <TabList>
-            <Tab>Lists by Categories</Tab>
-            <Tab>Lists by Headlines</Tab>
+            <Tab onClick={() => {
+              this.props.fetchedSearchCategories(this.props.params.searchedTerm);
+              this.setState({tabNum: 0});
+            }}>Lists by Categories</Tab>
+            <Tab onClick={() => {
+              this.props.fetchedSearchLists(this.props.params.searchedTerm);
+              this.setState({tabNum: 1});
+            }}>Lists by Headlines</Tab>
           </TabList>
           <TabPanel>
-            <div className="search_by_cat_container">
-              {this.renderSearchedList()}
-            </div>
           </TabPanel>
           <TabPanel>
-            <div className="search_by_title_container">
-              {this.renderSearchedList()}
-            </div>
           </TabPanel>
         </Tabs>
+        <div className="search_by_cat_container">
+          {this.renderSearchedList()}
+        </div>
       </div>
     );
   }
