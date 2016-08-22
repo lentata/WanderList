@@ -69,36 +69,35 @@ export class UserProfile extends Component {
       return(
         <div>
           <NavBar />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-md-offset-4">
+          <div className="mother_div">
+            <div className="container">
+              <div className="profile">
                 <img className="profilePic" src={info.photo} alt="Profile Picture" />
                 <p className="pacifico">{info.username}</p>
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md-5">
-                <Tabs>
-                  <TabList>
-                    <Tab onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</Tab>
-                    <Tab onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</Tab>
-                    <Tab onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</Tab>
-                    <Tab onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</Tab>
-                  </TabList>
-                  <TabPanel>
-                  </TabPanel>
-                  <TabPanel>
-                  </TabPanel>
-                  <TabPanel>
-                  </TabPanel>
-                  <TabPanel>
-                  </TabPanel>
-                </Tabs>
+              <div className="col-md-11">
+                <div>
+                  <Tabs>
+                    <TabList>
+                      <Tab onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</Tab>
+                      <Tab onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</Tab>
+                      <Tab onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</Tab>
+                      <Tab onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</Tab>
+                    </TabList>
+                    <TabPanel>
+                    </TabPanel>
+                    <TabPanel>
+                    </TabPanel>
+                    <TabPanel>
+                    </TabPanel>
+                    <TabPanel>
+                    </TabPanel>
+                  </Tabs>
+                </div>
               </div>
             </div>
 
-
-            <ul>
+            <ul className="profile-list-group">
               {this.renderList()}
             </ul>
           </div>
@@ -111,25 +110,25 @@ export class UserProfile extends Component {
       return(
         <div>
           <NavBar />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-md-offset-4">
-              <img className="profilePic" src={otherInfo.photo} alt="Profile Picture" />
-              <h3 className="pacifico">{otherInfo.username}</h3>
+          <div className="mother_div">
+            <div className="container">
+              <div className="profile">
+                <img className="profilePic" src={otherInfo.photo} alt="Profile Picture" />
+                <p className="pacifico">{otherInfo.username}</p>
+              </div>
+              <div className="col-md-11">
+                <div>
+                  <Tabs>
+                    <TabList>
+                      <Tab>Overview</Tab>
+                    </TabList>
+                    <TabPanel>
+                    </TabPanel>
+                  </Tabs>
+                </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-2">
-                <Tabs>
-                  <TabList>
-                    <Tab>Overview</Tab>
-                  </TabList>
-                  <TabPanel>
-                  </TabPanel>
-                </Tabs>
-              </div>
-            </div>
-            <ul>
+            <ul className="profile-list-group">
               {this.renderList()}
             </ul>
           </div>
