@@ -642,14 +642,20 @@ body {
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-.profilePic{
+.profilePic {
   border-radius: 100%;
   float: left;
   margin: 0px 15px;
 }
 
-.pacifico{
+.pacifico {
   font-family: Pacifico;
   font-size: 2em;
   padding: 3%;
+}
+
+.category {
+  font-family: Signika;
+  font-size: 1.5em;
+  padding-left: 1%;
 }
