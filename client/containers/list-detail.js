@@ -58,16 +58,16 @@ export class ListDetail extends Component {
       <div className='container'>
         <NavBar list={list} />
 
-        <div className="btn-toolbar">
-          {deleter === author ?
-          <button className="btn btn-danger navbar-btn navbar-right col-md-1"
-          onClick={ this.onDeleteClick }>
-          Delete List</button> : <div/>}
-        </div>
 
         <div className="row">
           <div className="col-xs-8 list-detail-container">
             <div>
+              <div className="btn-toolbar">
+                {deleter === author ?
+                  <button className="btn btn-danger col-md-2"
+                    onClick={ this.onDeleteClick }>
+                    Delete List</button> : <div/>}
+              </div>
               <Votes
                 list={list}
                 info={info}

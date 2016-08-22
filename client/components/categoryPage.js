@@ -33,12 +33,18 @@ export class CategoryPage extends Component {
     return(
       <div>
         <NavBar />
-        <ul>
-          <h1>{this.props.params.categories}</h1>
-          <div>
-            {this.renderCatList()}
+        <div className="mother_div">
+          <div className="container">
+            <div className="mainPage-tabs">
+                <p className="category">Category: {this.props.params.categories}</p>
+              </div>
           </div>
-        </ul>
+          <ul className="list-group">
+            <div>
+              {this.renderCatList()}
+            </div>
+          </ul>
+        </div>
       </div>
     );
   }
