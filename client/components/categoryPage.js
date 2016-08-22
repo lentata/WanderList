@@ -14,6 +14,12 @@ export class CategoryPage extends Component {
     this.props.fetchListCategories(this.props.params.categories);
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if(this.props.params.categories !== nextProps.params.categories) {
+      nextProps.fetchListCategories(nextProps.params.categories);
+    }
+  }
+
   renderCatList() {
 
     return this.props.list.map((list, i) => <List {...this.props}
