@@ -318,6 +318,10 @@ button.close {
   padding-left: 15px;
 }
 
+.profile-list-group {
+  margin-left: -1%;
+}
+
 .list_main_container {
   display: inline-block;
 }
@@ -564,6 +568,14 @@ button.close {
   margin-top: 5%;
 }
 
+.profile-tabs {
+
+}
+
+.profile {
+  margin-top: 3%;
+}
+
 .button:hover {
   cursor: pointer
 }
@@ -632,10 +644,12 @@ body {
 
 .profilePic{
   border-radius: 100%;
-  margin-left: 20px;
+  float: left;
+  margin: 0px 15px;
 }
 
 .pacifico{
   font-family: Pacifico;
   font-size: 2em;
+  padding: 3%;
 }

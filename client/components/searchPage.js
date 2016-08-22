@@ -54,22 +54,24 @@ export class SearchPage extends Component {
     return (
       <div className="container">
         <NavBar />
-        <Tabs className="search-tabs" selectedIndex={this.state.tabNum}>
-          <TabList>
-            <Tab onClick={() => {
-              this.props.fetchedSearchCategories(this.props.params.searchedTerm);
-              this.setState({tabNum: 0});
-            }}>Lists by Categories</Tab>
-            <Tab onClick={() => {
-              this.props.fetchedSearchLists(this.props.params.searchedTerm);
-              this.setState({tabNum: 1});
-            }}>Lists by Headlines</Tab>
-          </TabList>
-          <TabPanel>
-          </TabPanel>
-          <TabPanel>
-          </TabPanel>
-        </Tabs>
+        <div className="mainPage-tabs">
+          <Tabs className="search-tabs" selectedIndex={this.state.tabNum}>
+            <TabList>
+              <Tab onClick={() => {
+                this.props.fetchedSearchCategories(this.props.params.searchedTerm);
+                this.setState({tabNum: 0});
+              }}>Lists by Categories</Tab>
+              <Tab onClick={() => {
+                this.props.fetchedSearchLists(this.props.params.searchedTerm);
+                this.setState({tabNum: 1});
+              }}>Lists by Headlines</Tab>
+            </TabList>
+            <TabPanel>
+            </TabPanel>
+            <TabPanel>
+            </TabPanel>
+          </Tabs>
+        </div>
         <div className="search_by_cat_container">
           {this.renderSearchedList()}
         </div>
