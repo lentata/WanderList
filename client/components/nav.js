@@ -41,7 +41,7 @@ export default class navBar extends Component {
                   onClick={()=>this.props.fetchRandomList()
                     .then(() => {browserHistory.push(`/lists/${this.props.id}`)
                   })}>
-                  Wanderlist!
+                  Surprise Me!
                 </Button>
               </li>
 
