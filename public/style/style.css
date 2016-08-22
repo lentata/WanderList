@@ -183,7 +183,7 @@ button.close {
 
 .search-not-found {
   margin-left: 1%;
-  margin-top: 1%;
+  padding-top: 2%;
 }
 
 .label-default:before {
@@ -315,6 +315,12 @@ button.close {
 .list-group {
   border-radius: 0px;
   margin-top: 5.7%;
+  padding-left: 3%;
+}
+
+.list-group-search {
+  border-radius: 0px;
+  margin-top: 10%;
   padding-left: 3%;
 }
 
@@ -658,4 +664,8 @@ body {
   font-family: Signika;
   font-size: 1.5em;
   padding-left: 1%;
+}
+
+.add-list {
+  margin-top: 2%;
 }

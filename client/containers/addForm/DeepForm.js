@@ -76,7 +76,7 @@ export class DeepForm extends Component {
       return (
         <form className="container" onSubmit={ handleSubmit(this.onSubmit) }>
         <Nav />
-          <div className="form-group">
+          <div className="form-group add-list">
             <legend>Create your headline and categories!</legend>
 
             <div className={`form-group ${title.touched && title.invalid ? 'has-error' : ''}`}>

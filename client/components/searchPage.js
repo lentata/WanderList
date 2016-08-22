@@ -57,6 +57,7 @@ export class SearchPage extends Component {
         <div className="mother_div">
           <div className="container">
             <div className="mainPage-tabs">
+              <p className="category">Search results for: {this.props.params.searchedTerm}</p>
               <div className="col-md-7">
                 <Tabs selectedIndex={this.state.tabNum}>
                   <TabList>
@@ -78,7 +79,7 @@ export class SearchPage extends Component {
             </div>
           </div>
 
-          <ul className="list-group">
+          <ul className="list-group-search">
             {this.renderSearchedList()}
           </ul>
       </div>
