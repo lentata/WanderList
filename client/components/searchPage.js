@@ -29,17 +29,21 @@ export class SearchPage extends Component {
   }
 
   renderSearchedList() {
-    return this.props.list.map((list, i) =>
-      <List {...this.props}
-        info={this.props.info}
-        votes={list.upvote - list.downvote}
-        upLists={this.props.upLists}
-        downLists={this.props.downLists}
-        favoriteLists={this.props.favoriteLists}
-        searchLists={this.props.searchLists}
-        key={i}
-        i={i}
-        list={list} />);
+    if(this.props.list.length === 0) {
+      return <div className="search-not-found">Content Not Found!</div>;
+    } else {
+      return this.props.list.map((list, i) =>
+        <List {...this.props}
+          info={this.props.info}
+          votes={list.upvote - list.downvote}
+          upLists={this.props.upLists}
+          downLists={this.props.downLists}
+          favoriteLists={this.props.favoriteLists}
+          searchLists={this.props.searchLists}
+          key={i}
+          i={i}
+          list={list} />);
+    }
   }
 
   render(){

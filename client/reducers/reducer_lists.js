@@ -34,7 +34,7 @@ export default function(state = INITIAL_STATE, action) {
   if(action.type === FETCH_LIST) {
     return { ...state, all: action.payload.data };
   } else if(action.type === FETCH_RANDOM) {
-    return { ...state, id: action.payload.data._id, list: action.payload.data };
+    return { ...state, id: action.payload.data._id, all: [action.payload.data] };
   } else if(action.type === CREATE_LIST) {
     return { ...state, createdList: action.payload.data};
   } else if(action.type === USER_INFO) {
