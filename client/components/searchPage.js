@@ -29,7 +29,6 @@ export class SearchPage extends Component {
   }
 
   renderSearchedList() {
-    console.log(this.props.list.length)
     if(this.props.list.length === 0) {
       return <div className="search-not-found">Content Not Found!</div>;
     } else {
