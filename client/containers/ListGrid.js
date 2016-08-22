@@ -75,7 +75,7 @@ export class ListGrid extends Component {
         <div className="mother_div">
         <div className="container">
           <div className="mainPage-tabs">
-            <div className="col-md-3">
+            <div className="col-md-7">
               <Tabs>
                 <TabList>
                   <Tab onClick={()=>this.filterList("new")}>New</Tab>

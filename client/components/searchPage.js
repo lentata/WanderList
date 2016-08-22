@@ -52,30 +52,37 @@ export class SearchPage extends Component {
       return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
     }
     return (
-      <div className="container">
+      <div>
         <NavBar />
-        <div className="mainPage-tabs">
-          <Tabs className="search-tabs" selectedIndex={this.state.tabNum}>
-            <TabList>
-              <Tab onClick={() => {
-                this.props.fetchedSearchCategories(this.props.params.searchedTerm);
-                this.setState({tabNum: 0});
-              }}>Lists by Categories</Tab>
-              <Tab onClick={() => {
-                this.props.fetchedSearchLists(this.props.params.searchedTerm);
-                this.setState({tabNum: 1});
-              }}>Lists by Headlines</Tab>
-            </TabList>
-            <TabPanel>
-            </TabPanel>
-            <TabPanel>
-            </TabPanel>
-          </Tabs>
-        </div>
-        <div className="search_by_cat_container">
-          {this.renderSearchedList()}
-        </div>
+        <div className="mother_div">
+          <div className="container">
+            <div className="mainPage-tabs">
+              <div className="col-md-7">
+                <Tabs selectedIndex={this.state.tabNum}>
+                  <TabList>
+                    <Tab onClick={() => {
+                      this.props.fetchedSearchCategories(this.props.params.searchedTerm);
+                      this.setState({tabNum: 0});
+                    }}>Lists by Categories</Tab>
+                    <Tab onClick={() => {
+                      this.props.fetchedSearchLists(this.props.params.searchedTerm);
+                      this.setState({tabNum: 1});
+                    }}>Lists by Headlines</Tab>
+                  </TabList>
+                  <TabPanel>
+                  </TabPanel>
+                  <TabPanel>
+                  </TabPanel>
+                </Tabs>
+              </div>
+            </div>
+          </div>
+
+          <ul className="list-group">
+            {this.renderSearchedList()}
+          </ul>
       </div>
+    </div>
     );
   }
 }
