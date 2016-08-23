@@ -649,6 +649,7 @@ body {
 }
 
 .profilePic {
+  max-width: 8%;
   border-radius: 100%;
   float: left;
   margin: 0px 15px;
