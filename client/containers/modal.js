@@ -30,10 +30,10 @@ export default class OurModal extends Component{
   render() {
     return (
       <div>
-        <Button onClick={this.open}>
-          {this.props.status}
+        <Button onClick={ this.open }>
+          { this.props.status }
         </Button>
-        <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal show={ this.state.showModal } onHide={ this.close }>
           <Modal.Header closeButton>
             <Modal.Title>
               <h2 className="modal_title">

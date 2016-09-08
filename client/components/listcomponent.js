@@ -9,8 +9,7 @@ export default class ListComponent extends Component {
   }
 
   toggleFavFunc(favStatus) {
-    if(firebase.auth().currentUser) {
-      console.log('FAV!!!', favStatus);
+    if (firebase.auth().currentUser) {
       this.props.favoriteAction(this.props.list._id, firebase.auth().currentUser.uid, favStatus);
     } else {
       alert("You must be signed in to favorite lists!");
@@ -19,17 +18,15 @@ export default class ListComponent extends Component {
 
   render(){
     const { list, info } = this.props;
-
     const favStatus = this.props.favoriteLists.includes(list._id.toString());
-
-    return(
+    return (
         <div className="list_main_container">
           <div className="list_image_container">
             <img className="img-thumbnail" src={list.content[0].image } />
           </div>
 
           <div className="list_overview_container">
-            <div className="list_overview_fav fa fa-star fa-2x" style={{color: favStatus ? "#ff3f00" : "grey"}} onClick={this.toggleFavFunc.bind(this, favStatus)} />
+            <div className="list_overview_fav fa fa-star fa-2x" style={{ color: favStatus ? "#ff3f00" : "grey" }} onClick={ this.toggleFavFunc.bind(this, favStatus) } />
             <Link to={ "/lists/" + list._id } className="media-heading list_overview_title">
               { list.title }
             </Link>
@@ -37,23 +34,23 @@ export default class ListComponent extends Component {
             <div className="list_overview_inner_container">
               <span className="fa fa-user list_overview_inner" />
               <span className="list_overview_words">
-                &nbsp;<Link to={'/userProfile/' + this.props.list.authorId}>{list.author ? list.author : "¯\\_(ツ)_/¯"}</Link>
+                &nbsp;<Link to={'/userProfile/' + this.props.list.authorId}>{ list.author ? list.author : "¯\\_(ツ)_/¯" }</Link>
               </span>
 
               <span className="fa fa-clock-o list_overview_inner" />
               <span className="list_overview_words">
-                &nbsp;created {moment(list.createdAt).fromNow()}
+                &nbsp;created { moment(list.createdAt).fromNow() }
               </span>
 
               <span className="fa fa-commenting list_overview_inner" />
               <span className="list_overview_words">
-                &nbsp;{list.comments.length > 1 ? list.comments.length + " comments" : list.comments.length === 1 ? "1 comment" : "no comments"}
+                &nbsp;{ list.comments.length > 1 ? list.comments.length + " comments" : list.comments.length === 1 ? "1 comment" : "no comments" }
               </span>
             </div>
 
             <div className="list_overview_cats">
               <span>
-                {list.categories.map((category, i) => {
+                { list.categories.map((category, i) => {
                   return (
                     <Link key={i} to={"/categoryPage/" + category}>
                       <span className="label label-default">
@@ -61,7 +58,7 @@ export default class ListComponent extends Component {
                       </span>
                     </Link>
                   );
-                })}
+                }) }
               </span>
             </div>
           </div>

@@ -7,7 +7,7 @@ export class PureTextarea extends Component {
 
   render() {
     const { field, ...rest } = this.props
-    return <textarea {...field} {...rest}/>
+    return <textarea { ...field } { ...rest }/>
   }
 }
 

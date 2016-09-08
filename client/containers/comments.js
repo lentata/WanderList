@@ -15,18 +15,18 @@ export class Comments extends Component {
     let deleter = localStorage.getItem('logged') ? JSON.parse(localStorage.getItem('userId')).userId : null;
 
     return (
-      <div className="comment" key={i}>
+      <div className="comment" key={ i }>
         <h5>
           <strong>
-            <Link to={'/userProfile/' + comment.userId}>
+            <Link to={ '/userProfile/' + comment.userId }>
             {comment.user}
             </Link>
           </strong>
-          <small><em>  {moment(comment.posted).fromNow()} &nbsp;</em></small>
+          <small><em>  { moment(comment.posted).fromNow() } &nbsp;</em></small>
 
-          {deleter === comment.userId ? <button className="remove-comment" onClick={ this.props.removeComment.bind(this, this.props.list._id, i)}>&times;</button> : <div/>}
+          { deleter === comment.userId ? <button className="remove-comment" onClick={ this.props.removeComment.bind(this, this.props.list._id, i) }>&times;</button> : <div/> }
         </h5>
-        <h5><Linkify>{comment.text}</Linkify></h5>
+        <h5><Linkify>{ comment.text }</Linkify></h5>
       </div>
     )
   }
@@ -35,7 +35,7 @@ export class Comments extends Component {
     evt.preventDefault();
     const author = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : null;
     const userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : null;
-    if(author && userId) {
+    if (author && userId) {
       const postId = this.props.list._id;
       const comment = this.refs.comment.value;
       this.props.addComment(postId, userId, author, comment);
@@ -46,20 +46,19 @@ export class Comments extends Component {
   }
 
   render() {
-
     return (
       <div className="comments col-xs-3">
         <legend className="list-legend">Comments</legend>
-        <form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
+        <form ref="commentForm" className="comment-form" onSubmit={ this.handleSubmit.bind(this) }>
           <textarea className="textarea-comment" ref="comment" placeholder="Leave a comment!"></textarea>
           <input className="submit-comment" type="submit" />
         </form>
         <div className="comments-lists col-xs-3">
-          {this.props.list.comments
+          { this.props.list.comments
             .sort( (a, b) => {
             return Date.parse(b.posted) - Date.parse(a.posted);
           })
-            .map(this.renderComment, this)}
+            .map(this.renderComment, this) }
         </div>
       </div>
     )

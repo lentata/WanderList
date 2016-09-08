@@ -1,6 +1,6 @@
-import {AUTH_IN} from '../actions/index';
+import { AUTH_IN } from '../actions/index';
 
-const INITIAL_STATE = {authState: null};
+const INITIAL_STATE = { authState: null };
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {

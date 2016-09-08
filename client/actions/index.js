@@ -26,15 +26,15 @@ export function fetchUserInfo(uid) {
   const request = axios.get(`/api/user/${uid}`);
   return {
     type: USER_INFO,
-    payload: request
+    payload: request,
   };
 }
-//Props here is userID
+
 export function fetchListsForUser(props, query) {
   const request = axios.post(`/api/lists/upvote`, props);
   return {
     type: query,
-    payload: request
+    payload: request,
   };
 }
 
@@ -43,26 +43,24 @@ export function filterLists(props) {
   const request = axios.get(`/api/lists/votelist?ids=${query}`);
   return {
     type: FILTER_LISTS,
-    payload: request
-  }
+    payload: request,
+  };
 }
 
 export function fetchOthersInfo(props) {
-  console.log("FETCHOTHERSINFO", props);
   const request = axios.get(`/api/lists/others?id=${props}`);
   return {
     type: OTHERS_LISTS,
-    payload: request
-  }
+    payload: request,
+  };
 }
 
 //Pagination Post request for lists
 export function fetchLists(props) {
-  // console.log("ACTION", props);
   const request = axios.post(`/api/listspag`, props);
   return {
     type: FETCH_LISTS,
-    payload: request
+    payload: request,
   };
 }
 
@@ -70,7 +68,7 @@ export function fetchList(id) {
   const request = axios.get(`/api/lists/${id}`);
   return {
     type: FETCH_LIST,
-    payload: request
+    payload: request,
   };
 }
 
@@ -78,7 +76,7 @@ export function fetchRandomList() {
   const request = axios.get(`/api/random`);
   return {
     type: FETCH_RANDOM,
-    payload: request
+    payload: request,
   };
 }
 
@@ -88,7 +86,7 @@ export function createList(props) {
   const request = axios.post(`/api/lists`, props);
   return {
     type: CREATE_LIST,
-    payload: request
+    payload: request,
   };
 }
 
@@ -96,7 +94,7 @@ export function deleteList(id) {
   const request = axios.delete(`/api/lists/${id}`);
   return {
     type: DELETE_LIST,
-    payload: request
+    payload: request,
   };
 }
 
@@ -104,7 +102,7 @@ export function userAuth(props) {
   const request = axios.post(`/api/auth`, props);
   return {
     type: AUTH_IN,
-    payload: request
+    payload: request,
   };
 }
 
@@ -112,12 +110,12 @@ export function upvote(lid, uid) {
   const data = {
     lid: lid,
     votes: true,
-    uid: uid
+    uid: uid,
   };
   const request = axios.post(`/api/votes`, data);
   return {
     type: UPVOTE,
-    id: lid
+    id: lid,
   };
 }
 
@@ -125,12 +123,12 @@ export function downvote(lid, uid) {
   const data = {
     lid: lid,
     votes: false,
-    uid: uid
+    uid: uid,
   };
   const request = axios.post(`/api/votes`, data);
   return {
     type: DOWNVOTE,
-    id: lid
+    id: lid,
   };
 }
 
@@ -138,7 +136,7 @@ export function fetchListCategories(categories) {
   const request = axios.get(`/api/categoryPage/${categories}`);
   return {
     type: FETCHCATEGORIES,
-    payload: request
+    payload: request,
   };
 }
 
@@ -146,7 +144,7 @@ export function fetchedSearchLists(searchedTerm) {
   const request = axios.get(`/api/search/${searchedTerm}`);
   return {
     type: SEARCHLISTS,
-    payload: request
+    payload: request,
   };
 }
 
@@ -154,7 +152,7 @@ export function fetchedSearchCategories(searchedTerm) {
   const request = axios.get(`/api/searchCat/${searchedTerm}`);
   return {
     type: SEARCHCATS,
-    payload: request
+    payload: request,
   };
 }
 
@@ -162,13 +160,13 @@ export function favorite(lid, uid, favStatus) {
   const data = {
     lid: lid,
     favorite: favStatus,
-    uid: uid
+    uid: uid,
   };
   const request = axios.post(`/api/favorite`, data);
   return {
     type: TOGGLEFAV,
     id: lid,
-    fav: favStatus
+    fav: favStatus,
   };
 }
 
@@ -177,33 +175,32 @@ export function addComment(postId, userId, author, comment) {
     _id: postId,
     userId: userId,
     user: author,
-    text: comment
+    text: comment,
   };
-
   const request = axios.post(`/api/comments`, data);
   return {
     type: ADD_COMMENT,
     payload: request,
-    lid: postId
-  }
+    lid: postId,
+  };
 }
 
 export function removeComment(listId, commentIndex) {
   const data = {
-    commentIndex
-  }
-  const request = axios.post(`/api/comments/${listId}`, data)
+    commentIndex,
+  };
+  const request = axios.post(`/api/comments/${listId}`, data);
   return {
     type: REMOVE_COMMENT,
     listId,
     commentIndex,
-  }
+  };
 }
 
 export function postQuant(){
   const request = axios.get(`/api/list`);
   return {
     type: ITEM_NO,
-    payload: request
-  }
+    payload: request,
+  };
 }

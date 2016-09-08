@@ -7,82 +7,82 @@ import List from '../containers/lists';
 import { Nav, NavItem } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-
 export class UserProfile extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.renderList = this.renderList.bind(this);
   }
 
-  //PASS IN USER ID FROM OTHER USERS IN URL TO GET THEIR PROFILE
-  componentWillMount(){
+  componentWillMount() {
     this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId)
       .then(() => {
-        if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
+        if (this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
           this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
         } else {
           this.props.fetchOthersInfo(this.props.params.id)
             .then(() => {
               this.props.filterLists(this.props.othersLists);
             });
-        }
+          }
       });
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if(this.props.location.pathname !== nextProps.location.pathname) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
       this.props.fetchUserInfo(JSON.parse(localStorage.getItem('userId')).userId)
         .then(() => {
-          if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
+          if (this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
             this.props.filterLists(this.props.ownedLists.map(list => list._id.toString()))
           } else {
             this.props.fetchOthersInfo(this.props.params.id)
               .then(() => {
                 this.props.filterLists(this.props.othersLists);
               });
-          }
+            }
         });
     }
   }
 
   renderList() {
-    if(!this.props.list.length){
+    if (!this.props.list.length) {
       return ("Add Some Lists");
     }
-    return this.props.list.map((list, i) => <List {...this.props}
-      info={this.props.info}
-      votes={list.upvote - list.downvote}
-      upLists={this.props.upLists}
-      downLists={this.props.downLists}
-      favoriteLists={this.props.favoriteLists}
-      key={i}
-      i={i}
-      list={list} />);
+
+    return this.props.list.map((list, i) => <List { ...this.props }
+      info = { this.props.info }
+      votes = { list.upvote - list.downvote }
+      upLists = { this.props.upLists }
+      downLists = { this.props.downLists }
+      favoriteLists = { this.props.favoriteLists }
+      key = { i }
+      i = { i }
+      list = { list } />);
   }
 
-  render(){
+  render() {
     const { list, info, otherInfo, upLists, downLists, favoriteLists, ownedLists } = this.props;
-    if(this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
-      if(!upLists || !info) {
+    if (this.props.params.id === JSON.parse(localStorage.getItem('userId')).userId && localStorage.getItem('logged')) {
+      if (!upLists || !info) {
         return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
       }
-      return(
+
+      return (
         <div>
           <NavBar />
           <div className="mother_div">
             <div className="container">
               <div className="profile">
-                <img className="profilePic" src={info.photo} alt="Profile Picture" />
-                <p className="pacifico">{info.username}</p>
+                <img className="profilePic" src={ info.photo } alt="Profile Picture" />
+                <p className="pacifico">{ info.username }</p>
               </div>
               <div className="col-md-11">
                 <div>
                   <Tabs>
                     <TabList>
-                      <Tab onClick={()=>this.props.filterLists(ownedLists.map(list => list._id.toString()))}>Overview</Tab>
-                      <Tab onClick={()=>this.props.filterLists(upLists)}>Upvoted Lists</Tab>
-                      <Tab onClick={()=>this.props.filterLists(downLists)}>Downvoted Lists</Tab>
-                      <Tab onClick={()=>this.props.filterLists(favoriteLists)}>Favorite Lists</Tab>
+                      <Tab onClick={ () => this.props.filterLists(ownedLists.map(list => String(list._id))) }>Overview</Tab>
+                      <Tab onClick={ () => this.props.filterLists(upLists) }>Upvoted Lists</Tab>
+                      <Tab onClick={ () => this.props.filterLists(downLists) }>Downvoted Lists</Tab>
+                      <Tab onClick={ () => this.props.filterLists(favoriteLists) }>Favorite Lists</Tab>
                     </TabList>
                     <TabPanel>
                     </TabPanel>
@@ -98,23 +98,24 @@ export class UserProfile extends Component {
             </div>
 
             <ul className="profile-list-group">
-              {this.renderList()}
+              { this.renderList() }
             </ul>
           </div>
         </div>
         );
     } else {
-      if(!otherInfo) {
+      if (!otherInfo) {
         return (<div><img height="100%" src="../loading.gif" alt="loading" /></div>);
       }
-      return(
+
+      return (
         <div>
           <NavBar />
           <div className="mother_div">
             <div className="container">
               <div className="profile">
-                <img className="profilePic" src={otherInfo.photo} alt="Profile Picture" />
-                <p className="pacifico">{otherInfo.username}</p>
+                <img className="profilePic" src={ otherInfo.photo } alt="Profile Picture" />
+                <p className="pacifico">{ otherInfo.username }</p>
               </div>
               <div className="col-md-11">
                 <div>
@@ -147,7 +148,7 @@ function mapStateToProps(state) {
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
     ownedLists: state.lists.ownedLists,
-    othersLists: state.lists.othersLists
+    othersLists: state.lists.othersLists,
   };
 }
 

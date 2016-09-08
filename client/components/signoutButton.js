@@ -6,25 +6,22 @@ import { Button } from 'react-bootstrap';
 export default class SignOut extends Component {
   constructor(props){
     super(props);
-
-
   }
+
   signOutFunc(){
     firebase.auth().signOut();
     localStorage.removeItem("logged");
   }
 
   render(){
-    
-    return(
+    return (
       <div>
-        <form className="form-actions" onSubmit={this.signOutFunc}>
+        <form className="form-actions" onSubmit={ this.signOutFunc }>
           <Button type="submit">
             Log out
           </Button>
         </form>
       </div>
-
     );
   }
 }
