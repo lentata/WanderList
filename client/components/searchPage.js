@@ -16,20 +16,18 @@ export class SearchPage extends Component {
   }
 
   componentWillMount() {
-    //this.props.fetchedSearchLists(this.props.params.searchedTerm);
     this.props.fetchedSearchCategories(this.props.params.searchedTerm);
   }
 
   componentWillUpdate(nextProps, nextState) {
-    // this.props.fetchedSearchLists(nextProps.params.searchedTerm);
-    if(this.props.params.searchedTerm !== nextProps.params.searchedTerm) {
+    if (this.props.params.searchedTerm !== nextProps.params.searchedTerm) {
       nextProps.fetchedSearchCategories(nextProps.params.searchedTerm);
       nextState.tabNum = 0;
     }
   }
 
   renderSearchedList() {
-    if(this.props.list.length === 0) {
+    if (this.props.list.length === 0) {
       return <div className="search-not-found">Content Not Found!</div>;
     } else {
       return this.props.list.map((list, i) =>
@@ -57,18 +55,18 @@ export class SearchPage extends Component {
         <div className="mother_div">
           <div className="container">
             <div className="mainPage-tabs">
-              <p className="category">Search results for: {this.props.params.searchedTerm}</p>
+              <p className="category">Search results for: { this.props.params.searchedTerm }</p>
               <div className="col-md-7">
-                <Tabs selectedIndex={this.state.tabNum}>
+                <Tabs selectedIndex={ this.state.tabNum }>
                   <TabList>
-                    <Tab onClick={() => {
+                    <Tab onClick={ () => {
                       this.props.fetchedSearchCategories(this.props.params.searchedTerm);
-                      this.setState({tabNum: 0});
-                    }}>Lists by Categories</Tab>
-                    <Tab onClick={() => {
+                      this.setState({ tabNum: 0 });
+                    } }>Lists by Categories</Tab>
+                    <Tab onClick={ () => {
                       this.props.fetchedSearchLists(this.props.params.searchedTerm);
-                      this.setState({tabNum: 1});
-                    }}>Lists by Headlines</Tab>
+                      this.setState({ tabNum: 1 });
+                    } }>Lists by Headlines</Tab>
                   </TabList>
                   <TabPanel>
                   </TabPanel>
@@ -97,7 +95,7 @@ function mapStateToProps(state) {
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
-    categoryLists: state.lists.categoryLists
+    categoryLists: state.lists.categoryLists,
   };
 }
 

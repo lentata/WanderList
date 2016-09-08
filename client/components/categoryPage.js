@@ -15,13 +15,12 @@ export class CategoryPage extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if(this.props.params.categories !== nextProps.params.categories) {
+    if (this.props.params.categories !== nextProps.params.categories) {
       nextProps.fetchListCategories(nextProps.params.categories);
     }
   }
 
   renderCatList() {
-
     return this.props.list.map((list, i) => <List {...this.props}
       info={this.props.info}
       votes={list.upvote - list.downvote}
@@ -36,18 +35,18 @@ export class CategoryPage extends Component {
 
   render(){
     const { list, info } = this.props;
-    return(
+    return (
       <div>
         <NavBar />
         <div className="mother_div">
           <div className="container">
             <div className="mainPage-tabs">
-                <p className="category">Category: {this.props.params.categories}</p>
+                <p className="category">Category: { this.props.params.categories }</p>
               </div>
           </div>
           <ul className="list-group">
             <div>
-              {this.renderCatList()}
+              { this.renderCatList() }
             </div>
           </ul>
         </div>
@@ -63,7 +62,7 @@ function mapStateToProps(state) {
     upLists: state.lists.upvotedLists,
     downLists: state.lists.downvotedLists,
     favoriteLists: state.lists.favoriteLists,
-    searchLists: state.lists.searchLists
+    searchLists: state.lists.searchLists,
   };
 }
 

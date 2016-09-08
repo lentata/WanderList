@@ -2,7 +2,7 @@
 WanderList is a content platform for generating ranked order lists.  Any number of items can be entered into our platform and can be semantically tagged and shared. URLs for images can be copy and pasted into our input form.  Currently, we support URLs that end in .gif, .jpg, and .png.
 
 ##Installation
-The app can be accessed at https://wanderlists.herokuapp.com.  To run it locally, you may either download this repo, or fork it and download your fork.
+The app can be accessed at http://ec2-54-200-161-78.us-west-2.compute.amazonaws.com:3000/.  You may either clone this repo or fork it.
 
 ##Usage
 From the root of the project directory, run `npm install`, followed by `npm start`.  The app should now be accessible at localhost:3000.

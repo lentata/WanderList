@@ -27,29 +27,29 @@ const INITIAL_STATE = {
   categoryLists: [],
   searchLists: [],
   ownedLists: [],
-  othersLists: []
+  othersLists: [],
 };
 
 export default function(state = INITIAL_STATE, action) {
-  if(action.type === FETCH_LIST) {
+  if (action.type === FETCH_LIST) {
     return { ...state, all: action.payload.data };
-  } else if(action.type === FETCH_RANDOM) {
+  } else if (action.type === FETCH_RANDOM) {
     return { ...state, id: action.payload.data._id, all: [action.payload.data] };
-  } else if(action.type === CREATE_LIST) {
-    return { ...state, createdList: action.payload.data};
-  } else if(action.type === USER_INFO) {
+  } else if (action.type === CREATE_LIST) {
+    return { ...state, createdList: action.payload.data };
+  } else if (action.type === USER_INFO) {
     return { ...state,
       info: action.payload.data.user,
       upvotedLists: action.payload.data.user.upvotedLists,
       downvotedLists: action.payload.data.user.downvotedLists,
       favoriteLists: action.payload.data.user.favLists,
-      ownedLists: action.payload.data.lists
+      ownedLists: action.payload.data.lists,
     };
-  } else if(action.type === FETCH_LISTS) {
+  } else if (action.type === FETCH_LISTS) {
     return {
       ...state, all: action.payload.data
     };
-  } else if(action.type === UPVOTE) {
+  } else if (action.type === UPVOTE) {
     let index = 0;
     let upIndex = state.upvotedLists.indexOf(action.id);
     let downIndex = state.downvotedLists.indexOf(action.id);
@@ -80,7 +80,7 @@ export default function(state = INITIAL_STATE, action) {
         targetList.downvote -= 1;
         return {
           ...state,
-          all:[
+          all: [
             ...state.all.slice(0, index),
             Object.assign({}, targetList, targetList.upvote, targetList.downvote),
             ...state.all.slice(index + 1)
@@ -112,7 +112,7 @@ export default function(state = INITIAL_STATE, action) {
         list: targetList
       };
     }
-  } else if(action.type === DOWNVOTE) {
+  } else if (action.type === DOWNVOTE) {
     let index = 0;
     let upIndex = state.upvotedLists.indexOf(action.id);
     let downIndex = state.downvotedLists.indexOf(action.id);
@@ -122,7 +122,6 @@ export default function(state = INITIAL_STATE, action) {
       }
     });
     let targetList = state.all[index];
-    console.log('the target list', targetList);
     if (downIndex === -1) {
       if (upIndex === -1) {
         targetList.downvote += 1;
@@ -176,7 +175,7 @@ export default function(state = INITIAL_STATE, action) {
         list: targetList
       };
     }
-  } else if(action.type === ADD_COMMENT) {
+  } else if (action.type === ADD_COMMENT) {
     let index = -1;
     state.all.forEach((list, i) => {
       if (list._id.toString() === action.lid) {
@@ -193,7 +192,7 @@ export default function(state = INITIAL_STATE, action) {
         ...state.all.slice(index + 1)
       ]
     };
-  } else if(action.type === REMOVE_COMMENT) {
+  } else if (action.type === REMOVE_COMMENT) {
     let index = -1;
     state.all.forEach((list, i) => {
       if (list._id.toString() === action.listId) {
@@ -210,8 +209,8 @@ export default function(state = INITIAL_STATE, action) {
         ...state.all.slice(index + 1)
       ]
     };
-  } else if(action.type === TOGGLEFAV) {
-      if(action.fav) {
+  } else if (action.type === TOGGLEFAV) {
+      if (action.fav) {
         const index = state.favoriteLists.indexOf(action.id);
         return {
           ...state,
@@ -219,7 +218,7 @@ export default function(state = INITIAL_STATE, action) {
             ...state.favoriteLists.slice(0, index),
             ...state.favoriteLists.slice(index + 1)
           ]
-        }
+        };
       } else {
         return {
           ...state,
@@ -227,38 +226,36 @@ export default function(state = INITIAL_STATE, action) {
             ...state.favoriteLists,
             action.id
           ]
-        }
+        };
       }
-  } else if(action.type === FETCHCATEGORIES) {
+  } else if (action.type === FETCHCATEGORIES) {
     return {
       ...state,
       all: action.payload.data
     };
-  } else if(action.type === SEARCHLISTS) {
-    //LINKED TO fetchedSearchLists
+  } else if (action.type === SEARCHLISTS) {
     return {
       ...state,
       searchLists: [...action.payload.data],
       all: [...action.payload.data]
     };
-  } else if(action.type === FILTER_LISTS) {
+  } else if (action.type === FILTER_LISTS) {
     return {
       ...state,
       all: action.payload.data
-    }
-  } else if(action.type === SEARCHCATS) {
-    //LINKED TO fetchedSearchCategories
+    };
+  } else if (action.type === SEARCHCATS) {
     return {
       ...state,
       searchCats: [...action.payload.data],
       all: [...action.payload.data]
     };
-  } else if(action.type === OTHERS_LISTS) {
+  } else if (action.type === OTHERS_LISTS) {
     return {
       ...state,
       otherInfo: action.payload.data.info,
       othersLists: action.payload.data.lists
-    }
+    };
   } else {
     return state;
   }

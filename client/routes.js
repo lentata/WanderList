@@ -10,7 +10,6 @@ import UserProfile from './components/userProfile';
 import CategoryPage from './components/categoryPage';
 import SearchPage from './components/searchPage';
 
-
 export default (
   <Route path='/' component={ App }>
     <IndexRoute component={ ListGrid } />

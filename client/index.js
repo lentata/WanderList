@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-import {Router, browserHistory, withRouter} from 'react-router';
+import { Router, browserHistory, withRouter } from 'react-router';
 import routes from './routes';
 import reducers from './reducers';
 
@@ -28,7 +28,7 @@ const store = createStore(reducers, {},
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-if(module.hot) {
+if (module.hot) {
   module.hot.accept('./reducers/',() => {
     const nextRootReducer = require('./reducers/index').default;
     store.replaceReducer(nextRootReducer);
@@ -37,6 +37,6 @@ if(module.hot) {
 
 //Render our app!
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
+  <Provider store={ store }>
+    <Router history={ history } routes={ routes } />
   </Provider> , document.querySelector('.mainPage'));

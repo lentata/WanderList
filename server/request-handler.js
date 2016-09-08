@@ -18,7 +18,7 @@ module.exports = function(app) {
   //get all lists, ADAPTED FOR MONGO
   app.get('/api/lists', function(req, res) {
     List.find({}, function(err, docs) {
-      if(err) throw err;
+      if (err) throw err;
       res.send(docs);
     });
   });
@@ -26,7 +26,7 @@ module.exports = function(app) {
   //Get Quantity of lists
   app.get('/api/list', function(req, res) {
     List.count({}, function(err, num) {
-      if(err) throw err;
+      if (err) throw err;
       res.status(201).json(num);
     });
   });
@@ -36,7 +36,7 @@ module.exports = function(app) {
     var ids = [];
     List.find({}, function(err, docs) {
       docs.forEach(function(item){
-        if(req.body.indexOf("" + item._id) !== -1){
+        if (req.body.indexOf("" + item._id) !== -1){
           ids.push(item);
         }
       })
@@ -45,8 +45,8 @@ module.exports = function(app) {
   });
 
   app.get('/api/lists/votelist', function(req, res) {
-    List.find({'_id': {$in: JSON.parse(req.query.ids)}}, function(err, lists) {
-      if(err) throw err;
+    List.find({ '_id': { $in: JSON.parse(req.query.ids) } }, function(err, lists) {
+      if (err) throw err;
       res.send(lists);
     })
   });
@@ -54,10 +54,10 @@ module.exports = function(app) {
   app.get('/api/lists/others', function(req, res) {
     var resObj = {};
     List.find({'authorId': req.query.id}, function(err, lists) {
-      if(err) throw err;
+      if (err) throw err;
       resObj.lists = lists.map(list => list._id.toString());
       User.findOne({'userId': req.query.id}, function(err, user) {
-        if(err) throw err;
+        if (err) throw err;
         resObj.info = user;
         res.send(resObj);
       });
@@ -67,7 +67,7 @@ module.exports = function(app) {
 //List1 is Temporary for Pagination, Testing purposes only
    app.post('/api/listspag', function(req, res) {
     var p = (req.body.type - 1) * 10;
-    if(req.body.filter === 'top'){
+    if (req.body.filter === 'top'){
       List
       .find({})
       .exec(function (err, posts) {
@@ -78,7 +78,7 @@ module.exports = function(app) {
       });
     } else
 
-    if(req.body.filter === 'new'){
+    if (req.body.filter === 'new'){
         List
       .find({})
       .sort({createdAt: 'desc'})
@@ -89,7 +89,7 @@ module.exports = function(app) {
       });
     } else
 
-    if(req.body.filter === 'contro'){
+    if (req.body.filter === 'contro'){
       List
       .find({})
       .limit(10)
@@ -108,10 +108,10 @@ module.exports = function(app) {
     var uid = req.params.uid;
     var resObj = {};
     User.findOne({'userId': uid}, function(err, user) {
-      if(err) throw err;
+      if (err) throw err;
       resObj.user = user;
       List.find({'authorId': uid}, function(err, lists) {
-        if(err) throw err;
+        if (err) throw err;
         resObj.lists = lists;
         res.send(resObj);
       });
@@ -124,7 +124,7 @@ module.exports = function(app) {
       username: info.username,
       password: info.password
     }).fetch().then(function(user) {
-      if(user) {
+      if (user) {
         res.send(true);
       } else {
         res.send(false);
@@ -145,10 +145,10 @@ module.exports = function(app) {
     }
 
     User.findOne({userId: req.body.userId}, function(err, user){
-      if(err) throw err;
-      if(!user){
+      if (err) throw err;
+      if (!user){
         new User(userSetup).save(function(err){
-          if(err) throw err;
+          if (err) throw err;
         });
       }
       res.status(201).json(userSetup);
@@ -158,8 +158,8 @@ module.exports = function(app) {
   //get individual list
   app.get('/api/lists/:id', function(req, res) {
     var id = req.params.id;
-    List.find({_id: id}, function(err, obj) {
-      if(err) throw err;
+    List.find({ _id: id }, function(err, obj) {
+      if (err) throw err;
       res.send(obj);
     });
   });
@@ -179,8 +179,8 @@ module.exports = function(app) {
   // Get category
   app.get('/api/categoryPage/:categories', function(req, res) {
     var categories = req.params.categories;
-    List.find({categories: {"$in" : [categories]}}, function(err, obj) {
-      if(err) throw err;
+    List.find({ categories: { "$in" : [categories] } }, function(err, obj) {
+      if (err) throw err;
       res.send(obj);
     });
   });
@@ -188,16 +188,16 @@ module.exports = function(app) {
   // Get lists that match searched term
   app.get('/api/search/:searchedTerm', function(req, res) {
     var searchedTerm = req.params.searchedTerm;
-    List.find({title: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
-      if(err) throw err;
+    List.find({ title: { '$regex': searchedTerm, '$options': "i" } }, function(err, obj) {
+      if (err) throw err;
       res.send(obj);
     });
   });
 
   app.get('/api/searchCat/:searchedTerm', function(req, res) {
     var searchedTerm = req.params.searchedTerm;
-    List.find({categories: {'$regex': searchedTerm, '$options': "i"}}, function(err, obj) {
-      if(err) throw err;
+    List.find({ categories: { '$regex': searchedTerm, '$options': "i" } }, function(err, obj) {
+      if (err) throw err;
       res.send(obj);
     });
   });
@@ -207,7 +207,7 @@ module.exports = function(app) {
   // Delete list
   app.delete('/api/lists/:id', function(req, res){
     List.findByIdAndRemove({_id: req.params.id}, function(err){
-      if(err) throw err;
+      if (err) throw err;
     });
   });
 
@@ -272,7 +272,7 @@ module.exports = function(app) {
     var mapUpLists = {};
     var mapDownLists = {};
     User.findOne({'userId': uid}, function(err, info) {
-      if(err) throw err;
+      if (err) throw err;
       var upflag = info.upvotedLists.map(function(objId) {
         return objId.toString();
       }).indexOf(lid) === -1 ? false : true;
@@ -284,60 +284,60 @@ module.exports = function(app) {
       var delUpFlag = false;
       var delDownFlag = false;
       List.findOne({'_id': lid}, function(err, list) {
-        if(err) throw err;
-        if(vflag) {
-          if(!upflag && !downflag) {
+        if (err) throw err;
+        if (vflag) {
+          if (!upflag && !downflag) {
             list.upvote = +list.upvote + 1;
             addUpFlag = true;
           }
-          else if(!upflag && downflag) {
+          else if (!upflag && downflag) {
             list.upvote = +list.upvote + 1;
             list.downvote = +list.downvote - 1;
             addUpFlag = true;
             delDownFlag = true;
           }
-          else if(upflag && !downflag) {
+          else if (upflag && !downflag) {
             list.upvote = +list.upvote - 1;
             delUpFlag = true;
           }
         } else {
-          if(!upflag && !downflag) {
+          if (!upflag && !downflag) {
             list.downvote = +list.downvote + 1;
             addDownFlag = true;
           }
-          else if(upflag && !downflag) {
+          else if (upflag && !downflag) {
             list.downvote = +list.downvote + 1;
             list.upvote = +list.upvote - 1;
             addDownFlag = true;
             delUpFlag = true;
           }
-          else if(!upflag && downflag) {
+          else if (!upflag && downflag) {
             list.downvote = +list.downvote - 1;
             delDownFlag = true;
           }
         }
         list.save(function(err) {
-          if(err) throw err;
-          if(addUpFlag) {
+          if (err) throw err;
+          if (addUpFlag) {
             info.upvotedLists.push(lid);
             info.save(function(err) {
-              if(err) throw err;
+              if (err) throw err;
             });
           }
-          if(addDownFlag) {
+          if (addDownFlag) {
             info.downvotedLists.push(lid);
             info.save(function(err) {
-              if(err) throw err;
+              if (err) throw err;
             });
           }
-          if(delUpFlag) {
-            User.update({'userId': uid}, { $pullAll: {'upvotedLists': [lid]}}, function(err) {
-              if(err) throw err;
+          if (delUpFlag) {
+            User.update({'userId': uid}, { $pullAll: { 'upvotedLists': [lid] } }, function(err) {
+              if (err) throw err;
             });
           }
-          if(delDownFlag) {
-            User.update({'userId': uid}, { $pullAll: {'downvotedLists': [lid]}}, function(err) {
-              if(err) throw err;
+          if (delDownFlag) {
+            User.update({'userId': uid}, { $pullAll: { 'downvotedLists': [lid] } }, function(err) {
+              if (err) throw err;
             });
           }
         });
@@ -350,17 +350,17 @@ module.exports = function(app) {
     var lid = req.body.lid.toString();
     var uid = req.body.uid;
     var favorite = req.body.favorite;
-    if(favorite) {
-      User.update({'userId': uid}, { $pullAll: {'favLists': [lid]}}, function(err) {
-        if(err) throw err;
+    if (favorite) {
+      User.update({'userId': uid}, { $pullAll: { 'favLists': [lid] } }, function(err) {
+        if (err) throw err;
       });
 
     } else {
       User.findOne({'userId': uid}, function(err, user) {
-        if(err) throw err;
+        if (err) throw err;
         user.favLists.push(lid);
         user.save(function(err) {
-          if(err) throw err;
+          if (err) throw err;
         });
       });
     }

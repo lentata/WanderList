@@ -3,7 +3,6 @@ import {reduxForm} from 'redux-form';
 import {userAuth, fetchUserInfo} from '../actions/index';
 import {Link, browserHistory} from 'react-router';
 
-
 export class Login extends Component {
    constructor(props){
     super(props);
@@ -27,8 +26,8 @@ export class Login extends Component {
         userId: user.uid
       };
       Login.context.userAuth(userDataStorage);
-      var logged = {logged: true};
-      var userId = {userId: userDataStorage.userId}
+      var logged = { logged: true };
+      var userId = { userId: userDataStorage.userId }
       localStorage.setItem('logged', JSON.stringify(logged));
       localStorage.setItem('userId', JSON.stringify(userId));
       fetchUserInfo(userId.userId);
@@ -80,19 +79,19 @@ export class Login extends Component {
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit, resetForm} = this.props;
+    const { fields: { username, password }, handleSubmit, resetForm } = this.props;
     return (
       <div className="login-form_container">
         <div className="login-form_inner-container">
-          <button onClick={this.setProvider.bind(this, 'Google', this.props)} className="btn btn-block btn-social btn-google">
+          <button onClick={ this.setProvider.bind(this, 'Google', this.props) } className="btn btn-block btn-social btn-google">
             <span className="fa fa-google" /> Log in with Google
           </button>
 
-          <button onClick={this.setProvider.bind(this, 'Facebook', this.props)} className="btn btn-block btn-social btn-facebook">
+          <button onClick={ this.setProvider.bind(this, 'Facebook', this.props) } className="btn btn-block btn-social btn-facebook">
             <span className="fa fa-facebook" /> Log in with Facebook
           </button>
 
-          <button onClick={this.setProvider.bind(this, 'Github', this.props)} className="btn btn-block btn-social btn-github">
+          <button onClick={ this.setProvider.bind(this, 'Github', this.props) } className="btn btn-block btn-social btn-github">
             <span className="fa fa-github" /> Log in with Github
           </button>
         </div>
@@ -101,15 +100,15 @@ export class Login extends Component {
           <div className="login-signup__sep-text">or</div>
         </div>
 
-        <form className="form-actions" onSubmit={handleSubmit(this.emailSignIn.bind(this))}>
+        <form className="form-actions" onSubmit={ handleSubmit(this.emailSignIn.bind(this)) }>
           <div className="form-group">
             <label className="login_labels">Email</label>
-            <input type="username" className="form-control login_inputs" {...username}/>
+            <input type="username" className="form-control login_inputs" { ...username }/>
           </div>
 
           <div>
             <label className="login_labels">Password</label>
-            <input type="password" className="form-control login_inputs" {...password}/>
+            <input type="password" className="form-control login_inputs" { ...password }/>
           </div>
 
           <button type="submit" className="btn login_btn">
@@ -134,4 +133,4 @@ function mapDispatchToProps(dispatch) {
 export default reduxForm({
   form: 'loginForm',
   fields: ['username', 'password', 'displayName', 'photo']
-}, mapStateToProps, {userAuth, fetchUserInfo})(Login);
+}, mapStateToProps, { userAuth, fetchUserInfo })(Login);

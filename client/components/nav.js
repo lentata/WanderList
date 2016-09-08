@@ -14,18 +14,16 @@ export default class navBar extends Component {
     this.navigation = this.navigation.bind(this);
   }
 
-  navigation(props){
-    if(props === 'addList') {
-    browserHistory.push(`/lists/new`);
-    } else
-    if(props==='profile'){
-    browserHistory.push('/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId);
+  navigation(props) {
+    if (props === 'addList') {
+      browserHistory.push(`/lists/new`);
+    } else if (props === 'profile') {
+      browserHistory.push('/userProfile/' + JSON.parse(localStorage.getItem('userId')).userId);
     }
   }
 
-  render(){
-
-    return(
+  render() {
+    return (
       <div>
         <nav className="navbar navbar-fixed-top" role="navigation">
           <div className="container-fluid">
@@ -38,24 +36,24 @@ export default class navBar extends Component {
             <div className="nav navbar-nav navbar-right mainBtns">
               <li>
                 <Button
-                  onClick={()=>this.props.fetchRandomList()
-                    .then(() => {browserHistory.push(`/lists/${this.props.id}`)
+                  onClick={ () => this.props.fetchRandomList()
+                    .then(() => { browserHistory.push(`/lists/${this.props.id }`)
                   })}>
                   Surprise Me!
                 </Button>
               </li>
 
               <li>
-                {localStorage.getItem('logged') ?  <Button onClick={()=>this.navigation('addList')}>Add a list
+                { localStorage.getItem('logged') ?  <Button onClick={ () => this.navigation('addList') }>Add a list
                 </Button> : <OurModal status={'Add a List'} /> }
               </li>
 
               <li>
-                {localStorage.getItem('logged') ? <SignOut />  : <OurModal status={'Log in / Sign up'}/>}
+                { localStorage.getItem('logged') ? <SignOut />  : <OurModal status={ 'Log in / Sign up' }/> }
               </li>
 
               <li>
-                {localStorage.getItem('logged') ? <Button onClick={()=>this.navigation('profile')}>Profile</Button> : null }
+                { localStorage.getItem('logged') ? <Button onClick={ () => this.navigation('profile') }>Profile</Button> : null }
               </li>
             </div>
           </div>
@@ -64,10 +62,11 @@ export default class navBar extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     loginState: state,
-    id: state.lists.id
+    id: state.lists.id,
   };
 }
 
